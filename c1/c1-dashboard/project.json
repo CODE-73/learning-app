@@ -1,7 +1,7 @@
 {
   "name": "c1-dashboard",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/c1-dashboard",
+  "sourceRoot": "c1/c1-dashboard",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/c1-dashboard"
+        "outputPath": "dist/c1/c1-dashboard"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/c1-dashboard"
+          "outputPath": "c1/c1-dashboard"
         },
         "production": {}
       }
@@ -46,14 +46,14 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/c1-dashboard/jest.config.ts"
+        "jestConfig": "c1/c1-dashboard/jest.config.ts"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/c1-dashboard/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["c1/c1-dashboard/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

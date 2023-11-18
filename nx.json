@@ -57,6 +57,9 @@
         "style": "scss",
         "linter": "eslint"
       }
+    },
+    "@nx/workspace:move": {
+      "projectNameAndRootFormat": "as-provided"
     }
   },
   "nxCloudAccessToken": "Y2U3NGMzMzgtZTM1MS00MTQwLThiYjYtOGRlNTYzNjMzOWUyfHJlYWQtd3JpdGU="
