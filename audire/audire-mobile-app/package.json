@@ -2,6 +2,7 @@
   "name": "audire-mobile-app",
   "version": "0.0.1",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
@@ -16,7 +17,10 @@
     "react": "*",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
-    "@babel/core": "*"
+    "@babel/core": "*",
+    "expo-router": "*",
+    "react-native-gesture-handler": "*",
+    "expo-updates": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",

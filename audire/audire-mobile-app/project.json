@@ -1,7 +1,7 @@
 {
   "name": "audire-mobile-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "audire/audire-mobile-app/src",
+  "sourceRoot": "audire/audire-mobile-app",
   "projectType": "application",
   "targets": {
     "start": {
