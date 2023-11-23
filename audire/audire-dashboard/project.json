@@ -1,7 +1,7 @@
 {
-  "name": "c1-dashboard",
+  "name": "audire-dashboard",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "c1/c1-dashboard",
+  "sourceRoot": "audire/audire-dashboard",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,11 +9,11 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/c1/c1-dashboard"
+        "outputPath": "dist/audire/audire-dashboard"
       },
       "configurations": {
         "development": {
-          "outputPath": "c1/c1-dashboard"
+          "outputPath": "audire/audire-dashboard"
         },
         "production": {}
       }
@@ -22,16 +22,16 @@
       "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "c1-dashboard:build",
+        "buildTarget": "audire-dashboard:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "c1-dashboard:build:development",
+          "buildTarget": "audire-dashboard:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "c1-dashboard:build:production",
+          "buildTarget": "audire-dashboard:build:production",
           "dev": false
         }
       }
@@ -39,21 +39,21 @@
     "export": {
       "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "c1-dashboard:build:production"
+        "buildTarget": "audire-dashboard:build:production"
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "c1/c1-dashboard/jest.config.ts"
+        "jestConfig": "audire/audire-dashboard/jest.config.ts"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["c1/c1-dashboard/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["audire/audire-dashboard/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'c1-dashboard',
+  displayName: 'audire-dashboard',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/c1/c1-dashboard',
+  coverageDirectory: '../../coverage/audire/audire-dashboard',
 };
