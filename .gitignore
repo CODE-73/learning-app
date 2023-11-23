@@ -114,3 +114,21 @@ yarn-error.log
 
 
 c1-mobile-app-e2e/artifacts
+
+# Expo
+node_modules/
+.expo/
+.yarn/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+cache/
+
+
+audire/audire-mobile-app-e2e/artifacts
