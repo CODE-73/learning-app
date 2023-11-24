@@ -21,7 +21,14 @@
     "expo-router": "*",
     "react-native-gesture-handler": "*",
     "react-native-safe-area-context": "*",
-    "expo-updates": "*"
+    "expo-updates": "*",
+    "@gluestack-style/react": "*",
+    "@gluestack-ui/themed": "*",
+    "@gluestack-ui/config": "*",
+    "zod": "*",
+    "react-hook-form": "*",
+    "@hookform/resolvers": "*",
+    "lucide-react-native": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",
