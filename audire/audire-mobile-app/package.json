@@ -20,6 +20,7 @@
     "@babel/core": "*",
     "expo-router": "*",
     "react-native-gesture-handler": "*",
+    "react-native-safe-area-context": "*",
     "expo-updates": "*"
   },
   "scripts": {
