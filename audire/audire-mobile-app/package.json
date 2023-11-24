@@ -28,7 +28,8 @@
     "zod": "*",
     "react-hook-form": "*",
     "@hookform/resolvers": "*",
-    "lucide-react-native": "*"
+    "lucide-react-native": "*",
+    "expo-asset": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",
