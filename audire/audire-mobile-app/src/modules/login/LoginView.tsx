@@ -38,36 +38,45 @@ import {
 } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 
-// import { z } from 'zod';
-
-// const logInSchema
-
 const LoginView = () => {
   const image = Asset.fromURI('/assets/audire.png').uri;
   return (
-    <>
-      <Image
-        size="sm"
-        alt="test"
-        borderRadius="$none"
-        source={{
-          uri: image,
-        }}
-      />
-      <Text>Welcome</Text>
-      <Text>To Audire</Text>
-      <Input>
-        <InputField type="MobileNumber" placeholder="MobileNumber" />
-      </Input>
-      <Input>
-        <InputField type="Name" placeholder="Name" />
-      </Input>
-      <Link href="/verification" asChild>
-        <Button>
-          <ButtonText fontSize="$sm"> SIGN IN </ButtonText>
-        </Button>
-      </Link>
-    </>
+    <ScrollView>
+      <VStack space={4} alignItems="center">
+        <Image
+          size="lg"
+          alt="Audire Logo"
+          borderRadius="md"
+          source={{
+            uri: image,
+          }}
+        />
+        <Heading fontSize="xl" fontWeight="bold">
+          Welcome to
+        </Heading>
+        <Heading fontSize="xl" fontWeight="bold" color="gray.500">
+          Audire
+        </Heading>
+
+        <FormControl>
+          <Input>
+            <InputField type="text" placeholder="Mobile Number" />
+          </Input>
+        </FormControl>
+        <FormControl>
+          <Input>
+            <InputField type="text" placeholder="Name" />
+          </Input>
+        </FormControl>
+        <Link href="/verification" asChild>
+          <Button variant="primary">
+            <ButtonText fontSize="md" fontWeight="bold">
+              SIGN IN
+            </ButtonText>
+          </Button>
+        </Link>
+      </VStack>
+    </ScrollView>
   );
 };
 

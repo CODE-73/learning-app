@@ -1,104 +1,82 @@
-import {
-  VStack,
-  Box,
-  HStack,
-  Icon,
-  Text,
-  Button,
-  Image,
-  Center,
-  FormControl,
-  Input,
-  Link,
-  LinkText,
-  FormControlHelperText,
-  InputField,
-  ButtonText,
-  ArrowLeftIcon,
-  FormControlError,
-  FormControlErrorIcon,
-  FormControlErrorText,
-  Toast,
-  ToastTitle,
-  useToast,
-  Heading,
-} from '@gluestack-ui/themed';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Link } from 'expo-router';
 
 const VerificationView = () => {
+  const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
+
+  const handleOtpInputChange = (index, value) => {
+    const updatedOtpValues = [...otpValues];
+    updatedOtpValues[index] = value;
+    setOtpValues(updatedOtpValues);
+  };
+
+  const renderOtpInputBoxes = () => {
+    const otpBoxes = [];
+
+    for (let i = 0; i < 6; i++) {
+      otpBoxes.push(
+        <TextInput
+          key={i}
+          style={{
+            borderWidth: 1,
+            borderColor: 'gray',
+            borderRadius: 5,
+            fontSize: 20,
+            textAlign: 'center',
+            width: 40,
+            height: 40,
+            marginRight: 5,
+          }}
+          keyboardType="numeric"
+          value={otpValues[i]}
+          onChangeText={(value) => handleOtpInputChange(i, value)}
+          maxLength={1}
+        />
+      );
+    }
+
+    return otpBoxes;
+  };
+
   return (
-    <VStack space="xs">
-      <Heading
-        fontSize="$xl"
-        sx={{
-          '@md': { fontSize: '$2xl', pb: '$4' },
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: 24, marginBottom: 20 }}>Enter OTP</Text>
+
+      <Text style={{ fontSize: 16, marginBottom: 12 }}>
+        We have sent the OTP code to{' '}
+        <Text style={{ fontWeight: 'bold' }}>87******47</Text>
+      </Text>
+
+      <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+        {renderOtpInputBoxes()}
+      </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          // Resend OTP logic here
         }}
       >
-        Enter OTP
-      </Heading>
-      <HStack space="xs" alignItems="center">
-        <Text
-          color="$textLight800"
-          sx={{
-            '@md': {
-              pb: '$12',
-            },
-            _dark: {
-              color: '$textDark400',
-            },
+        <Text style={{ fontSize: 16, color: 'blue' }}>RESEND OTP</Text>
+      </TouchableOpacity>
+      <Link href="/profile/course" asChild>
+        <TouchableOpacity
+          style={{
+            marginTop: 20,
+            backgroundColor: 'blue',
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            borderRadius: 5,
           }}
-          fontSize="$sm"
-        >
-          We have sent the OTP code to
-          <Text
-            fontWeight="$bold"
-            color="$textLight800"
-            sx={{
-              _dark: {
-                color: '$textDark400',
-              },
-            }}
-            fontSize="$sm"
-          >
-            {} 87******47
-          </Text>
-        </Text>
-      </HStack>
-
-      <HStack py="$8">
-        <Text
-          color="$textLight800"
-          sx={{
-            _dark: {
-              color: '$textDark400',
-            },
+          onPress={() => {
+            // Proceed button logic here
           }}
-          fontSize="$sm"
         >
-          Didn't receive the OTP?{' '}
-        </Text>
-        <Link href="">
-          <LinkText fontSize="$sm">RESEND OTP</LinkText>
-        </Link>
-      </HStack>
-
-      <Button
-        size="lg"
-        variant="solid"
-        action="primary"
-        isDisabled={false}
-        isFocusVisible={false}
-      >
-        <ButtonText fontSize="$sm">PROCEED </ButtonText>
-      </Button>
-      <Box
-        sx={{
-          '@md': {
-            display: 'none',
-          },
-        }}
-        display="flex"
-      ></Box>
-    </VStack>
+          <Text style={{ color: 'white', fontSize: 16 }}>PROCEED</Text>
+        </TouchableOpacity>
+      </Link>
+    </View>
   );
 };
+
 export default VerificationView;

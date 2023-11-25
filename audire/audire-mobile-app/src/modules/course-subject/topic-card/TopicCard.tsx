@@ -2,17 +2,19 @@ import React, { FC } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
-type StageCardProps = {
-  stage: string;
+type TopicCardProps = {
+  topic: string;
   href: string;
+  description: string;
 };
 
-const StageCard: FC<StageCardProps> = ({ stage, href }) => {
+const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
   return (
     <View style={styles.container}>
       <Link href={href} asChild>
         <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>{stage}</Text>
+          <Text style={styles.cardText}>{topic}</Text>
+          {description && <Text style={styles.description}>{description}</Text>}
         </TouchableOpacity>
       </Link>
     </View>
@@ -39,6 +41,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  description: {
+    fontSize: 14,
+    marginTop: 10,
+  },
 });
 
-export default StageCard;
+export default TopicCard;
