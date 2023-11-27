@@ -1,12 +1,16 @@
-import VerificationView from './VerificationView';
 import { Image, Box } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
+import { FC, ReactNode } from 'react';
 
-const VerificationTopView = () => {
+type AuthorizationLayoutProps = {
+  children: ReactNode;
+};
+
+const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
   const image = Asset.fromURI('/assets/audire.png').uri;
   return (
     <Box
-      bg="#701a75"
+      bg="#f5d0fe"
       sx={{
         // Use flex to make the Box fill the entire screen
         display: 'flex',
@@ -23,13 +27,15 @@ const VerificationTopView = () => {
       <Image
         size="2xl"
         alt="Audire Logo"
+        mt={30}
+        mb={30}
         source={{
           uri: image,
         }}
       />
-      <VerificationView />
+      {children}
     </Box>
   );
 };
 
-export default VerificationTopView;
+export default AuthorizationLayout;

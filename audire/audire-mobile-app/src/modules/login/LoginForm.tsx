@@ -15,7 +15,7 @@ import {
 import { View } from 'lucide-react-native';
 import { Asset } from 'expo-asset';
 
-const LoginFormView = () => {
+const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState('');
 
   const handleInputChange = (event) => {
@@ -96,4 +96,4 @@ const LoginFormView = () => {
   );
 };
 
-export default LoginFormView;
+export default LoginForm;

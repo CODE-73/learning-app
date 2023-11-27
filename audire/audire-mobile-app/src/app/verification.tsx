@@ -1,5 +1,5 @@
-import VerificationTopView from '../modules/login/VerificationTopView';
+import VerificationView from '../modules/login/VerificationView';
 
-const Verification = () => <VerificationTopView />;
+const Verification = () => <VerificationView />;
 
 export default Verification;
