@@ -38,8 +38,8 @@ const LoginForm = () => {
         // iOS
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 50,
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
       }}
     >
       <Box alignItems="center">

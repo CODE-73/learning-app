@@ -14,10 +14,9 @@ const CourseSelectionView = () => {
     <Box
       style={{
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: 'white',
         width: '100%',
+        // TODO: Fahim Please check
         borderTopLeftRadius: '53px',
         borderTopRightRadius: '53px',
         // Android
@@ -25,12 +24,33 @@ const CourseSelectionView = () => {
         // iOS
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 50,
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
       }}
     >
-      <Box>
-        <Box>
+      <Box
+        flexDirection="column"
+        alignItems="center"
+        style={{ marginTop: '100px' }}
+      >
+        <Box
+          maxWidth="$64"
+          borderColor="#171717"
+          borderRadius="$lg"
+          borderWidth="$1"
+          my="$4"
+          backgroundColor="#fdf4ff"
+          overflow="hidden"
+          sx={{
+            '@base': {
+              mx: '$5',
+            },
+            _dark: {
+              bg: '$backgroundDark900',
+              borderColor: '$borderDark800',
+            },
+          }}
+        >
           <Link href="/" asChild>
             <TouchableOpacity
               style={styles.card}
@@ -40,7 +60,20 @@ const CourseSelectionView = () => {
             </TouchableOpacity>
           </Link>
         </Box>
-        <Box>
+        <Box
+          maxWidth="$64"
+          borderColor="#171717"
+          borderRadius="$lg"
+          borderWidth="$1"
+          my="$4"
+          backgroundColor="#fdf4ff"
+          overflow="hidden"
+          sx={{
+            '@base': {
+              mx: '$5',
+            },
+          }}
+        >
           <Link href="/" asChild>
             <TouchableOpacity
               style={styles.card}
@@ -56,20 +89,13 @@ const CourseSelectionView = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
   card: {
-    backgroundColor: 'lightblue',
     padding: 20,
-    margin: 10,
-    borderRadius: 10,
-    width: 150,
+    margin: 5,
+    width: 250,
     justifyContent: 'center',
     alignItems: 'center',
+    height: 80,
   },
   cardText: {
     fontSize: 20,

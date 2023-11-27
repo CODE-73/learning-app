@@ -30,14 +30,14 @@ const topBar = () => {
     >
       <Box
         sx={{
-          // Use flex to make the Box fill the entire screen
           display: 'flex',
           flexDirection: 'row',
 
-          justifyContent: 'center',
           alignItems: 'center',
         }}
       >
+        <Icon as={Menu} size="xl" sx={{ marginRight: 66 }} />
+
         <Box>
           <Image
             size="xl"
@@ -48,13 +48,16 @@ const topBar = () => {
           />
         </Box>
 
-        <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-          <AvatarFallbackText>Sandeep Srivastava</AvatarFallbackText>
+        <Avatar
+          bgColor="$amber600"
+          size="md"
+          borderRadius="$full"
+          sx={{ marginLeft: 66 }}
+        >
+          <AvatarFallbackText>Mohammed Sameer</AvatarFallbackText>
         </Avatar>
       </Box>
       <CourseSelectionView />
-
-      <Icon as={Menu} m="$2" w="$4" h="$4" />
     </Box>
   );
 };
