@@ -1,17 +1,8 @@
-import { Image, Box } from '@gluestack-ui/themed';
-import { Asset } from 'expo-asset';
+import { Box } from '@gluestack-ui/themed';
 import { Slot } from 'expo-router';
-import {
-  Avatar,
-  AvatarBadge,
-  AvatarFallbackText,
-  AvatarImage,
-} from '@gluestack-ui/themed';
-import { Icon } from '@gluestack-ui/themed';
-import { Menu } from 'lucide-react-native';
+import Topbar from '../../modules/common/Topbar';
 
-const topBar = () => {
-  const image = Asset.fromURI('/assets/audire.png').uri;
+const MainLayout = () => {
   return (
     <Box
       bg="#f5d0fe"
@@ -28,38 +19,10 @@ const topBar = () => {
         // '@lg': { m: '$1' },
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-
-          alignItems: 'center',
-        }}
-      >
-        <Icon as={Menu} size="xl" sx={{ marginRight: 66 }} />
-
-        <Box>
-          <Image
-            size="xl"
-            alt="Audire Logo"
-            source={{
-              uri: image,
-            }}
-          />
-        </Box>
-
-        <Avatar
-          bgColor="$amber600"
-          size="md"
-          borderRadius="$full"
-          sx={{ marginLeft: 66 }}
-        >
-          <AvatarFallbackText>Mohammed Sameer</AvatarFallbackText>
-        </Avatar>
-      </Box>
+      <Topbar />
       <Slot />
     </Box>
   );
 };
 
-export default topBar;
+export default MainLayout;

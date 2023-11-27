@@ -1,6 +1,5 @@
-// import CourseSelectionView from '../../../modules/profile/CourseSelectionView';
-import TopBar from '../../../modules/profile/TopBar';
+import CourseSelectionView from '../../../modules/profile/CourseSelectionView';
 
-const course = () => <TopBar />;
+const CourseSelectionPage = () => <CourseSelectionView />;
 
-export default course;
+export default CourseSelectionPage;
