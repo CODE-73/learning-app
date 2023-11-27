@@ -6,9 +6,12 @@ import {
   Image,
   Button,
   ButtonIcon,
+  BadgeText,
+  Badge,
+  VStack,
 } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
-import { Menu } from 'lucide-react-native';
+import { Menu, MessageSquare } from 'lucide-react-native';
 import { FC } from 'react';
 
 type TopbarProps = {
@@ -58,14 +61,30 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
         />
       </Box>
 
-      <Avatar
-        bgColor="$amber600"
-        size="md"
-        borderRadius="$full"
-        sx={{ marginLeft: 66 }}
-      >
-        <AvatarFallbackText>Mohammed Sameer</AvatarFallbackText>
-      </Avatar>
+      <Box alignItems="center" sx={{ marginLeft: 66 }}>
+        <VStack>
+          <Badge
+            h={22}
+            w={22}
+            bg="$red600"
+            borderRadius="$full"
+            mb={-14}
+            mr={-14}
+            zIndex={1}
+            variant="solid"
+            alignSelf="flex-end"
+          >
+            <BadgeText color="$white">2</BadgeText>
+          </Badge>
+
+          <ButtonIcon
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+            color="black"
+            as={MessageSquare}
+            size="xl"
+          />
+        </VStack>
+      </Box>
     </Box>
   );
 };
