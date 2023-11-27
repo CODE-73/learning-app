@@ -1,8 +1,12 @@
 import { Box } from '@gluestack-ui/themed';
 import { Slot } from 'expo-router';
 import Topbar from '../../modules/common/Topbar';
+import Sidebar from '../../modules/common/Sidebar';
+import { useState } from 'react';
 
 const MainLayout = () => {
+  const [sidebarShown, setSidebarShown] = useState(false);
+  console.log(sidebarShown);
   return (
     <Box
       bg="#f5d0fe"
@@ -19,8 +23,9 @@ const MainLayout = () => {
         // '@lg': { m: '$1' },
       }}
     >
-      <Topbar />
+      <Topbar onToggleSidebar={() => setSidebarShown((prev) => !prev)} />
       <Slot />
+      <Sidebar isShown={sidebarShown} />
     </Box>
   );
 };

@@ -4,11 +4,18 @@ import {
   Box,
   Icon,
   Image,
+  Button,
+  ButtonIcon,
 } from '@gluestack-ui/themed';
-import { Menu } from 'lucide-react-native';
 import { Asset } from 'expo-asset';
+import { Menu } from 'lucide-react-native';
+import { FC } from 'react';
 
-const Topbar = () => {
+type TopbarProps = {
+  onToggleSidebar: () => void;
+};
+
+const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
   const image = Asset.fromURI('/assets/audire.png').uri;
 
   return (
@@ -20,7 +27,26 @@ const Topbar = () => {
         alignItems: 'center',
       }}
     >
-      <Icon as={Menu} size="xl" sx={{ marginRight: 66 }} />
+      {/* <Icon
+        as={Menu}
+        onClick={onToggleSidebar}
+        size="xl"
+        sx={{ marginRight: 66 }}
+      /> */}
+      <Button
+        size="md"
+        paddingLeft="10px"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+      >
+        <ButtonIcon
+          color="black"
+          as={Menu}
+          onClick={onToggleSidebar}
+          //TODO: Fahim Please check
+          size="xl"
+          sx={{ marginRight: 66, zIndex: 1 }}
+        />
+      </Button>
 
       <Box>
         <Image

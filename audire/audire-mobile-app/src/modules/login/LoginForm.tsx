@@ -49,7 +49,7 @@ const LoginForm = () => {
           </Text>
           <Box alignItems="center" mt={10}>
             <Text fontSize="$3xl" fontWeight="bold" color="#86198f">
-              Audire
+              AUDIRE
             </Text>
           </Box>
         </Box>
