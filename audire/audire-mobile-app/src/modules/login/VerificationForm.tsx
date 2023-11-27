@@ -62,21 +62,22 @@ const VerificationView = () => {
     >
       <Box alignItems="center">
         <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Enter OTP</Text>
-        <Box mt={35} mb={20} style={{ display: 'flex', flexDirection: 'row' }}>
+        <Box
+          mt={35}
+          mb={20}
+          alignItems="center"
+          style={{ display: 'flex', flexDirection: 'row' }}
+        >
           <Text style={{ fontSize: 14 }}>We have sent the OTP code to </Text>
-          <Text style={{ fontWeight: 'bold', paddingRight: 10 }}>
-            87******47
-          </Text>
+          <Text style={{ fontWeight: 'bold' }}>87******47</Text>
           <Link href="/login" asChild>
             <Button
-              borderRadius=""
-              size="lg"
-              p="$3.5"
-              bg="$indigo600"
-              borderColor="$indigo600"
+              size="md"
+              paddingLeft="10px"
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
             >
               {/* EditIcon is imported from 'lucide-react-native' */}
-              <ButtonIcon as={PenSquare} />
+              <ButtonIcon color="blue" as={PenSquare} />
             </Button>
           </Link>
         </Box>
