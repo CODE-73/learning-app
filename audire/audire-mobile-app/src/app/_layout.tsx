@@ -4,7 +4,13 @@ import { config } from '@gluestack-ui/config';
 
 const RootLayout = () => (
   <GluestackUIProvider config={config}>
-    <Box width="100%" justifyContent="center" alignItems="center">
+    <Box
+      width="100%"
+      flex={1}
+      flexDirection="column"
+      justifyContent="flex-start"
+      alignItems="stretch"
+    >
       <Slot />
     </Box>
   </GluestackUIProvider>
