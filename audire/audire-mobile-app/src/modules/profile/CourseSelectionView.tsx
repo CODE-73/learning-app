@@ -29,22 +29,28 @@ const CourseSelectionView = () => {
         shadowRadius: 50,
       }}
     >
-      <Link href="/" asChild>
-        <TouchableOpacity
-          style={styles.card}
-          onPress={() => handleCardPress('CA')}
-        >
-          <Text style={styles.cardText}>CA</Text>
-        </TouchableOpacity>
-      </Link>
-      <Link href="/" asChild>
-        <TouchableOpacity
-          style={styles.card}
-          onPress={() => handleCardPress('CMA')}
-        >
-          <Text style={styles.cardText}>CMA</Text>
-        </TouchableOpacity>
-      </Link>
+      <Box>
+        <Box>
+          <Link href="/" asChild>
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handleCardPress('CA')}
+            >
+              <Text style={styles.cardText}>CA</Text>
+            </TouchableOpacity>
+          </Link>
+        </Box>
+        <Box>
+          <Link href="/" asChild>
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => handleCardPress('CMA')}
+            >
+              <Text style={styles.cardText}>CMA</Text>
+            </TouchableOpacity>
+          </Link>
+        </Box>
+      </Box>
     </Box>
   );
 };
