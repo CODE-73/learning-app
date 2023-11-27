@@ -1,8 +1,8 @@
-import LoginTopBar from './LoginFormView';
+import CourseSelectionView from './CourseSelectionView';
 import { Image, Box } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 
-const LoginView = () => {
+const topBar = () => {
   const image = Asset.fromURI('/assets/audire.png').uri;
   return (
     <Box
@@ -21,17 +21,15 @@ const LoginView = () => {
       }}
     >
       <Image
-        size="2xl"
+        size="xl"
         alt="Audire Logo"
-        mt={30}
-        mb={30}
         source={{
           uri: image,
         }}
       />
-      <LoginTopBar />
+      <CourseSelectionView />
     </Box>
   );
 };
 
-export default LoginView;
+export default topBar;

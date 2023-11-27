@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
+import { Box } from '@gluestack-ui/themed';
+
 const CourseSelectionView = () => {
   const handleCardPress = (course) => {
     // Handle card press logic here
@@ -9,7 +11,24 @@ const CourseSelectionView = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Box
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        width: '100%',
+        borderTopLeftRadius: '53px',
+        borderTopRightRadius: '53px',
+        // Android
+        elevation: 5,
+        // iOS
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 50,
+      }}
+    >
       <Link href="/" asChild>
         <TouchableOpacity
           style={styles.card}
@@ -26,7 +45,7 @@ const CourseSelectionView = () => {
           <Text style={styles.cardText}>CMA</Text>
         </TouchableOpacity>
       </Link>
-    </View>
+    </Box>
   );
 };
 
