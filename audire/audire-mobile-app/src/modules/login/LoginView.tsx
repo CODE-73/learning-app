@@ -1,40 +1,15 @@
-import { useState } from 'react';
 import { Link } from 'expo-router';
-import verification from '../../app/verification';
+
 import {
-  Center,
   Button,
   FormControl,
-  HStack,
   Input,
-  Text,
   VStack,
-  useToast,
-  Toast,
-  Box,
-  CheckIcon,
-  Checkbox,
-  Icon,
-  ToastTitle,
   InputField,
-  FormControlError,
-  FormControlErrorIcon,
-  FormControlErrorText,
-  InputIcon,
-  FormControlHelper,
-  CheckboxIndicator,
-  CheckboxIcon,
-  CheckboxLabel,
   ButtonText,
-  ButtonIcon,
   Image,
-  Divider,
-  ArrowLeftIcon,
   Heading,
-  LinkText,
   ScrollView,
-  InputSlot,
-  Pressable,
 } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 
@@ -42,15 +17,15 @@ const LoginView = () => {
   const image = Asset.fromURI('/assets/audire.png').uri;
   return (
     <ScrollView>
-      <VStack space={4} alignItems="center">
-        <Image
-          size="lg"
-          alt="Audire Logo"
-          borderRadius="md"
-          source={{
-            uri: image,
-          }}
-        />
+      <Image
+        size="2xl"
+        alt="Audire Logo"
+        borderRadius="md"
+        source={{
+          uri: image,
+        }}
+      />
+      <VStack alignItems="center">
         <Heading fontSize="xl" fontWeight="bold">
           Welcome to
         </Heading>
@@ -58,18 +33,19 @@ const LoginView = () => {
           Audire
         </Heading>
 
-        <FormControl>
+        <FormControl mb={4}>
           <Input>
             <InputField type="text" placeholder="Mobile Number" />
           </Input>
         </FormControl>
-        <FormControl>
+        <FormControl mb={4}>
           <Input>
             <InputField type="text" placeholder="Name" />
           </Input>
         </FormControl>
+
         <Link href="/verification" asChild>
-          <Button variant="primary">
+          <Button variant="primary" mt={4}>
             <ButtonText fontSize="md" fontWeight="bold">
               SIGN IN
             </ButtonText>
