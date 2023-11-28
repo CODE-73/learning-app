@@ -21,7 +21,6 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
         borderColor="#171717"
         borderRadius="$lg"
         borderWidth="$1"
-        my="$4"
         backgroundColor="#fdf4ff"
         overflow="hidden"
         sx={{
@@ -50,11 +49,11 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
 const styles = StyleSheet.create({
   card: {
     padding: 20,
-    margin: 5,
+    margin: 15,
     width: 250,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 80,
+    height: 50,
   },
   cardText: {
     fontSize: 20,
