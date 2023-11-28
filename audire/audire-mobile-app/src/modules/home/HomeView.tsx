@@ -1,6 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+
 import StageCard from './stage-card/StageCard';
+import { Box } from '@gluestack-ui/themed';
 
 const stages = [
   { name: 'Foundation', link: '/course-stages/foundation' },
@@ -10,11 +11,27 @@ const stages = [
 
 const HomeView = () => {
   return (
-    <View>
+    <Box
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        width: '100%',
+        // TODO: Fahim Please check
+        borderTopLeftRadius: '53px',
+        borderTopRightRadius: '53px',
+        // Android
+        elevation: 5,
+        // iOS
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
+      }}
+    >
       {stages.map((stage) => (
         <StageCard key={stage.name} stage={stage.name} href={stage.link} />
       ))}
-    </View>
+    </Box>
   );
 };
 

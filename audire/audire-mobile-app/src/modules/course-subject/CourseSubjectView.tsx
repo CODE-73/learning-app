@@ -1,6 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
+
 import TopicCard from './topic-card/TopicCard';
+import { Box } from '@gluestack-ui/themed';
 
 const topics = [
   {
@@ -22,7 +23,23 @@ const topics = [
 
 const CourseSubjectView = () => {
   return (
-    <View>
+    <Box
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        width: '100%',
+        // TODO: Fahim Please check
+        borderTopLeftRadius: '53px',
+        borderTopRightRadius: '53px',
+        // Android
+        elevation: 5,
+        // iOS
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
+      }}
+    >
       {topics.map((topic) => (
         <TopicCard
           key={topic.name}
@@ -31,7 +48,7 @@ const CourseSubjectView = () => {
           description={topic.description}
         />
       ))}
-    </View>
+    </Box>
   );
 };
 

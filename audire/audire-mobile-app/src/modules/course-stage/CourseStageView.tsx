@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import SubjectCard from './subject-card/SubjectCard';
+import { Box } from '@gluestack-ui/themed';
 
 const subjects = [
   {
@@ -30,7 +31,23 @@ const subjects = [
 
 const CourseStageView = () => {
   return (
-    <View>
+    <Box
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        width: '100%',
+        // TODO: Fahim Please check
+        borderTopLeftRadius: '53px',
+        borderTopRightRadius: '53px',
+        // Android
+        elevation: 5,
+        // iOS
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
+      }}
+    >
       {subjects.map((subject) => (
         <SubjectCard
           key={subject.name}
@@ -39,7 +56,7 @@ const CourseStageView = () => {
           description={subject.description}
         />
       ))}
-    </View>
+    </Box>
   );
 };
 

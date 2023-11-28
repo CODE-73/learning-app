@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Box } from '@gluestack-ui/themed';
 
 const CourseTopicView = () => {
   // Sample data for each section
@@ -11,7 +12,23 @@ const CourseTopicView = () => {
   ];
 
   return (
-    <View>
+    <Box
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+        width: '100%',
+        // TODO: Fahim Please check
+        borderTopLeftRadius: '53px',
+        borderTopRightRadius: '53px',
+        // Android
+        elevation: 5,
+        // iOS
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 30,
+      }}
+    >
       {/* Title */}
       <Text style={styles.title}>Course Title</Text>
 
@@ -27,7 +44,7 @@ const CourseTopicView = () => {
           <Text>{section.content}</Text>
         </View>
       ))}
-    </View>
+    </Box>
   );
 };
 

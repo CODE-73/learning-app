@@ -9,6 +9,6 @@ const HomePage = () =>
   isLoggedIn ? <HomeView /> : <LoginView />;
 
 // Replace this with your actual authentication logic
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 export default HomePage;
