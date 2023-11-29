@@ -5,7 +5,7 @@ type PublicLayoutProps = {
 };
 
 const PublicLayout: FC<PublicLayoutProps> = ({ children }) => (
-  <div className="h-screen bg-background text-white flex flex-row">
+  <div className="h-screen bg-background text-white flex flex-row items-center justify-center">
     {children}
   </div>
 );

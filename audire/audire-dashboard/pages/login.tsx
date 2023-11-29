@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
 import { NextPageWithLayout } from './_app';
 import PublicLayout from 'layouts/PublicLayout';
+import LoginView from 'modules/login/LoginView';
 
 const LoginPage: NextPageWithLayout = () => {
-  return <div>LoginView</div>;
+  return <LoginView />;
 };
 
 LoginPage.getLayout = (page: ReactElement) => (
