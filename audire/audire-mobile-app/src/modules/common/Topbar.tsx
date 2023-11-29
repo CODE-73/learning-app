@@ -51,7 +51,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
         />
       </Button>
 
-      <Box>
+      <Box sx={{ marginRight: 20 }}>
         <Image
           size="xl"
           alt="Audire Logo"
