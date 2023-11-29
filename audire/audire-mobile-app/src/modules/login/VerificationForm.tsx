@@ -73,8 +73,8 @@ const VerificationView = () => {
           <Link href="/login" asChild>
             <Button
               size="md"
-              paddingLeft="10px"
-              style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+              paddingLeft="$2.5"
+              sx={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
             >
               {/* EditIcon is imported from 'lucide-react-native' */}
               <ButtonIcon color="blue" as={PenSquare} />

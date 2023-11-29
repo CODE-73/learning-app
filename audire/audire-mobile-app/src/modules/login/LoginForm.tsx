@@ -7,22 +7,12 @@ import {
   Input,
   InputField,
   ButtonText,
-  Heading,
   Box,
-  Image,
   Text,
 } from '@gluestack-ui/themed';
-import { View } from 'lucide-react-native';
-import { Asset } from 'expo-asset';
-
 const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState('');
 
-  const handleInputChange = (event) => {
-    // Remove non-numeric characters
-    const value = event.target.value.replace(/[^0-9]/g, '');
-    setMobileNumber(value);
-  };
   return (
     <Box
       sx={{
@@ -66,7 +56,9 @@ const LoginForm = () => {
                 type="text"
                 placeholder="Mobile Number"
                 value={mobileNumber}
-                onChange={handleInputChange}
+                onChangeText={(e) => {
+                  setMobileNumber(e);
+                }}
               />
             </Input>
           </FormControl>

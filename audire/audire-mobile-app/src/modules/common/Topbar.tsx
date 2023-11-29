@@ -1,13 +1,10 @@
 import {
-  Avatar,
-  AvatarFallbackText,
+  Badge,
+  BadgeText,
   Box,
-  Icon,
-  Image,
   Button,
   ButtonIcon,
-  BadgeText,
-  Badge,
+  Image,
   VStack,
 } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
@@ -38,14 +35,13 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       /> */}
       <Button
         size="md"
-        paddingLeft="10px"
+        paddingLeft="$2.5"
         style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+        onPress={onToggleSidebar}
       >
         <ButtonIcon
           color="black"
           as={Menu}
-          onClick={onToggleSidebar}
-          //TODO: Fahim Please check
           size="xl"
           sx={{ marginRight: 66, zIndex: 1 }}
         />

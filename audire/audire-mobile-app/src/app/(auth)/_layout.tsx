@@ -14,8 +14,8 @@ const MainLayout = () => {
         // Use flex to make the Box fill the entire screen
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh', // 100% of the viewport height
-        justifyContent: 'center', // Center the content vertically
+        height: '$full',
+        justifyContent: 'flex-start', // Center the content vertically
         alignItems: 'center', // Center the content horizontally
 
         // Other styles if needed
@@ -25,7 +25,10 @@ const MainLayout = () => {
     >
       <Topbar onToggleSidebar={() => setSidebarShown((prev) => !prev)} />
       <Slot />
-      <Sidebar isShown={sidebarShown} />
+      <Sidebar
+        isShown={sidebarShown}
+        onToggleSidebar={() => setSidebarShown((prev) => !prev)}
+      />
     </Box>
   );
 };

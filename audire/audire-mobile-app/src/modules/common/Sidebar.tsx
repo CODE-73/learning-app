@@ -12,6 +12,7 @@ type Option = {
 
 type SidebarProps = {
   isShown: boolean;
+  onToggleSidebar: () => void;
 };
 
 const options: Option[] = [
@@ -21,10 +22,11 @@ const options: Option[] = [
   { name: 'Terms And Conditions', link: '' },
   { name: 'Log Out', link: '' },
 ];
-const Sidebar: FC<SidebarProps> = ({ isShown }) => {
+const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   return isShown ? (
     //transperent box
     <Box
+      onTouchCancel={onToggleSidebar}
       style={{
         left: 0,
         top: 0,
@@ -85,8 +87,8 @@ const Sidebar: FC<SidebarProps> = ({ isShown }) => {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ fontSize: 14, color: 'black' }}>Profile </Text>
-              <Text style={{ fontWeight: 'bold', color: 'black' }}>
+              <Text sx={{ fontSize: 14, color: 'black' }}>Profile </Text>
+              <Text sx={{ fontWeight: 'bold', color: 'black' }}>
                 Muhammed Rameez
               </Text>
             </Box>
@@ -95,7 +97,10 @@ const Sidebar: FC<SidebarProps> = ({ isShown }) => {
             {options.map((option) => (
               <Link href={option.link}>
                 <TouchableOpacity key={option.name}>
-                  <Text style={{ fontSize: 18, color: 'black' }} mb={60}>
+                  <Text
+                    sx={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}
+                    mb={60}
+                  >
                     {option.name}
                   </Text>
                 </TouchableOpacity>
@@ -104,7 +109,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown }) => {
           </Box>
         </Box>
         <Box
-          style={{
+          sx={{
             display: 'flex',
             alignItems: 'center',
             marginTop: 10,
