@@ -1,6 +1,7 @@
 import { Box, Text, Avatar, AvatarFallbackText } from '@gluestack-ui/themed';
 import { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Link } from 'expo-router';
 
 // import { Home, Mail, Book, LogOut } from 'react-lucide-icons'; // Import Lucide Icons
 
@@ -14,8 +15,9 @@ type SidebarProps = {
 };
 
 const options: Option[] = [
-  { name: 'About Us', link: '' },
-  { name: 'Contact Us', link: '' },
+  { name: 'About Us', link: '/about' },
+  { name: 'Contact Us', link: '/profile/contact-us' },
+  { name: 'Download', link: '/profile/downloads' },
   { name: 'Terms And Conditions', link: '' },
   { name: 'Log Out', link: '' },
 ];
@@ -91,14 +93,13 @@ const Sidebar: FC<SidebarProps> = ({ isShown }) => {
           </Box>
           <Box mt={40} pl={20}>
             {options.map((option) => (
-              <TouchableOpacity
-                key={option.name}
-                onPress={() => console.log(`Navigate to: ${option.link}`)}
-              >
-                <Text style={{ fontSize: 18, color: 'black' }} mb={60}>
-                  {option.name}
-                </Text>
-              </TouchableOpacity>
+              <Link href={option.link}>
+                <TouchableOpacity key={option.name}>
+                  <Text style={{ fontSize: 18, color: 'black' }} mb={60}>
+                    {option.name}
+                  </Text>
+                </TouchableOpacity>
+              </Link>
             ))}
           </Box>
         </Box>

@@ -1,7 +1,6 @@
-import React from 'react';
-import { View } from 'react-native';
-import SubjectCard from './subject-card/SubjectCard';
 import { Box } from '@gluestack-ui/themed';
+import React from 'react';
+import SubjectCard from './subject-card/SubjectCard';
 
 const subjects = [
   {
@@ -32,13 +31,12 @@ const subjects = [
 const CourseStageView = () => {
   return (
     <Box
-      style={{
+      sx={{
         flex: 1,
         backgroundColor: 'white',
         width: '100%',
-        // TODO: Fahim Please check
-        borderTopLeftRadius: '53px',
-        borderTopRightRadius: '53px',
+        borderTopLeftRadius: '$3xl',
+        borderTopRightRadius: '$3xl',
         // Android
         elevation: 5,
         // iOS

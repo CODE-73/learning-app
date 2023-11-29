@@ -12,13 +12,12 @@ const stages = [
 const HomeView = () => {
   return (
     <Box
-      style={{
+      sx={{
         flex: 1,
         backgroundColor: 'white',
         width: '100%',
-        // TODO: Fahim Please check
-        borderTopLeftRadius: '53px',
-        borderTopRightRadius: '53px',
+        borderTopLeftRadius: '$3xl',
+        borderTopRightRadius: '$3xl',
         // Android
         elevation: 5,
         // iOS

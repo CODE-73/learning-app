@@ -1,24 +1,23 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
 import { Box } from '@gluestack-ui/themed';
 
 const CourseSelectionView = () => {
-  const handleCardPress = (course) => {
+  const handleCardPress = (course: unknown) => {
     // Handle card press logic here
     console.log(`Selected course: ${course}`);
   };
 
   return (
     <Box
-      style={{
+      sx={{
         flex: 1,
         backgroundColor: 'white',
         width: '100%',
-        // TODO: Fahim Please check
-        borderTopLeftRadius: '53px',
-        borderTopRightRadius: '53px',
+        borderTopLeftRadius: '$3xl',
+        borderTopRightRadius: '$3xl',
         // Android
         elevation: 5,
         // iOS
@@ -28,11 +27,7 @@ const CourseSelectionView = () => {
         shadowRadius: 30,
       }}
     >
-      <Box
-        flexDirection="column"
-        alignItems="center"
-        style={{ marginTop: '100px' }}
-      >
+      <Box flexDirection="column" alignItems="center" sx={{ marginTop: '$24' }}>
         <Box
           maxWidth="$64"
           borderColor="#171717"

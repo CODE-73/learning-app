@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native'; // Import the Image component
-import { Asset } from 'expo-asset';
 import { Box } from '@gluestack-ui/themed';
+import { Asset } from 'expo-asset';
+import React from 'react';
+import { Image, Text } from 'react-native'; // Import the Image component
 
 const CourseTopicView = () => {
   // Sample data for each section
@@ -16,12 +16,12 @@ const CourseTopicView = () => {
     <Box
       flexDirection="column"
       alignItems="center"
-      style={{
+      sx={{
         flex: 1,
         backgroundColor: 'white',
         width: '100%',
-        borderTopLeftRadius: '53px',
-        borderTopRightRadius: '53px',
+        borderTopLeftRadius: '$3xl',
+        borderTopRightRadius: '$3xl',
         elevation: 5,
         shadowColor: 'black',
         shadowOffset: { width: 0, height: 2 },
