@@ -26,7 +26,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   return isShown ? (
     //transperent box
     <Box
-      onTouchCancel={onToggleSidebar}
+      onTouchMove={onToggleSidebar}
       style={{
         left: 0,
         top: 0,
@@ -97,10 +97,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
             {options.map((option) => (
               <Link href={option.link}>
                 <TouchableOpacity key={option.name}>
-                  <Text
-                    sx={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}
-                    mb={60}
-                  >
+                  <Text sx={{ fontSize: 18, color: 'black' }} mb={40}>
                     {option.name}
                   </Text>
                 </TouchableOpacity>

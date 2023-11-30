@@ -64,7 +64,7 @@ const CourseTopicView = () => {
             key={index}
             style={styles.section}
           >
-            <Text style={styles.sectionTitle}>{section.title}</Text>
+            <Text sx={styles.sectionTitle}>{section.title}</Text>
             <Text>{section.content}</Text>
             <Box
               width="100%"

@@ -48,7 +48,7 @@ const VerificationView = () => {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
-        width: '100%',
+        width: '$full',
         borderTopLeftRadius: '$3xl',
         borderTopRightRadius: '$3xl',
         // Android
