@@ -10,19 +10,12 @@ const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
   const image = Asset.fromURI('/assets/audire.png').uri;
   return (
     <Box
-      bg="#f5d0fe"
-      sx={{
-        // Use flex to make the Box fill the entire screen
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh', // 100% of the viewport height
-        justifyContent: 'center', // Center the content vertically
-        alignItems: 'center', // Center the content horizontally
-
-        // Other styles if needed
-        // '@sm': { m: '$1' },
-        // '@lg': { m: '$1' },
-      }}
+      bg="$fuchsia200"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center" // Center the content vertically
+      alignItems="center" // Center the content horizontally
+      h="$full"
     >
       <Image
         size="2xl"

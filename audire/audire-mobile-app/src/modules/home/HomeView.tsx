@@ -1,5 +1,5 @@
 import React from 'react';
-
+import HomeFooterView from '../footer/HomeFooterView';
 import StageCard from './stage-card/StageCard';
 import { Box } from '@gluestack-ui/themed';
 
@@ -12,24 +12,26 @@ const stages = [
 const HomeView = () => {
   return (
     <Box
-      sx={{
-        flex: 1,
-        backgroundColor: 'white',
-        width: '100%',
-        borderTopLeftRadius: '$3xl',
-        borderTopRightRadius: '$3xl',
-        // Android
-        elevation: 5,
-        // iOS
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 30,
+      borderTopRightRadius="$2xl"
+      borderTopLeftRadius="$2xl"
+      flex={1}
+      bgColor="white"
+      width="$full"
+      // Android
+      elevation="$1.5"
+      // iOS
+      shadowColor="black"
+      shadowOpacity="$40"
+      shadowRadius="$8"
+      shadowOffset={{
+        width: 0,
+        height: 2,
       }}
     >
       {stages.map((stage) => (
         <StageCard key={stage.name} stage={stage.name} href={stage.link} />
       ))}
+      <HomeFooterView />
     </Box>
   );
 };

@@ -9,19 +9,12 @@ const MainLayout = () => {
   console.log(sidebarShown);
   return (
     <Box
-      bg="#f5d0fe"
-      sx={{
-        // Use flex to make the Box fill the entire screen
-        display: 'flex',
-        flexDirection: 'column',
-        height: '$full',
-        justifyContent: 'flex-start', // Center the content vertically
-        alignItems: 'center', // Center the content horizontally
-
-        // Other styles if needed
-        // '@sm': { m: '$1' },
-        // '@lg': { m: '$1' },
-      }}
+      bg="$fuchsia200"
+      display="flex"
+      flexDirection="column"
+      h="$full"
+      justifyContent="flex-start"
+      alignItems="center"
     >
       <Topbar onToggleSidebar={() => setSidebarShown((prev) => !prev)} />
       <Slot />

@@ -20,34 +20,23 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'row',
-
-        alignItems: 'center',
-      }}
+      w="$full"
+      px="$10"
+      display="flex"
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
     >
-      {/* <Icon
-        as={Menu}
-        onClick={onToggleSidebar}
-        size="xl"
-        sx={{ marginRight: 66 }}
-      /> */}
       <Button
         size="md"
-        paddingLeft="$2.5"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+        pl="$2.5"
+        bgColor="rgba(0, 0, 0, 0)"
         onPress={onToggleSidebar}
       >
-        <ButtonIcon
-          color="black"
-          as={Menu}
-          size="xl"
-          sx={{ marginRight: 66, zIndex: 1 }}
-        />
+        <ButtonIcon color="black" as={Menu} size="xl" zIndex={1} />
       </Button>
 
-      <Box sx={{ marginRight: 20 }}>
+      <Box>
         <Image
           size="xl"
           alt="Audire Logo"
@@ -57,7 +46,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
         />
       </Box>
 
-      <Box alignItems="center" sx={{ marginLeft: 66 }}>
+      <Box>
         <VStack>
           <Badge
             h={22}
@@ -74,7 +63,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
           </Badge>
 
           <ButtonIcon
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
+            bgColor="rgba(0, 0, 0, 0)"
             color="black"
             as={MessageSquare}
             size="xl"

@@ -1,9 +1,7 @@
-import React from 'react';
-import { Box, Text, Image } from 'your-ui-library';
+// import React from 'react';
+// import { Box, Text, Image } from 'your-ui-library';
 
-const VideoComponent = ({ section }) => {
-  
-  return (
-   
+// const VideoComponent = ({ section }) => {
 
-export default VideoComponent;
+//   return (
+// export default VideoComponent;

@@ -16,6 +16,7 @@ type SidebarProps = {
 };
 
 const options: Option[] = [
+  { name: 'Home', link: '/' },
   { name: 'About Us', link: '/about' },
   { name: 'Contact Us', link: '/profile/contact-us' },
   { name: 'Download', link: '/profile/downloads' },
@@ -27,77 +28,60 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
     //transperent box
     <Box
       onTouchMove={onToggleSidebar}
-      style={{
-        left: 0,
-        top: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'absolute',
-        height: '100%',
-        borderRightWidth: 1,
-        borderRightColor: 'black',
-        backgroundColor: 'rgba(253, 242, 248, 0.5)',
-      }}
-      width="100%"
+      left="$0"
+      top="$0"
+      display="flex"
+      flexDirection="column"
+      position="absolute"
+      height="$full"
+      borderRightWidth="$1"
+      borderRightColor="black"
+      width="$full"
       bg="#fdf2f8"
-      mb={20}
+      mb="$5"
+      bgColor="rgba(253, 242, 248, 0.5)"
     >
       <Box
-        style={{
-          left: 0,
-          top: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'absolute',
-          height: '100%',
-          borderRightWidth: 1,
-          borderRightColor: 'black',
-        }}
-        width="70%"
+        left="$0"
+        top="$0"
+        display="flex"
+        flexDirection="column"
+        position="absolute"
+        height="$full"
+        borderRightWidth="$1"
+        borderRightColor="black"
+        width="$3/4"
         bg="#fdf2f8"
-        mb={20}
+        mb="$5"
       >
         <Box
-          style={{
-            borderBottomRightRadius: 50,
-            overflow: 'hidden',
-            borderRightWidth: 2,
-            borderRightColor: 'black',
-          }}
+          borderBottomRightRadius="$2xl"
+          overflow="hidden"
+          borderRightWidth="$1"
+          borderRightColor="black"
           width="100%"
           bg="#fbcfe8"
         >
-          <Box
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginTop: 10,
-              marginBottom: 10,
-            }}
-          >
-            <Box style={{ marginTop: 60, marginBottom: 10 }}>
+          <Box display="flex" alignItems="center" mt="$2.5" mb="$2.5">
+            <Box mt="$16" mb="$2.5">
               <Avatar bgColor="$amber600" size="md" borderRadius="$full">
                 <AvatarFallbackText>Mohammed Sameer</AvatarFallbackText>
               </Avatar>
             </Box>
-            <Box
-              style={{
-                display: 'flex',
-
-                alignItems: 'center',
-              }}
-            >
-              <Text sx={{ fontSize: 14, color: 'black' }}>Profile </Text>
-              <Text sx={{ fontWeight: 'bold', color: 'black' }}>
+            <Box display="flex" alignItems="center">
+              <Text fontSize="$xs" color="black">
+                Profile{' '}
+              </Text>
+              <Text fontWeight="bold" color="black">
                 Muhammed Rameez
               </Text>
             </Box>
           </Box>
-          <Box mt={40} pl={20}>
+          <Box mt="$10" pl="$5">
             {options.map((option) => (
-              <Link href={option.link}>
-                <TouchableOpacity key={option.name}>
-                  <Text sx={{ fontSize: 18, color: 'black' }} mb={40}>
+              <Link key={option.name} href={option.link} asChild>
+                <TouchableOpacity>
+                  <Text fontSize="$lg" color="black" mb="$10">
                     {option.name}
                   </Text>
                 </TouchableOpacity>
@@ -105,14 +89,10 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
             ))}
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            marginTop: 10,
-          }}
-        >
-          <Text style={{ fontSize: 14, color: 'black' }}>Audire v1.0.0 </Text>
+        <Box display="flex" alignItems="center" mt="$2.5">
+          <Text fontSize="$sm" color="black">
+            Audire v1.0.0{' '}
+          </Text>
         </Box>
       </Box>
     </Box>

@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { PenSquare } from 'lucide-react-native';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { Box, Button, ButtonText, ButtonIcon } from '@gluestack-ui/themed';
+import {
+  Box,
+  Button,
+  ButtonText,
+  ButtonIcon,
+  Text,
+} from '@gluestack-ui/themed';
 
 const VerificationView = () => {
   const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
 
-  const handleOtpInputChange = (index, value) => {
+  const handleOtpInputChange = (index: number, value: string) => {
     const updatedOtpValues = [...otpValues];
     updatedOtpValues[index] = value;
     setOtpValues(updatedOtpValues);
@@ -42,61 +48,62 @@ const VerificationView = () => {
   };
 
   return (
-    <View
-      sx={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        width: '$full',
-        borderTopLeftRadius: '$3xl',
-        borderTopRightRadius: '$3xl',
-        // Android
-        elevation: 5,
-        // iOS
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 30,
+    <Box
+      display="flex"
+      flex={1}
+      justifyContent="center"
+      alignItems="center"
+      w="$full"
+      bg="white"
+      borderTopLeftRadius="$3xl"
+      borderTopRightRadius="$3xl"
+      // Android
+      elevation="$1.5"
+      // iOS
+      shadowColor="black"
+      shadowOffset={{
+        width: 0,
+        height: 2,
       }}
+      shadowOpacity="$95"
+      shadowRadius="$7"
     >
       <Box alignItems="center">
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Enter OTP</Text>
+        <Text fontSize="$md" fontWeight="bold">
+          Enter OTP
+        </Text>
+
         <Box
           mt={35}
           mb={20}
           alignItems="center"
-          style={{ display: 'flex', flexDirection: 'row' }}
+          display="flex"
+          flexDirection="row"
         >
-          <Text style={{ fontSize: 14 }}>We have sent the OTP code to </Text>
-          <Text style={{ fontWeight: 'bold' }}>87******47</Text>
+          <Text fontSize="$sm">We have sent the OTP code to </Text>
+          <Text fontWeight="bold">87******47</Text>
           <Link href="/login" asChild>
-            <Button
-              size="md"
-              paddingLeft="$2.5"
-              sx={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
-            >
-              {/* EditIcon is imported from 'lucide-react-native' */}
+            <Button size="md" paddingLeft="$2.5" bgColor="rgba(0, 0, 0, 0)">
               <ButtonIcon color="blue" as={PenSquare} />
             </Button>
           </Link>
         </Box>
-        <View style={{ flexDirection: 'row', marginBottom: 30 }}>
+        <Box flexDirection="row" mb="$8">
           {renderOtpInputBoxes()}
-        </View>
+        </Box>
 
         <TouchableOpacity
           onPress={() => {
             // Resend OTP logic here
           }}
         >
-          <Text style={{ fontSize: 14, color: 'blue', fontWeight: 'bold' }}>
+          <Text fontSize="$sm" color="blue" fontWeight="bold">
             RESEND OTP
           </Text>
         </TouchableOpacity>
         <Box mt={20}>
           <Link href="/profile/course" asChild>
-            <Button variant="solid" mt={4} bg="#86198f">
+            <Button variant="solid" mt="$4" bg="#86198f">
               <ButtonText fontSize="$md" fontWeight="bold">
                 PROCEED
               </ButtonText>
@@ -104,7 +111,7 @@ const VerificationView = () => {
           </Link>
         </Box>
       </Box>
-    </View>
+    </Box>
   );
 };
 
