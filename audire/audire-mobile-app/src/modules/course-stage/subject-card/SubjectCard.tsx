@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { Box } from '@gluestack-ui/themed';
+import { Text, Box } from '@gluestack-ui/themed';
 
 type SubjectCardProps = {
   subject: string;
@@ -11,17 +11,13 @@ type SubjectCardProps = {
 
 const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
   return (
-    <Box
-      flexDirection="column"
-      alignItems="center"
-      style={{ marginTop: '100px' }}
-    >
+    <Box flexDirection="column" alignItems="center" mt="$24">
       <Box
         maxWidth="$64"
-        borderColor="#171717"
+        borderColor="black"
         borderRadius="$lg"
         borderWidth="$1"
-        backgroundColor="#fdf4ff"
+        backgroundColor="white"
         overflow="hidden"
         sx={{
           '@base': {
@@ -34,31 +30,27 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
         }}
       >
         <Link href={href} asChild>
-          <TouchableOpacity style={styles.card}>
-            <Text style={styles.cardText}>{subject}</Text>
-            {description && (
-              <Text style={styles.description}>{description}</Text>
-            )}
-          </TouchableOpacity>
+          <Box
+            m="$4"
+            w="$64"
+            // h="$12"
+          >
+            <TouchableOpacity>
+              <Text
+                fontSize="$xl"
+                fontWeight="bold"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {subject}
+              </Text>
+              {description && <Text>{description}</Text>}
+            </TouchableOpacity>
+          </Box>
         </Link>
       </Box>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    margin: 15,
-    width: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 50,
-  },
-  cardText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
 
 export default SubjectCard;

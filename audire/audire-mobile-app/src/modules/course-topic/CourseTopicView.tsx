@@ -1,7 +1,7 @@
-import { Box } from '@gluestack-ui/themed';
+import { Box, Text } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 import React from 'react';
-import { Image, Text } from 'react-native'; // Import the Image component
+import { Image } from 'react-native'; // Import the Image component
 
 const CourseTopicView = () => {
   // Sample data for each section
@@ -16,25 +16,29 @@ const CourseTopicView = () => {
     <Box
       flexDirection="column"
       alignItems="center"
-      sx={{
-        flex: 1,
-        backgroundColor: 'white',
-        width: '100%',
-        borderTopLeftRadius: '$3xl',
-        borderTopRightRadius: '$3xl',
-        elevation: 5,
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 30,
+      flex={1}
+      bgColor="white"
+      w="$full"
+      borderTopLeftRadius="$3xl"
+      borderTopRightRadius="$3xl"
+      elevation="$1.5"
+      // iOS
+      shadowColor="black"
+      shadowOpacity="$40"
+      shadowRadius="$8"
+      shadowOffset={{
+        width: 0,
+        height: 2,
       }}
     >
       <Box flexDirection="column" alignItems="center">
         {/* Title */}
-        <Text style={styles.title}>CA - PHOENIX</Text>
+        <Text fontSize="$xl" fontWeight="bold" mb="$2.5" mt="$2.5">
+          CA - PHOENIX
+        </Text>
 
         {/* Description */}
-        <Text style={styles.description}>
+        <Text fontSize="$md" mb="$5">
           This is a brief description of the course topic.
         </Text>
       </Box>
@@ -46,7 +50,7 @@ const CourseTopicView = () => {
           <Box
             flexDirection="column"
             alignItems="center"
-            width="100%"
+            w="$full"
             borderColor="$borderLight200"
             borderRadius="$lg"
             borderWidth="$2"
@@ -62,9 +66,11 @@ const CourseTopicView = () => {
               },
             }}
             key={index}
-            style={styles.section}
+            mb="$5"
           >
-            <Text sx={styles.sectionTitle}>{section.title}</Text>
+            <Text fontSize="$xs" fontWeight="bold" mb="$2.5">
+              {section.title}
+            </Text>
             <Text>{section.content}</Text>
             <Box
               width="100%"
@@ -85,8 +91,6 @@ const CourseTopicView = () => {
               }}
             >
               <Image
-                h={150}
-                width="100%"
                 source={{
                   uri: image,
                 }}
@@ -99,34 +103,15 @@ const CourseTopicView = () => {
       {sectionsData
         .filter((section) => section.title !== 'Video Class')
         .map((section, index) => (
-          <Box key={index} style={styles.section}>
-            <Text style={styles.sectionTitle}>{section.title}</Text>
+          <Box key={index} mb="$5">
+            <Text fontSize="$xs" fontWeight="bold" mb="$2.5">
+              {section.title}
+            </Text>
             <Text>{section.content}</Text>
           </Box>
         ))}
     </Box>
   );
-};
-
-const styles = {
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  description: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
 };
 
 export default CourseTopicView;

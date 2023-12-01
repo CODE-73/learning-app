@@ -3,8 +3,6 @@ import { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 
-// import { Home, Mail, Book, LogOut } from 'react-lucide-icons'; // Import Lucide Icons
-
 type Option = {
   name: string;
   link: string;
@@ -37,7 +35,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
       borderRightWidth="$1"
       borderRightColor="black"
       width="$full"
-      bg="#fdf2f8"
+      bg="$pink50"
       mb="$5"
       bgColor="rgba(253, 242, 248, 0.5)"
     >
@@ -47,11 +45,11 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
         display="flex"
         flexDirection="column"
         position="absolute"
-        height="$full"
+        h="$full"
         borderRightWidth="$1"
         borderRightColor="black"
         width="$3/4"
-        bg="#fdf2f8"
+        bg="$pink50"
         mb="$5"
       >
         <Box
@@ -60,7 +58,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
           borderRightWidth="$1"
           borderRightColor="black"
           width="100%"
-          bg="#fbcfe8"
+          bg="$pink200"
         >
           <Box display="flex" alignItems="center" mt="$2.5" mb="$2.5">
             <Box mt="$16" mb="$2.5">

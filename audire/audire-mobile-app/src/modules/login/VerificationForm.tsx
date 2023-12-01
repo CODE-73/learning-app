@@ -28,7 +28,7 @@ const VerificationView = () => {
           key={i}
           style={{
             borderWidth: 1,
-            borderColor: 'gray',
+            borderColor: '$gray',
             borderRadius: 5,
             fontSize: 20,
             textAlign: 'center',
@@ -54,13 +54,13 @@ const VerificationView = () => {
       justifyContent="center"
       alignItems="center"
       w="$full"
-      bg="white"
+      bg="$white"
       borderTopLeftRadius="$3xl"
       borderTopRightRadius="$3xl"
       // Android
       elevation="$1.5"
       // iOS
-      shadowColor="black"
+      shadowColor="$black"
       shadowOffset={{
         width: 0,
         height: 2,
@@ -83,8 +83,8 @@ const VerificationView = () => {
           <Text fontSize="$sm">We have sent the OTP code to </Text>
           <Text fontWeight="bold">87******47</Text>
           <Link href="/login" asChild>
-            <Button size="md" paddingLeft="$2.5" bgColor="rgba(0, 0, 0, 0)">
-              <ButtonIcon color="blue" as={PenSquare} />
+            <Button size="md" pl="$2.5" bgColor="rgba(0, 0, 0, 0)">
+              <ButtonIcon color="$blue" as={PenSquare} />
             </Button>
           </Link>
         </Box>
@@ -97,13 +97,13 @@ const VerificationView = () => {
             // Resend OTP logic here
           }}
         >
-          <Text fontSize="$sm" color="blue" fontWeight="bold">
+          <Text fontSize="$sm" color="$blue" fontWeight="bold">
             RESEND OTP
           </Text>
         </TouchableOpacity>
         <Box mt={20}>
           <Link href="/profile/course" asChild>
-            <Button variant="solid" mt="$4" bg="#86198f">
+            <Button variant="solid" mt="$4" bg="$fuchsia800">
               <ButtonText fontSize="$md" fontWeight="bold">
                 PROCEED
               </ButtonText>

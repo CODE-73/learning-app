@@ -24,19 +24,20 @@ const topics = [
 const CourseSubjectView = () => {
   return (
     <Box
-      sx={{
-        flex: 1,
-        backgroundColor: 'white',
-        width: '100%',
-        borderTopLeftRadius: '$3xl',
-        borderTopRightRadius: '$3xl',
-        // Android
-        elevation: 5,
-        // iOS
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 30,
+      flex={1}
+      bgColor="white"
+      w="$full"
+      borderTopLeftRadius="$3xl"
+      borderTopRightRadius="$3xl"
+      //Android
+      elevation="$1.5"
+      // iOS
+      shadowColor="black"
+      shadowOpacity="$40"
+      shadowRadius="$8"
+      shadowOffset={{
+        width: 0,
+        height: 2,
       }}
     >
       {topics.map((topic) => (

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-
-import { Box } from '@gluestack-ui/themed';
+import { Text, Box } from '@gluestack-ui/themed';
 
 const CourseSelectionView = () => {
   const handleCardPress = (course: unknown) => {
@@ -12,29 +11,30 @@ const CourseSelectionView = () => {
 
   return (
     <Box
-      sx={{
-        flex: 1,
-        backgroundColor: 'white',
-        width: '100%',
-        borderTopLeftRadius: '$3xl',
-        borderTopRightRadius: '$3xl',
-        // Android
-        elevation: 5,
-        // iOS
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 30,
+      flex={1}
+      bgColor="$white"
+      w="$full"
+      borderTopLeftRadius="$3xl"
+      borderTopRightRadius="$3xl"
+      //Android
+      elevation="$1.5"
+      // iOS
+      shadowColor="$black"
+      shadowOpacity="$40"
+      shadowRadius="$8"
+      shadowOffset={{
+        width: 0,
+        height: 2,
       }}
     >
-      <Box flexDirection="column" alignItems="center" sx={{ marginTop: '$24' }}>
+      <Box flexDirection="column" alignItems="center" mt="$24">
         <Box
           maxWidth="$64"
-          borderColor="#171717"
+          borderColor="$black"
           borderRadius="$lg"
           borderWidth="$1"
           my="$4"
-          backgroundColor="#fdf4ff"
+          backgroundColor="$white"
           overflow="hidden"
           sx={{
             '@base': {
@@ -47,12 +47,19 @@ const CourseSelectionView = () => {
           }}
         >
           <Link href="/" asChild>
-            <TouchableOpacity
-              style={styles.card}
-              onPress={() => handleCardPress('CA')}
+            <Box
+              m="$4"
+              w="$56"
+              h="$12"
+              // justifyContent="center"
+              alignItems="center"
             >
-              <Text style={styles.cardText}>CA</Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleCardPress('CA')}>
+                <Text fontSize="$xl" fontWeight="bold">
+                  CA
+                </Text>
+              </TouchableOpacity>
+            </Box>
           </Link>
         </Box>
         <Box
@@ -61,7 +68,7 @@ const CourseSelectionView = () => {
           borderRadius="$lg"
           borderWidth="$1"
           my="$4"
-          backgroundColor="#fdf4ff"
+          backgroundColor="$white"
           overflow="hidden"
           sx={{
             '@base': {
@@ -70,32 +77,24 @@ const CourseSelectionView = () => {
           }}
         >
           <Link href="/" asChild>
-            <TouchableOpacity
-              style={styles.card}
-              onPress={() => handleCardPress('CMA')}
+            <Box
+              m="$4"
+              w="$56"
+              h="$12"
+              // justifyContent="center"
+              alignItems="center"
             >
-              <Text style={styles.cardText}>CMA</Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleCardPress('CMA')}>
+                <Text fontSize="$xl" fontWeight="bold">
+                  CMA
+                </Text>
+              </TouchableOpacity>
+            </Box>
           </Link>
         </Box>
       </Box>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    margin: 5,
-    width: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 80,
-  },
-  cardText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
 
 export default CourseSelectionView;

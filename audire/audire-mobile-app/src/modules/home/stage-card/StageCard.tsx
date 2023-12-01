@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { Box } from '@gluestack-ui/themed';
+import { Text, Box } from '@gluestack-ui/themed';
 
 type StageCardProps = {
   stage: string;
@@ -10,18 +10,14 @@ type StageCardProps = {
 
 const StageCard: FC<StageCardProps> = ({ stage, href }) => {
   return (
-    <Box
-      flexDirection="column"
-      alignItems="center"
-      style={{ marginTop: '100px' }}
-    >
+    <Box flexDirection="column" alignItems="center" mt="$24">
       <Box
         maxWidth="$64"
-        borderColor="#171717"
+        borderColor="$black"
         borderRadius="$lg"
         borderWidth="$1"
         my="$4"
-        backgroundColor="#fdf4ff"
+        backgroundColor="$white"
         overflow="hidden"
         sx={{
           '@base': {
@@ -34,28 +30,27 @@ const StageCard: FC<StageCardProps> = ({ stage, href }) => {
         }}
       >
         <Link href={href} asChild>
-          <TouchableOpacity style={styles.card}>
-            <Text style={styles.cardText}>{stage}</Text>
-          </TouchableOpacity>
+          <Box
+            m="$4"
+            w="$64"
+
+            // h="$12"
+          >
+            <TouchableOpacity>
+              <Text
+                fontSize="$xl"
+                fontWeight="bold"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {stage}
+              </Text>
+            </TouchableOpacity>
+          </Box>
         </Link>
       </Box>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    margin: 5,
-    width: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 80,
-  },
-  cardText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
 
 export default StageCard;
