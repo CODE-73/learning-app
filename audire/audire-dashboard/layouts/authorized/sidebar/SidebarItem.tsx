@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, ButtonGroup } from '@nextui-org/react';
 import { LuAlignEndHorizontal } from 'react-icons/lu';
 import { MdOutlineSubject, MdOutlineTopic } from 'react-icons/md';
@@ -17,11 +17,21 @@ const buttons = [
 ];
 
 const SidebarItem = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleButtonClick = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <div className="flex flex-col flex space-y-6 w-64  ">
+    <div
+      className={`flex flex-col space-y-6 w-64 ${
+        isSidebarOpen ? '' : 'hidden'
+      }`}
+    >
       {buttons.map((button, index) => (
         <ButtonGroup key={index}>
-          <Button className="w-full text-xl ">
+          <Button className="w-full text-xl" onClick={handleButtonClick}>
             {React.createElement(button.icon, { color: 'black' })}
             <a href={button.link} className="text-black hover:text-blue-500">
               <h4 className="font-semibold text-xl">{button.text}</h4>
