@@ -1,8 +1,3 @@
-side bar item----
-
-
-
-
 import { Button, ButtonGroup } from '@nextui-org/react';
 import { LuAlignEndHorizontal } from 'react-icons/lu';
 import { MdOutlineSubject, MdOutlineTopic } from 'react-icons/md';
