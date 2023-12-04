@@ -1,5 +1,11 @@
+import React from 'react';
+
 const DashboardView = () => {
-  return <div>Dashboard View</div>;
+  return (
+    <div>
+      <div>Dashboard</div>
+    </div>
+  );
 };
 
 export default DashboardView;

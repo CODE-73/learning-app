@@ -1,7 +1,11 @@
 // import React, { useState } from 'react';
-
-const StudentsView = () => {
-  return <div className="bg-black">Students</div>;
+import StudentsView from '../../modules/batch/StudentsView';
+const StudentsPage = () => {
+  return (
+    <div>
+      <StudentsView />
+    </div>
+  );
 };
 
-export default StudentsView;
+export default StudentsPage;

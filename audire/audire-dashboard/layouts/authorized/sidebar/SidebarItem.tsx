@@ -10,12 +10,12 @@ const buttons = [
   {
     icon: LuAlignEndHorizontal,
     text: 'Dashboard',
-    link: '/home/DashboardView',
+    link: '/',
   },
-  { icon: MdOutlineSubject, text: 'Subjects', link: '#' },
+  { icon: MdOutlineSubject, text: 'Subjects', link: '/syllabus/subjects' },
   { icon: MdOutlineTopic, text: 'Topics', link: '#' },
   { icon: PiStudent, text: 'Students', link: '/batch/Students' },
-  { icon: TfiIdBadge, text: 'Batches', link: '#' },
+  { icon: TfiIdBadge, text: 'Batches', link: '' },
   { icon: PiExam, text: 'Test Series', link: '#' },
   { icon: IoMdNotificationsOutline, text: 'Notifications', link: '#' },
 ];

@@ -1,5 +1,5 @@
 import AboutView from '../../modules/home/AboutView';
 
-const AboutViewPage = () => <AboutView />;
+const AboutPage = () => <AboutView />;
 
-export default AboutViewPage;
+export default AboutPage;
