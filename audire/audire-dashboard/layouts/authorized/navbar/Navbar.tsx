@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Avatar, Card, Button } from '@nextui-org/react';
 import { IoIosArrowDropdown } from 'react-icons/io';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isCardOpen, setIsCardOpen] = useState(false);
@@ -14,9 +16,15 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar-root bg-white p-4 flex items-center justify-between border-b-4 ">
-      <div className="flex gap-4 items-center">
-        <div className="relative">
+    <div className="navbar-root bg-white p-4 flex items-center  border-b-4  ">
+      <div className="md:hidden text-2xl  top-8  ">
+        <GiHamburgerMenu color="black" />
+      </div>
+      <div className="flex gap-4 items-center justify-between ">
+        <div className="object-contain mb-4  text-2xl top-8 ">
+          <Image src="/images/logo.png" alt="Logo" width={54} height={44} />
+        </div>
+        <div className="relative ">
           <input
             type="text"
             placeholder="User Name"
