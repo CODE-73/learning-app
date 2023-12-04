@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="sidebar-root relative">
       <div className="md:hidden text-2xl relative top-8 right-8 ">
         <GiHamburgerMenu color="black" onClick={handleHamburgerClick} />
       </div>
@@ -22,7 +22,7 @@ const Sidebar = () => {
       <div
         className={`${
           isSidebarOpen ? 'flex' : 'hidden'
-        } md:flex fixed  top-0 left-0 h-full bg-white p-4 flex flex-col items-center border-r-4`}
+        } md:flex top-0 left-0 h-full bg-white p-4 flex flex-col items-center border-r-4`}
         onClick={handleButtonClick}
       >
         <Image

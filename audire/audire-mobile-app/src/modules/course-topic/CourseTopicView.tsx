@@ -21,6 +21,7 @@ const CourseTopicView = () => {
       w="$full"
       borderTopLeftRadius="$3xl"
       borderTopRightRadius="$3xl"
+      //Android
       elevation="$1.5"
       // iOS
       shadowColor="black"

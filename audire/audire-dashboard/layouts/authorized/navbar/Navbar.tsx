@@ -14,9 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white p-4 flex items-center justify-between border-b-4 ">
-      <div></div>
-
+    <div className="navbar-root bg-white p-4 flex items-center justify-between border-b-4 ">
       <div className="flex gap-4 items-center">
         <div className="relative">
           <input

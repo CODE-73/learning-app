@@ -1,5 +1,5 @@
 const DashboardView = () => {
-  return <div className="bg-blue">Dashboard</div>;
+  return <div>Dashboard View</div>;
 };
 
 export default DashboardView;

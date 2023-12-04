@@ -7,11 +7,12 @@ type AuthorizedLayoutProps = {
 };
 
 const AuthorizedLayout: FC<AuthorizedLayoutProps> = ({ children }) => (
-  // TODO: Add Sidebar & Header
-  <div className="h-screen bg-background text-white flex flex-row">
-    {children}
+  <div className="h-screen w-screen bg-background flex flex-col">
     <Navbar />
-    <Sidebar />
+    <div className="flex">
+      <Sidebar />
+      {children}
+    </div>
   </div>
 );
 

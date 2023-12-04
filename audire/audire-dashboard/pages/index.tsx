@@ -1,4 +1,5 @@
 import StudentsView from './batch/Students';
+import DashboardView from 'modules/home/DashboardView';
 
 export function Index() {
   /*
@@ -8,6 +9,7 @@ export function Index() {
    */
   return (
     <div>
+      <DashboardView />
       <StudentsView />;
     </div>
   );
