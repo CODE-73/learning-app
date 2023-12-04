@@ -4,7 +4,7 @@ import { MdOutlineSubject, MdOutlineTopic } from 'react-icons/md';
 import { PiStudent, PiExam } from 'react-icons/pi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { TfiIdBadge } from 'react-icons/tfi';
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 
 const buttons = [
