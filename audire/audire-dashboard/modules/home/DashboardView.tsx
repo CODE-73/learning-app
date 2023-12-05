@@ -19,10 +19,7 @@ const DashboardView = () => {
       number: '7034278767',
       course: 'CA',
       CourseStage: 'Stage 1',
-      status: 'Active',
       dateAndTime: '2023-12-04 12:00 PM',
-      enrolmentDate: '2023-01-01',
-      batchEndDate: '2023-06-30',
     },
     {
       key: '2',
@@ -30,11 +27,8 @@ const DashboardView = () => {
       name: 'Fahim Ali Zain',
       number: '956714336',
       course: 'CMA',
-      status: 'Expired',
       CourseStage: 'Stage 1',
       dateAndTime: '2023-12-04 12:00 PM',
-      enrolmentDate: '2023-01-01',
-      batchEndDate: '2023-06-30',
     },
     {
       key: '3',
@@ -42,11 +36,8 @@ const DashboardView = () => {
       name: 'Mohammed Ramees',
       number: '956234567',
       course: 'CA',
-      status: 'Fresher',
       CourseStage: 'Stage 3',
       dateAndTime: '2023-12-04 12:00 PM',
-      enrolmentDate: '2023-01-01',
-      batchEndDate: '2023-06-30',
     },
     {
       key: '4',
@@ -54,11 +45,8 @@ const DashboardView = () => {
       name: 'fabinsha',
       number: '908767855',
       course: 'CMA',
-      status: 'Active',
       CourseStage: 'Stage 5',
       dateAndTime: '2023-12-04 12:00 PM',
-      enrolmentDate: '2023-01-01',
-      batchEndDate: '2023-06-30',
     },
     {
       key: '5',
@@ -66,11 +54,7 @@ const DashboardView = () => {
       name: 'Rayif',
       number: '908767855',
       course: 'CMA',
-      status: 'Expred',
-      CourseStage: 'Stage 1',
       dateAndTime: '2023-12-04 12:00 PM',
-      enrolmentDate: '2023-01-01',
-      batchEndDate: '2023-06-30',
     },
   ];
 
@@ -91,25 +75,10 @@ const DashboardView = () => {
       key: 'course',
       label: 'Course',
     },
-    {
-      key: 'CourseStage',
-      label: 'Stage',
-    },
-    {
-      key: 'status',
-      label: 'Status',
-    },
+
     {
       key: 'dateAndTime',
       label: 'DATE & TIME',
-    },
-    {
-      key: 'enrolmentDate',
-      label: 'Enrolment Date',
-    },
-    {
-      key: 'batchEndDate',
-      label: 'Batch End Date',
     },
   ];
 
