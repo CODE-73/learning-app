@@ -1,1 +1,3 @@
-export * from './lib/models';
+export function hello() {
+    return 'world';
+}

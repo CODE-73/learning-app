@@ -24,19 +24,19 @@
     "prisma": {
       "command": "prisma",
       "options": {
-        "cwd": "<path-to-library-root>"
+        "cwd": "libs/models"
       }
     },
     "migrate": {
       "command": "prisma migrate dev",
       "options": {
-        "cwd": "<path-to-library-root>"
+        "cwd": "libs/models"
       }
     },
     "generate-types": {
       "command": "prisma generate",
       "options": {
-        "cwd": "<path-to-library-root>"
+        "cwd": "libs/models"
       }
     }
   },
