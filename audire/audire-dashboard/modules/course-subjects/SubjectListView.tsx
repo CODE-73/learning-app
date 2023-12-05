@@ -3,6 +3,7 @@ import { FC } from 'react';
 import SubjectForm from './SubjectForm';
 import { useDisclosure } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
+import { IoMdAdd } from 'react-icons/io';
 import {
   Table,
   TableHeader,
@@ -39,8 +40,9 @@ const SubjectListView: FC = () => {
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>
         <div>
-          <Button color="secondary" onPress={onOpen}>
-            ADD
+          <Button color="primary" onPress={onOpen}>
+            <IoMdAdd />
+            Create Table
           </Button>
         </div>
       </div>

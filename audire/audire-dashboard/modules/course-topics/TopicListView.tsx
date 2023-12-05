@@ -10,20 +10,29 @@ import {
   Chip,
   Tooltip,
   ChipProps,
+  Button,
 } from '@nextui-org/react';
 import { CiEdit } from 'react-icons/ci';
 import { MdDelete } from 'react-icons/md';
-import { FaEye } from 'react-icons/fa';
+import { IoMdAdd } from 'react-icons/io';
 import { columns, topics } from './data';
+import { useDisclosure } from '@nextui-org/react';
+import TopicForm from './TopicForm';
+import { FC } from 'react';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   upload: 'success',
   non: 'danger',
 };
+
 type Topic = (typeof topics)[0];
-const TopicListView = () => {
+
+const TopicListView: FC = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const renderCell = React.useCallback((topic: Topic, columnKey: React.Key) => {
     const cellValue = topic[columnKey as keyof Topic];
+
     switch (columnKey) {
       case 'topic':
         return <div>{topic.topic}</div>;
@@ -78,13 +87,11 @@ const TopicListView = () => {
         return (
           <div className="relative flex items-center gap-2">
             <Tooltip content="Details">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <FaEye />
-              </span>
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50"></span>
             </Tooltip>
             <Tooltip content="Edit user">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <CiEdit />
+                <CiEdit onClick={onOpen} />
               </span>
             </Tooltip>
             <Tooltip color="danger" content="Delete user">
@@ -100,27 +107,38 @@ const TopicListView = () => {
   }, []);
 
   return (
-    <Table aria-label="Example table with custom cells">
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === 'actions' ? 'center' : 'start'}
-          >
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={topics}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div>
+      <TopicForm isOpen={isOpen} onOpenChange={onOpenChange} />
+      <h1 className=" text-2xl font-bold">Topics</h1>
+
+      <div className="">
+        <Button color="primary" onPress={onOpen}>
+          <IoMdAdd />
+          Create Table
+        </Button>
+      </div>
+      <Table aria-label="Example table with custom cells">
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn
+              key={column.uid}
+              align={column.uid === 'actions' ? 'center' : 'start'}
+            >
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={topics}>
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey)}</TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 export default TopicListView;
