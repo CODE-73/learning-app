@@ -1,10 +1,10 @@
 import React from 'react';
-import SubjectView from 'modules/course-subjects/SubjectView';
+import SubjectListView from 'modules/course-subjects/SubjectListView';
 
 const SubjectPage = () => {
   return (
     <div>
-      <SubjectView />
+      <SubjectListView />
     </div>
   );
 };
