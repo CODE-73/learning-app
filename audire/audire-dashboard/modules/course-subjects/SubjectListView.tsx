@@ -2,10 +2,37 @@ import React from 'react';
 import { FC } from 'react';
 import SubjectForm from './SubjectForm';
 import { useDisclosure } from '@nextui-org/react';
-import { Card, Divider, Input, Button } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  User as Topic,
+} from '@nextui-org/react';
 
+import { columns, topics } from './data';
+
+type Topic = (typeof topics)[0];
 const SubjectListView: FC = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const renderCell = React.useCallback((topic: Topic, columnKey: React.Key) => {
+    switch (columnKey) {
+      case 'topic':
+        return <div>{topic.topic}</div>;
+
+      case 'description':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-sm capitalize text-default-400">
+              {topic.description}
+            </p>
+          </div>
+        );
+    }
+  }, []);
   return (
     <div>
       <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />
@@ -17,29 +44,28 @@ const SubjectListView: FC = () => {
           </Button>
         </div>
       </div>
-      <div className=" m-8 ">
-        <Card className="max-w-[400px] bg-[#d4d4d8] text-black w-screen ">
-          <div className=" m-4 ">
-            <Input type="Subject" label="Subject" labelPlacement="outside" />
-          </div>
-          <div className=" m-4 ">
-            <Input
-              type="Description"
-              label="Description"
-              labelPlacement="outside"
-            />
-          </div>
-          <Divider />
-          <div>
-            <Button color="primary" variant="light">
-              Save
-            </Button>{' '}
-            <Button color="primary" variant="light">
-              Cancel
-            </Button>
-          </div>
-        </Card>
-      </div>
+
+      <Table aria-label="Example table with custom cells">
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn
+              key={column.uid}
+              align={column.uid === 'actions' ? 'center' : 'start'}
+            >
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={topics}>
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey)}</TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 };
