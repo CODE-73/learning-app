@@ -20,6 +20,24 @@
       "options": {
         "lintFilePatterns": ["libs/models/**/*.ts", "libs/models/package.json"]
       }
+    },
+    "prisma": {
+      "command": "prisma",
+      "options": {
+        "cwd": "<path-to-library-root>"
+      }
+    },
+    "migrate": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "<path-to-library-root>"
+      }
+    },
+    "generate-types": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "<path-to-library-root>"
+      }
     }
   },
   "tags": []
