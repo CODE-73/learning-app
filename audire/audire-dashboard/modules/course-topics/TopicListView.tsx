@@ -18,7 +18,7 @@ import { columns, topics } from './data';
 
 const statusColorMap: Record<string, ChipProps['color']> = {
   upload: 'success',
-  non: 'warning',
+  non: 'danger',
 };
 type Topic = (typeof topics)[0];
 const TopicListView = () => {
@@ -31,7 +31,7 @@ const TopicListView = () => {
       case 'description':
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
+            {/* <p className="text-bold text-sm capitalize">{cellValue}</p> */}
             <p className="text-bold text-sm capitalize text-default-400">
               {topic.description}
             </p>
