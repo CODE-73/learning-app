@@ -9,3 +9,74 @@ datasource db {
 }
 
 
+model Profile {
+	id    String  @id @db.Uuid
+	firstName String
+	lastName String
+	mobile String?
+	email String?
+	city String
+	state String
+}
+
+model Course {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title String @unique
+	stages Stage[]
+	createdBy   Profile? @relation("EntityCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  createdById String?  @db.Uuid
+  updatedBy   Profile? @relation("EntityUpdatedBy", fields: [updatedById], references: [id], onDelete: Restrict)
+  updatedById String?  @db.Uuid
+	createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now())
+}
+
+model Stage {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title String
+  course Course @relation(fields: [courseID], references: [courseID])
+  courseId String
+	subjects Subject[]
+	createdBy   Profile? @relation("EntityCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  createdById String?  @db.Uuid
+  updatedBy   Profile? @relation("EntityUpdatedBy", fields: [updatedById], references: [id], onDelete: Restrict)
+  updatedById String?  @db.Uuid
+	createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now())
+}
+
+model Subject {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title String
+	description String
+  stage Stage @relation(fields: [stageID], references: [stageID])
+  stageId String
+	topics Topic[]
+	createdBy   Profile? @relation("EntityCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+  createdById String?  @db.Uuid
+  updatedBy   Profile? @relation("EntityUpdatedBy", fields: [updatedById], references: [id], onDelete: Restrict)
+  updatedById String?  @db.Uuid
+	createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now())
+}
+
+model Topic {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+	title String
+	description String
+  subject Subject @relation(fields: [subjectID], references: [subjectID])
+  subjectId String
+	videoLink String
+	studyMaterial String
+	mcqQuestions   McqQuestion[]
+}
+
+model McqQuestion {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  question    String
+  options     String[]
+  correctOption Int
+  explanation String
+  topic       Topic  @relation(fields: [topicId], references: [id])
+  topicId     String
+}
