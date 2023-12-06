@@ -89,12 +89,12 @@ const TopicListView: FC = () => {
             <Tooltip content="Details">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50"></span>
             </Tooltip>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit topic">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <CiEdit onClick={onOpen} />
               </span>
             </Tooltip>
-            <Tooltip color="danger" content="Delete user">
+            <Tooltip color="danger" content="Delete topic">
               <span className="text-lg text-danger cursor-pointer active:opacity-50">
                 <MdDelete />
               </span>

@@ -169,14 +169,18 @@ const TopicForm: FC<TopicFormProps> = ({ isOpen, onOpenChange }) => {
                           </div>
                           <ModalFooter>
                             <Button
-                              className="outline outline-1 outline-offset"
+                              className="outline outline-1 outline-offset  h-6"
                               color="danger"
                               variant="light"
                             >
                               Cancel
                             </Button>
 
-                            <Button type="submit" color="secondary">
+                            <Button
+                              className=" h-6"
+                              type="submit"
+                              color="secondary"
+                            >
                               Save
                             </Button>
                           </ModalFooter>
