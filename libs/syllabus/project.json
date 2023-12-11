@@ -1,0 +1,29 @@
+{
+  "name": "syllabus",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/syllabus/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/syllabus",
+        "main": "libs/syllabus/src/index.ts",
+        "tsConfig": "libs/syllabus/tsconfig.lib.json",
+        "assets": ["libs/syllabus/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/syllabus/**/*.ts",
+          "libs/syllabus/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
