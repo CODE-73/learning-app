@@ -6,6 +6,8 @@ import { Session, SupabaseClient } from '@supabase/supabase-js';
 
 import { Database } from '../supabase_types';
 
+export type LearningAppSupabase = SupabaseClient<Database>;
+
 const SessionContextProvider = dynamic(
   () =>
     import('@supabase/auth-helpers-react').then(
