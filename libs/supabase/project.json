@@ -1,5 +1,5 @@
 {
-  "name": "supabase",
+  "name": "models",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/supabase/src",
   "projectType": "library",
@@ -22,6 +22,24 @@
           "libs/supabase/**/*.ts",
           "libs/supabase/package.json"
         ]
+      }
+    },
+    "prisma": {
+      "command": "prisma",
+      "options": {
+        "cwd": "libs/supabase"
+      }
+    },
+    "migrate": {
+      "command": "prisma migrate dev",
+      "options": {
+        "cwd": "libs/supabase"
+      }
+    },
+    "generate-types": {
+      "command": "prisma generate",
+      "options": {
+        "cwd": "libs/supabase"
       }
     }
   },

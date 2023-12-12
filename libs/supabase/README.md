@@ -1,7 +1,7 @@
-# supabase
+# models
 
 This library was generated with [Nx](https://nx.dev).
 
 ## Building
 
-Run `nx build supabase` to build the library.
+Run `nx build models` to build the library.

@@ -1,1 +1,3 @@
-export * from './lib/supabase';
+export function hello() {
+  return 'world';
+}
