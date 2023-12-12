@@ -4,6 +4,8 @@ import SubjectForm from './SubjectForm';
 import { useDisclosure } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import { IoMdAdd } from 'react-icons/io';
+import { CiEdit } from 'react-icons/ci';
+import { MdDelete } from 'react-icons/md';
 import {
   Table,
   TableHeader,
@@ -11,29 +13,52 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  User as Topic,
+  Tooltip,
+  User as Subject,
 } from '@nextui-org/react';
 
-import { columns, topics } from './data';
+import { columns, subjects } from './data';
 
-type Topic = (typeof topics)[0];
+type Subject = (typeof subjects)[0];
 const SubjectListView: FC = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const renderCell = React.useCallback((topic: Topic, columnKey: React.Key) => {
-    switch (columnKey) {
-      case 'topic':
-        return <div>{topic.topic}</div>;
+  const renderCell = React.useCallback(
+    (topic: Subject, columnKey: React.Key) => {
+      switch (columnKey) {
+        case 'topic':
+          return <div>{topic.topic}</div>;
 
-      case 'description':
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize text-default-400">
-              {topic.description}
-            </p>
-          </div>
-        );
-    }
-  }, []);
+        case 'description':
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-sm capitalize text-default-400">
+                {topic.description}
+              </p>
+            </div>
+          );
+
+        case 'actions':
+          return (
+            <div className="relative flex items-center gap-2">
+              <Tooltip content="Details">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50"></span>
+              </Tooltip>
+              <Tooltip content="Edit subject">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <CiEdit onClick={onOpen} />
+                </span>
+              </Tooltip>
+              <Tooltip color="danger" content="Delete subject">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <MdDelete />
+                </span>
+              </Tooltip>
+            </div>
+          );
+      }
+    },
+    []
+  );
   return (
     <div>
       <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />
@@ -58,7 +83,7 @@ const SubjectListView: FC = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={topics}>
+        <TableBody items={subjects}>
           {(item) => (
             <TableRow key={item.id}>
               {(columnKey) => (

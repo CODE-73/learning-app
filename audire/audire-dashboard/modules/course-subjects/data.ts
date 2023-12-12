@@ -1,9 +1,10 @@
 export const columns = [
   { name: 'TOPIC', uid: 'topic' },
   { name: 'DESCRIPTION', uid: 'description' },
+  { name: 'ACTIONS', uid: 'actions' },
 ];
 
-export const topics = [
+export const subjects = [
   {
     id: 1,
     topic: 'bussness analytics',

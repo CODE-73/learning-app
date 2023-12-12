@@ -1,1 +1,1 @@
-export * from './lib/syllabus';
+export * from './swr';
