@@ -1,5 +1,5 @@
 {
-  "name": "models",
+  "name": "supabase",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/supabase/src",
   "projectType": "library",
@@ -36,10 +36,20 @@
         "cwd": "libs/supabase"
       }
     },
-    "generate-types": {
+    "prisma-generate": {
       "command": "prisma generate",
       "options": {
         "cwd": "libs/supabase"
+      }
+    },
+    "generate-types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/supabase",
+        "commands": [
+          "npx supabase gen types typescript --linked --schema public> ./src/supabase_types.ts",
+          "npx nx lint supabase --fix"
+        ]
       }
     }
   },

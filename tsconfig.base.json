@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@learning-app/models": ["libs/models/src/index.ts"]
+      "@learning-app/supabase": ["libs/supabase/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]
