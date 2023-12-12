@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@learning-app/supabase": ["libs/supabase/src/index.ts"],
+      "@learning-app/batch": ["batch/src/index.ts", "../../libs/batch/src/index.ts"],
+      "@learning-app/supabase": ["libs/supabase/src/index.ts", "../../libs/supabase/src/index.ts"],
+      "@learning-app/syllabus": ["libs/syllabus/src/index.ts", "../../libs/syllabus/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
