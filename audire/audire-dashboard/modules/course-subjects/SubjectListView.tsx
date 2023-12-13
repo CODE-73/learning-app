@@ -16,14 +16,22 @@ import {
   Tooltip,
   User as Subject,
 } from '@nextui-org/react';
-import { useCourses } from '@learning-app/syllabus';
+import { Select, SelectItem, SelectSection } from '@nextui-org/react';
+
 import { columns, subjects } from './data';
+import { useCourses } from '@learning-app/syllabus';
 
 type Subject = (typeof subjects)[0];
 const SubjectListView: FC = () => {
   const { data, isLoading } = useCourses();
   console.info({ data, isLoading }, data?.data);
-
+  const stagesData = data?.data;
+  const Stages = stagesData?.map((stageItem) => ({
+    title: stageItem.title,
+    Stages: ['Foudation', 'Intermediate', 'Final'],
+  }));
+  const headingClasses =
+    'flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small';
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const renderCell = React.useCallback(
     (topic: Subject, columnKey: React.Key) => {
@@ -64,6 +72,28 @@ const SubjectListView: FC = () => {
   );
   return (
     <div>
+      <Select
+        label="Course"
+        placeholder="Stage"
+        className="max-w-xs"
+        scrollShadowProps={{
+          isEnabled: false,
+        }}
+      >
+        {(Stages || []).map((section, index) => (
+          <SelectSection
+            key={index}
+            title={section.title}
+            classNames={{
+              heading: headingClasses,
+            }}
+          >
+            {section.Stages.map((stage) => (
+              <SelectItem key={stage}>{stage}</SelectItem>
+            ))}
+          </SelectSection>
+        ))}
+      </Select>
       <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>
