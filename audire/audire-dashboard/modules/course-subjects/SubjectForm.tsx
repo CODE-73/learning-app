@@ -34,7 +34,7 @@ const SubjectForm: FC<SubjectFormProps> = ({ isOpen, onOpenChange }) => {
                   Subject
                 </ModalHeader>
                 <ModalBody>
-                  <label>Subject</label>
+                  <label>Topic</label>
                   <input
                     {...register('Subject' as const)}
                     style={{ border: '1px solid black', height: '30px' }}

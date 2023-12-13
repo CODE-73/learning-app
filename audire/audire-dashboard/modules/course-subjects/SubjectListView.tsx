@@ -75,40 +75,6 @@ const SubjectListView: FC = () => {
   );
   return (
     <div>
-      <Select
-        label="Course"
-        placeholder="Stage"
-        className="max-w-xs"
-        scrollShadowProps={{
-          isEnabled: false,
-        }}
-        onSelectionChange={(e) => {
-          if (e instanceof Set) {
-            const stageId = e.size > 0 ? e.values().next().value : undefined;
-            const courseId = !stageId
-              ? undefined
-              : courses.find(
-                  (x) => x.stages.findIndex((y) => y.id === stageId) >= 0
-                )?.id;
-            setSelectedStage(stageId);
-            setSelectedCourse(courseId);
-          }
-        }}
-      >
-        {(courses || []).map((course, index) => (
-          <SelectSection
-            key={index}
-            title={course.title}
-            classNames={{
-              heading: headingClasses,
-            }}
-          >
-            {course.stages.map((stage) => (
-              <SelectItem key={stage.id}>{stage.title}</SelectItem>
-            ))}
-          </SelectSection>
-        ))}
-      </Select>
       <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>
@@ -119,7 +85,42 @@ const SubjectListView: FC = () => {
           </Button>
         </div>
       </div>
-
+      <div>
+        <Select
+          label="Course"
+          placeholder="Stage"
+          className="max-w-xs"
+          scrollShadowProps={{
+            isEnabled: false,
+          }}
+          onSelectionChange={(e) => {
+            if (e instanceof Set) {
+              const stageId = e.size > 0 ? e.values().next().value : undefined;
+              const courseId = !stageId
+                ? undefined
+                : courses.find(
+                    (x) => x.stages.findIndex((y) => y.id === stageId) >= 0
+                  )?.id;
+              setSelectedStage(stageId);
+              setSelectedCourse(courseId);
+            }
+          }}
+        >
+          {(courses || []).map((course, index) => (
+            <SelectSection
+              key={index}
+              title={course.title}
+              classNames={{
+                heading: headingClasses,
+              }}
+            >
+              {course.stages.map((stage) => (
+                <SelectItem key={stage.id}>{stage.title}</SelectItem>
+              ))}
+            </SelectSection>
+          ))}
+        </Select>
+      </div>
       <Table aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
           {(column) => (
