@@ -4,7 +4,6 @@ import { SortParam } from '../../types';
 type CourseListSortParams = SortParam<Course>;
 
 export type CourseListRequest = {
-  courseId: string;
   filters?: CourseListFilterParams;
   sort?: CourseListSortParams;
   page?: number;

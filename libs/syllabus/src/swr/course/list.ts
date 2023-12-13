@@ -11,18 +11,17 @@ import { CourseSWRKeys } from './keys';
 export const useCourses = (params?: Partial<CourseListRequest>) => {
   const supabase = useSupabaseClient();
 
-  const key = params?.courseId
-    ? [
-        CourseSWRKeys.COURSE,
-        CourseSWRKeys.LIST,
-        params.courseId,
-        JSON.stringify(params),
-      ]
-    : null;
+  const key = [
+    CourseSWRKeys.COURSE,
+    CourseSWRKeys.LIST,
+    JSON.stringify(params),
+  ];
 
-  return useSWRImmutable<CourseListResponse, PostgrestError, string[] | null>(
-    key,
-    () =>
-      getCourses(supabase, { ...params, courseId: params?.courseId as string })
-  );
+  const r = useSWRImmutable<
+    CourseListResponse,
+    PostgrestError,
+    string[] | null
+  >(key, () => getCourses(supabase, params ?? {}));
+
+  return r;
 };

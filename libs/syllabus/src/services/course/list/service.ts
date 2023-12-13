@@ -13,13 +13,11 @@ export async function getCourses(
   supabaseClient: LearningAppSupabase,
   params: CourseListRequest
 ): Promise<CourseListResponse> {
-  const { courseId, filters, sort } = params;
+  const { filters, sort } = params;
 
   let query = supabaseClient.from('Course').select('*', {
     count: 'exact',
   });
-
-  query = query.filter('courseId', 'eq', courseId);
 
   if (filters?.q) {
     query = query.or(

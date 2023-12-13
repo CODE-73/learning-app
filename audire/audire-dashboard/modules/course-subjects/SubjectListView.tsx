@@ -16,11 +16,14 @@ import {
   Tooltip,
   User as Subject,
 } from '@nextui-org/react';
-
+import { useCourses } from '@learning-app/syllabus';
 import { columns, subjects } from './data';
 
 type Subject = (typeof subjects)[0];
 const SubjectListView: FC = () => {
+  const { data, isLoading } = useCourses();
+  console.info({ data, isLoading }, data?.data);
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const renderCell = React.useCallback(
     (topic: Subject, columnKey: React.Key) => {
