@@ -1,6 +1,5 @@
 import { CourseInsert } from 'libs/syllabus/src/types/course';
 import { LearningAppSupabase } from '@learning-app/supabase';
-
 import { CourseUpsertRequest, CourseUpsertResponse } from './types';
 
 /**
