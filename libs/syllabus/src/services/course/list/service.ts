@@ -9,7 +9,7 @@ import { CourseListRequest, CourseListResponse } from './types';
  * @returns A promise that resolves to an array of partial Course objects representing the course.
  */
 
-export async function getCourse(
+export async function getCourses(
   supabaseClient: LearningAppSupabase,
   params: CourseListRequest
 ): Promise<CourseListResponse> {
