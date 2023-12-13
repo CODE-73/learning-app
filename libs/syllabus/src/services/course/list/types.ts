@@ -1,7 +1,7 @@
-import { Course } from 'libs/syllabus/src/types/course';
+import { CourseWithStages } from '../../../types';
 import { SortParam } from '../../types';
 
-type CourseListSortParams = SortParam<Course>;
+type CourseListSortParams = SortParam<CourseWithStages>;
 
 export type CourseListRequest = {
   filters?: CourseListFilterParams;
@@ -15,6 +15,6 @@ export type CourseListFilterParams = {
 };
 
 export type CourseListResponse = {
-  data: Course[];
+  data: CourseWithStages[];
   count: number;
 };

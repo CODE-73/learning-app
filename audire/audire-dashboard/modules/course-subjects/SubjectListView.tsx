@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FC } from 'react';
 import SubjectForm from './SubjectForm';
 import { useDisclosure } from '@nextui-org/react';
@@ -19,19 +19,22 @@ import {
 import { Select, SelectItem, SelectSection } from '@nextui-org/react';
 
 import { columns, subjects } from './data';
-import { useCourses } from '@learning-app/syllabus';
+import { useCourses, useSubjects } from '@learning-app/syllabus';
 
 type Subject = (typeof subjects)[0];
 const SubjectListView: FC = () => {
-  const { data, isLoading } = useCourses();
-  console.info({ data, isLoading }, data?.data);
-  const stagesData = data?.data;
-  const Stages = stagesData?.map((stageItem) => ({
-    title: stageItem.title,
-    Stages: ['Foudation', 'Intermediate', 'Final'],
-  }));
+  const { data: { data: courses } = { data: [] } } = useCourses();
+  const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
+  const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
+
+  const { data: { data: subjects } = { data: [] } } = useSubjects({
+    stageId,
+    courseId,
+  });
+
   const headingClasses =
     'flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small';
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const renderCell = React.useCallback(
     (topic: Subject, columnKey: React.Key) => {
@@ -68,7 +71,7 @@ const SubjectListView: FC = () => {
           );
       }
     },
-    []
+    [onOpen]
   );
   return (
     <div>
@@ -79,17 +82,29 @@ const SubjectListView: FC = () => {
         scrollShadowProps={{
           isEnabled: false,
         }}
+        onSelectionChange={(e) => {
+          if (e instanceof Set) {
+            const stageId = e.size > 0 ? e.values().next().value : undefined;
+            const courseId = !stageId
+              ? undefined
+              : courses.find(
+                  (x) => x.stages.findIndex((y) => y.id === stageId) >= 0
+                )?.id;
+            setSelectedStage(stageId);
+            setSelectedCourse(courseId);
+          }
+        }}
       >
-        {(Stages || []).map((section, index) => (
+        {(courses || []).map((course, index) => (
           <SelectSection
             key={index}
-            title={section.title}
+            title={course.title}
             classNames={{
               heading: headingClasses,
             }}
           >
-            {section.Stages.map((stage) => (
-              <SelectItem key={stage}>{stage}</SelectItem>
+            {course.stages.map((stage) => (
+              <SelectItem key={stage.id}>{stage.title}</SelectItem>
             ))}
           </SelectSection>
         ))}

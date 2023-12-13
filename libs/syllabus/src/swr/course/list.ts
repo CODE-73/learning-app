@@ -17,11 +17,8 @@ export const useCourses = (params?: Partial<CourseListRequest>) => {
     JSON.stringify(params),
   ];
 
-  const r = useSWRImmutable<
-    CourseListResponse,
-    PostgrestError,
-    string[] | null
-  >(key, () => getCourses(supabase, params ?? {}));
-
-  return r;
+  return useSWRImmutable<CourseListResponse, PostgrestError, string[] | null>(
+    key,
+    () => getCourses(supabase, params ?? {})
+  );
 };
