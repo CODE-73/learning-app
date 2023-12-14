@@ -81,7 +81,7 @@ const SubjectListView: FC = () => {
         <div>
           <Button color="primary" onPress={onOpen}>
             <IoMdAdd />
-            Create Table
+            Add Subject
           </Button>
         </div>
       </div>
