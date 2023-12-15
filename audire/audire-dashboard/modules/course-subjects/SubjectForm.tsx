@@ -77,28 +77,27 @@ const SubjectForm: FC<SubjectFormProps> = ({
 
   return (
     <form
-      className="flex flex-col gap-1"
+      className="flex flex-col gap-4"
       onSubmit={form.handleSubmit(upsertSubject)}
     >
-      <h1>Subject</h1>
-      <h6>Subject</h6>
+      <h1 className="font-bold text-xl">Subject</h1>
+
       <Input
         type="text"
         label="subject"
         placeholder="Enter the subject"
-        onClear={() => console.log('clear')}
         {...form.register('title')}
         style={{ height: '30px' }}
       />
-      <h6>Description</h6>
+
       <Input
         label="Description"
         placeholder="Enter your description"
-        onClear={() => console.log('clear')}
         {...form.register('description')}
         style={{ height: '30px' }}
       />
       <div className="flex flex-row  gap-1 ">
+        <div className="grow"></div>
         <Button
           className="outline outline-1 outline-offset"
           color="danger"

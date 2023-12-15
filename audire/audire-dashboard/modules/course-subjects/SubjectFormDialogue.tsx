@@ -18,7 +18,12 @@ const SubjectFormDialogue: FC<SubjectFormProps> = ({
   isOpen,
   onOpenChange,
 }) => (
-  <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
+  <Modal
+    className="p-8 "
+    isOpen={isOpen}
+    onOpenChange={onOpenChange}
+    isDismissable={false}
+  >
     <ModalContent>
       <SubjectForm
         isNew={isNew}

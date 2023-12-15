@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Subject } from '@learning-app/syllabus';
 import { FC } from 'react';
 import SubjectFormDialog from './SubjectFormDialogue';
+import ConfirmDeleteDialog from 'components/ConfirmDeleteDialog';
+
 import { useDisclosure } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import { IoMdAdd } from 'react-icons/io';
@@ -16,14 +18,12 @@ import {
   TableCell,
   Tooltip,
 } from '@nextui-org/react';
-import { Select, SelectItem, SelectSection } from '@nextui-org/react';
 
-// TODO: Extract Columns
+import CourseStageSelector from 'components/CourseStageSelector';
 import { columns } from './data';
-import { useCourses, useSubjects } from '@learning-app/syllabus';
+import { useSubjects } from '@learning-app/syllabus';
 
 const SubjectListView: FC = () => {
-  const { data: { data: courses } = { data: [] } } = useCourses();
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
   const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
   const [activeSubject, setactiveSubject] = useState<Subject | null>(null);
@@ -33,10 +33,13 @@ const SubjectListView: FC = () => {
     courseId,
   });
 
-  const headingClasses =
-    'flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small';
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isDeleteDialogOpen,
+    onOpen: openDeleteDialog,
+    onOpenChange: toggleDeleteDialog,
+  } = useDisclosure();
+
   const renderCell = React.useCallback(
     (subject: Subject, columnKey: React.Key) => {
       switch (columnKey) {
@@ -70,14 +73,19 @@ const SubjectListView: FC = () => {
               </Tooltip>
               <Tooltip color="danger" content="Delete subject">
                 <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <MdDelete />
+                  <MdDelete
+                    onClick={() => {
+                      setactiveSubject(subject);
+                      openDeleteDialog();
+                    }}
+                  />
                 </span>
               </Tooltip>
             </div>
           );
       }
     },
-    [onOpen]
+    [onOpen, openDeleteDialog]
   );
   return (
     <div>
@@ -87,6 +95,13 @@ const SubjectListView: FC = () => {
         isNew={activeSubject === null}
         stageId={stageId}
         subjectId={activeSubject?.id}
+      />
+      <ConfirmDeleteDialog
+        isOpen={isDeleteDialogOpen}
+        onCancel={toggleDeleteDialog}
+        onConfirm={() => {
+          // trigger
+        }}
       />
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>
@@ -103,42 +118,15 @@ const SubjectListView: FC = () => {
           </Button>
         </div>
       </div>
-      <div>
-        <Select
-          label="Course"
-          placeholder="Stage"
-          className="max-w-xs"
-          scrollShadowProps={{
-            isEnabled: false,
-          }}
-          onSelectionChange={(e) => {
-            if (e instanceof Set) {
-              const stageId = e.size > 0 ? e.values().next().value : undefined;
-              const courseId = !stageId
-                ? undefined
-                : courses.find(
-                    (x) => x.stages.findIndex((y) => y.id === stageId) >= 0
-                  )?.id;
-              setSelectedStage(stageId);
-              setSelectedCourse(courseId);
-            }
-          }}
-        >
-          {(courses || []).map((course, index) => (
-            <SelectSection
-              key={index}
-              title={course.title}
-              classNames={{
-                heading: headingClasses,
-              }}
-            >
-              {course.stages.map((stage) => (
-                <SelectItem key={stage.id}>{stage.title}</SelectItem>
-              ))}
-            </SelectSection>
-          ))}
-        </Select>
-      </div>
+
+      <CourseStageSelector
+        value={stageId}
+        onChange={({ stageId, courseId }) => {
+          setSelectedStage(stageId ?? undefined);
+          setSelectedCourse(courseId ?? undefined);
+        }}
+      />
+
       <Table aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
           {(column) => (
