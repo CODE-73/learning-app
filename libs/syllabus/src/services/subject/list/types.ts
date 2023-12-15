@@ -1,4 +1,4 @@
-import { Subject } from 'libs/syllabus/src/types';
+import { Subject } from '../../../types';
 import { SortParam } from '../../types';
 
 type SubjectListSortParams = SortParam<Subject>;

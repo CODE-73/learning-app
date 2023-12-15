@@ -1,4 +1,4 @@
-import { Subject, SubjectUpsert } from 'libs/syllabus/src/types';
+import { Subject, SubjectUpsert } from '../../../types';
 
 export type SubjectUpsertRequest = {
   input: SubjectUpsert;

@@ -1,4 +1,4 @@
-import { CourseInsert } from '../../../types/course';
+import { CourseInsert } from '../../../types';
 import { LearningAppSupabase } from '@learning-app/supabase';
 import { CourseUpsertRequest, CourseUpsertResponse } from './types';
 

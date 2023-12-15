@@ -1,4 +1,4 @@
-import { Course, CourseUpsert } from '../../../types/course';
+import { Course, CourseUpsert } from '../../../types';
 
 export type CourseUpsertRequest = {
   input: CourseUpsert;

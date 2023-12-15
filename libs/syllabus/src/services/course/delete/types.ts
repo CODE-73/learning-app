@@ -1,4 +1,4 @@
-import { Course } from '../../../types/course';
+import { Course } from '../../../types';
 
 export type CourseDeleteRequest = {
   courseId: string;
