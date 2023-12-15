@@ -1,4 +1,4 @@
-import { Course } from 'libs/syllabus/src/types/course';
+import { Course } from '../../../types/course';
 
 export type CourseGetRequest = {
   courseId: string;

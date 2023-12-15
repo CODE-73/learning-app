@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Subject } from '@learning-app/syllabus';
 import { FC } from 'react';
-import SubjectForm from './SubjectForm';
+import SubjectFormDialog from './SubjectFormDialogue';
 import { useDisclosure } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import { IoMdAdd } from 'react-icons/io';
@@ -38,16 +38,16 @@ const SubjectListView: FC = () => {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const renderCell = React.useCallback(
-    (topic: Subject, columnKey: React.Key) => {
+    (subject: Subject, columnKey: React.Key) => {
       switch (columnKey) {
-        case 'topic':
-          return <div>{topic.topic}</div>;
+        case 'subject':
+          return <div>{subject.title}</div>;
 
         case 'description':
           return (
             <div className="flex flex-col">
               <p className="text-bold text-sm capitalize text-default-400">
-                {topic.description}
+                {subject.description}
               </p>
             </div>
           );
@@ -60,7 +60,12 @@ const SubjectListView: FC = () => {
               </Tooltip>
               <Tooltip content="Edit subject">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <CiEdit onClick={onOpen} />
+                  <CiEdit
+                    onClick={() => {
+                      setactiveSubject(subject);
+                      onOpen();
+                    }}
+                  />
                 </span>
               </Tooltip>
               <Tooltip color="danger" content="Delete subject">
@@ -76,11 +81,12 @@ const SubjectListView: FC = () => {
   );
   return (
     <div>
-      <SubjectForm
+      <SubjectFormDialog
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isNew={activeSubject === null}
-        activeSubject={activeSubject}
+        stageId={stageId}
+        subjectId={activeSubject?.id}
       />
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>

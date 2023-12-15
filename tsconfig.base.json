@@ -10,15 +10,34 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@learning-app/batch": ["batch/src/index.ts", "../../libs/batch/src/index.ts"],
-      "@learning-app/supabase": ["libs/supabase/src/index.ts", "../../libs/supabase/src/index.ts"],
-      "@learning-app/syllabus": ["libs/syllabus/src/index.ts", "../../libs/syllabus/src/index.ts"]
+      "@learning-app/batch": [
+        "batch/src/index.ts",
+        "../../libs/batch/src/index.ts"
+      ],
+      "@learning-app/supabase": [
+        "libs/supabase/src/index.ts",
+        "../../libs/supabase/src/index.ts"
+      ],
+      "@learning-app/syllabus": [
+        "libs/syllabus/src/index.ts",
+        "../../libs/syllabus/src/index.ts"
+      ],
+      "@learning-app/utils": [
+        "libs/utils/src/index.ts",
+        "../../libs/utils/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

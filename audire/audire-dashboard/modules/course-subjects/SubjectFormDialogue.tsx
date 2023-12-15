@@ -1,19 +1,32 @@
+import React from 'react';
+import { FC } from 'react';
 import { Modal, ModalContent } from '@nextui-org/react';
 import SubjectForm from './SubjectForm';
-import { FC } from 'react';
 
-interface SubjectFormDialogueProps {
+interface SubjectFormProps {
+  isNew?: boolean;
+  subjectId?: string;
+  stageId?: string;
   isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
+  onOpenChange: () => void;
 }
 
-const SubjectFormDialogue: FC<SubjectFormDialogueProps> = ({
+const SubjectFormDialogue: FC<SubjectFormProps> = ({
+  isNew,
+  stageId,
+  subjectId,
   isOpen,
   onOpenChange,
 }) => (
   <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
     <ModalContent>
-      {(onClose) => <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />}
+      <SubjectForm
+        isNew={isNew}
+        stageId={stageId}
+        subjectId={subjectId}
+        onComplete={onOpenChange}
+        onCancel={onOpenChange}
+      />
     </ModalContent>
   </Modal>
 );

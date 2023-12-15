@@ -1,4 +1,4 @@
-import { Subject } from 'libs/syllabus/src/types';
+import { Subject } from '../../../types';
 
 export type SubjectDeleteRequest = {
   subjectId: string;

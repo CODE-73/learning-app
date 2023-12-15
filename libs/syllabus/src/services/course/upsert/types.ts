@@ -1,4 +1,4 @@
-import { Course, CourseUpsert } from 'libs/syllabus/src/types/course';
+import { Course, CourseUpsert } from '../../../types/course';
 
 export type CourseUpsertRequest = {
   input: CourseUpsert;
