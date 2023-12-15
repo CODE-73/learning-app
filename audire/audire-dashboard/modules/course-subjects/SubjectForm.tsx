@@ -21,11 +21,6 @@ interface SubjectFormProps {
   activeSubject: Subject | null;
 }
 
-// interface IFormInput {
-//   Subject: string;
-//   Description: string;
-// }
-
 const SubjectFormSchema = z.object({
   subject: z.string(),
   description: z.string(),
@@ -62,58 +57,51 @@ const SubjectForm: FC<SubjectFormProps> = ({
     } catch (e) {
       console.error(e);
     }
-    return (
-      <>
-        <Modal
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          isDismissable={false}
-        >
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <form onSubmit={form.handleSubmit(upsertSubject)}>
-                  <ModalHeader className="flex flex-col gap-1">
-                    Subject
-                  </ModalHeader>
-                  <ModalBody>
-                    <label>Topic</label>
-                    <Input
-                      label="Subject"
-                      placeholder="Enter the subject"
-                      onClear={() => console.log('clear')}
-                      {...form.register('Subject' as const)}
-                      style={{ border: '1px solid black', height: '30px' }}
-                    />
-
-                    <label>Description</label>
-                    <Input
-                      {...form.register('Description' as const)}
-                      style={{ border: '1px solid black', height: '30px' }}
-                    />
-                  </ModalBody>
-
-                  <ModalFooter>
-                    <Button
-                      className="outline outline-1 outline-offset"
-                      color="danger"
-                      variant="light"
-                      onPress={onClose}
-                    >
-                      Cancel
-                    </Button>
-
-                    <Button type="submit" color="secondary" onPress={onClose}>
-                      Save
-                    </Button>
-                  </ModalFooter>
-                </form>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
-      </>
-    );
   };
+
+  return (
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <form onSubmit={form.handleSubmit(upsertSubject)}>
+        <ModalContent>
+          <ModalHeader className="flex flex-col gap-1">Subject</ModalHeader>
+          <ModalBody>
+            <h6>Subject</h6>
+            <Input
+              type="text"
+              label="subject"
+              placeholder="Enter the subject"
+              onClear={() => console.log('clear')}
+              {...form.register('subject')}
+              style={{ height: '30px' }}
+            />
+
+            <Input
+              label="Description"
+              labelPlacement="outside"
+              placeholder="Enter your description"
+              {...form.register('description')}
+              style={{ height: '30px' }}
+            />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              className="outline outline-1 outline-offset"
+              color="danger"
+              variant="light"
+              onClick={onOpenChange}
+            >
+              Cancel
+            </Button>
+
+            <Button type="submit" color="secondary" onClick={onOpenChange}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </form>
+    </Modal>
+  );
 };
+
 export default SubjectForm;

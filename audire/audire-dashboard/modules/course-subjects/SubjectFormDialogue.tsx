@@ -12,7 +12,9 @@ const SubjectFormDialogue: FC<SubjectFormDialogueProps> = ({
   onOpenChange,
 }) => (
   <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false}>
-    <ModalContent>{(onClose) => <SubjectForm />}</ModalContent>
+    <ModalContent>
+      {(onClose) => <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />}
+    </ModalContent>
   </Modal>
 );
 
