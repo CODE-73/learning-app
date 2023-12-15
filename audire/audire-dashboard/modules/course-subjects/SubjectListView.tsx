@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Subject } from '@learning-app/syllabus';
 import { FC } from 'react';
 import SubjectForm from './SubjectForm';
 import { useDisclosure } from '@nextui-org/react';
@@ -14,19 +15,19 @@ import {
   TableRow,
   TableCell,
   Tooltip,
-  User as Subject,
 } from '@nextui-org/react';
 import { Select, SelectItem, SelectSection } from '@nextui-org/react';
 
-import { columns, subjects } from './data';
+// TODO: Extract Columns
+import { columns } from './data';
 import { useCourses, useSubjects } from '@learning-app/syllabus';
 
-type Subject = (typeof subjects)[0];
 const SubjectListView: FC = () => {
   const { data: { data: courses } = { data: [] } } = useCourses();
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
   const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
-
+  const [activeSubject, setactiveSubject] = useState<Subject | null>(null);
+  console.log(activeSubject);
   const { data: { data: subjects } = { data: [] } } = useSubjects({
     stageId,
     courseId,
@@ -75,11 +76,22 @@ const SubjectListView: FC = () => {
   );
   return (
     <div>
-      <SubjectForm isOpen={isOpen} onOpenChange={onOpenChange} />
+      <SubjectForm
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isNew={activeSubject === null}
+        activeSubject={activeSubject}
+      />
       <div className="flex justify-between m-4">
         <div className="font-bold text-2xl">Subjects</div>
         <div>
-          <Button color="primary" onPress={onOpen}>
+          <Button
+            color="primary"
+            onPress={onOpen}
+            onClick={() => {
+              setactiveSubject(null);
+            }}
+          >
             <IoMdAdd />
             Add Subject
           </Button>
