@@ -41,7 +41,7 @@ const SubjectListView: FC = () => {
     (subject: Subject, columnKey: React.Key) => {
       switch (columnKey) {
         case 'subject':
-          return <div>{subject.title}</div>;
+          return <div> {subject.title}</div>;
 
         case 'description':
           return (

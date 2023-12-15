@@ -76,8 +76,11 @@ const SubjectForm: FC<SubjectFormProps> = ({
   });
 
   return (
-    <form onSubmit={form.handleSubmit(upsertSubject)}>
-      <div className="flex flex-col gap-1">Subject</div>
+    <form
+      className="flex flex-col gap-1"
+      onSubmit={form.handleSubmit(upsertSubject)}
+    >
+      <h1>Subject</h1>
       <h6>Subject</h6>
       <Input
         type="text"
@@ -95,19 +98,20 @@ const SubjectForm: FC<SubjectFormProps> = ({
         {...form.register('description')}
         style={{ height: '30px' }}
       />
+      <div className="flex flex-row  gap-1 ">
+        <Button
+          className="outline outline-1 outline-offset"
+          color="danger"
+          variant="light"
+          onClick={onCancel}
+        >
+          Cancel
+        </Button>
 
-      <Button
-        className="outline outline-1 outline-offset"
-        color="danger"
-        variant="light"
-        onClick={onCancel}
-      >
-        Cancel
-      </Button>
-
-      <Button type="submit" color="secondary" disabled={isMutating}>
-        Save
-      </Button>
+        <Button type="submit" color="secondary" disabled={isMutating}>
+          Save
+        </Button>
+      </div>
     </form>
   );
 };
