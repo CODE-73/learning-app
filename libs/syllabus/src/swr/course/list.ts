@@ -1,6 +1,6 @@
 import { useSupabaseClient } from '@learning-app/supabase';
 import { PostgrestError } from '@supabase/supabase-js';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 import {
   CourseListRequest,
   CourseListResponse,
@@ -17,8 +17,7 @@ export const useCourses = (params?: Partial<CourseListRequest>) => {
     JSON.stringify(params),
   ];
 
-  return useSWRImmutable<CourseListResponse, PostgrestError, string[] | null>(
-    key,
-    () => getCourses(supabase, params ?? {})
+  return useSWR<CourseListResponse, PostgrestError, string[] | null>(key, () =>
+    getCourses(supabase, params ?? {})
   );
 };

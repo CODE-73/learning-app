@@ -7,6 +7,7 @@ import {
   SubjectUpsertResponse,
   upsertSubject,
 } from '../../services/subject/upsert';
+import { useClearCacheOnSuccess } from '@learning-app/utils';
 import { PostgrestError } from '@supabase/supabase-js';
 
 export const useSubjectUpsert = () => {
@@ -19,7 +20,12 @@ export const useSubjectUpsert = () => {
     PostgrestError,
     string[] | null,
     SubjectUpsertRequest
-  >(key, (_, { arg }) =>
-    upsertSubject(supabase, { ...arg, input: { ...arg.input } })
+  >(
+    key,
+    (_, { arg }) =>
+      upsertSubject(supabase, { ...arg, input: { ...arg.input } }),
+    {
+      ...useClearCacheOnSuccess(SubjectSWRKeys.SUBJECT),
+    }
   );
 };
