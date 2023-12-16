@@ -1,7 +1,8 @@
 import { useCourses } from '@learning-app/syllabus';
 import { Select, SelectItem, SelectSection } from '@nextui-org/react';
 import React, { FC, ReactElement } from 'react';
-import { Controller, Control, FieldValues, FieldPath } from 'react-hook-form';
+import { Control, FieldValues, FieldPath } from 'react-hook-form';
+import Form from './form/Form';
 
 interface CourseStageSelectorProps {
   value?: string;
@@ -64,11 +65,11 @@ type CourseStageSelectorFieldProps<T extends FieldValues = FieldValues> = {
   control: Control<T>;
 };
 
-function CourseStageSelectorField<T extends FieldValues>(
+function CourseStageSelectorField<T extends FieldValues = FieldValues>(
   props: CourseStageSelectorFieldProps<T>
 ) {
   return (
-    <Controller
+    <Form.FormField
       name={props.name}
       control={props.control}
       render={({ field }) => (

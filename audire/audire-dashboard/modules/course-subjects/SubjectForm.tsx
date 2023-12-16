@@ -94,10 +94,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
         placeholder="Enter Subject description"
       />
 
-      <CourseStageSelector.Field<SubjectForm>
-        name="stageId"
-        control={form.control}
-      />
+      <CourseStageSelector.Field name="stageId" control={form.control} />
 
       <div className="flex flex-row gap-1">
         <div className="grow"></div>
