@@ -31,9 +31,12 @@
         "platform": "android"
       }
     },
-    "build": {
-      "executor": "@nx/expo:build",
-      "options": {}
+    "build-web": {
+      "executor": "@nx/expo:export",
+      "options": {
+        "bundler": "metro",
+        "platform": "web"
+      }
     },
     "submit": {
       "executor": "@nx/expo:submit",
