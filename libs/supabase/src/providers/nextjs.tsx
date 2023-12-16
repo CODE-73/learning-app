@@ -23,7 +23,7 @@ interface SupabaseProviderProps {
   loading?: ReactNode;
 }
 
-export const SupabaseProvider: FC<SupabaseProviderProps> = ({
+export const SupabaseProviderNextJS: FC<SupabaseProviderProps> = ({
   children,
   initialSession,
   ...props

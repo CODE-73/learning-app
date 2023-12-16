@@ -1,6 +1,6 @@
 export { type Database } from './supabase_types';
 export {
-  SupabaseProvider,
+  SupabaseProviderNextJS,
   useSupabaseClient,
   type LearningAppSupabase,
 } from './providers';
