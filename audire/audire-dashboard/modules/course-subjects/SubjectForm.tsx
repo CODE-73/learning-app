@@ -53,12 +53,17 @@ const SubjectForm: FC<SubjectFormProps> = ({
   }, [form, isNew, subject]);
 
   const upsertSubject = async (data: SubjectForm) => {
+    if (!data.title || !data.description) {
+      return;
+    }
+
     try {
       const subject = await trigger({
         input: {
           id: isNew ? undefined : subjectId,
           title: data.title,
           description: data.description,
+          stageId: data.stageId,
         },
       });
       onComplete?.(subject);
@@ -107,7 +112,12 @@ const SubjectForm: FC<SubjectFormProps> = ({
           Cancel
         </Button>
 
-        <Button type="submit" color="secondary" disabled={isMutating}>
+        <Button
+          type="submit"
+          color="secondary"
+          disabled={isMutating}
+          onClick={onCancel}
+        >
           Save
         </Button>
       </div>
