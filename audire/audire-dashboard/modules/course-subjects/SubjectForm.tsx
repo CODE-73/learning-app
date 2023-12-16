@@ -106,18 +106,14 @@ const SubjectForm: FC<SubjectFormProps> = ({
         <Button
           className="outline outline-1 outline-offset"
           color="danger"
+          type="button"
           variant="light"
           onClick={onCancel}
         >
           Cancel
         </Button>
 
-        <Button
-          type="submit"
-          color="secondary"
-          disabled={isMutating}
-          onClick={onCancel}
-        >
+        <Button type="submit" color="secondary" disabled={isMutating}>
           Save
         </Button>
       </div>

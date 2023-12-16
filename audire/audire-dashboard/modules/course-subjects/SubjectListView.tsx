@@ -22,6 +22,7 @@ import {
 import CourseStageSelector from 'components/CourseStageSelector';
 import { columns } from './data';
 import { useSubjects } from '@learning-app/syllabus';
+import { useSubjectDelete } from '@learning-app/syllabus';
 
 const SubjectListView: FC = () => {
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
@@ -32,7 +33,7 @@ const SubjectListView: FC = () => {
     stageId,
     courseId,
   });
-
+  const { trigger } = useSubjectDelete();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
     isOpen: isDeleteDialogOpen,
@@ -100,7 +101,18 @@ const SubjectListView: FC = () => {
         isOpen={isDeleteDialogOpen}
         onCancel={toggleDeleteDialog}
         onConfirm={() => {
-          // trigger
+          if (activeSubject) {
+            console.log(activeSubject.id);
+            trigger({
+              subjectId: activeSubject.id,
+            })
+              .then((response) => {
+                console.log('Delete success:', response);
+              })
+              .catch((error) => {
+                console.error('Delete error:', error);
+              });
+          }
         }}
       />
       <div className="flex justify-between m-4">

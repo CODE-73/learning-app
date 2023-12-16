@@ -1,4 +1,4 @@
-import { Topic, TopicUpsert } from 'libs/syllabus/src/types';
+import { Topic, TopicUpsert } from '../../../types';
 
 export type TopicUpsertRequest = {
   input: TopicUpsert;

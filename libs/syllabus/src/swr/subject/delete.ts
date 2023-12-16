@@ -9,7 +9,7 @@ import {
 
 import { deleteSubject } from '../../services/subject/delete/service';
 
-export async function useSubjectDelete() {
+export function useSubjectDelete() {
   const supabase = useSupabaseClient();
 
   const key = [SubjectSWRKeys.SUBJECT, SubjectSWRKeys.DELETE];

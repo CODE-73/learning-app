@@ -62,6 +62,7 @@ const ConfirmDeleteDialog: FC<ConfirmDeleteDialogProps> = ({
                 color="primary"
                 onPress={() => {
                   onConfirm?.();
+
                   onCancel();
                 }}
               >

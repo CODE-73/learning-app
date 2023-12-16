@@ -1,4 +1,4 @@
-import { SubjectInsert } from 'libs/syllabus/src/types';
+import { SubjectInsert } from '../../../types';
 import { SubjectUpsertRequest, SubjectUpsertResponse } from './types';
 import { LearningAppSupabase } from '@learning-app/supabase';
 
