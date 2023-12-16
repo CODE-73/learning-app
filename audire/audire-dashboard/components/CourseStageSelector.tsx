@@ -1,6 +1,7 @@
 import { useCourses } from '@learning-app/syllabus';
 import { Select, SelectItem, SelectSection } from '@nextui-org/react';
-import React from 'react';
+import React, { FC, ReactElement } from 'react';
+import { Controller, Control, FieldValues, FieldPath } from 'react-hook-form';
 
 interface CourseStageSelectorProps {
   value?: string;
@@ -10,16 +11,18 @@ interface CourseStageSelectorProps {
   }) => void;
 }
 
-const CourseStageSelector: React.FC<CourseStageSelectorProps> = ({
-  value,
-  onChange,
-}) => {
+const CourseStageSelector: FC<CourseStageSelectorProps> & {
+  Field: <T extends FieldValues>(
+    props: CourseStageSelectorFieldProps<T>
+  ) => ReactElement;
+} = ({ value, onChange }) => {
   const { data: { data: courses } = { data: [] } } = useCourses();
 
   return (
     <Select
       label="Course"
       placeholder="Stage"
+      selectedKeys={value ? [value] : []}
       className="max-w-xs"
       scrollShadowProps={{
         isEnabled: false,
@@ -55,5 +58,29 @@ const CourseStageSelector: React.FC<CourseStageSelectorProps> = ({
     </Select>
   );
 };
+
+type CourseStageSelectorFieldProps<T extends FieldValues = FieldValues> = {
+  name: FieldPath<T>;
+  control: Control<T>;
+};
+
+function CourseStageSelectorField<T extends FieldValues>(
+  props: CourseStageSelectorFieldProps<T>
+) {
+  return (
+    <Controller
+      name={props.name}
+      control={props.control}
+      render={({ field }) => (
+        <CourseStageSelector
+          value={field.value}
+          onChange={(params) => field.onChange(params.stageId)}
+        />
+      )}
+    />
+  );
+}
+
+CourseStageSelector.Field = CourseStageSelectorField;
 
 export default CourseStageSelector;

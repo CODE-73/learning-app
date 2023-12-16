@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Subject, useSubject, useSubjectUpsert } from '@learning-app/syllabus';
 import { Button, Input } from '@nextui-org/react';
+import CourseStageSelector from 'components/CourseStageSelector';
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -44,7 +45,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
       return;
     }
 
-    console.info('SubjectFormReset', { subject });
+    // Load the form with the values of useSubject
     form.reset({
       title: subject.title,
       description: subject.description,
@@ -72,21 +73,12 @@ const SubjectForm: FC<SubjectFormProps> = ({
     }
   };
 
-  console.info('SubjectForm', {
-    form: form.getValues(),
-    isNew,
-    stageId,
-    subjectId,
-    subject,
-  });
-
   return (
     <form
       className="flex flex-col gap-4"
       onSubmit={form.handleSubmit(upsertSubject)}
     >
       <h1 className="font-bold text-xl">Subject</h1>
-
       <Input
         type="text"
         label="subject"
@@ -94,14 +86,19 @@ const SubjectForm: FC<SubjectFormProps> = ({
         {...form.register('title')}
         style={{ height: '30px' }}
       />
-
       <Input
         label="Description"
         placeholder="Enter your description"
         {...form.register('description')}
         style={{ height: '30px' }}
       />
-      <div className="flex flex-row  gap-1 ">
+
+      <CourseStageSelector.Field<SubjectForm>
+        name="stageId"
+        control={form.control}
+      />
+
+      <div className="flex flex-row gap-1">
         <div className="grow"></div>
         <Button
           className="outline outline-1 outline-offset"
@@ -112,7 +109,6 @@ const SubjectForm: FC<SubjectFormProps> = ({
         >
           Cancel
         </Button>
-
         <Button type="submit" color="secondary" disabled={isMutating}>
           Save
         </Button>
