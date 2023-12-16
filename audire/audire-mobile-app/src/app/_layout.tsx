@@ -1,6 +1,7 @@
 import { Slot } from 'expo-router';
 import { GluestackUIProvider, Box } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
+import { ExpoSupabaseProvider } from '@learning-app/supabase';
 
 const audireConfig = {
   ...config,
@@ -37,16 +38,18 @@ const audireConfig = {
 } as const;
 
 const RootLayout = () => (
-  <GluestackUIProvider config={audireConfig}>
-    <Box
-      width="100%"
-      flex={1}
-      flexDirection="column"
-      justifyContent="flex-start"
-      alignItems="stretch"
-    >
-      <Slot />
-    </Box>
-  </GluestackUIProvider>
+  <ExpoSupabaseProvider>
+    <GluestackUIProvider config={audireConfig}>
+      <Box
+        width="100%"
+        flex={1}
+        flexDirection="column"
+        justifyContent="flex-start"
+        alignItems="stretch"
+      >
+        <Slot />
+      </Box>
+    </GluestackUIProvider>
+  </ExpoSupabaseProvider>
 );
 export default RootLayout;

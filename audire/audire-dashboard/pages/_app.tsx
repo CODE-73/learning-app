@@ -5,7 +5,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import AuthorizedLayout from 'layouts/authorized/AuthorizedLayout';
 import { NextUIProvider } from '@nextui-org/react';
-import { SupabaseProviderNextJS } from '@learning-app/supabase';
+import { NextSupabaseProvider } from '@learning-app/supabase';
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,14 +21,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     ((page) => <AuthorizedLayout>{page}</AuthorizedLayout>);
 
   return (
-    <SupabaseProviderNextJS>
+    <NextSupabaseProvider>
       <Head>
         <title>Welcome to audire-dashboard!</title>
       </Head>
       <NextUIProvider>
         <main className="app">{getLayout(<Component {...pageProps} />)}</main>
       </NextUIProvider>
-    </SupabaseProviderNextJS>
+    </NextSupabaseProvider>
   );
 }
 

@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import { FC, ReactNode, useEffect, useState } from 'react';
 
-import { useSupabaseClient as useSupabaseClientReact } from '@supabase/auth-helpers-react';
 import { Session, SupabaseClient } from '@supabase/supabase-js';
 
 import { Database } from '../supabase_types';
@@ -23,7 +22,7 @@ interface SupabaseProviderProps {
   loading?: ReactNode;
 }
 
-export const SupabaseProviderNextJS: FC<SupabaseProviderProps> = ({
+export const NextSupabaseProvider: FC<SupabaseProviderProps> = ({
   children,
   initialSession,
   ...props
@@ -55,6 +54,4 @@ export const SupabaseProviderNextJS: FC<SupabaseProviderProps> = ({
   );
 };
 
-export const useSupabaseClient = () => {
-  return useSupabaseClientReact<Database>();
-};
+

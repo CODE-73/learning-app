@@ -29,7 +29,14 @@
     "react-hook-form": "*",
     "@hookform/resolvers": "*",
     "lucide-react-native": "*",
-    "expo-asset": "*"
+    "expo-asset": "*",
+    "tslib": "*",
+    "@supabase/supabase-js": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "@supabase/auth-helpers-react": "*",
+    "next": "*",
+    "@supabase/auth-helpers-nextjs": "*",
+    "swr": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",
