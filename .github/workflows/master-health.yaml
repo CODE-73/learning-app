@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       - name: Run Linter
-        run: npx nx affected --target=lint
+        run: npx nx run-many --target=lint --all
 
   build:
     runs-on: ubuntu-latest
@@ -41,8 +41,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Linter
-        run: npx nx affected --target=build
+      - name: Run Build
+        run: npx nx run-many --target=build --all
 
   test:
     runs-on: ubuntu-latest
@@ -59,4 +59,4 @@ jobs:
         run: npm install
 
       - name: Run Tests
-        run: npx nx affected --target=test
+        run: npx nx run-many --target=test --all

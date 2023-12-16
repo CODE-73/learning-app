@@ -62,5 +62,8 @@
       "projectNameAndRootFormat": "as-provided"
     }
   },
+  "affected": {
+    "defaultBase": "master"
+  },
   "nxCloudAccessToken": "Y2U3NGMzMzgtZTM1MS00MTQwLThiYjYtOGRlNTYzNjMzOWUyfHJlYWQtd3JpdGU="
 }
