@@ -22,7 +22,7 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Linter
         run: npx nx run-many --target=lint --all
@@ -39,7 +39,7 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Build
         run: npx nx run-many --target=build --all
@@ -56,7 +56,7 @@ jobs:
           node-version: '18.x'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Tests
         run: npx nx run-many --target=test --all
