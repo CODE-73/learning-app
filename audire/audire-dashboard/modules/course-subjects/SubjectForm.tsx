@@ -1,7 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Subject, useSubject, useSubjectUpsert } from '@learning-app/syllabus';
-import { Button, Input } from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import CourseStageSelector from 'components/CourseStageSelector';
+import InputElement from 'components/form/InputElement';
+import Form from 'components/form/Form';
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -74,23 +76,22 @@ const SubjectForm: FC<SubjectFormProps> = ({
   };
 
   return (
-    <form
+    <Form
+      formContext={form}
       className="flex flex-col gap-4"
       onSubmit={form.handleSubmit(upsertSubject)}
     >
       <h1 className="font-bold text-xl">Subject</h1>
-      <Input
-        type="text"
-        label="subject"
-        placeholder="Enter the subject"
-        {...form.register('title')}
-        style={{ height: '30px' }}
+
+      <InputElement
+        name="title"
+        label="Title"
+        placeholder="Enter Subject Title"
       />
-      <Input
+      <InputElement
+        name="description"
         label="Description"
-        placeholder="Enter your description"
-        {...form.register('description')}
-        style={{ height: '30px' }}
+        placeholder="Enter Subject description"
       />
 
       <CourseStageSelector.Field<SubjectForm>
@@ -113,7 +114,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
           Save
         </Button>
       </div>
-    </form>
+    </Form>
   );
 };
 
