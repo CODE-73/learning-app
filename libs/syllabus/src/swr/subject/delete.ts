@@ -2,6 +2,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { useSupabaseClient } from '@learning-app/supabase';
 import { SubjectSWRKeys } from './keys';
 import useSWRMutation from 'swr/mutation';
+import { useClearCacheOnSuccess } from '@learning-app/utils';
 import {
   SubjectDeleteRequest,
   SubjectDeleteResponse,
@@ -18,9 +19,14 @@ export function useSubjectDelete() {
     PostgrestError,
     string[] | null,
     SubjectDeleteRequest
-  >(key, (_, { arg }) =>
-    deleteSubject(supabase, {
-      ...arg,
-    })
+  >(
+    key,
+    (_, { arg }) =>
+      deleteSubject(supabase, {
+        ...arg,
+      }),
+    {
+      ...useClearCacheOnSuccess(SubjectSWRKeys.SUBJECT),
+    }
   );
 }

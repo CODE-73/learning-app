@@ -6,19 +6,14 @@ export async function deleteSubject(
   params: SubjectDeleteRequest
 ): Promise<SubjectDeleteResponse> {
   const { subjectId } = params;
-  const query = supabase
-    .from('Subject')
-    .delete({ count: 'exact' })
-    .eq('subjectId', subjectId)
-    .select('*');
+  const query = supabase.from('Subject').delete().eq('id', subjectId);
 
-  const { data, error, count } = await query.single();
+  const { error } = await query.single();
 
   if (error) {
     throw error;
   }
   return {
-    count: count ?? 0,
-    data: data as SubjectDeleteResponse['data'],
+    success: true,
   };
 }
