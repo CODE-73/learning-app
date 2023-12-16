@@ -9,13 +9,10 @@ import {
 
 import { deleteSubject } from '../../services/subject/delete/service';
 
-export async function useSubjectDelete(params: SubjectDeleteRequest) {
+export async function useSubjectDelete() {
   const supabase = useSupabaseClient();
 
-  const key = params.subjectId
-    ? [SubjectSWRKeys.SUBJECT, SubjectSWRKeys.GET, params.subjectId]
-    : null;
-
+  const key = [SubjectSWRKeys.SUBJECT, SubjectSWRKeys.DELETE];
   return useSWRMutation<
     SubjectDeleteResponse,
     PostgrestError,
@@ -24,7 +21,6 @@ export async function useSubjectDelete(params: SubjectDeleteRequest) {
   >(key, (_, { arg }) =>
     deleteSubject(supabase, {
       ...arg,
-      subjectId: params.subjectId as string,
     })
   );
 }
