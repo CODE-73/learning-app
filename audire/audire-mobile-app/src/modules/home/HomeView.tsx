@@ -4,9 +4,8 @@ import StageCard from './stage-card/StageCard';
 import { Box } from '@gluestack-ui/themed';
 import { useCourses } from '@learning-app/syllabus';
 
-const TEMP_COURSE = 'CMA';
-
 const HomeView = () => {
+  const TEMP_COURSE = 'CA';
   const { data: { data: courses } = { data: [] } } = useCourses();
 
   return (

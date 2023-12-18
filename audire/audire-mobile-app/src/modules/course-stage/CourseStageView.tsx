@@ -1,34 +1,15 @@
 import { Box } from '@gluestack-ui/themed';
-import React from 'react';
+import React, { FC } from 'react';
 import SubjectCard from './subject-card/SubjectCard';
+import { useSubjects } from '@learning-app/syllabus';
 
-const subjects = [
-  {
-    name: 'Accounting',
-    link: '/course-subjects/Accounting',
-    description: 'Learn the principles of accounting and financial management.',
-  },
-  {
-    name: 'Business Law',
-    link: '/course-subjects/business-law',
-    description:
-      'Explore legal aspects related to business operations and contracts.',
-  },
-  {
-    name: 'Quantitative Aptitude',
-    link: '/course-subjects/quant-apt',
-    description:
-      'Enhance your quantitative skills for data analysis and decision-making.',
-  },
-  {
-    name: 'Business Economics',
-    link: '/course-subjects/business-economics',
-    description:
-      'Study economic principles and their application in the business environment.',
-  },
-];
+type CourseStageViewProps = {
+  stageId: string;
+};
 
-const CourseStageView = () => {
+const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
+  const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
+
   return (
     <Box
       flex={1}
@@ -36,9 +17,7 @@ const CourseStageView = () => {
       w="$full"
       borderTopLeftRadius="$3xl"
       borderTopRightRadius="$3xl"
-      //Android
       elevation="$1.5"
-      // iOS
       shadowColor="$black"
       shadowOpacity="$40"
       shadowRadius="$8"
@@ -49,9 +28,9 @@ const CourseStageView = () => {
     >
       {subjects.map((subject) => (
         <SubjectCard
-          key={subject.name}
-          subject={subject.name}
-          href={subject.link}
+          key={subject.id}
+          subject={subject.title}
+          href={`/course-subjects/${subject.id}`}
           description={subject.description}
         />
       ))}
