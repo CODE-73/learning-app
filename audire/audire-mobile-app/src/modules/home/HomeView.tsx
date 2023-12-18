@@ -2,14 +2,13 @@ import React from 'react';
 import HomeFooterView from '../footer/HomeFooterView';
 import StageCard from './stage-card/StageCard';
 import { Box } from '@gluestack-ui/themed';
+import { useCourses } from '@learning-app/syllabus';
 
-const stages = [
-  { name: 'Foundation', link: '/course-stages/foundation' },
-  { name: 'Intermediate', link: '/course-stages/intermediate' },
-  { name: 'Final', link: '/course-stages/final' },
-];
+const TEMP_COURSE = 'CMA';
 
 const HomeView = () => {
+  const { data: { data: courses } = { data: [] } } = useCourses();
+
   return (
     <Box
       borderTopRightRadius="$2xl"
@@ -17,9 +16,7 @@ const HomeView = () => {
       flex={1}
       bgColor="white"
       width="$full"
-      // Android
       elevation="$1.5"
-      // iOS
       shadowColor="black"
       shadowOpacity="$40"
       shadowRadius="$8"
@@ -28,9 +25,15 @@ const HomeView = () => {
         height: 2,
       }}
     >
-      {stages.map((stage) => (
-        <StageCard key={stage.name} stage={stage.name} href={stage.link} />
-      ))}
+      {((courses ?? []).find((c) => c.title === TEMP_COURSE)?.stages ?? []).map(
+        (stage) => (
+          <StageCard
+            key={stage.id}
+            stage={stage.title}
+            href={`/course-stages/${stage.id}`}
+          />
+        )
+      )}
       <HomeFooterView />
     </Box>
   );
