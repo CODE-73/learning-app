@@ -1,6 +1,6 @@
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { PostgrestError } from '@supabase/supabase-js';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 import {
   TopicListRequest,
   TopicListResponse,
@@ -8,21 +8,18 @@ import {
 } from '../../services/topic';
 import { TopicSWRKeys } from './keys';
 
-export function useTopics(params?: Partial<TopicListRequest>) {
+export const useTopics = (params?: Partial<TopicListRequest>) => {
+  console.log('pppp', params?.subjectId);
   const supabase = useSupabaseClient();
 
-  const key =
-    params?.stageId && params?.TopicId
-      ? [TopicSWRKeys.TOPIC, TopicSWRKeys.LIST, JSON.stringify(params)]
-      : null;
-
-  return useSWRImmutable<TopicListResponse, PostgrestError, string[] | null>(
-    key,
-    () =>
-      getTopics(supabase, {
-        ...params,
-        stageId: params?.stageId as string,
-        TopicId: params?.TopicId as string,
-      })
+  const key = params?.subjectId
+    ? [TopicSWRKeys.TOPIC, TopicSWRKeys.LIST, JSON.stringify(params)]
+    : null;
+  console.log('key', key);
+  return useSWR<TopicListResponse, PostgrestError, string[] | null>(key, () =>
+    getTopics(supabase, {
+      ...params,
+      subjectId: params?.subjectId as string,
+    })
   );
-}
+};

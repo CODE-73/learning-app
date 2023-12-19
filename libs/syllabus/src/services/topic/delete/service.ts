@@ -6,11 +6,7 @@ export async function deleteTopic(
   params: TopicDeleteRequest
 ): Promise<TopicDeleteResponse> {
   const { topicId } = params;
-  const query = supabase
-    .from('Topic')
-    .delete({ count: 'exact' })
-    .eq('topicId', topicId)
-    .select('*');
+  const query = supabase.from('Topic').delete().eq('id', topicId);
 
   const { data, error, count } = await query.single();
 

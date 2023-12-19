@@ -1,5 +1,5 @@
 export enum SubjectSWRKeys {
-  SUBJECT = 'Subject',
+  SUBJECT = 'subject',
   LIST = 'list',
   DELETE = 'delete',
   UPSERT = 'upsert',

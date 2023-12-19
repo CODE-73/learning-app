@@ -13,14 +13,14 @@ export async function getTopics(
   supabaseCilent: LearningAppSupabase,
   params: TopicListRequest
 ): Promise<TopicListResponse> {
-  const { TopicId, filters, sort } = params;
+  const { subjectId, filters, sort } = params;
 
   let query = supabaseCilent
     .from('Topic')
     .select('*', {
       count: 'exact',
     })
-    .match({ TopicId });
+    .match({ subjectId });
 
   if (filters?.q) {
     query = query.or(

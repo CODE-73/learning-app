@@ -4,23 +4,26 @@ import { TopicSWRKeys } from './keys';
 import useSWRMutation from 'swr/mutation';
 import { TopicDeleteRequest, TopicDeleteResponse } from '../../services/topic';
 import { deleteTopic } from '../../services/topic';
+import { useClearCacheOnSuccess } from '@learning-app/utils';
 
-export async function useTopicDelete(params: TopicDeleteRequest) {
+export function useTopicDelete() {
   const supabase = useSupabaseClient();
 
-  const key = params.topicId
-    ? [TopicSWRKeys.TOPIC, TopicSWRKeys.DELETE, params.topicId]
-    : null;
+  const key = [TopicSWRKeys.TOPIC, TopicSWRKeys.DELETE];
 
   return useSWRMutation<
     TopicDeleteResponse,
     PostgrestError,
     string[] | null,
     TopicDeleteRequest
-  >(key, (_, { arg }) =>
-    deleteTopic(supabase, {
-      ...arg,
-      topicId: params.topicId as string,
-    })
+  >(
+    key,
+    (_, { arg }) =>
+      deleteTopic(supabase, {
+        ...arg,
+      }),
+    {
+      ...useClearCacheOnSuccess(TopicSWRKeys.TOPIC),
+    }
   );
 }

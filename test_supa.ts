@@ -6,10 +6,14 @@ const supabase = createClient(
 );
 
 async function main() {
-  const r = await supabase
-    .from('Course')
-    .update({ title: '+2' })
-    .eq('id', '65c21334-34df-4bf6-9553-092cb6e6a018');
+  const r = await supabase.from('Topic').insert({
+    title: 'More About Business',
+    description: 'More about Topic',
+    subjectId: '8336646f-c8eb-4453-a6b2-9f8a7d8d2af2',
+    videoLink: 'sdfsdf',
+    studyMaterial: 'dsfdsf',
+  });
+
   console.info({ r });
 }
 
