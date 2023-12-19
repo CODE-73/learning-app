@@ -11,18 +11,22 @@ import { useForm } from 'react-hook-form';
 import Form from 'components/form/Form';
 import InputElement from 'components/form/InputElement';
 import CourseSubjectSelector from 'components/CourseSubjectSelector';
+import CourseStageSelector from 'components/CourseStageSelector';
+import MCQDialog from './MCQDailog';
 interface TopicFormProps {
   isNew?: boolean;
   topicId?: string;
   subjectId?: string;
   onComplete?: (topic: Topic) => void;
   onCancel?: () => void;
+  stageId: string | undefined;
 }
 
 const TopicFormSchema = z.object({
   title: z.string(),
   description: z.string(),
   subjectId: z.string().min(1),
+  videoLink: z.string(),
 });
 
 type TopicForm = z.infer<typeof TopicFormSchema>;
@@ -33,6 +37,7 @@ const TopicForm: FC<TopicFormProps> = ({
   topicId,
   onComplete,
   onCancel,
+  stageId,
 }) => {
   const { data: topic } = useTopic({ topicId });
   const { trigger, isMutating } = useTopicUpsert();
@@ -55,6 +60,7 @@ const TopicForm: FC<TopicFormProps> = ({
       title: topic.title,
       description: topic.description,
       subjectId: topic.subjectId,
+      videoLink: '',
     });
   }, [form, isNew, topic]);
 
@@ -70,6 +76,7 @@ const TopicForm: FC<TopicFormProps> = ({
           title: data.title,
           description: data.description,
           subjectId: data.subjectId,
+          videoLink: '',
         },
       });
       onComplete?.(topic);
@@ -103,89 +110,15 @@ const TopicForm: FC<TopicFormProps> = ({
         </h4>
       </div>
       <div className="text-sm font-medium  p-2 ">MCQ Question</div>
-      <Accordion variant="splitted">
-        <AccordionItem key="1" aria-label="Add MSQ" title="Add MSQ">
-          <div>
-            <label className=" text-sm font-medium mr-4">Add Question</label>
-            <Textarea
-              label="Question"
-              variant="bordered"
-              placeholder="Enter your question"
-              disableAnimation
-              disableAutosize
-              classNames={{
-                base: 'max-w-xs',
-                input: 'resize-y min-h-[40px]',
-              }}
-            />
-          </div>
 
-          <div className="pt-8">
-            <div>
-              <label className=" text-sm font-medium mr-4  ">option 1</label>
-              <input
-                className="rounded-lg mr-4"
-                style={{
-                  border: '1px solid black',
-                  height: '30px',
-                  padding: '8px',
-                }}
-              />
-              <Checkbox defaultSelected size="md"></Checkbox>
-            </div>
-            <div className="pt-4">
-              <label className=" text-sm font-medium mr-4">option 2</label>
-              <input
-                className="rounded-lg mr-4"
-                style={{
-                  border: '1px solid black',
-                  height: '30px',
-                  padding: '8px',
-                }}
-              />
-              <Checkbox defaultSelected size="md"></Checkbox>
-            </div>
-            <div className="pt-4">
-              <label className=" text-sm font-medium mr-4">option 3</label>
-              <input
-                className="rounded-lg mr-4"
-                style={{
-                  border: '1px solid black',
-                  height: '30px',
-                  padding: '8px',
-                }}
-              />
-              <Checkbox defaultSelected size="md"></Checkbox>
-            </div>
-            <div className="pt-4">
-              <label className=" text-sm font-medium mr-4 ">option 4</label>
-              <input
-                className="rounded-lg mr-4"
-                style={{
-                  border: '1px solid black',
-                  height: '30px',
-                  padding: '8px',
-                }}
-              />
-              <Checkbox defaultSelected size="md"></Checkbox>
-            </div>
-            <ModalFooter>
-              <Button
-                className="outline outline-1 outline-offset  h-6"
-                color="danger"
-                variant="light"
-              >
-                Cancel
-              </Button>
+      <MCQDialog />
+      {/* <CourseStageSelector.Field name="stageId" control={form.control} /> */}
+      <CourseSubjectSelector.Field
+        name="subjectId"
+        stageId={stageId}
+        control={form.control}
+      />
 
-              <Button className=" h-6" type="submit" color="secondary">
-                Save
-              </Button>
-            </ModalFooter>
-          </div>
-        </AccordionItem>
-      </Accordion>
-      <CourseSubjectSelector.Field name="subjectId" control={form.control} />
       <div className="flex flex-row gap-1">
         <div className="grow"></div>
         <Button

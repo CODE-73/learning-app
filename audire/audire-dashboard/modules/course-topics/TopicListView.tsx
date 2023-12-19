@@ -78,7 +78,7 @@ const TopicListView: FC = () => {
               size="sm"
               variant="flat"
             >
-              {cellValue}
+              {topic.videoLink ? 'Upload' : 'Non'}
             </Chip>
           );
 
@@ -149,6 +149,7 @@ const TopicListView: FC = () => {
         isNew={activeTopic === null}
         subjectId={subjectId}
         topicId={activeTopic?.id}
+        stageId={stageId}
       />
       <ConfirmDeleteDialog
         isOpen={isDeleteDialogOpen}

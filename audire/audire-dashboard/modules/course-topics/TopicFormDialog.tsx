@@ -9,6 +9,7 @@ interface TopicFormProps {
   subjectId?: string;
   isOpen: boolean;
   onOpenChange: () => void;
+  stageId: string | undefined;
 }
 
 const TopicFormDialog: FC<TopicFormProps> = ({
@@ -17,23 +18,29 @@ const TopicFormDialog: FC<TopicFormProps> = ({
   subjectId,
   isOpen,
   onOpenChange,
-}) => (
-  <Modal
-    className="p-8 "
-    isOpen={isOpen}
-    onOpenChange={onOpenChange}
-    isDismissable={false}
-  >
-    <ModalContent>
-      <TopicForm
-        isNew={isNew}
-        subjectId={subjectId}
-        topicId={topicId}
-        onComplete={onOpenChange}
-        onCancel={onOpenChange}
-      />
-    </ModalContent>
-  </Modal>
-);
+  stageId,
+}) => {
+  console.log('RameeSubject ID:', topicId);
+
+  return (
+    <Modal
+      className="p-8 "
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      isDismissable={false}
+    >
+      <ModalContent>
+        <TopicForm
+          isNew={isNew}
+          stageId={stageId}
+          subjectId={subjectId}
+          topicId={topicId}
+          onComplete={onOpenChange}
+          onCancel={onOpenChange}
+        />
+      </ModalContent>
+    </Modal>
+  );
+};
 
 export default TopicFormDialog;

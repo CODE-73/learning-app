@@ -7,6 +7,7 @@ import {
   TopicUpsertResponse,
   upsertTopic,
 } from '../../services/topic';
+import { useClearCacheOnSuccess } from '@learning-app/utils';
 
 export const useTopicUpsert = () => {
   const supabase = useSupabaseClient();
@@ -18,7 +19,11 @@ export const useTopicUpsert = () => {
     PostgrestError,
     string[] | null,
     TopicUpsertRequest
-  >(key, (_, { arg }) =>
-    upsertTopic(supabase, { ...arg, input: { ...arg.input } })
+  >(
+    key,
+    (_, { arg }) => upsertTopic(supabase, { ...arg, input: { ...arg.input } }),
+    {
+      ...useClearCacheOnSuccess(TopicSWRKeys.TOPIC),
+    }
   );
 };

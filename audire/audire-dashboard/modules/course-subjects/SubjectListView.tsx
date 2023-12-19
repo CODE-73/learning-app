@@ -28,8 +28,7 @@ const SubjectListView: FC = () => {
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
   const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
   const [activeSubject, setactiveSubject] = useState<Subject | null>(null);
-  console.log(activeSubject);
-  console.log('aaaaa', stageId);
+ 
   const { data: { data: subjects } = { data: [] } } = useSubjects({
     stageId,
   });

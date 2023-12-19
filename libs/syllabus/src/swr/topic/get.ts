@@ -1,5 +1,5 @@
 import { PostgrestError } from '@supabase/supabase-js';
-import useSWR from 'swr/mutation';
+import useSWR from 'swr';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import {
   TopicGetRequest,
