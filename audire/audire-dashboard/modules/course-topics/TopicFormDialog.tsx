@@ -20,8 +20,6 @@ const TopicFormDialog: FC<TopicFormProps> = ({
   onOpenChange,
   stageId,
 }) => {
-  console.log('RameeSubject ID:', topicId);
-
   return (
     <Modal
       className="p-8 "

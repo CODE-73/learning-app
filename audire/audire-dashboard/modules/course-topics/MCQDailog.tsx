@@ -1,5 +1,4 @@
 import React from 'react';
-import { FC } from 'react';
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import { ModalFooter, Button, Textarea, Checkbox } from '@nextui-org/react';
 

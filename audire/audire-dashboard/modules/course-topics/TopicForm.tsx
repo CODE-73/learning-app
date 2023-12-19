@@ -2,7 +2,7 @@ import React from 'react';
 import { FC, useEffect } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { FaFileUpload } from 'react-icons/fa';
-import {  Button,} from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { Topic, useTopic, useTopicUpsert } from '@learning-app/syllabus';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -24,7 +24,6 @@ const TopicFormSchema = z.object({
   title: z.string(),
   description: z.string(),
   subjectId: z.string().min(1),
-  videoLink: z.string(),
 });
 
 type TopicForm = z.infer<typeof TopicFormSchema>;
@@ -47,7 +46,7 @@ const TopicForm: FC<TopicFormProps> = ({
     },
     resolver: zodResolver(TopicFormSchema),
   });
-
+  console.log(form);
   useEffect(() => {
     if (isNew || !topic) {
       return;
@@ -58,15 +57,15 @@ const TopicForm: FC<TopicFormProps> = ({
       title: topic.title,
       description: topic.description,
       subjectId: topic.subjectId,
-      videoLink: '',
     });
   }, [form, isNew, topic]);
 
+  console.info('TopiformState', { ...form.formState });
   const upsertTopic = async (data: TopicForm) => {
     if (!data.title || !data.description) {
       return;
     }
-
+    console.log(upsertTopic);
     try {
       const topic = await trigger({
         input: {
@@ -74,7 +73,8 @@ const TopicForm: FC<TopicFormProps> = ({
           title: data.title,
           description: data.description,
           subjectId: data.subjectId,
-          videoLink: '',
+          videoLink: 'video-link',
+          studyMaterial: 'study-material',
         },
       });
       onComplete?.(topic);
@@ -82,6 +82,7 @@ const TopicForm: FC<TopicFormProps> = ({
       console.error(e);
     }
   };
+
   return (
     <Form formContext={form} onSubmit={form.handleSubmit(upsertTopic)}>
       <h1 className="font-bold text-xl">Topic</h1>
