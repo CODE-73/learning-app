@@ -16,16 +16,15 @@ const CourseSubjectSelector: React.FC<CourseSubjectSelectorProps> & {
   ) => ReactElement;
 } = ({ value, onChange, stageId }) => {
   const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
-
   return (
     <Select
       label="Subject"
       placeholder="Select a Subject"
-      // selectedKeys={value ? [value] : []}
+      selectedKeys={value ? [value] : []}
       className="max-w-xs"
-      // scrollShadowProps={{
-      //   isEnabled: false,
-      // }}
+      scrollShadowProps={{
+        isEnabled: false,
+      }}
       onSelectionChange={(e) => {
         if (e instanceof Set) {
           const subjectId: string | null =
@@ -58,7 +57,7 @@ function CourseSubjectSelectorField<T extends FieldValues = FieldValues>(
       control={props.control}
       render={({ field }) => (
         <CourseSubjectSelector
-          value={field.name}
+          value={field.value}
           onChange={(params) => field.onChange(params.subjectId)}
           stageId={props.stageId}
         />

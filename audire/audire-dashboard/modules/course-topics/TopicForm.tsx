@@ -2,8 +2,7 @@ import React from 'react';
 import { FC, useEffect } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { FaFileUpload } from 'react-icons/fa';
-import { ModalFooter, Button, Textarea, Checkbox } from '@nextui-org/react';
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import {  Button,} from '@nextui-org/react';
 import { Topic, useTopic, useTopicUpsert } from '@learning-app/syllabus';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -11,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import Form from 'components/form/Form';
 import InputElement from 'components/form/InputElement';
 import CourseSubjectSelector from 'components/CourseSubjectSelector';
-import CourseStageSelector from 'components/CourseStageSelector';
 import MCQDialog from './MCQDailog';
 interface TopicFormProps {
   isNew?: boolean;
@@ -112,7 +110,6 @@ const TopicForm: FC<TopicFormProps> = ({
       <div className="text-sm font-medium  p-2 ">MCQ Question</div>
 
       <MCQDialog />
-      {/* <CourseStageSelector.Field name="stageId" control={form.control} /> */}
       <CourseSubjectSelector.Field
         name="subjectId"
         stageId={stageId}
