@@ -15,9 +15,7 @@ const CourseSubjectSelector: React.FC<CourseSubjectSelectorProps> & {
     props: CourseSubjectSelectorFieldProps<T>
   ) => ReactElement;
 } = ({ value, onChange, stageId }) => {
-  console.log('StageID', stageId);
   const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
-  console.log('subjectssss', subjects);
 
   return (
     <Select

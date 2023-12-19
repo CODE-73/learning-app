@@ -31,13 +31,12 @@ const statusColorMap: Record<string, ChipProps['color']> = {
 };
 
 const TopicListView: FC = () => {
-  const [topicId, setSelectedTopic] = useState<string | undefined>(undefined);
   const [subjectId, setSelectedSubject] = useState<string | undefined>(
     undefined
   );
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
-  console.log('aaaaaaaaaa', subjectId);
+
   const {
     data: { data: topics } = {
       data: [],
@@ -156,7 +155,6 @@ const TopicListView: FC = () => {
         onCancel={toggleDeleteDialog}
         onConfirm={() => {
           if (activeTopic) {
-            console.log(activeTopic.id);
             trigger({
               topicId: activeTopic.id,
             })
