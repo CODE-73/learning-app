@@ -2,15 +2,16 @@ import React from 'react';
 import { FC, useEffect } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { FaFileUpload } from 'react-icons/fa';
-import { Button } from '@nextui-org/react';
+import { Accordion, AccordionItem, Button } from '@nextui-org/react';
 import { Topic, useTopic, useTopicUpsert } from '@learning-app/syllabus';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import Form from 'components/form/Form';
 import InputElement from 'components/form/InputElement';
 import CourseSubjectSelector from 'components/CourseSubjectSelector';
-import MCQDialog from './MCQDailog';
+import MCQForm from './MCQForm';
+import { type TopicForm, TopicFormSchema } from './zod';
+
 interface TopicFormProps {
   isNew?: boolean;
   topicId?: string;
@@ -19,14 +20,6 @@ interface TopicFormProps {
   onCancel?: () => void;
   stageId: string | undefined;
 }
-
-const TopicFormSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  subjectId: z.string().min(1),
-});
-
-type TopicForm = z.infer<typeof TopicFormSchema>;
 
 const TopicForm: FC<TopicFormProps> = ({
   isNew,
@@ -46,7 +39,11 @@ const TopicForm: FC<TopicFormProps> = ({
     },
     resolver: zodResolver(TopicFormSchema),
   });
-  console.log(form);
+  const { fields, append } = useFieldArray({
+    control: form.control,
+    name: 'mcqQuestions',
+  });
+
   useEffect(() => {
     if (isNew || !topic) {
       return;
@@ -60,12 +57,11 @@ const TopicForm: FC<TopicFormProps> = ({
     });
   }, [form, isNew, topic]);
 
-  console.info('TopiformState', { ...form.formState });
   const upsertTopic = async (data: TopicForm) => {
+    console.info('upsertTopic', data);
     if (!data.title || !data.description) {
       return;
     }
-    console.log(upsertTopic);
     try {
       const topic = await trigger({
         input: {
@@ -79,6 +75,7 @@ const TopicForm: FC<TopicFormProps> = ({
       });
       onComplete?.(topic);
     } catch (e) {
+      // TODO: Add toast
       console.error(e);
     }
   };
@@ -108,9 +105,33 @@ const TopicForm: FC<TopicFormProps> = ({
           <FaFileUpload className="text-2xl ml-2" />
         </h4>
       </div>
-      <div className="text-sm font-medium  p-2 ">MCQ Question</div>
-
-      <MCQDialog />
+      <div className="flex flex-col my-2">
+        <div className="flex items-center justify-between my-2">
+          <div className="text-sm font-medium">MCQ Question</div>
+          <Button
+            onClick={() =>
+              append({
+                question: 'New MCQ Question',
+                options: ['', '', '', ''],
+                correctAnswer: 0,
+                explanation: '',
+              })
+            }
+          >
+            Add MCQ
+          </Button>
+        </div>
+        <Accordion variant="splitted">
+          {fields.map((field, index) => (
+            <AccordionItem
+              key={field.id}
+              title={form.watch(`mcqQuestions.${index}.question`)}
+            >
+              <MCQForm formFieldIdx={index} />
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
       <CourseSubjectSelector.Field
         name="subjectId"
         stageId={stageId}

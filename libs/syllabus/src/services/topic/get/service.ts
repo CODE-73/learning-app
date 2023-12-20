@@ -15,7 +15,7 @@ export async function getTopic(
 ): Promise<TopicGetResponse> {
   const { data, error } = await supabase
     .from('Topic')
-    .select('*')
+    .select('*, mcqQuestions:McqQuestion(*)')
     .match({ id: params.topicId })
     .single();
 

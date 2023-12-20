@@ -1,4 +1,5 @@
 import { Database } from '@learning-app/supabase';
+export * from './mcqQuestions';
 
 export type Topic = Database['public']['Tables']['Topic']['Row'];
 export type TopicUpdate = Database['public']['Tables']['Topic']['Update'];
