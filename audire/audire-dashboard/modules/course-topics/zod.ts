@@ -3,8 +3,8 @@ import { z } from 'zod';
 const MCQQuestionSchema = z.object({
   id: z.string().optional(),
   question: z.string(),
-  options: z.array(z.string()),
-  correctAnswer: z.number().default(0),
+  options: z.array(z.string()).default(['', '', '', '']),
+  correctOption: z.number().default(0),
   explanation: z.string().default(''),
 });
 

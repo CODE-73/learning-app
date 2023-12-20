@@ -10,8 +10,8 @@ type MCQFormProps = {
 
 const MCQForm: FC<MCQFormProps> = (props) => {
   const form = useFormContext<TopicForm>();
-  const correctAnswer = form.watch(
-    `mcqQuestions.${props.formFieldIdx}.correctAnswer`
+  const correctOption = form.watch(
+    `mcqQuestions.${props.formFieldIdx}.correctOption`
   );
   const options = form.watch(
     `mcqQuestions.${props.formFieldIdx}.options` as const
@@ -58,10 +58,10 @@ const MCQForm: FC<MCQFormProps> = (props) => {
               }}
             />
             <Checkbox
-              isSelected={correctAnswer === index}
+              isSelected={correctOption === index}
               onValueChange={() =>
                 form.setValue(
-                  `mcqQuestions.${props.formFieldIdx}.correctAnswer`,
+                  `mcqQuestions.${props.formFieldIdx}.correctOption`,
                   index
                 )
               }

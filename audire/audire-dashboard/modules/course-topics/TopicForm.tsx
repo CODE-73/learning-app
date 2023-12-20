@@ -11,6 +11,7 @@ import InputElement from 'components/form/InputElement';
 import CourseSubjectSelector from 'components/CourseSubjectSelector';
 import MCQForm from './MCQForm';
 import { type TopicForm, TopicFormSchema } from './zod';
+import { useMCQQuestionUpsert } from '@learning-app/syllabus';
 
 interface TopicFormProps {
   isNew?: boolean;
@@ -31,6 +32,9 @@ const TopicForm: FC<TopicFormProps> = ({
 }) => {
   const { data: topic } = useTopic({ topicId });
   const { trigger, isMutating } = useTopicUpsert();
+
+  const { trigger: upsertMCQQuestions, isMutating: MCQuestionIsMutating } =
+    useMCQQuestionUpsert();
 
   const form = useForm<TopicForm>({
     mode: 'onBlur',
@@ -54,6 +58,10 @@ const TopicForm: FC<TopicFormProps> = ({
       title: topic.title,
       description: topic.description,
       subjectId: topic.subjectId,
+      mcqQuestions: topic.mcqQuestions.map((x) => ({
+        ...x,
+        options: x.options ?? ['', '', '', ''],
+      })),
     });
   }, [form, isNew, topic]);
 
@@ -63,7 +71,7 @@ const TopicForm: FC<TopicFormProps> = ({
       return;
     }
     try {
-      const topic = await trigger({
+      const newTopic = await trigger({
         input: {
           id: isNew ? undefined : topicId,
           title: data.title,
@@ -73,7 +81,16 @@ const TopicForm: FC<TopicFormProps> = ({
           studyMaterial: 'study-material',
         },
       });
-      onComplete?.(topic);
+
+      await upsertMCQQuestions({
+        prevMCQs: topic?.mcqQuestions ?? [],
+        newMCQs: data.mcqQuestions.map((x) => ({
+          ...x,
+          topicId: newTopic.id,
+        })),
+      });
+
+      await onComplete?.(newTopic);
     } catch (e) {
       // TODO: Add toast
       console.error(e);
@@ -113,7 +130,7 @@ const TopicForm: FC<TopicFormProps> = ({
               append({
                 question: 'New MCQ Question',
                 options: ['', '', '', ''],
-                correctAnswer: 0,
+                correctOption: 0,
                 explanation: '',
               })
             }
@@ -149,7 +166,11 @@ const TopicForm: FC<TopicFormProps> = ({
         >
           Cancel
         </Button>
-        <Button type="submit" color="secondary" disabled={isMutating}>
+        <Button
+          type="submit"
+          color="secondary"
+          disabled={isMutating || MCQuestionIsMutating}
+        >
           Save
         </Button>
       </div>
