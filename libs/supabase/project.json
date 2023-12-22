@@ -19,7 +19,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/supabase/**/*.ts",
+          "libs/supabase/src/**/*.ts",
+          "libs/supabase/prisma/**/*.ts",
           "libs/supabase/package.json"
         ]
       }
@@ -48,7 +49,7 @@
         "cwd": "libs/supabase",
         "commands": [
           "npx supabase gen types typescript --linked --schema public> ./src/supabase_types.ts",
-          "npx nx lint supabase --fix"
+          "npx nx lint supabase --fix --force"
         ]
       }
     }
