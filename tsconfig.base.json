@@ -18,8 +18,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@learning-app/auth": [
+        "libs/auth/src/index.ts",
+        "../../libs/auth/src/index.ts"
+      ],
       "@learning-app/batch": [
-        "batch/src/index.ts",
+        "libs/batch/src/index.ts",
         "../../libs/batch/src/index.ts"
       ],
       "@learning-app/supabase": [

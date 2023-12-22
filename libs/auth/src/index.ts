@@ -1,1 +1,1 @@
-export * from 'swr';
+export * from './swr';
