@@ -322,11 +322,11 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      get_user_by_mobile: {
+      check_mobile_exists: {
         Args: {
           mobile: string
         }
-        Returns: unknown[]
+        Returns: boolean
       }
     }
     Enums: {
