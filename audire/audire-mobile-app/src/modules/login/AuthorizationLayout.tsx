@@ -7,26 +7,26 @@ type AuthorizationLayoutProps = {
 };
 
 const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
-  const image = Asset.fromURI('/assets/audire.png').uri;
+  const image = Asset.fromURI('/assets/loginBackroudImage.svg').uri;
   return (
     <Box
-      bg="$fuchsia200"
+      bg="white"
       display="flex"
       flexDirection="column"
-      justifyContent="center" // Center the content vertically
-      alignItems="center" // Center the content horizontally
+      justifyContent="flex-end"
+      alignItems="flex-end"
       h="$full"
     >
-      <Image
-        size="2xl"
-        alt="Audire Logo"
-        mt={30}
-        mb={30}
-        source={{
-          uri: image,
-        }}
-      />
       {children}
+      <Box position="absolute">
+        <Image
+          alt="loginBackroudImage"
+          size="2xl"
+          source={{
+            uri: image,
+          }}
+        />
+      </Box>
     </Box>
   );
 };
