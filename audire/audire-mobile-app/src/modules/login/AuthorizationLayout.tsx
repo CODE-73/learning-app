@@ -18,7 +18,7 @@ const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
       h="$full"
     >
       {children}
-      <Box position="absolute">
+      <Box position="absolute" zIndex={-1}>
         <Image
           alt="loginBackroudImage"
           size="2xl"

@@ -16,13 +16,13 @@ const LoginForm = () => {
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
       <Box mb="$9">
-        <Text fontSize="$xl" color="black" fontWeight="bold">
+        <Text fontSize="$3xl" color="black" fontWeight="bold" mb="$3">
           Welcome to
         </Text>
 
-        <Text fontSize="$2xl" fontWeight="bold" color="#8D0C8A">
+        <Text fontSize="$4xl" fontWeight="bold" color="#8D0C8A">
           Audire
-          <Text fontSize="$2xl" fontWeight="bold" color="black">
+          <Text fontSize="$4xl" fontWeight="bold" color="black">
             !
           </Text>
         </Text>

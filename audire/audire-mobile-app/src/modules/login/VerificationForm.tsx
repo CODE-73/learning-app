@@ -45,9 +45,9 @@ const VerificationView = () => {
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
       <Box display="flex" mb="$6">
-        <Text fontSize="$xl" fontWeight="bold" color="black" pl="$6">
+        <Text fontSize="$2xl" fontWeight="bold" color="black" pl="$6">
           Verify
-          <Text color="$fuchsia800" fontWeight="bold" fontSize="$xl" ml="$1">
+          <Text color="$fuchsia800" fontWeight="bold" fontSize="$2xl" ml="$1">
             OTP
           </Text>
         </Text>

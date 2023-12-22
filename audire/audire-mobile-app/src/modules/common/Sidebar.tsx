@@ -68,10 +68,10 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
             </Box>
             <Box display="flex" alignItems="center">
               <Text fontSize="$xs" color="black">
-                Profile{' '}
+                Profile
               </Text>
               <Text fontWeight="bold" color="black">
-                Muhammed Rameez
+                Mohammed sameer
               </Text>
             </Box>
           </Box>

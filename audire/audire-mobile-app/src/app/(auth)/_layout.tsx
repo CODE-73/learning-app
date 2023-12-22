@@ -9,7 +9,6 @@ const MainLayout = () => {
   console.log(sidebarShown);
   return (
     <Box
-      bg="$fuchsia200"
       display="flex"
       flexDirection="column"
       h="$full"
