@@ -8,14 +8,24 @@ datasource db {
     shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+enum Role {
+    STUDENT
+    FACULTY
+    INSTITUTE_ADMIN
+    SUPER_ADMIN
+}
+
 model Profile {
-    id             String   @id @db.Uuid
-    firstName      String
-    lastName       String
-    mobile         String?
-    email          String?
-    city           String
-    state          String
+    id   String @id @db.Uuid
+    role Role   @default(STUDENT)
+
+    firstName String?
+    lastName  String?
+    mobile    String?
+    email     String?
+    city      String?
+    state     String?
+
     createdCourses Course[] @relation("CourseCreatedBy")
     updatedCourses Course[] @relation("CourseUpdatedBy")
 
@@ -76,8 +86,8 @@ model Topic {
     description   String
     subject       Subject       @relation(fields: [subjectId], references: [id])
     subjectId     String        @db.Uuid
-    videoLink     String
-    studyMaterial String
+    videoLink     String?
+    studyMaterial String?
     mcqQuestions  McqQuestion[]
     createdBy     Profile?      @relation("TopicCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
     createdById   String?       @db.Uuid
