@@ -3,9 +3,16 @@ import VideoComponent from './VideoComponent';
 import StudyMeterial from './StudyMeterial';
 import SampleQuestions from './SampleQuestions';
 import McqTestCard from './McqTestCard';
-import React from 'react';
+import React, { FC } from 'react';
+import { useTopic } from '@learning-app/syllabus';
 
-const CourseTopicView = () => {
+type CourseTopicViewProps = {
+  topicId: string;
+};
+
+const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
+  const { data: topic } = useTopic({ topicId });
+
   return (
     <Box flexDirection="column" flex={1} bgColor="white" w="$full">
       <Box ml="$5" pt="$5" pb="$1">
@@ -31,7 +38,7 @@ const CourseTopicView = () => {
       <VideoComponent />
       <StudyMeterial />
       <SampleQuestions />
-      <McqTestCard />
+      <McqTestCard topicId={topic?.id} />
     </Box>
   );
 };
