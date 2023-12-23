@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { Text, Box } from '@gluestack-ui/themed';
+import { Text, Box, Image } from '@gluestack-ui/themed';
+import { Asset } from 'expo-asset';
 
 type SubjectCardProps = {
   subject: string;
@@ -10,45 +11,54 @@ type SubjectCardProps = {
 };
 
 const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
+  const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
   return (
-    <Box flexDirection="column" alignItems="center" mt="$24">
-      <Box
-        maxWidth="$64"
-        borderColor="black"
-        borderRadius="$lg"
-        borderWidth="$1"
-        backgroundColor="white"
-        overflow="hidden"
-        sx={{
-          '@base': {
-            mx: '$5',
-          },
-          _dark: {
-            bg: '$backgroundDark900',
-            borderColor: '$borderDark800',
-          },
-        }}
-      >
-        <Link href={href} asChild>
+    <Box
+      flex={1}
+      w="$full"
+      borderColor="$black"
+      borderRadius="$sm"
+      my="$1"
+      backgroundColor="$white"
+      overflow="hidden"
+      shadowColor="$black"
+      shadowOffset={{ width: 1, height: 2 }}
+      shadowOpacity={0.5}
+      shadowRadius={5}
+    >
+      <Link href={href} asChild>
+        <TouchableOpacity>
           <Box
-            m="$4"
-            w="$64"
-            // h="$12"
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            p="$4"
           >
-            <TouchableOpacity>
+            <Box pl="$4" mt="$2">
               <Text
                 fontSize="$xl"
                 fontWeight="bold"
                 justifyContent="center"
                 alignItems="center"
+                numberOfLines={1}
+                ellipsizeMode="tail"
               >
                 {subject}
               </Text>
-              {description && <Text>{description}</Text>}
-            </TouchableOpacity>
+              {description && <Text size="xs">{description}</Text>}
+            </Box>
+            <Box pr="$4">
+              <Image
+                alt="loginBackroudImage"
+                size="xs"
+                source={{
+                  uri: PlayIcon,
+                }}
+              />{' '}
+            </Box>
           </Box>
-        </Link>
-      </Box>
+        </TouchableOpacity>
+      </Link>
     </Box>
   );
 };

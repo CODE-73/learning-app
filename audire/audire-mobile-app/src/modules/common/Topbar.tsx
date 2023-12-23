@@ -13,7 +13,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
   return (
     <Box
       w="$full"
-      p="$8"
+      p="$6"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
@@ -29,7 +29,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       <Box>
         <Image
           size="xs"
-          alt="Audire Logo"
+          alt="notificationIcon"
           source={{
             uri: image,
           }}

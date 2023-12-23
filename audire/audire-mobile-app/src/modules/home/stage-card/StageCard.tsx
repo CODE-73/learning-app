@@ -3,6 +3,8 @@ import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import { Text, Box } from '@gluestack-ui/themed';
 
+import { HiArrowLongRight } from 'react-icons/hi2';
+
 type StageCardProps = {
   stage: string;
   href: string;
@@ -10,45 +12,26 @@ type StageCardProps = {
 
 const StageCard: FC<StageCardProps> = ({ stage, href }) => {
   return (
-    <Box flexDirection="column" alignItems="center" mt="$24">
-      <Box
-        maxWidth="$64"
-        borderColor="$black"
-        borderRadius="$lg"
-        borderWidth="$1"
-        my="$4"
-        backgroundColor="$white"
-        overflow="hidden"
-        sx={{
-          '@base': {
-            mx: '$5',
-          },
-          _dark: {
-            bg: '$backgroundDark900',
-            borderColor: '$borderDark800',
-          },
-        }}
-      >
-        <Link href={href} asChild>
-          <Box
-            m="$4"
-            w="$64"
+    <Box width={120} height={120} alignItems="center">
+      <Link href={href} asChild>
+        <TouchableOpacity>
+          <Box alignItems="center" pt="$3">
+            <Text
+              color="black"
+              fontSize="$lg"
+              fontWeight="$medium"
+              justifyContent="center"
+              alignItems="center"
+            >
+              {stage}
+            </Text>
 
-            // h="$12"
-          >
-            <TouchableOpacity>
-              <Text
-                fontSize="$xl"
-                fontWeight="bold"
-                justifyContent="center"
-                alignItems="center"
-              >
-                {stage}
-              </Text>
-            </TouchableOpacity>
+            <Box pt="$10" ml="$10">
+              <HiArrowLongRight color="B051AE" fontSize={40} />
+            </Box>
           </Box>
-        </Link>
-      </Box>
+        </TouchableOpacity>
+      </Link>
     </Box>
   );
 };

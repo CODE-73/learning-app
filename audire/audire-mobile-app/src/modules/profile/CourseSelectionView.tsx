@@ -35,7 +35,7 @@ const CourseSelectionView = () => {
             backgroundColor="$white"
             overflow="hidden"
             shadowColor="$black"
-            shadowOffset={{ width: 1, height: 5 }}
+            shadowOffset={{ width: 1, height: 2 }}
             shadowOpacity={0.5}
             shadowRadius={5}
           >

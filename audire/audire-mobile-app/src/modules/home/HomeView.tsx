@@ -1,38 +1,57 @@
 import React from 'react';
 import HomeFooterView from '../footer/HomeFooterView';
 import StageCard from './stage-card/StageCard';
-import { Box } from '@gluestack-ui/themed';
+import { Box, Text, Image, View } from '@gluestack-ui/themed';
 import { useCourses } from '@learning-app/syllabus';
+import { Asset } from 'expo-asset';
 
 const HomeView = () => {
   const TEMP_COURSE = 'CA';
   const { data: { data: courses } = { data: [] } } = useCourses();
+  const image = Asset.fromURI('/assets/homepageBanner.jpg').uri;
+  const colors = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
 
   return (
-    <Box
-      borderTopRightRadius="$2xl"
-      borderTopLeftRadius="$2xl"
-      flex={1}
-      bgColor="white"
-      width="$full"
-      elevation="$1.5"
-      shadowColor="black"
-      shadowOpacity="$40"
-      shadowRadius="$8"
-      shadowOffset={{
-        width: 0,
-        height: 2,
-      }}
-    >
-      {((courses ?? []).find((c) => c.title === TEMP_COURSE)?.stages ?? []).map(
-        (stage) => (
-          <StageCard
+    <Box flex={1} width="$full">
+      <Text fontSize="$xl" color="black" fontWeight="$$light" ml="$5" py="$5">
+        Hey Jane!
+      </Text>
+      <Box bg="white" p="$1.5">
+        <Image
+          borderRadius={10}
+          w="$full"
+          size="2xl"
+          alt="homepageBanner"
+          source={{
+            uri: image,
+          }}
+        />
+      </Box>
+      <Text fontSize="$xl" color="black" fontWeight="$medium" ml="$5" py="$5">
+        Choose your stage
+      </Text>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+        borderRadius="$2xl"
+      >
+        {(
+          (courses ?? []).find((c) => c.title === TEMP_COURSE)?.stages ?? []
+        ).map((stage, index) => (
+          <View
+            borderRadius="$lg"
             key={stage.id}
-            stage={stage.title}
-            href={`/course-stages/${stage.id}`}
-          />
-        )
-      )}
+            style={{ backgroundColor: colors[index % colors.length] }}
+          >
+            <StageCard
+              stage={stage.title}
+              href={`/course-stages/${stage.id}`}
+            />
+          </View>
+        ))}
+      </Box>
       <HomeFooterView />
     </Box>
   );
