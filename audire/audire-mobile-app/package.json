@@ -38,7 +38,8 @@
     "@supabase/auth-helpers-nextjs": "*",
     "swr": "*",
     "@prisma/client": "*",
-    "supabase": "*"
+    "supabase": "*",
+    "react-icons": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",

@@ -1,6 +1,7 @@
+import React, { FC, ReactNode, useEffect, useRef } from 'react';
 import { Image, Box } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
-import { FC, ReactNode } from 'react';
+import { Animated } from 'react-native';
 
 type AuthorizationLayoutProps = {
   children: ReactNode;
@@ -8,6 +9,17 @@ type AuthorizationLayoutProps = {
 
 const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
   const image = Asset.fromURI('/assets/loginBackroudImage.svg').uri;
+
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
   return (
     <Box
       bg="white"
@@ -19,13 +31,15 @@ const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
     >
       {children}
       <Box position="absolute" zIndex={-1}>
-        <Image
-          alt="loginBackroudImage"
-          size="2xl"
-          source={{
-            uri: image,
-          }}
-        />
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <Image
+            alt="loginBackroudImage"
+            size="2xl"
+            source={{
+              uri: image,
+            }}
+          />
+        </Animated.View>
       </Box>
     </Box>
   );

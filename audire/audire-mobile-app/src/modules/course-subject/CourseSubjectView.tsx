@@ -20,7 +20,7 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
       <Box px="$4">
         {topics.map((topic) => (
           <TopicCard
-            key={topic.title}
+            key={topic.id}
             topic={topic.title}
             href={`/course-topics/${topic.id}`}
             description={topic.description}

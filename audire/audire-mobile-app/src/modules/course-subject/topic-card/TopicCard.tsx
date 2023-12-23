@@ -49,7 +49,7 @@ const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
             </Box>
             <Box pr="$4">
               <Image
-                alt="loginBackroudImage"
+                alt="PlayIcon"
                 size="xs"
                 source={{
                   uri: PlayIcon,

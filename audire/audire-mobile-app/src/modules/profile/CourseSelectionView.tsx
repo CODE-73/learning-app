@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import { Text, Box, Image } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 import { useCourses } from '@learning-app/syllabus';
+import { Animated } from 'react-native';
 
 const CourseSelectionView = () => {
-  const handleCardPress = (course: unknown) => {
-    // Handle card press logic here
-    console.log(`Selected course: ${course}`);
-  };
+  const handleCardPress = (course: unknown) => {};
   const { data: { data: courses } = { data: [] } } = useCourses();
+  const fadeAnim = useRef(new Animated.Value(0)).current;
   const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
   const commonGirl = Asset.fromURI('/assets/commonGirl.svg').uri;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
 
   return (
     <Box flex={1} bgColor="$white" w="$full">
@@ -77,13 +84,15 @@ const CourseSelectionView = () => {
         right="$0"
         zIndex={-1}
       >
-        <Image
-          alt="loginBackroudImage"
-          size="2xl"
-          source={{
-            uri: commonGirl,
-          }}
-        />
+        <Animated.View style={{ opacity: fadeAnim }}>
+          <Image
+            alt="loginBackroudImage"
+            size="2xl"
+            source={{
+              uri: commonGirl,
+            }}
+          />
+        </Animated.View>
       </Box>
     </Box>
   );
