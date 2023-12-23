@@ -14,6 +14,8 @@ export async function mobileVerifyOTP(
   }>('auth-verify-mobile-otp', {
     body: {
       mobile: args.mobile,
+      otp: args.otp,
+      fullName: args.fullName,
     },
   });
 

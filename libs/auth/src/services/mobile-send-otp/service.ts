@@ -19,7 +19,7 @@ export async function mobileSendOTP(
     },
   });
 
-  if (error || !data || data?.success) {
+  if (error || !data || !data?.success) {
     throw new Error(data?.message ?? error?.message ?? 'Unknown error');
   }
 

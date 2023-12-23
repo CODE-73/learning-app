@@ -18,3 +18,5 @@ export const useVerifyMobileOTP = () => {
     MobileVerifyOTPRequest
   >(AuthSWRKeys.LOGIN, (_, { arg }) => mobileVerifyOTP(supabase, arg));
 };
+
+
