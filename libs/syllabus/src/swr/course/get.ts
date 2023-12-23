@@ -1,5 +1,5 @@
 import { PostgrestError } from '@supabase/supabase-js';
-import useSWRMutation from 'swr/mutation';
+import useSWR from 'swr';
 import { useSupabaseClient } from '@learning-app/supabase';
 import {
   CourseGetRequest,
@@ -17,8 +17,7 @@ export function useCourse(
     ? [CourseSWRKeys.COURSE, CourseSWRKeys.GET, params.courseId]
     : null;
 
-  return useSWRMutation<CourseGetResponse, PostgrestError, string[] | null>(
-    key,
-    () => getCourse(supabase, params)
+  return useSWR<CourseGetResponse, PostgrestError, string[] | null>(key, () =>
+    getCourse(supabase, params)
   );
 }
