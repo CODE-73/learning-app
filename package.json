@@ -5,6 +5,8 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.478.0",
+    "@aws-sdk/s3-request-presigner": "^3.478.0",
     "@expo/metro-config": "~0.10.7",
     "@gluestack-style/react": "^1.0.17",
     "@gluestack-ui/config": "^1.0.3",
@@ -45,6 +47,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231218.0",
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@config-plugins/detox": "~6.0.0",
@@ -111,6 +114,7 @@
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tsx": "^4.6.2",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "wrangler": "^3.22.1"
   }
 }
