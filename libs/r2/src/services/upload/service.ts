@@ -13,10 +13,15 @@ export async function uploadFile({
     expiresIn: isBigFile ? 28800 : 3600,
   });
 
+  let fileType = 'application/octet-stream';
+  if ('type' in fileContents) {
+    fileType = fileContents.type;
+  }
+
   const r = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/octet-stream',
+      'Content-Type': fileType,
     },
     body: fileContents,
   });
