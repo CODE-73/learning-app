@@ -1,7 +1,5 @@
 import React from 'react';
 import { FC, useEffect } from 'react';
-import { FaCloudUploadAlt } from 'react-icons/fa';
-import { FaFileUpload } from 'react-icons/fa';
 import { Accordion, AccordionItem, Button } from '@nextui-org/react';
 import { Topic, useTopic, useTopicUpsert } from '@learning-app/syllabus';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +10,7 @@ import CourseSubjectSelector from 'components/CourseSubjectSelector';
 import MCQForm from './MCQForm';
 import { type TopicForm, TopicFormSchema } from './zod';
 import { useMCQQuestionUpsert } from '@learning-app/syllabus';
+import FileUpload from 'components/FileUpload';
 
 interface TopicFormProps {
   isNew?: boolean;
@@ -38,9 +37,6 @@ const TopicForm: FC<TopicFormProps> = ({
 
   const form = useForm<TopicForm>({
     mode: 'onBlur',
-    defaultValues: {
-      subjectId,
-    },
     resolver: zodResolver(TopicFormSchema),
   });
   const { fields, append } = useFieldArray({
@@ -50,6 +46,7 @@ const TopicForm: FC<TopicFormProps> = ({
 
   useEffect(() => {
     if (isNew || !topic) {
+      form.reset({ mcqQuestions: [], subjectId });
       return;
     }
 
@@ -63,7 +60,7 @@ const TopicForm: FC<TopicFormProps> = ({
         options: x.options ?? ['', '', '', ''],
       })),
     });
-  }, [form, isNew, topic]);
+  }, [form, isNew, subjectId, topic]);
 
   const upsertTopic = async (data: TopicForm) => {
     console.info('upsertTopic', data);
@@ -110,18 +107,22 @@ const TopicForm: FC<TopicFormProps> = ({
         label="Description"
         placeholder="Enter Subject description"
       />
-      <div className="flex items-center justify-center border border-4 border-black-500 border-dashed p-4 ">
-        <h4 className="text-sm font-medium flex flex-col items-center justify-center">
-          Upload Video
-          <FaCloudUploadAlt className="text-2xl ml-2" />
-        </h4>
-      </div>
-      <div className="flex items-center justify-center border border-4 border-black-500 border-dashed p-4">
-        <h4 className=" text-sm font-medium flex flex-col items-center justify-center">
-          Study Material
-          <FaFileUpload className="text-2xl ml-2" />
-        </h4>
-      </div>
+
+      {!isNew && topic && (
+        <>
+          <FileUpload
+            label="Upload Video"
+            isBigFile={true}
+            keyPrefix={`videos/`}
+          />
+          <FileUpload
+            label="Upload Study Material"
+            isBigFile={false}
+            keyPrefix={`study-materials/`}
+          />
+        </>
+      )}
+
       <div className="flex flex-col my-2">
         <div className="flex items-center justify-between my-2">
           <div className="text-sm font-medium">MCQ Question</div>

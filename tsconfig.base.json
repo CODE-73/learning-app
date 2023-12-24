@@ -23,7 +23,10 @@
         "libs/batch/src/index.ts",
         "../../libs/batch/src/index.ts"
       ],
-      "@learning-app/r2": ["libs/r2/src/index.ts"],
+      "@learning-app/r2": [
+        "libs/r2/src/index.ts",
+        "../../libs/r2/src/index.ts"
+      ],
       "@learning-app/supabase": [
         "libs/supabase/src/index.ts",
         "../../libs/supabase/src/index.ts"

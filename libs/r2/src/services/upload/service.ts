@@ -6,6 +6,7 @@ export async function uploadFile({
   isBigFile,
   fileContents,
 }: UploadFileRequest): Promise<UploadFileResponse> {
+  console.info('Starting Upload', { key, isBigFile, fileContents });
   const url = await makeSignedURL({
     requestType: isBigFile ? 'UPLOAD_BIG' : 'UPLOAD_SMALL',
     key,
