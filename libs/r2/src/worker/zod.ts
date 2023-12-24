@@ -10,3 +10,5 @@ export const RequestSchema = z.object({
   key: z.string().min(1),
   expiresIn: z.number().int().gt(0).optional().default(3600),
 });
+
+export type BucketManagerArgs = z.infer<typeof RequestSchema>;
