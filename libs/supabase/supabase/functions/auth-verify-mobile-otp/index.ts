@@ -20,7 +20,7 @@ Deno.serve(async (req) => {
   );
   if (!success || 'error' in body) {
     return new Response(JSON.stringify(body), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
       status: 400,
     });
   }
@@ -37,7 +37,7 @@ Deno.serve(async (req) => {
         message: 'Invalid OTP',
       }),
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
         status: 400,
       }
     );
@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
           message: 'Signup failed',
         }),
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
           status: 400,
         }
       );
@@ -90,7 +90,7 @@ Deno.serve(async (req) => {
         message: 'Login failed',
       }),
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
         status: 400,
       }
     );
@@ -104,7 +104,7 @@ Deno.serve(async (req) => {
       fullName,
     }),
     {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
     }
   );
 });

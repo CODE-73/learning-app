@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
   );
   if (!success || 'error' in body) {
     return new Response(JSON.stringify(body), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
       status: 400,
     });
   }
@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
   // const r = await sendOTP(mobile, otp);
   // if (!r) {
   //   return new Response(JSON.stringify({ error: 'Failed to send OTP' }), {
-  //     headers: { 'Content-Type': 'application/json' },
+  //     headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
   //     status: 500,
   //   });
   // }
@@ -49,7 +49,7 @@ Deno.serve(async (req) => {
       isNewUser: !userExists,
     }),
     {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
     }
   );
 });
