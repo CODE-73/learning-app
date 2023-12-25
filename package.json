@@ -20,6 +20,7 @@
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/auth-helpers-react": "^0.4.2",
     "@supabase/supabase-js": "^2.39.0",
+    "@types/react-router-dom": "^5.3.3",
     "expo": "49.0.16",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
@@ -47,9 +48,9 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20231218.0",
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
+    "@cloudflare/workers-types": "^4.20231218.0",
     "@config-plugins/detox": "~6.0.0",
     "@expo/cli": "~0.10.13",
     "@nx/detox": "17.1.3",

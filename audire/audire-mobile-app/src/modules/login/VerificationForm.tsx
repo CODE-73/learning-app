@@ -1,47 +1,82 @@
-import React, { useState } from 'react';
-
+import React, { FC, RefObject, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 import { Link } from 'expo-router';
-import { Box, Text } from '@gluestack-ui/themed';
+import { router } from 'expo-router';
+import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
+import { useVerifyMobileOTP } from '@learning-app/auth';
 
-const VerificationView = () => {
-  const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
+type VerificationFormProps = {
+  mobile: string;
+  fullName: string;
+  isNewUser: boolean;
+};
 
+const VerificationView: FC<VerificationFormProps> = ({
+  mobile,
+  fullName,
+  isNewUser,
+}) => {
+  const [otpValues, setOTPValues] = useState(Array<string>(6).fill(''));
+  const inputRefs = useRef(
+    Array(6)
+      .fill(0)
+      .map(() => React.createRef<TextInput>())
+  );
+
+  const { trigger } = useVerifyMobileOTP();
+
+  const handleTrigger = async () => {
+    try {
+      const otpString = otpValues.join('');
+      const r = await trigger({
+        mobile: mobile,
+        otp: otpString,
+        fullName: fullName,
+      });
+    } catch (e) {
+      console.error('Error triggering mobile OTP:', e);
+    }
+  };
   const handleOtpInputChange = (index: number, value: string) => {
-    const updatedOtpValues = [...otpValues];
-    updatedOtpValues[index] = value;
-    setOtpValues(updatedOtpValues);
+    let nextRef: RefObject<TextInput> | null = null;
+    if (value) {
+      nextRef = inputRefs.current[index + 1];
+    } else if (!value && otpValues[index]) {
+      nextRef = inputRefs.current[index - 1];
+    }
+    nextRef?.current?.focus?.();
+    setOTPValues((prev) => {
+      prev[index] = isNaN(parseInt(value)) ? '' : value;
+      return [...prev];
+    });
+    console.log(`Value at index ${index}: ${otpValues[index]}`);
   };
 
   const renderOtpInputBoxes = () => {
-    const otpBoxes = [];
-
-    for (let i = 0; i < 6; i++) {
-      otpBoxes.push(
-        <TextInput
-          key={i}
-          style={{
-            borderWidth: 1,
-            borderColor: '#DAC0D98C',
-            borderRadius: 5,
-            fontSize: 20,
-            textAlign: 'center',
-            width: 40,
-            height: 40,
-            marginRight: 5,
-            backgroundColor: '#DAC0D98C',
-          }}
-          keyboardType="numeric"
-          value={otpValues[i]}
-          onChangeText={(value) => handleOtpInputChange(i, value)}
-          maxLength={1}
-        />
-      );
-    }
-
-    return otpBoxes;
+    return otpValues.map((value, index) => (
+      <TextInput
+        key={index}
+        value={otpValues[index]}
+        ref={inputRefs.current[index]}
+        style={{
+          borderWidth: 1,
+          borderColor: '#DAC0D98C',
+          borderRadius: 5,
+          fontSize: 20,
+          textAlign: 'center',
+          width: 40,
+          height: 40,
+          marginRight: 5,
+          backgroundColor: '#DAC0D98C',
+        }}
+        keyboardType="numeric"
+        onChangeText={(newValue) => handleOtpInputChange(index, newValue)}
+        maxLength={1}
+      />
+    ));
   };
 
+  console.info({ otpValues });
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
       <Box display="flex" mb="$6">
@@ -54,7 +89,7 @@ const VerificationView = () => {
 
         <Box my="$1.5" alignItems="center">
           <Text fontSize="$sm" fontWeight="bold" color="black">
-            Enter the OTP that was sent on (+91) 8778878898
+            Enter the OTP that was sent on {mobile}
           </Text>
         </Box>
       </Box>
@@ -77,15 +112,25 @@ const VerificationView = () => {
             </Link>
           </Box>
         </Box>
-        {/* <Box mt={20}>
-          <Link href="/profile/course" asChild>
-            <Button variant="solid" mt="$4" bg="$fuchsia800">
-              <ButtonText fontSize="$md" fontWeight="bold">
-                PROCEED
-              </ButtonText>
-            </Button>
-          </Link>
-        </Box> */}
+        <Box mt={20}>
+          <Button
+            variant="solid"
+            mt="$4"
+            bg="$fuchsia800"
+            onPress={() => {
+              handleTrigger();
+              if (isNewUser === true) {
+                router.replace('/profile/course');
+              } else {
+                router.replace('/');
+              }
+            }}
+          >
+            <ButtonText fontSize="$md" fontWeight="bold">
+              PROCEED
+            </ButtonText>
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

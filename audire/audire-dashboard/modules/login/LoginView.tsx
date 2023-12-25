@@ -1,12 +1,55 @@
+import { FC } from 'react';
 import Image from 'next/image';
-const LoginView = () => {
-  const handleLogin = () => {
-    console.log('Login button clicked');
-  };
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import Form from 'components/form/Form';
+import { z } from 'zod';
+import InputElement from 'components/form/InputElement';
+import { Button } from '@nextui-org/react';
+import { useLoginWithEmail } from '@learning-app/auth';
+import { useRouter } from 'next/router';
 
+const LoginFormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, 'Password must be at least 8 characters long'),
+});
+
+type LoginForm = z.infer<typeof LoginFormSchema>;
+
+const LoginView: FC = () => {
+  const form = useForm<LoginForm>({
+    mode: 'onBlur',
+    defaultValues: {
+      email: '',
+    },
+    resolver: zodResolver(LoginFormSchema),
+  });
+  const { isDirty, isValid } = form.formState;
+
+  const router = useRouter();
+
+  const { trigger } = useLoginWithEmail();
+  const onSubmit = async (data: LoginForm) => {
+    try {
+      const r = await trigger({
+        email: data.email,
+        password: data.password,
+      });
+      // Success
+      router.push('/');
+      console.log(r);
+    } catch (e) {
+      alert('Invalid email or password');
+      console.error('Error triggering on log in:', e);
+    }
+  };
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-      <form className="mt-4 p-6">
+    <Form
+      formContext={form}
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="mt-4 p-6"
+    >
+      <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <Image
           src="/images/audire.png"
           alt="Logo"
@@ -21,42 +64,47 @@ const LoginView = () => {
           Please sign in to your account and start the adventure
         </span>
 
-        <label className="block  mt-6">
+        <InputElement
+          className="block  mt-6"
+          name="email"
+          placeholder="Email"
+          required
+        >
           <span className="block text-lg font-medium text-slate-700">
-            Username
+            Email
           </span>
           <input
-            type="text"
-            placeholder="Username"
             className="mt-2 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-lg text-black shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
           />
-        </label>
+        </InputElement>
 
-        <label className="block mt-6">
+        <InputElement
+          className="block mt-6"
+          name="password"
+          placeholder="Enter your password"
+        >
           <span className="block text-lg font-medium text-slate-700">
             Password
           </span>
           <input
-            type="password"
-            placeholder="Enter your password"
             className="mt-2 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-lg text-black shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
           />
-        </label>
+        </InputElement>
 
-        <button
-          type="button"
+        <Button
+          type="submit"
           className="mt-6 w-full text-white font-bold py-1 px-3 rounded hover:bg-white"
           style={{
             backgroundColor: '#86198f',
           }}
-          onClick={handleLogin}
+          disabled={!isDirty || !isValid}
         >
           Login
-        </button>
-      </form>
-    </div>
+        </Button>
+      </div>
+    </Form>
   );
 };
 
