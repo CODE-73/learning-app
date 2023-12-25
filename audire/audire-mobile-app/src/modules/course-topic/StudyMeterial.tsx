@@ -38,7 +38,7 @@ const StudyMeterial: FC<StudyMeterialProps> = (props) => {
               source={{
                 uri: PlayIcon,
               }}
-            />{' '}
+            />
           </Box>
         </Box>
       </TouchableOpacity>

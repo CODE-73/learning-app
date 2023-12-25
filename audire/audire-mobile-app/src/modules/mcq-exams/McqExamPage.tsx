@@ -4,8 +4,7 @@ import { StyleSheet, Image } from 'react-native';
 import { Asset } from 'expo-asset';
 import { type McqQuestion } from '@learning-app/syllabus';
 import { TouchableOpacity } from 'react-native';
-import { MdOutlineNavigateNext } from 'react-icons/md';
-import { GrFormPrevious } from 'react-icons/gr';
+import { ChevronRightIcon, ChevronLeftIcon } from '@gluestack-ui/themed';
 import AllQuestions from './AllQuestions';
 import { useState } from 'react';
 import Congratulations from './Congratulations';
@@ -161,7 +160,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               p="$2"
               borderRadius="$lg"
             >
-              <GrFormPrevious />
+              <ChevronLeftIcon />
               <Text color="black">Previous</Text>
             </Box>
           </TouchableOpacity>
@@ -177,7 +176,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               borderRadius="$lg"
             >
               <Text color="black">Next</Text>
-              <MdOutlineNavigateNext />
+              <ChevronRightIcon />
             </Box>{' '}
           </TouchableOpacity>
         </Box>

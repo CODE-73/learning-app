@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC } from 'react';
-import { IoMdClose } from 'react-icons/io';
+import { CloseIcon } from '@gluestack-ui/themed';
 import {
   Heading,
   Box,
@@ -46,7 +46,7 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
         <ModalHeader>
           <Heading size="lg">All Questions</Heading>
           <ModalCloseButton>
-            <IoMdClose size={30} />
+            <CloseIcon size="sm" />
           </ModalCloseButton>
         </ModalHeader>
         <ModalBody bgColor="#e5e5e5" pt="$7">

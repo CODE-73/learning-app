@@ -12,7 +12,7 @@ const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
   const commonGirl = Asset.fromURI('/assets/commonGirl.svg').uri;
 
   return (
-    <Box flex={1} bgColor="$white" w="$full">
+    <Box display="flex" bgColor="$white" w="$full">
       <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" py="$8">
         Select a Subject to start with.
       </Text>

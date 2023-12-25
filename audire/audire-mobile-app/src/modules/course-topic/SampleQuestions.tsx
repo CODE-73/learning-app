@@ -38,7 +38,7 @@ const SampleQuestions: FC<SampleQuestionsProps> = (props) => {
               source={{
                 uri: PlayIcon,
               }}
-            />{' '}
+            />
           </Box>
         </Box>
       </TouchableOpacity>

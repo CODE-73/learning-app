@@ -14,7 +14,7 @@ const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
   const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
   return (
     <Box
-      flex={1}
+      display="flex"
       w="$full"
       borderColor="$black"
       borderRadius="$sm"
@@ -60,7 +60,7 @@ const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
                 source={{
                   uri: PlayIcon,
                 }}
-              />{' '}
+              />
             </Box>
           </Box>
         </TouchableOpacity>

@@ -1,3 +1,5 @@
+// https://github.com/supabase/supabase/issues/8464
+import 'react-native-url-polyfill/auto';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { SupabaseClient, Session, createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';

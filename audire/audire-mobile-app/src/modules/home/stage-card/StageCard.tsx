@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import { Text, Box } from '@gluestack-ui/themed';
 
-import { HiArrowLongRight } from 'react-icons/hi2';
+import { ArrowRightIcon } from '@gluestack-ui/themed';
 
 type StageCardProps = {
   stage: string;
@@ -11,6 +11,7 @@ type StageCardProps = {
 };
 
 const StageCard: FC<StageCardProps> = ({ stage, href }) => {
+  console.info('StageCard', { stage });
   return (
     <Box width={120} height={120} alignItems="center">
       <Link href={href} asChild>
@@ -27,7 +28,7 @@ const StageCard: FC<StageCardProps> = ({ stage, href }) => {
             </Text>
 
             <Box pt="$10" ml="$10">
-              <HiArrowLongRight color="B051AE" fontSize={40} />
+              <ArrowRightIcon color="B051AE" fontSize={40} />
             </Box>
           </Box>
         </TouchableOpacity>

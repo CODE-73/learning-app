@@ -13,7 +13,7 @@ const HomeView = () => {
 
   return (
     <Box flex={1} width="$full">
-      <Text fontSize="$xl" color="black" fontWeight="$$light" ml="$5" py="$5">
+      <Text fontSize="$xl" color="black" fontWeight="$light" ml="$5" py="$5">
         Hey Jane!
       </Text>
       <Box bg="white" p="$1.5">

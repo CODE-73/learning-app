@@ -32,12 +32,9 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
       flexDirection="column"
       position="absolute"
       height="$full"
-      borderRightWidth="$1"
-      borderRightColor="black"
       width="$full"
-      bg="$pink50"
       mb="$5"
-      bgColor="rgba(253, 242, 248, 0.5)"
+      bgColor="white"
     >
       <Box
         left="$0"
@@ -46,24 +43,17 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
         flexDirection="column"
         position="absolute"
         h="$full"
-        borderRightWidth="$1"
-        borderRightColor="black"
         width="$3/4"
-        bg="$pink50"
+        bg="white"
         mb="$5"
       >
-        <Box
-          borderBottomRightRadius="$2xl"
-          overflow="hidden"
-          borderRightWidth="$1"
-          borderRightColor="black"
-          width="100%"
-          bg="$pink200"
-        >
+        <Box overflow="hidden" width="100%">
           <Box display="flex" alignItems="center" mt="$2.5" mb="$2.5">
             <Box mt="$16" mb="$2.5">
-              <Avatar bgColor="$amber600" size="md" borderRadius="$full">
-                <AvatarFallbackText>Mohammed Sameer</AvatarFallbackText>
+              <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
+                <AvatarFallbackText fontWeight="bold" color="black">
+                  Mohammed Sameer
+                </AvatarFallbackText>
               </Avatar>
             </Box>
             <Box display="flex" alignItems="center">
