@@ -1,4 +1,4 @@
-import { Checkbox } from '@nextui-org/react';
+import { Button, Checkbox } from '@nextui-org/react';
 import TextAreaElement from 'components/form/TextAreaElement';
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -17,10 +17,20 @@ const MCQForm: FC<MCQFormProps> = (props) => {
     `mcqQuestions.${props.formFieldIdx}.options` as const
   );
 
+  const handleDelete = () => {
+    // Remove the selected MCQ from the form data
+    form.setValue(
+      'mcqQuestions',
+      form
+        .getValues()
+        .mcqQuestions.filter((_, idx) => idx !== props.formFieldIdx)
+    );
+  };
+
   return (
     <>
       <div>
-        <label className=" text-sm font-medium mr-4">Add Question</label>
+        <label className="text-sm font-medium mr-4">Add Question</label>
         <TextAreaElement
           name={`mcqQuestions.${props.formFieldIdx}.question`}
           label="Question"
@@ -38,7 +48,7 @@ const MCQForm: FC<MCQFormProps> = (props) => {
       <div className="pt-8">
         {options.map((option, index) => (
           <div key={index}>
-            <label className=" text-sm font-medium mr-4  ">
+            <label className="text-sm font-medium mr-4">
               Option {index + 1}
             </label>
             <input
@@ -48,7 +58,7 @@ const MCQForm: FC<MCQFormProps> = (props) => {
                 const value = e.target.value;
                 form.setValue(
                   `mcqQuestions.${props.formFieldIdx}.options`,
-                  options.map((option, idx) => (idx === index ? value : option))
+                  options.map((opt, idx) => (idx === index ? value : opt))
                 );
               }}
               style={{
@@ -69,6 +79,14 @@ const MCQForm: FC<MCQFormProps> = (props) => {
             ></Checkbox>
           </div>
         ))}
+        <Button
+          className="outline outline-1 outline-offset"
+          color="danger"
+          variant="light"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
       </div>
     </>
   );
