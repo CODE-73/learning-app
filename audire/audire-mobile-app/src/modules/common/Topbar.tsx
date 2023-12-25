@@ -2,6 +2,7 @@ import { Box, Image, Avatar, AvatarFallbackText } from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 
 import { FC } from 'react';
+import { Pressable } from 'react-native';
 
 type TopbarProps = {
   onToggleSidebar: () => void;
@@ -20,11 +21,13 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       alignItems="center"
     >
       <Box>
-        <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
-          <AvatarFallbackText fontWeight="bold" color="black">
-            Mohammed Sameer
-          </AvatarFallbackText>
-        </Avatar>
+        <Pressable onPress={onToggleSidebar}>
+          <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
+            <AvatarFallbackText fontWeight="bold" color="black">
+              Mohammed Sameer
+            </AvatarFallbackText>
+          </Avatar>
+        </Pressable>
       </Box>
       <Box>
         <Image

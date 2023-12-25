@@ -31,30 +31,36 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
           <Box
             display="flex"
             flexDirection="row"
+            alignItems="center"
             justifyContent="space-between"
             p="$4"
+            width="$full"
           >
-            <Box pl="$4" mt="$2">
+            <Box flexShrink={1}>
               <Text
                 fontSize="$xl"
                 fontWeight="bold"
                 justifyContent="center"
                 alignItems="center"
-                numberOfLines={1}
-                ellipsizeMode="tail"
+                numberOfLines={2}
+                isTruncated
               >
                 {subject}
               </Text>
-              {description && <Text size="xs">{description}</Text>}
+              {description && (
+                <Text size="xs" isTruncated>
+                  {description}
+                </Text>
+              )}
             </Box>
-            <Box pr="$4">
+            <Box>
               <Image
                 alt="loginBackroudImage"
                 size="xs"
                 source={{
                   uri: PlayIcon,
                 }}
-              />{' '}
+              />
             </Box>
           </Box>
         </TouchableOpacity>

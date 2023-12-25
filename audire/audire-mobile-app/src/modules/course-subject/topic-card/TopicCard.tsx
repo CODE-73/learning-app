@@ -33,19 +33,25 @@ const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
             flexDirection="row"
             justifyContent="space-between"
             p="$4"
+            width="$full"
+            alignItems="center"
           >
-            <Box pl="$4" mt="$2">
+            <Box flexShrink={1}>
               <Text
                 fontSize="$xl"
                 fontWeight="bold"
                 justifyContent="center"
                 alignItems="center"
-                numberOfLines={1}
-                ellipsizeMode="tail"
+                numberOfLines={2}
+                isTruncated
               >
                 {topic}
               </Text>
-              {description && <Text>{description}</Text>}
+              {description && (
+                <Text size="xs" isTruncated>
+                  {description}
+                </Text>
+              )}
             </Box>
             <Box pr="$4">
               <Image

@@ -1,37 +1,208 @@
 import React, { ComponentProps, FC } from 'react';
-import { Box, Text } from '@gluestack-ui/themed';
+import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
+import { StyleSheet, Image } from 'react-native';
+import { Asset } from 'expo-asset';
+import { type McqQuestion } from '@learning-app/syllabus';
 import { TouchableOpacity } from 'react-native';
+import { MdOutlineNavigateNext } from 'react-icons/md';
+import { GrFormPrevious } from 'react-icons/gr';
+import AllQuestions from './AllQuestions';
+import { useState } from 'react';
+import Congratulations from './Congratulations';
 
-type McqExamPageProps = ComponentProps<typeof Box>;
+type McqExamPageProps = ComponentProps<typeof Box> & {
+  questions: McqQuestion[];
+};
 
-const McqExamPage: FC<McqExamPageProps> = (props) => {
+const ListIconStyles = StyleSheet.create({
+  ListIcon: {
+    width: 20,
+    height: 20,
+  },
+});
+const quiteIconStyles = StyleSheet.create({
+  quiteIcon: {
+    width: 14,
+    height: 13,
+  },
+});
+
+const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [showSubimtModal, setShowSubimtModal] = useState(false);
+
+  const ref = React.useRef(null);
+
+  const options = [
+    { id: 'A', label: questions[0].options?.[0] },
+    { id: 'B', label: questions[0].options?.[1] },
+    { id: 'C', label: questions[0].options?.[2] },
+    { id: 'D', label: questions[0].options?.[3] },
+  ];
+
+  const ListIcon = Asset.fromURI('/assets/mcqQuestionListIcon.svg').uri;
+  const quiteIcon = Asset.fromURI('/assets/quiteIcon.svg').uri;
+
   return (
-    <Box borderRadius="$sm" my="$1" backgroundColor="#e5e5e5" mx={17} py="$6">
-      {/* <Link href={'#'} asChild> */}
-      <TouchableOpacity>
+    <Box w="$full">
+      <Box display="flex" flexDirection="row" justifyContent="flex-end" pr="$4">
+        <Box>
+          <TouchableOpacity onPress={() => setShowModal(true)} ref={ref}>
+            <Box pt="$1.5">
+              <Image
+                alt="ListIcon"
+                style={ListIconStyles.ListIcon}
+                source={{
+                  uri: ListIcon,
+                }}
+              />
+            </Box>
+          </TouchableOpacity>
+          {showModal && (
+            <AllQuestions
+              isOpen={showModal}
+              onClose={() => setShowModal(false)}
+            />
+          )}
+        </Box>
+        <TouchableOpacity>
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignContent="center"
+            alignItems="center"
+            justifyContent="space-between"
+            bgColor="#e5e5e5"
+            ml="$4"
+            p="$1"
+            px="$3"
+            borderRadius="$full"
+          >
+            <Text color="#8D0C8A" mr="$2">
+              Quit
+            </Text>
+            <Image
+              alt="quiteIcon"
+              style={quiteIconStyles.quiteIcon}
+              source={{
+                uri: quiteIcon,
+              }}
+            />
+          </Box>
+        </TouchableOpacity>
+      </Box>
+      {/* start */}
+      <Box>
+        <Box>
+          <Box
+            borderRadius="$sm"
+            mt="$16"
+            mb="$2"
+            backgroundColor="#e5e5e5"
+            mx={17}
+            pl="$4"
+            overflow="scroll"
+          >
+            <Box pb="$16">
+              <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
+                Question 1/15
+              </Text>
+              <Text fontWeight="$bold">{questions[0].question}</Text>
+            </Box>
+          </Box>
+        </Box>
+
+        {options.map((option) => (
+          <TouchableOpacity key={option.id}>
+            <Box
+              display="flex"
+              flexDirection="row"
+              borderRadius="$sm"
+              backgroundColor="#e5e5e5"
+              mx={17}
+              p="$2"
+              mb="$2"
+              alignItems="center"
+              overflow="scroll"
+            >
+              <Box
+                bg="$primary500"
+                p="$2"
+                width="$10"
+                alignItems="center"
+                borderRadius="$lg"
+              >
+                <Text color="black" fontWeight="$bold">
+                  {option.id}
+                </Text>
+              </Box>
+
+              <Text fontWeight="$bold" pl="$10">
+                {option.label}
+              </Text>
+            </Box>
+          </TouchableOpacity>
+        ))}
+
         <Box
           display="flex"
           flexDirection="row"
-          justifyContent="space-between"
-          p="$4"
+          justifyContent="space-around"
+          pt="$16"
         >
-          <Box pl="$4" mt="$2">
-            <Text
-              color="#8D0C8A"
-              fontSize="$xl"
-              fontWeight="bold"
-              justifyContent="center"
+          <TouchableOpacity>
+            <Box
+              bg="#e5e5e5"
+              display="flex"
+              flexDirection="row"
               alignItems="center"
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              textDecorationLine="underline"
+              justifyContent="center"
+              width={150}
+              p="$2"
+              borderRadius="$lg"
             >
-              Start MCQ Test
-            </Text>
-          </Box>
+              <GrFormPrevious />
+              <Text color="black">Previous</Text>
+            </Box>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Box
+              bg="#e5e5e5"
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center"
+              width={150}
+              p="$2"
+              borderRadius="$lg"
+            >
+              <Text color="black">Next</Text>
+              <MdOutlineNavigateNext />
+            </Box>{' '}
+          </TouchableOpacity>
+        </Box>
+      </Box>
+      <TouchableOpacity>
+        <Box m="$6">
+          <Button
+            variant="solid"
+            mt="$1"
+            bg="#8D0C8A"
+            onPress={() => setShowSubimtModal(true)}
+            ref={ref}
+          >
+            <ButtonText fontSize="$md" fontWeight="bold">
+              Submit
+            </ButtonText>
+          </Button>
         </Box>
       </TouchableOpacity>
-      {/* </Link> */}
+      {showSubimtModal && (
+        <Congratulations
+          isOpen={showSubimtModal}
+          onClose={() => setShowSubimtModal(false)}
+        />
+      )}
     </Box>
   );
 };
