@@ -20,15 +20,14 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       justifyContent="space-between"
       alignItems="center"
     >
-      <Box>
-        <Pressable onPress={onToggleSidebar}>
-          <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
-            <AvatarFallbackText fontWeight="bold" color="black">
-              Mohammed Sameer
-            </AvatarFallbackText>
-          </Avatar>
-        </Pressable>
-      </Box>
+      <Pressable onPress={onToggleSidebar}>
+        <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
+          <AvatarFallbackText fontWeight="bold" color="black">
+            Mohammed Sameer
+          </AvatarFallbackText>
+        </Avatar>
+      </Pressable>
+
       <Box>
         <Image
           size="xs"
