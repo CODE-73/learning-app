@@ -11,7 +11,7 @@ type SubjectCardProps = {
 };
 
 const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
-  // const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
+  const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
   console.info('SubjectCard', { subject });
   return (
     <Box
@@ -56,13 +56,13 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
               )}
             </Box>
             <Box>
-              {/* <Image
-                alt="loginBackroudImage"
+              <Image
+                alt="PlayIcon"
                 size="xs"
                 source={{
                   uri: PlayIcon,
                 }}
-              /> */}
+              />
             </Box>
           </Box>
         </TouchableOpacity>

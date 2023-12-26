@@ -4,6 +4,7 @@ import { Link } from 'expo-router';
 import { Text, Box } from '@gluestack-ui/themed';
 
 import { ArrowRightIcon } from '@gluestack-ui/themed';
+import { Icon } from '@gluestack-ui/themed';
 
 type StageCardProps = {
   stage: string;
@@ -28,7 +29,7 @@ const StageCard: FC<StageCardProps> = ({ stage, href }) => {
             </Text>
 
             <Box pt="$10" ml="$10">
-              <ArrowRightIcon color="B051AE" fontSize={40} />
+              <Icon as={ArrowRightIcon} color="#B051AE" m="$2" w="$6" h="$6" />
             </Box>
           </Box>
         </TouchableOpacity>

@@ -33,10 +33,10 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
   const ref = React.useRef(null);
 
   const options = [
-    { id: 'A', label: questions[0].options?.[0] },
-    { id: 'B', label: questions[0].options?.[1] },
-    { id: 'C', label: questions[0].options?.[2] },
-    { id: 'D', label: questions[0].options?.[3] },
+    { id: 'A', label: questions[0]?.options?.[0] },
+    { id: 'B', label: questions[0]?.options?.[1] },
+    { id: 'C', label: questions[0]?.options?.[2] },
+    { id: 'D', label: questions[0]?.options?.[3] },
   ];
 
   const ListIcon = Asset.fromURI('/assets/mcqQuestionListIcon.svg').uri;
@@ -100,7 +100,6 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             backgroundColor="#e5e5e5"
             mx={17}
             pl="$4"
-            overflow="scroll"
           >
             <Box pb="$16">
               <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
@@ -122,7 +121,6 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               p="$2"
               mb="$2"
               alignItems="center"
-              overflow="scroll"
             >
               <Box
                 bg="$primary500"
@@ -177,7 +175,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             >
               <Text color="black">Next</Text>
               <ChevronRightIcon />
-            </Box>{' '}
+            </Box>
           </TouchableOpacity>
         </Box>
       </Box>

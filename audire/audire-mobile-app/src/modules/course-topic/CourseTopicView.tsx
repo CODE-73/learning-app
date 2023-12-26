@@ -1,5 +1,5 @@
 import { Box, Text } from '@gluestack-ui/themed';
-import VideoComponent from './VideoComponent';
+// import VideoComponent from './VideoComponent';
 import StudyMeterial from './StudyMeterial';
 import SampleQuestions from './SampleQuestions';
 import McqTestCard from './McqTestCard';
@@ -35,7 +35,7 @@ const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
         </Text>
       </Box>
 
-      <VideoComponent />
+      {/* <VideoComponent /> */}
       <StudyMeterial />
       <SampleQuestions />
       <McqTestCard topicId={topic?.id} />

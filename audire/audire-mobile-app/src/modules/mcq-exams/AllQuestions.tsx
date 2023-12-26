@@ -81,7 +81,7 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
           <Box display="flex" flexDirection="row">
             <Box display="flex" flexDirection="column" pr="$5">
               {statusData.map((status, index) => (
-                <Box key={index} display="flex" flexDirection="row">
+                <Box key={id} display="flex" flexDirection="row">
                   <Box
                     width={4}
                     p="$2.5"
@@ -96,7 +96,7 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
             </Box>
             <Box display="flex" flexDirection="column" pr="$5">
               {revisitData.map((revisit, index) => (
-                <Box key={index} display="flex" flexDirection="row">
+                <Box key={id} display="flex" flexDirection="row">
                   <Box
                     width={4}
                     p="$2.5"
