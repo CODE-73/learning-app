@@ -31,6 +31,12 @@
         "platform": "android"
       }
     },
+    "build-android": {
+      "executor": "@nx/expo:build",
+      "options": {
+        "platform": "android"
+      }
+    },
     "build-web": {
       "executor": "@nx/expo:export",
       "options": {
