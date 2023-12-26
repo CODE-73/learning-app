@@ -4,4 +4,8 @@ export type UploadFileRequest = {
   fileContents: Blob | Buffer;
 };
 
-export type UploadFileResponse = string;
+export type FileUploadEvent = {
+  key: string;
+  progress: number;
+  uploadDone: boolean;
+};

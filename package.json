@@ -21,6 +21,7 @@
     "@supabase/auth-helpers-react": "^0.4.2",
     "@supabase/supabase-js": "^2.39.0",
     "@types/react-router-dom": "^5.3.3",
+    "event-iterator": "^2.0.0",
     "expo": "49.0.16",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
