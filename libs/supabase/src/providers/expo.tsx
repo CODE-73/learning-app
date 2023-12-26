@@ -5,6 +5,7 @@ import { SupabaseClient, Session, createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Database } from '../supabase_types';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import Constants from 'expo-constants';
 
 type ExpoSupabaseProviderProps = {
   children: ReactNode;
@@ -19,18 +20,28 @@ export const ExpoSupabaseProvider: FC<ExpoSupabaseProviderProps> = (props) => {
   );
 
   useEffect(() => {
-    const _supabase = createClient(
-      process.env['EXPO_PUBLIC_SUPABASE_API_URL'] as string,
-      process.env['EXPO_PUBLIC_SUPABASE_ANON_KEY'] as string,
-      {
-        auth: {
-          storage: AsyncStorage,
-          autoRefreshToken: true,
-          persistSession: true,
-          detectSessionInUrl: false,
-        },
-      }
-    );
+    let SUPABASE_URL, SUPABASE_ANON_KEY;
+    const expoConfig = Constants.expoConfig;
+    if (expoConfig) {
+      SUPABASE_URL = expoConfig.extra?.['EXPO_PUBLIC_SUPABASE_API_URL'];
+      SUPABASE_ANON_KEY = expoConfig.extra?.['EXPO_PUBLIC_SUPABASE_ANON_KEY'];
+    }
+
+    if (!SUPABASE_URL) {
+      // @ts-expect-error inlining as per expo docs
+      SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_API_URL;
+      // @ts-expect-error inlining as per expo docs
+      SUPABASE_ANON_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+    }
+
+    const _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: {
+        storage: AsyncStorage,
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: false,
+      },
+    });
     setSupabase(_supabase);
   }, []);
 

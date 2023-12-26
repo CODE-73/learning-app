@@ -31,10 +31,12 @@
         "platform": "android"
       }
     },
-    "build-android": {
+    "build-android-local": {
       "executor": "@nx/expo:build",
       "options": {
-        "platform": "android"
+        "platform": "android",
+        "local": true,
+        "profile": "preview"
       }
     },
     "build-web": {

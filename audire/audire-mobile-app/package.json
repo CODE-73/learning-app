@@ -41,7 +41,8 @@
     "supabase": "*",
     "react-icons": "*",
     "react-native-video": "*",
-    "react-native-url-polyfill": "*"
+    "react-native-url-polyfill": "*",
+    "expo-constants": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",

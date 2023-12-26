@@ -105,7 +105,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
                 Question 1/15
               </Text>
-              <Text fontWeight="$bold">{questions[0].question}</Text>
+              <Text fontWeight="$bold">{questions[0]?.question}</Text>
             </Box>
           </Box>
         </Box>
