@@ -21,7 +21,7 @@ type AllQuestionsProps = ComponentProps<typeof Box> & {
   onClose: () => void;
 };
 
-const AllQuestions: FC<AllQuestionsProps> = (props) => {
+const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
   const ref = React.useRef(null);
   const commonGirl = Asset.fromURI('/assets/Congratulations.svg').uri;
   return (
@@ -82,4 +82,4 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
     </Modal>
   );
 };
-export default AllQuestions;
+export default CongratulationsDialog;

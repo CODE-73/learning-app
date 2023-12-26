@@ -1,39 +1,44 @@
-import { Box, Button, ButtonIcon } from '@gluestack-ui/themed';
+import { Box } from '@gluestack-ui/themed';
 import { Link } from 'expo-router';
-import { Users2, FileQuestion, Download } from 'lucide-react-native';
+import {
+  Icon,
+  ClockIcon,
+  GripVerticalIcon,
+  SettingsIcon,
+} from '@gluestack-ui/themed';
+import { TouchableOpacity } from 'react-native';
 
 const HomeFooterView = () => {
-  const footer = [
-    { name: 'My Batches', icon: Users2, link: '' },
-    { name: 'Doubts', icon: FileQuestion, link: '' },
-    { name: 'Download', icon: Download, link: '' },
+  const footer: footer[] = [
+    { name: 'Exams', link: '#', icon: ClockIcon },
+    {
+      name: 'Home',
+      link: '#',
+      icon: GripVerticalIcon,
+    },
+
+    { name: 'Settings', link: '#', icon: SettingsIcon },
   ];
   return (
     <Box
-      borderTopRightRadius="$xl"
-      borderTopLeftRadius="$xl"
+      borderRadius="$2xl"
+      borderColor="black"
+      borderWidth={1}
       position="absolute"
       w="$full"
-      bottom="$0"
+      bottom="$2"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
-      bg="$fuchsia200"
+      bg="#e5e5e5"
       px="$10"
-      py="$3"
-      shadowColor="$black"
-      shadowOffset={{
-        width: 3,
-        height: 0,
-      }}
-      shadowOpacity="$95"
-      shadowRadius="$1.5"
+      py="$5"
     >
       {footer.map((footer) => (
         <Link key={footer.name} href={footer.link} asChild>
-          <Button bg="rgba(0, 0, 0, 0)">
-            <ButtonIcon size="xl" color="black" as={footer.icon} />
-          </Button>
+          <TouchableOpacity>
+            {footer.icon && <Icon as={footer.icon} w="$6" h="$8" mx="$5" />}
+          </TouchableOpacity>
         </Link>
       ))}
     </Box>

@@ -8,6 +8,7 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@gluestack-ui/themed';
 import AllQuestions from './AllQuestions';
 import { useState } from 'react';
 import Congratulations from './Congratulations';
+import SubmitDialog from './SubmitDialog';
 
 type McqExamPageProps = ComponentProps<typeof Box> & {
   questions: McqQuestion[];
@@ -29,8 +30,8 @@ const quiteIconStyles = StyleSheet.create({
 const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
   const [showModal, setShowModal] = useState(false);
   const [showSubimtModal, setShowSubimtModal] = useState(false);
-
-  const ref = React.useRef(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
 
   const options = [
     { id: 'A', label: questions[0]?.options?.[0] },
@@ -39,6 +40,10 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     { id: 'D', label: questions[0]?.options?.[3] },
   ];
 
+  const handleOptionClick = (optionId) => {
+    setSelectedOption(optionId);
+  };
+
   const ListIcon = Asset.fromURI('/assets/mcqQuestionListIcon.svg').uri;
   const quiteIcon = Asset.fromURI('/assets/quiteIcon.svg').uri;
 
@@ -46,7 +51,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     <Box w="$full">
       <Box display="flex" flexDirection="row" justifyContent="flex-end" pr="$4">
         <Box>
-          <TouchableOpacity onPress={() => setShowModal(true)} ref={ref}>
+          <TouchableOpacity onPress={() => setShowModal(true)}>
             <Box pt="$1.5">
               <Image
                 alt="ListIcon"
@@ -64,7 +69,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             />
           )}
         </Box>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setShowSubmitDialog(true)}>
           <Box
             display="flex"
             flexDirection="row"
@@ -89,6 +94,11 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             />
           </Box>
         </TouchableOpacity>
+
+        <SubmitDialog
+          isOpen={showSubmitDialog}
+          onClose={() => setShowSubmitDialog(false)}
+        />
       </Box>
       {/* start */}
       <Box>
@@ -111,19 +121,24 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
         </Box>
 
         {options.map((option) => (
-          <TouchableOpacity key={option.id}>
+          <TouchableOpacity
+            key={option.id}
+            onPress={() => handleOptionClick(option.id)}
+          >
             <Box
               display="flex"
               flexDirection="row"
               borderRadius="$sm"
-              backgroundColor="#e5e5e5"
+              backgroundColor={
+                selectedOption === option.id ? '#8D0C8A' : '#e5e5e5'
+              }
               mx={17}
               p="$2"
               mb="$2"
               alignItems="center"
             >
               <Box
-                bg="$primary500"
+                bg="#F9E2F9"
                 p="$2"
                 width="$10"
                 alignItems="center"
@@ -186,7 +201,6 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             mt="$1"
             bg="#8D0C8A"
             onPress={() => setShowSubimtModal(true)}
-            ref={ref}
           >
             <ButtonText fontSize="$md" fontWeight="bold">
               Submit
@@ -194,12 +208,10 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           </Button>
         </Box>
       </TouchableOpacity>
-      {showSubimtModal && (
-        <Congratulations
-          isOpen={showSubimtModal}
-          onClose={() => setShowSubimtModal(false)}
-        />
-      )}
+      <Congratulations
+        isOpen={showSubimtModal}
+        onClose={() => setShowSubimtModal(false)}
+      />
     </Box>
   );
 };
