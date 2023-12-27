@@ -4,17 +4,18 @@ import StageCard from './stage-card/StageCard';
 import { Box, Text, Image, View } from '@gluestack-ui/themed';
 import { useCourses } from '@learning-app/syllabus';
 import { Asset } from 'expo-asset';
+import { useActiveUser } from '@learning-app/auth';
 
 const HomeView = () => {
   const TEMP_COURSE = 'CA';
   const { data: { data: courses } = { data: [] } } = useCourses();
   const image = Asset.fromURI('/assets/homepageBanner.jpg').uri;
   const colors = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
-
+  const { user } = useActiveUser();
   return (
     <Box flex={1} width="$full">
       <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$5">
-        Hey Jane!
+        Hello {user.firstName}!
       </Text>
       <Box bg="white" p="$1.5">
         <Image

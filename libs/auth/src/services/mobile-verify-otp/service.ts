@@ -23,5 +23,11 @@ export async function mobileVerifyOTP(
     throw new Error(data?.message ?? error?.message ?? 'Unknown error');
   }
 
+  const { data: setSession, error: sessionErr } =
+    await supabase.auth.setSession(data.session);
+  if (sessionErr || !setSession) {
+    throw new Error(sessionErr?.message ?? 'Unknown error');
+  }
+
   return data;
 }

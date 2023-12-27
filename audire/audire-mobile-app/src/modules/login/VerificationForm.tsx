@@ -28,12 +28,23 @@ const VerificationView: FC<VerificationFormProps> = ({
   const handleTrigger = async () => {
     try {
       const otpString = otpValues.join('');
-      const r = await trigger({
+      if (otpString.length < 6) {
+        return;
+      }
+
+      await trigger({
         mobile: mobile,
         otp: otpString,
         fullName: fullName,
       });
+
+      if (isNewUser === true) {
+        router.replace('/profile/course');
+      } else {
+        router.replace('/');
+      }
     } catch (e) {
+      alert('Wrong OTP');
       console.error('Error triggering mobile OTP:', e);
     }
   };
@@ -49,7 +60,6 @@ const VerificationView: FC<VerificationFormProps> = ({
       prev[index] = isNaN(parseInt(value)) ? '' : value;
       return [...prev];
     });
-    console.log(`Value at index ${index}: ${otpValues[index]}`);
   };
 
   const renderOtpInputBoxes = () => {
@@ -76,7 +86,6 @@ const VerificationView: FC<VerificationFormProps> = ({
     ));
   };
 
-  console.info({ otpValues });
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
       <Box display="flex" mb="$6">
@@ -119,11 +128,6 @@ const VerificationView: FC<VerificationFormProps> = ({
             bg="$fuchsia800"
             onPress={() => {
               handleTrigger();
-              if (isNewUser === true) {
-                router.replace('/profile/course');
-              } else {
-                router.replace('/');
-              }
             }}
           >
             <ButtonText fontSize="$md" fontWeight="bold">
