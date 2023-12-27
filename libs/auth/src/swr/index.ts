@@ -4,3 +4,4 @@ export * from './mobile-verify-otp';
 export * from './login-with-email';
 export * from './logout';
 export * from './profile/get';
+export * from './profile/update-profile';

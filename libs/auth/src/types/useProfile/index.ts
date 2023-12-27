@@ -5,4 +5,6 @@ export type Profile = Database['public']['Tables']['Profile']['Row'];
 export type ProfileExtended = Pick<
   Profile,
   'id' | 'firstName' | 'lastName' | 'mobile'
->;
+> & {
+  optedCourse: Database['public']['Tables']['Course']['Row'] | null;
+};

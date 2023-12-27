@@ -7,4 +7,5 @@ export enum AuthSWRKeys {
   UPDATE_USER_PASSWORD = 'updateUserPassword',
   GET = 'get',
   PROFILE = 'profile',
+  UPDATE = 'update',
 }

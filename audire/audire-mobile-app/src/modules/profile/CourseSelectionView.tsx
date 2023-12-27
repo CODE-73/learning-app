@@ -1,17 +1,20 @@
-import React, { useRef, useEffect } from 'react';
+import { Box, Text } from '@gluestack-ui/themed';
+import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Link } from 'expo-router';
-import { Text, Box } from '@gluestack-ui/themed';
-
+import { router } from 'expo-router';
+import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
 import { useCourses } from '@learning-app/syllabus';
 import { Animated } from 'react-native';
-import CourseSelectionPlayIcon from '/assets/courseSelectionPlayIcon.svg';
 import CommonGirl from '/assets/commonGirl.svg';
+import CourseSelectionPlayIcon from '/assets/courseSelectionPlayIcon.svg';
 
 const CourseSelectionView = () => {
-  const handleCardPress = (course: unknown) => {};
   const { data: { data: courses } = { data: [] } } = useCourses();
   const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const { user } = useActiveUser();
+
+  const { trigger } = useUpdateProfile();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -21,11 +24,24 @@ const CourseSelectionView = () => {
     }).start();
   }, [fadeAnim]);
 
+  const updateOptedCourse = async (courseId: string) => {
+    try {
+      const profile = await trigger({
+        profileId: user.id,
+        data: {
+          optedCourseId: courseId,
+        },
+      });
+      router.replace('/');
+    } catch (e) {
+      console.error(e);
+    }
+  };
   return (
     <Box flex={1} bgColor="$white" w="$full">
       <Box display="flex">
         <Text fontSize="$lg" color="black" fontWeight="$$light" ml="$5" pt="$8">
-          Hey Jane!
+          Hey {user.firstName}!
         </Text>
         <Text fontSize="$2xl" color="black" fontWeight="bold" ml="$5" pt="$2">
           Let’s start learning!
@@ -46,25 +62,23 @@ const CourseSelectionView = () => {
             shadowOpacity={0.5}
             shadowRadius={5}
           >
-            <Link href="/" asChild>
-              <TouchableOpacity onPress={() => handleCardPress(course.title)}>
-                <Box
-                  display="flex"
-                  flexDirection="row"
-                  justifyContent="space-between"
-                  p="$7"
-                >
-                  <Box pl="$4" mt="$2">
-                    <Text fontSize="$2xl" fontWeight="bold" color="black">
-                      {course.title}
-                    </Text>
-                  </Box>
-                  <Box pr="$4">
-                    <CourseSelectionPlayIcon />
-                  </Box>
+            <TouchableOpacity onPress={() => updateOptedCourse(course.id)}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                p="$7"
+              >
+                <Box pl="$4" mt="$2">
+                  <Text fontSize="$2xl" fontWeight="bold" color="black">
+                    {course.title}
+                  </Text>
                 </Box>
-              </TouchableOpacity>
-            </Link>
+                <Box pr="$4">
+                  <CourseSelectionPlayIcon />
+                </Box>
+              </Box>
+            </TouchableOpacity>
           </Box>
         ))}
       </Box>
