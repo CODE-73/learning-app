@@ -10,11 +10,9 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Image,
   Text,
 } from '@gluestack-ui/themed';
-
-import { Asset } from 'expo-asset';
+import Congratulations from '/assets/Congratulations.svg';
 
 type AllQuestionsProps = ComponentProps<typeof Box> & {
   isOpen: boolean;
@@ -23,7 +21,7 @@ type AllQuestionsProps = ComponentProps<typeof Box> & {
 
 const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
   const ref = React.useRef(null);
-  const commonGirl = Asset.fromURI('/assets/Congratulations.svg').uri;
+
   return (
     <Modal
       size="full"
@@ -52,13 +50,7 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
               Congratulations!
             </Heading>
             <Box>
-              <Image
-                alt="Congratulations"
-                size="2xl"
-                source={{
-                  uri: commonGirl,
-                }}
-              />
+              <Congratulations />
             </Box>
           </Box>
           <Box

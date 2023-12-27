@@ -1,12 +1,10 @@
 import React, { ComponentProps, FC, useEffect, useRef } from 'react';
-import { Box, Image } from '@gluestack-ui/themed';
-import { Asset } from 'expo-asset';
+import { Box } from '@gluestack-ui/themed';
 import Video, { VideoRef } from 'react-native-video';
 
 type VideoComponentProps = ComponentProps<typeof Box>;
 
 const VideoComponent: FC<VideoComponentProps> = (props) => {
-  const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
   const videoRef = useRef<VideoRef>(null);
 
   useEffect(() => {

@@ -3,15 +3,22 @@ import HomeFooterView from '../footer/HomeFooterView';
 import StageCard from './stage-card/StageCard';
 import { Box, Text, Image, View } from '@gluestack-ui/themed';
 import { useCourses } from '@learning-app/syllabus';
-import { Asset } from 'expo-asset';
 import { useActiveUser } from '@learning-app/auth';
+import HomePageBanner from 'assets/homepageBanner.jpg';
+import { Dimensions } from 'react-native';
 
 const HomeView = () => {
   const TEMP_COURSE = 'CA';
   const { data: { data: courses } = { data: [] } } = useCourses();
-  const image = Asset.fromURI('/assets/homepageBanner.jpg').uri;
+
   const colors = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
   const { user } = useActiveUser();
+
+  // 16:9 Aspect Ratio
+  const dimensions = Dimensions.get('window');
+  const imageHeight = Math.round((dimensions.width * 9) / 16);
+  const imageWidth = dimensions.width;
+
   return (
     <Box flex={1} width="$full">
       <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$5">
@@ -20,12 +27,13 @@ const HomeView = () => {
       <Box bg="white" p="$1.5">
         <Image
           borderRadius={10}
-          w="$full"
-          size="2xl"
-          alt="homepageBanner"
-          source={{
-            uri: image,
+          style={{
+            resizeMode: 'contain',
+            width: imageWidth,
+            height: imageHeight,
           }}
+          alt="homepageBanner"
+          source={HomePageBanner}
         />
       </Box>
       <Text fontSize="$xl" color="black" fontWeight="$medium" ml="$5" py="$5">

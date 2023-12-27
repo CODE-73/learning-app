@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { Text, Box, Image } from '@gluestack-ui/themed';
-import { Asset } from 'expo-asset';
+import { Text, Box } from '@gluestack-ui/themed';
+
+import CourseSelectionPlayIcon from '/assets/courseSelectionPlayIcon.svg';
 
 type SubjectCardProps = {
   subject: string;
@@ -11,8 +12,6 @@ type SubjectCardProps = {
 };
 
 const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
-  const PlayIcon = Asset.fromURI('/assets/courseSelectionPlayIcon.svg').uri;
-  console.info('SubjectCard', { subject });
   return (
     <Box
       display="flex"
@@ -56,13 +55,7 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
               )}
             </Box>
             <Box>
-              <Image
-                alt="PlayIcon"
-                size="xs"
-                source={{
-                  uri: PlayIcon,
-                }}
-              />
+              <CourseSelectionPlayIcon />
             </Box>
           </Box>
         </TouchableOpacity>

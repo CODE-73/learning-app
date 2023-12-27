@@ -1,15 +1,13 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react';
-import { Image, Box } from '@gluestack-ui/themed';
-import { Asset } from 'expo-asset';
+import { Box } from '@gluestack-ui/themed';
 import { Animated } from 'react-native';
+import LoginBackgroundImage from '/assets/loginBackroudImage.svg';
 
 type AuthorizationLayoutProps = {
   children: ReactNode;
 };
 
 const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
-  const image = Asset.fromURI('/assets/loginBackroudImage.svg').uri;
-
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -32,13 +30,7 @@ const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
       {children}
       <Box position="absolute" zIndex={-1}>
         <Animated.View style={{ opacity: fadeAnim }}>
-          <Image
-            alt="loginBackroudImage"
-            size="2xl"
-            source={{
-              uri: image,
-            }}
-          />
+          <LoginBackgroundImage />
         </Animated.View>
       </Box>
     </Box>

@@ -1,14 +1,11 @@
 import React, { ComponentProps, FC } from 'react';
-import { Box, Image, Text } from '@gluestack-ui/themed';
+import { Box, Text } from '@gluestack-ui/themed';
 import { TouchableOpacity } from 'react-native';
-
-import { Asset } from 'expo-asset';
+import DownloadPdf from '/assets/downloadPdf.svg';
 
 type SampleQuestionsProps = ComponentProps<typeof Box>;
 
 const SampleQuestions: FC<SampleQuestionsProps> = (props) => {
-  const PlayIcon = Asset.fromURI('/assets/downloadPdf.svg').uri;
-
   return (
     <Box borderRadius="$sm" my="$1" backgroundColor="#e5e5e5" mx={17} py="$6">
       {/* <Link href={'#'} asChild> */}
@@ -32,13 +29,7 @@ const SampleQuestions: FC<SampleQuestionsProps> = (props) => {
             </Text>
           </Box>
           <Box pr="$4">
-            <Image
-              alt="PlayIcon"
-              size="xs"
-              source={{
-                uri: PlayIcon,
-              }}
-            />
+            <DownloadPdf />
           </Box>
         </Box>
       </TouchableOpacity>

@@ -9,14 +9,13 @@ import {
 import { TouchableOpacity } from 'react-native';
 
 const HomeFooterView = () => {
-  const footer: footer[] = [
+  const footer = [
     { name: 'Exams', link: '#', icon: ClockIcon },
     {
       name: 'Home',
       link: '#',
       icon: GripVerticalIcon,
     },
-
     { name: 'Settings', link: '#', icon: SettingsIcon },
   ];
   return (
@@ -26,7 +25,7 @@ const HomeFooterView = () => {
       borderWidth={1}
       position="absolute"
       w="$full"
-      bottom="$2"
+      bottom="$0"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"

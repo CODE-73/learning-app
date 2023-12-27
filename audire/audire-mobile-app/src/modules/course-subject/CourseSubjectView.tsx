@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { useTopics } from '@learning-app/syllabus';
 import TopicCard from './topic-card/TopicCard';
-import { Box, Text, Image } from '@gluestack-ui/themed';
-
-import { Asset } from 'expo-asset';
+import { Box, Text } from '@gluestack-ui/themed';
+import CommonGirl from '/assets/commonGirl.svg';
 
 type CourseSubjectViewProps = {
   subjectId: string;
@@ -11,7 +10,7 @@ type CourseSubjectViewProps = {
 
 const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
   const { data: { data: topics } = { data: [] } } = useTopics({ subjectId });
-  const commonGirl = Asset.fromURI('/assets/commonGirl.svg').uri;
+
   return (
     <Box flex={1} bgColor="$white" w="$full">
       <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" py="$8">
@@ -37,13 +36,7 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
         right="$0"
         zIndex={-1}
       >
-        <Image
-          alt="loginBackroudImage"
-          size="2xl"
-          source={{
-            uri: commonGirl,
-          }}
-        />
+        <CommonGirl />
       </Box>
     </Box>
   );

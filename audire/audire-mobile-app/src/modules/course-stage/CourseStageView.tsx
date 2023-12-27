@@ -1,15 +1,15 @@
-import { Box, Text, Image } from '@gluestack-ui/themed';
+import { Box, Text } from '@gluestack-ui/themed';
 import React, { FC } from 'react';
 import SubjectCard from './subject-card/SubjectCard';
 import { useSubjects } from '@learning-app/syllabus';
-import { Asset } from 'expo-asset';
+
+import CommonGirl from '/assets/commonGirl.svg';
 type CourseStageViewProps = {
   stageId: string;
 };
 
 const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
   const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
-  const commonGirl = Asset.fromURI('/assets/commonGirl.svg').uri;
 
   return (
     <Box display="flex" bgColor="$white" w="$full" flex={1}>
@@ -36,13 +36,7 @@ const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
         right="$0"
         zIndex={-1}
       >
-        <Image
-          alt="loginBackroudImage"
-          size="2xl"
-          source={{
-            uri: commonGirl,
-          }}
-        />
+        <CommonGirl />
       </Box>
     </Box>
   );

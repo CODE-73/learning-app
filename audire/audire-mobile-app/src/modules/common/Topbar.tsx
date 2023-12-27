@@ -1,15 +1,9 @@
-import {
-  Box,
-  Image,
-  Avatar,
-  AvatarFallbackText,
-  Text,
-} from '@gluestack-ui/themed';
-import { Asset } from 'expo-asset';
-
+import { Box, Avatar, AvatarFallbackText, Text } from '@gluestack-ui/themed';
 import { FC } from 'react';
 import { Pressable } from 'react-native';
 import { Icon, ChevronRightIcon } from '@gluestack-ui/themed';
+import NotificationIcon from '/assets/notificationIcon.svg';
+
 // import { useCourse } from '../../../../../libs/syllabus/src/swr';
 
 type TopbarProps = {
@@ -19,7 +13,6 @@ type TopbarProps = {
 
 const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
   // const { data: Course } = useCourse({ CourseId: string });
-  const image = Asset.fromURI('/assets/notificationIcon.svg').uri;
 
   return (
     <Box
@@ -61,13 +54,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       </Box>
 
       <Box>
-        <Image
-          size="xs"
-          alt="notificationIcon"
-          source={{
-            uri: image,
-          }}
-        />
+        <NotificationIcon />
       </Box>
     </Box>
   );

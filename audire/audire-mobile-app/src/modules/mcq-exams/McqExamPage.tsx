@@ -1,12 +1,17 @@
-import React, { ComponentProps, FC } from 'react';
-import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
-import { StyleSheet, Image } from 'react-native';
-import { Asset } from 'expo-asset';
+import {
+  Box,
+  Button,
+  ButtonText,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  Text,
+} from '@gluestack-ui/themed';
 import { type McqQuestion } from '@learning-app/syllabus';
-import { TouchableOpacity } from 'react-native';
-import { ChevronRightIcon, ChevronLeftIcon } from '@gluestack-ui/themed';
+import React, { ComponentProps, FC, useState } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import McqQuestionListIcon from '/assets/mcqQuestionListIcon.svg';
+import QuiteIcon from '/assets/quiteIcon.svg';
 import AllQuestions from './AllQuestions';
-import { useState } from 'react';
 import Congratulations from './Congratulations';
 import SubmitDialog from './SubmitDialog';
 
@@ -14,13 +19,11 @@ type McqExamPageProps = ComponentProps<typeof Box> & {
   questions: McqQuestion[];
 };
 
-const ListIconStyles = StyleSheet.create({
+const IconStyles = StyleSheet.create({
   ListIcon: {
     width: 20,
     height: 20,
   },
-});
-const quiteIconStyles = StyleSheet.create({
   quiteIcon: {
     width: 14,
     height: 13,
@@ -44,22 +47,13 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     setSelectedOption(optionId);
   };
 
-  const ListIcon = Asset.fromURI('/assets/mcqQuestionListIcon.svg').uri;
-  const quiteIcon = Asset.fromURI('/assets/quiteIcon.svg').uri;
-
   return (
     <Box w="$full">
       <Box display="flex" flexDirection="row" justifyContent="flex-end" pr="$4">
         <Box>
           <TouchableOpacity onPress={() => setShowModal(true)}>
             <Box pt="$1.5">
-              <Image
-                alt="ListIcon"
-                style={ListIconStyles.ListIcon}
-                source={{
-                  uri: ListIcon,
-                }}
-              />
+              <McqQuestionListIcon style={IconStyles.ListIcon} />
             </Box>
           </TouchableOpacity>
           {showModal && (
@@ -85,13 +79,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             <Text color="#8D0C8A" mr="$2">
               Quit
             </Text>
-            <Image
-              alt="quiteIcon"
-              style={quiteIconStyles.quiteIcon}
-              source={{
-                uri: quiteIcon,
-              }}
-            />
+            <QuiteIcon style={IconStyles.quiteIcon} />
           </Box>
         </TouchableOpacity>
 
