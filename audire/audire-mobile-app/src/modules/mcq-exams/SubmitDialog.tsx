@@ -1,5 +1,5 @@
 import React, { ComponentProps, FC } from 'react';
-import { CloseIcon } from '@gluestack-ui/themed';
+
 import {
   Heading,
   Box,
@@ -7,7 +7,6 @@ import {
   ModalBackdrop,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   ButtonText,
@@ -43,9 +42,6 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
       <ModalContent>
         <ModalHeader>
           <Heading></Heading>
-          {/* <ModalCloseButton>
-            <CloseIcon size="sm" />
-          </ModalCloseButton> */}
         </ModalHeader>
         <ModalBody>
           <Box>

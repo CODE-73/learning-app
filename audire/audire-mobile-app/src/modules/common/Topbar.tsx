@@ -1,14 +1,24 @@
-import { Box, Image, Avatar, AvatarFallbackText } from '@gluestack-ui/themed';
+import {
+  Box,
+  Image,
+  Avatar,
+  AvatarFallbackText,
+  Text,
+} from '@gluestack-ui/themed';
 import { Asset } from 'expo-asset';
 
 import { FC } from 'react';
 import { Pressable } from 'react-native';
+import { Icon, ChevronRightIcon } from '@gluestack-ui/themed';
+// import { useCourse } from '../../../../../libs/syllabus/src/swr';
 
 type TopbarProps = {
   onToggleSidebar: () => void;
+  Course: string;
 };
 
 const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
+  // const { data: Course } = useCourse({ CourseId: string });
   const image = Asset.fromURI('/assets/notificationIcon.svg').uri;
 
   return (
@@ -20,13 +30,35 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       justifyContent="space-between"
       alignItems="center"
     >
-      <Pressable onPress={onToggleSidebar}>
-        <Avatar bgColor="#B051AE" size="md" borderRadius="$full">
-          <AvatarFallbackText fontWeight="bold" color="black">
-            Mohammed Sameer
-          </AvatarFallbackText>
-        </Avatar>
-      </Pressable>
+      <Box display="flex" flexDirection="row" alignItems="center">
+        <Pressable onPress={onToggleSidebar}>
+          <Avatar
+            bgColor="#B051AE"
+            size="md"
+            borderRadius="$full"
+            position="relative"
+          >
+            <AvatarFallbackText fontWeight="bold" color="black">
+              Mohammed Sameer
+            </AvatarFallbackText>
+          </Avatar>
+        </Pressable>
+        <Box
+          bg="$primary500"
+          pl={22}
+          right={18}
+          zIndex={-1}
+          bgColor="#8D0C8A"
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+        >
+          <Text color="white" fontWeight="bold">
+            CA
+          </Text>
+          <Icon as={ChevronRightIcon} m="$2" w="$5" h="$5" color="white" />
+        </Box>
+      </Box>
 
       <Box>
         <Image

@@ -57,10 +57,9 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
             gap="$1"
             justifyContent="center"
           >
-            {questionBoxs.map((questionBox) => (
-              <TouchableOpacity>
+            {questionBoxs.map((questionBox, index) => (
+              <TouchableOpacity key={index}>
                 <Box
-                  key={questionBox}
                   bg="$white"
                   alignItems="center"
                   justifyContent="center"
