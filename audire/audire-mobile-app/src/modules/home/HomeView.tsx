@@ -1,18 +1,28 @@
-import React from 'react';
-import HomeFooterView from '../footer/HomeFooterView';
-import StageCard from './stage-card/StageCard';
-import { Box, Text, Image, View } from '@gluestack-ui/themed';
-import { useCourses } from '@learning-app/syllabus';
+import { Box, Image, Text, View } from '@gluestack-ui/themed';
 import { useActiveUser } from '@learning-app/auth';
 import HomePageBanner from 'assets/homepageBanner.jpg';
+import { router } from 'expo-router';
+import React, { useEffect } from 'react';
 import { Dimensions } from 'react-native';
+import HomeFooterView from '../footer/HomeFooterView';
+import StageCard from './stage-card/StageCard';
+
+const CARD_COLORS = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
 
 const HomeView = () => {
-  const TEMP_COURSE = 'CA';
-  const { data: { data: courses } = { data: [] } } = useCourses();
+  const {
+    user: { firstName, optedCourse },
+  } = useActiveUser();
 
-  const colors = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
-  const { user } = useActiveUser();
+  useEffect(() => {
+    if (!optedCourse) {
+      router.replace('/profile/course');
+    }
+  }, [optedCourse]);
+
+  if (!optedCourse) {
+    return null;
+  }
 
   // 16:9 Aspect Ratio
   const dimensions = Dimensions.get('window');
@@ -22,7 +32,7 @@ const HomeView = () => {
   return (
     <Box flex={1} width="$full">
       <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$5">
-        Hello {user.firstName}!
+        Hello {firstName}!
       </Text>
       <Box bg="white" p="$1.5">
         <Image
@@ -46,13 +56,11 @@ const HomeView = () => {
         alignItems="center"
         borderRadius="$2xl"
       >
-        {(
-          (courses ?? []).find((c) => c.title === TEMP_COURSE)?.stages ?? []
-        ).map((stage, index) => (
+        {optedCourse.stages.map((stage, index) => (
           <View
             borderRadius="$lg"
             key={stage.id}
-            style={{ backgroundColor: colors[index % colors.length] }}
+            style={{ backgroundColor: CARD_COLORS[index % CARD_COLORS.length] }}
           >
             <StageCard
               stage={stage.title}

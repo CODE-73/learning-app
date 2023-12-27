@@ -12,6 +12,8 @@ import {
   CircleIcon,
 } from '@gluestack-ui/themed';
 
+import { useActiveUser } from '@learning-app/auth';
+
 type Option = {
   name: string;
   link: string;
@@ -36,6 +38,10 @@ const options: Option[] = [
   { name: 'Logout', link: '#', icon: CircleIcon },
 ];
 const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
+  const {
+    user: { firstName },
+  } = useActiveUser();
+
   return isShown ? (
     //transperent box
     <Box
@@ -65,7 +71,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
           <Box display="flex" flexDirection="row" p="$5">
             <Avatar bgColor="#B051AE" size="lg" borderRadius="$full">
               <AvatarFallbackText fontWeight="bold" color="black">
-                Mohammed Sameer
+                {firstName}
               </AvatarFallbackText>
             </Avatar>
 
@@ -74,7 +80,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
                 Hello,
               </Text>
               <Text fontWeight="bold" color="black" fontSize="$2xl">
-                Jane !
+                {firstName}!
               </Text>
             </Box>
           </Box>

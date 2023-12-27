@@ -7,7 +7,9 @@ export async function getProfile(
 ): Promise<ProfileGetResponse> {
   const { data, error } = await supabase
     .from('Profile')
-    .select('*, optedCourse:Course!Profile_optedCourseId_fkey(*)')
+    .select(
+      '*, optedCourse:Course!Profile_optedCourseId_fkey(*, stages:Stage(*))'
+    )
     .match({ id: params.id })
     .single();
 

@@ -1,18 +1,19 @@
 import { Box, Avatar, AvatarFallbackText, Text } from '@gluestack-ui/themed';
 import { FC } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, TouchableOpacity } from 'react-native';
 import { Icon, ChevronRightIcon } from '@gluestack-ui/themed';
 import NotificationIcon from '/assets/notificationIcon.svg';
-
-// import { useCourse } from '../../../../../libs/syllabus/src/swr';
+import { useActiveUser } from '@learning-app/auth';
+import { router } from 'expo-router';
 
 type TopbarProps = {
   onToggleSidebar: () => void;
-  Course: string;
 };
 
 const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
-  // const { data: Course } = useCourse({ CourseId: string });
+  const {
+    user: { optedCourse, firstName },
+  } = useActiveUser();
 
   return (
     <Box
@@ -32,25 +33,34 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
             position="relative"
           >
             <AvatarFallbackText fontWeight="bold" color="black">
-              Mohammed Sameer
+              {firstName}
             </AvatarFallbackText>
           </Avatar>
         </Pressable>
-        <Box
-          bg="$primary500"
-          pl={22}
-          right={18}
-          zIndex={-1}
-          bgColor="#8D0C8A"
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-        >
-          <Text color="white" fontWeight="bold">
-            CA
-          </Text>
-          <Icon as={ChevronRightIcon} m="$2" w="$5" h="$5" color="white" />
-        </Box>
+        {optedCourse && (
+          <Box
+            bg="$primary500"
+            pl={22}
+            right={18}
+            zIndex={-1}
+            bgColor="#8D0C8A"
+          >
+            <TouchableOpacity onPress={() => router.push('/profile/course')}>
+              <Box display="flex" flexDirection="row" alignItems="center">
+                <Text color="white" fontWeight="bold">
+                  {optedCourse.title}
+                </Text>
+                <Icon
+                  as={ChevronRightIcon}
+                  m="$2"
+                  w="$5"
+                  h="$5"
+                  color="white"
+                />
+              </Box>
+            </TouchableOpacity>
+          </Box>
+        )}
       </Box>
 
       <Box>
