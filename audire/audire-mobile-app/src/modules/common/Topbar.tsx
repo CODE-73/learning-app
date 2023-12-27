@@ -33,7 +33,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
       <Box display="flex" flexDirection="row" alignItems="center">
         <Pressable onPress={onToggleSidebar}>
           <Avatar
-            bgColor="#B051AE"
+            bgColor="#D6A8D4"
             size="md"
             borderRadius="$full"
             position="relative"

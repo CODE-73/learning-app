@@ -130,7 +130,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               flexDirection="row"
               borderRadius="$sm"
               backgroundColor={
-                selectedOption === option.id ? '#8D0C8A' : '#e5e5e5'
+                selectedOption === option.id ? '#94B6BB' : '#e5e5e5'
               }
               mx={17}
               p="$2"
