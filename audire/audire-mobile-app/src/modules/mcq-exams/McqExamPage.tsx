@@ -30,7 +30,7 @@ const quiteIconStyles = StyleSheet.create({
 const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
   const [showModal, setShowModal] = useState(false);
   const [showSubimtModal, setShowSubimtModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
 
   const options = [
@@ -40,7 +40,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     { id: 'D', label: questions[0]?.options?.[3] },
   ];
 
-  const handleOptionClick = (optionId) => {
+  const handleOptionClick = (optionId: string) => {
     setSelectedOption(optionId);
   };
 

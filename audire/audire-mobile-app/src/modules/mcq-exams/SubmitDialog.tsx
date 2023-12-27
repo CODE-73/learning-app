@@ -43,11 +43,13 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
         </ModalHeader>
         <ModalBody>
           <Box>
-            <Text>
+            <Text color="black">
               You have 10 unattended questions and 3 questions you had to
               revisit.
             </Text>
-            <Text pt="$4">Are you sure you want to submit the test ?</Text>
+            <Text color="black" pt="$4">
+              Are you sure you want to submit the test ?
+            </Text>
           </Box>
         </ModalBody>
         <ModalFooter>

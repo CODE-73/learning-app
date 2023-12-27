@@ -8,19 +8,22 @@ import { useTopic } from '@learning-app/syllabus';
 
 type CourseTopicViewProps = {
   topicId: string;
+  title: string;
+  description: string;
 };
 
 const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
   const { data: topic } = useTopic({ topicId });
+  console.log(topic, 'ddddddddddd');
 
   return (
     <Box flexDirection="column" flex={1} bgColor="white" w="$full">
       <Box ml="$5" pt="$5" pb="$1">
         <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
-          CA-Primary
+          {topic?.title}
         </Text>
         <Text fontSize="$md" color="black" fontWeight="$normal">
-          Course Topic description
+          {topic?.description}
         </Text>
       </Box>
 
