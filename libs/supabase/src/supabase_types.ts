@@ -1,3 +1,4 @@
+
 export type Json =
   | string
   | number
@@ -121,33 +122,47 @@ export interface Database {
       }
       Profile: {
         Row: {
-          city: string
+          city: string | null
           email: string | null
-          firstName: string
+          firstName: string | null
           id: string
-          lastName: string
+          lastName: string | null
           mobile: string | null
-          state: string
+          optedCourseId: string | null
+          role: Database["public"]["Enums"]["Role"]
+          state: string | null
         }
         Insert: {
-          city: string
+          city?: string | null
           email?: string | null
-          firstName: string
+          firstName?: string | null
           id: string
-          lastName: string
+          lastName?: string | null
           mobile?: string | null
-          state: string
+          optedCourseId?: string | null
+          role?: Database["public"]["Enums"]["Role"]
+          state?: string | null
         }
         Update: {
-          city?: string
+          city?: string | null
           email?: string | null
-          firstName?: string
+          firstName?: string | null
           id?: string
-          lastName?: string
+          lastName?: string | null
           mobile?: string | null
-          state?: string
+          optedCourseId?: string | null
+          role?: Database["public"]["Enums"]["Role"]
+          state?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "Profile_optedCourseId_fkey"
+            columns: ["optedCourseId"]
+            isOneToOne: false
+            referencedRelation: "Course"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       Stage: {
         Row: {
@@ -262,36 +277,36 @@ export interface Database {
           createdById: string | null
           description: string
           id: string
-          studyMaterial: string
+          studyMaterial: string | null
           subjectId: string
           title: string
           updatedAt: string | null
           updatedById: string | null
-          videoLink: string
+          videoLink: string | null
         }
         Insert: {
           createdAt?: string
           createdById?: string | null
           description: string
           id?: string
-          studyMaterial: string
+          studyMaterial?: string | null
           subjectId: string
           title: string
           updatedAt?: string | null
           updatedById?: string | null
-          videoLink: string
+          videoLink?: string | null
         }
         Update: {
           createdAt?: string
           createdById?: string | null
           description?: string
           id?: string
-          studyMaterial?: string
+          studyMaterial?: string | null
           subjectId?: string
           title?: string
           updatedAt?: string | null
           updatedById?: string | null
-          videoLink?: string
+          videoLink?: string | null
         }
         Relationships: [
           {
@@ -330,7 +345,7 @@ export interface Database {
       }
     }
     Enums: {
-      [_ in never]: never
+      Role: "STUDENT" | "FACULTY" | "INSTITUTE_ADMIN" | "SUPER_ADMIN"
     }
     CompositeTypes: {
       [_ in never]: never
