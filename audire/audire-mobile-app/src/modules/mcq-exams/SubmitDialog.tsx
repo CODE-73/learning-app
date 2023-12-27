@@ -24,6 +24,12 @@ type SubmitDialogProps = ComponentProps<typeof Box> & {
 
 const SubmitDialog: FC<SubmitDialogProps> = (props) => {
   const ref = React.useRef(null);
+  const handleClose = () => {
+    props.onClose();
+  };
+  const handleYesClick = () => {
+    handleClose();
+  };
 
   return (
     <Modal
@@ -37,9 +43,9 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
       <ModalContent>
         <ModalHeader>
           <Heading></Heading>
-          <ModalCloseButton>
+          {/* <ModalCloseButton>
             <CloseIcon size="sm" />
-          </ModalCloseButton>
+          </ModalCloseButton> */}
         </ModalHeader>
         <ModalBody>
           <Box>
@@ -55,7 +61,11 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
         <ModalFooter>
           <TouchableOpacity>
             <Box m="$6">
-              <Button variant="outline" action="secondary">
+              <Button
+                variant="outline"
+                action="secondary"
+                onPress={handleClose}
+              >
                 <ButtonText fontSize="$sm" fontWeight="$medium">
                   cancel
                 </ButtonText>
@@ -64,7 +74,7 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
           </TouchableOpacity>
           <TouchableOpacity>
             <Box>
-              <Button variant="solid" bg="#8D0C8A" onPress={() => {}}>
+              <Button variant="solid" bg="#8D0C8A" onPress={handleYesClick}>
                 <ButtonText fontSize="$md" fontWeight="bold">
                   Yes
                 </ButtonText>
