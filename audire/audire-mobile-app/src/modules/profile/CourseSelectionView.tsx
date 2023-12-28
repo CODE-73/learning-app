@@ -1,6 +1,6 @@
 import { Box, Text } from '@gluestack-ui/themed';
 import React, { useEffect, useRef } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
 import { useCourses } from '@learning-app/syllabus';
@@ -9,12 +9,15 @@ import CommonGirl from '/assets/commonGirl.svg';
 import CourseSelectionPlayIcon from '/assets/courseSelectionPlayIcon.svg';
 
 const CourseSelectionView = () => {
-  const { data: { data: courses } = { data: [] } } = useCourses();
+  const {
+    data: { data: courses } = { data: [] },
+    isLoading: isLoadingCourses,
+  } = useCourses();
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const { user } = useActiveUser();
 
-  const { trigger } = useUpdateProfile();
+  const { trigger, isMutating: isUpdatingSelectedCourse } = useUpdateProfile();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -26,7 +29,7 @@ const CourseSelectionView = () => {
 
   const updateOptedCourse = async (courseId: string) => {
     try {
-      const profile = await trigger({
+      await trigger({
         profileId: user.id,
         data: {
           optedCourseId: courseId,
@@ -37,6 +40,7 @@ const CourseSelectionView = () => {
       console.error(e);
     }
   };
+
   return (
     <Box flex={1} bgColor="$white" w="$full">
       <Box display="flex">
@@ -47,41 +51,62 @@ const CourseSelectionView = () => {
           Let’s start learning!
         </Text>
       </Box>
-
       <Box mt="$16" px="$8">
-        {courses.map((course) => (
+        {isLoadingCourses ? (
+          <ActivityIndicator size="large" color="#D6A8D4" />
+        ) : (
+          courses.map((course) => (
+            <Box
+              key={course.id}
+              borderColor="$black"
+              borderRadius="$sm"
+              my="$1.5"
+              backgroundColor="$white"
+              overflow="hidden"
+              shadowColor="$black"
+              shadowOffset={{ width: 1, height: 2 }}
+              shadowOpacity={0.5}
+              shadowRadius={5}
+              bgColor="#e5e5e5"
+            >
+              <TouchableOpacity onPress={() => updateOptedCourse(course.id)}>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  p="$7"
+                >
+                  <Box pl="$4" mt="$2">
+                    <Text fontSize="$2xl" fontWeight="bold" color="black">
+                      {course.title}
+                    </Text>
+                  </Box>
+                  <Box pr="$4">
+                    <CourseSelectionPlayIcon />
+                  </Box>
+                </Box>
+              </TouchableOpacity>
+            </Box>
+          ))
+        )}
+
+        {isUpdatingSelectedCourse && (
           <Box
-            key={course.id}
-            borderColor="$black"
-            borderRadius="$sm"
-            my="$1.5"
-            backgroundColor="$white"
-            overflow="hidden"
-            shadowColor="$black"
-            shadowOffset={{ width: 1, height: 2 }}
-            shadowOpacity={0.5}
-            shadowRadius={5}
-            bgColor="#e5e5e5"
+            bg="$white"
+            opacity={0.5}
+            position="absolute"
+            top={0}
+            bottom={0}
+            left={0}
+            right={0}
+            zIndex={10}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
           >
-            <TouchableOpacity onPress={() => updateOptedCourse(course.id)}>
-              <Box
-                display="flex"
-                flexDirection="row"
-                justifyContent="space-between"
-                p="$7"
-              >
-                <Box pl="$4" mt="$2">
-                  <Text fontSize="$2xl" fontWeight="bold" color="black">
-                    {course.title}
-                  </Text>
-                </Box>
-                <Box pr="$4">
-                  <CourseSelectionPlayIcon />
-                </Box>
-              </Box>
-            </TouchableOpacity>
+            <ActivityIndicator size="large" color="#D6A8D4" />
           </Box>
-        ))}
+        )}
       </Box>
       <Box
         display="flex"

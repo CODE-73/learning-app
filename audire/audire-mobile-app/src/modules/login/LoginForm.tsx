@@ -11,13 +11,14 @@ import {
 import { useSendMobileOTP } from '@learning-app/auth';
 import { router } from 'expo-router';
 import { useState } from 'react';
+import { ActivityIndicator } from 'react-native';
 
 const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [fullName, setFullName] = useState('');
   const [isNewUser, setIsNewUser] = useState(false);
 
-  const { trigger } = useSendMobileOTP();
+  const { trigger, isMutating: isTriggeringMobileOTP } = useSendMobileOTP();
 
   const handleTrigger = async () => {
     try {
@@ -126,9 +127,13 @@ const LoginForm = () => {
               console.log('Button pressed!');
             }}
           >
-            <ButtonText fontSize="$md" fontWeight="bold">
-              Continue
-            </ButtonText>
+            {isTriggeringMobileOTP ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <ButtonText fontSize="$md" fontWeight="bold">
+                Continue
+              </ButtonText>
+            )}
           </Button>
         </Box>
       </Box>
