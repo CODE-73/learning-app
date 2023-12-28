@@ -69,7 +69,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
       >
         <Box overflow="hidden" width="100%">
           <Box display="flex" flexDirection="row" p="$5">
-            <Avatar bgColor="#B051AE" size="lg" borderRadius="$full">
+            <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
               <AvatarFallbackText fontWeight="bold" color="black">
                 {firstName}
               </AvatarFallbackText>
