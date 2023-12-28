@@ -16,16 +16,16 @@ const SubjectCard: FC<SubjectCardProps> = ({ subject, href, description }) => {
     <Box
       display="flex"
       w="$full"
-      h="$20"
       borderColor="$black"
       borderRadius="$sm"
-      my="$1"
+      my="$1.5"
       backgroundColor="$white"
       overflow="hidden"
       shadowColor="$black"
       shadowOffset={{ width: 1, height: 2 }}
       shadowOpacity={0.5}
       shadowRadius={5}
+      bgColor="#e5e5e5"
     >
       <Link href={href} asChild>
         <TouchableOpacity>

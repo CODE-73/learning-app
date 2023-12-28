@@ -21,17 +21,16 @@ const HomeFooterView = () => {
   return (
     <Box
       borderRadius="$2xl"
-      borderColor="black"
-      borderWidth={1}
       position="absolute"
       w="$full"
       bottom="$0"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
-      bg="#e5e5e5"
+      bg="#D6A8D4"
       px="$10"
       py="$5"
+      alignItems="center"
     >
       {footer.map((footer) => (
         <Link key={footer.name} href={footer.link} asChild>

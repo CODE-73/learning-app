@@ -18,13 +18,14 @@ const TopicCard: FC<TopicCardProps> = ({ topic, href, description }) => {
       w="$full"
       borderColor="$black"
       borderRadius="$sm"
-      my="$1"
+      my="$1.5"
       backgroundColor="$white"
       overflow="hidden"
       shadowColor="$black"
       shadowOffset={{ width: 1, height: 2 }}
       shadowOpacity={0.5}
       shadowRadius={5}
+      bgColor="#e5e5e5"
     >
       <Link href={href} asChild>
         <TouchableOpacity>

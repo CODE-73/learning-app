@@ -54,13 +54,14 @@ const CourseSelectionView = () => {
             key={course.id}
             borderColor="$black"
             borderRadius="$sm"
-            my="$1"
+            my="$1.5"
             backgroundColor="$white"
             overflow="hidden"
             shadowColor="$black"
             shadowOffset={{ width: 1, height: 2 }}
             shadowOpacity={0.5}
             shadowRadius={5}
+            bgColor="#e5e5e5"
           >
             <TouchableOpacity onPress={() => updateOptedCourse(course.id)}>
               <Box
