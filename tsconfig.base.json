@@ -34,6 +34,10 @@
         "libs/supabase/src/index.ts",
         "../../libs/supabase/src/index.ts"
       ],
+      "@learning-app/supabase-expo": [
+        "libs/supabase/src/expo.ts",
+        "../../libs/supabase/src/expo.ts"
+      ],
       "@learning-app/syllabus": [
         "libs/syllabus/src/index.ts",
         "../../libs/syllabus/src/index.ts"

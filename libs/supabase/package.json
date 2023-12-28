@@ -9,6 +9,9 @@
   },
   "type": "module",
   "main": "./src/index.ts",
-  "typings": "./src/index.d.ts"
+  "typings": "./src/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./expo": "./src/expo.ts"
+  }
 }
-
