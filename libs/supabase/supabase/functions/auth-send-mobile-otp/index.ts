@@ -32,18 +32,17 @@ Deno.serve(async (req) => {
   const userExists = await checkUserExists(supabaseAdmin, mobile);
   const otp = generateOTP(mobile);
 
-  // const r = await sendOTP(mobile, otp);
-  // if (!r) {
-  //   return new Response(JSON.stringify({ error: 'Failed to send OTP' }), {
-  //     headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
-  //     status: 500,
-  //   });
-  // }
+  const r = await sendOTP(mobile, otp);
+  if (!r) {
+    return new Response(JSON.stringify({ error: 'Failed to send OTP' }), {
+      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
+      status: 500,
+    });
+  }
 
   return new Response(
     JSON.stringify({
       mobile,
-      otp,
       message: 'OTP sent successfully',
       success: true,
       isNewUser: !userExists,
