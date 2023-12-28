@@ -68,7 +68,7 @@ const LoginForm = () => {
         </Text>
       </Box>
 
-      <Box alignItems="center">
+      <Box alignItems="center" bgColor="#FFFFFF">
         <FormControl mb="$1" w="$full">
           <Input
             variant="outline"
