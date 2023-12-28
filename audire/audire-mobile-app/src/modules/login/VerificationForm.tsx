@@ -1,5 +1,5 @@
 import React, { FC, RefObject, useRef, useState } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, ActivityIndicator } from 'react-native';
 import { Link } from 'expo-router';
 import { router } from 'expo-router';
 import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
@@ -23,7 +23,8 @@ const VerificationView: FC<VerificationFormProps> = ({
       .map(() => React.createRef<TextInput>())
   );
 
-  const { trigger } = useVerifyMobileOTP();
+  const { trigger, isMutating: isLoadingVerifyMobileOTP } =
+    useVerifyMobileOTP();
 
   const handleTrigger = async () => {
     try {
@@ -48,6 +49,7 @@ const VerificationView: FC<VerificationFormProps> = ({
       console.error('Error triggering mobile OTP:', e);
     }
   };
+
   const handleOtpInputChange = (index: number, value: string) => {
     let nextRef: RefObject<TextInput> | null = null;
     if (value) {
@@ -130,9 +132,13 @@ const VerificationView: FC<VerificationFormProps> = ({
               handleTrigger();
             }}
           >
-            <ButtonText fontSize="$md" fontWeight="bold">
-              PROCEED
-            </ButtonText>
+            {isLoadingVerifyMobileOTP ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <ButtonText fontSize="$md" fontWeight="bold">
+                PROCEED
+              </ButtonText>
+            )}
           </Button>
         </Box>
       </Box>
