@@ -1,7 +1,7 @@
 import { Slot } from 'expo-router';
 import { GluestackUIProvider, Box } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
-import { ExpoSupabaseProvider } from '@learning-app/supabase/expo';
+import { ExpoSupabaseProvider } from '@learning-app/supabase-expo';
 
 const audireConfig = {
   ...config,
