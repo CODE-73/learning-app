@@ -27,20 +27,23 @@ function Index() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-fuchsia-800 text-center mb-4 font-black">
             AUDIRE
-            <div className="text-xs  pl-24 text-black ">School OF Commerce</div>
+            <div className="text-xs pl-24 text-black font-mono">
+              School OF Commerce
+            </div>
           </h1>
-          <p className="text-lg">
+          <p className="text-lg font-serif ">
             Transform your CA and CMA studies with our leading learning app.
             Access interactive modules, track progress, and join a supportive
             community. Elevate your financial expertise at your own pace. Start
-            excelling today
+            excelling today..
           </p>
         </div>
+
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-lg font-bold text-gray-800 mb-2">
+          <h2 className="text-lg font-bold text-gray-800 mb-2 font-mono">
             Get Started Today
           </h2>
-          <p className=" text-xs text-gray-600">
+          <p className=" text-xs text-gray-600 ">
             Download our app now and experience amazing features!
           </p>
         </div>
@@ -61,7 +64,7 @@ function Index() {
       </main>
 
       <footer className="bg-fuchsia-200 p-4">
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 font-sans">
           &copy; {new Date().getFullYear()} AUDIRE LEARNING APP. All rights
           reserved.
         </p>
