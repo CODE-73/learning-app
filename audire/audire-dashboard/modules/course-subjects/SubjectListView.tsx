@@ -23,12 +23,13 @@ import CourseStageSelector from 'components/CourseStageSelector';
 import { columns } from './data';
 import { useSubjects } from '@learning-app/syllabus';
 import { useSubjectDelete } from '@learning-app/syllabus';
+import { useActiveUser } from '@learning-app/auth';
 
 const SubjectListView: FC = () => {
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
   const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
   const [activeSubject, setactiveSubject] = useState<Subject | null>(null);
- 
+
   const { data: { data: subjects } = { data: [] } } = useSubjects({
     stageId,
   });
@@ -39,7 +40,8 @@ const SubjectListView: FC = () => {
     onOpen: openDeleteDialog,
     onOpenChange: toggleDeleteDialog,
   } = useDisclosure();
-
+  const { user } = useActiveUser();
+  console.log(user);
   const renderCell = React.useCallback(
     (subject: Subject, columnKey: React.Key) => {
       switch (columnKey) {

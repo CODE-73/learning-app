@@ -11,7 +11,7 @@ import {
 import { useSendMobileOTP } from '@learning-app/auth';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { TextInput, ActivityIndicator } from 'react-native';
 
 const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -78,24 +78,26 @@ const LoginForm = () => {
             isInvalid={false}
             isReadOnly={isNewUser ?? false}
           >
-            <InputSlot pl="$2">
-              <Text>+91</Text>
-            </InputSlot>
-            <InputField
-              type="text"
-              placeholder="Mobile Number"
-              value={mobileNumber}
-              onChangeText={(e) => {
-                let t = '';
-                for (const c of e) {
-                  if (isNaN(parseInt(c)) || c === ' ') {
-                    continue;
+            <TextInput keyboardType="numeric">
+              <InputSlot pl="$2">
+                <Text>+91</Text>
+              </InputSlot>
+              <InputField
+                type="text"
+                placeholder="Mobile Number"
+                value={mobileNumber}
+                onChangeText={(e) => {
+                  let t = '';
+                  for (const c of e) {
+                    if (isNaN(parseInt(c)) || c === ' ') {
+                      continue;
+                    }
+                    t += c;
                   }
-                  t += c;
-                }
-                setMobileNumber(t);
-              }}
-            />
+                  setMobileNumber(t);
+                }}
+              />
+            </TextInput>
           </Input>
         </FormControl>
         {isNewUser ? (
