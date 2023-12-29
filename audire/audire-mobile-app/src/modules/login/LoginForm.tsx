@@ -1,3 +1,4 @@
+import { TextareaInput } from '@gluestack-ui/config/build/theme';
 import {
   Box,
   Button,
@@ -78,26 +79,25 @@ const LoginForm = () => {
             isInvalid={false}
             isReadOnly={isNewUser ?? false}
           >
-            <TextInput keyboardType="numeric">
-              <InputSlot pl="$2">
-                <Text>+91</Text>
-              </InputSlot>
-              <InputField
-                type="text"
-                placeholder="Mobile Number"
-                value={mobileNumber}
-                onChangeText={(e) => {
-                  let t = '';
-                  for (const c of e) {
-                    if (isNaN(parseInt(c)) || c === ' ') {
-                      continue;
-                    }
-                    t += c;
+            <InputSlot pl="$2">
+              <Text>+91</Text>
+            </InputSlot>
+            <InputField
+              type="text"
+              placeholder="Mobile Number"
+              value={mobileNumber}
+              keyboardType="numeric"
+              onChangeText={(e) => {
+                let t = '';
+                for (const c of e) {
+                  if (isNaN(parseInt(c)) || c === ' ') {
+                    continue;
                   }
-                  setMobileNumber(t);
-                }}
-              />
-            </TextInput>
+                  t += c;
+                }
+                setMobileNumber(t);
+              }}
+            />
           </Input>
         </FormControl>
         {isNewUser ? (
