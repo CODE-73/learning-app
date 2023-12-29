@@ -131,6 +131,3 @@ npm-debug.*
 *.orig.*
 web-build/
 cache/
-
-
-audire/audire-mobile-app-e2e/artifacts
