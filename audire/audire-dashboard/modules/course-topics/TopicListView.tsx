@@ -142,7 +142,7 @@ const TopicListView: FC = () => {
   );
 
   return (
-    <div>
+    <div className="flex-grow m-8">
       <TopicFormDialog
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -169,33 +169,38 @@ const TopicListView: FC = () => {
         }}
       />
       {/* <TopicForm isOpen={isOpen} onOpenChange={onOpenChange} /> */}
-      <h1 className=" text-2xl font-bold">Topics</h1>
+      <div className="flex items-center justify-between ">
+        <h1 className=" text-2xl font-bold">Topics</h1>
 
-      <div className="">
-        <Button
-          color="primary"
-          onPress={onOpen}
-          onClick={() => {
-            setActiveTopic(null);
-          }}
-        >
-          <IoMdAdd />
-          Add Topic
-        </Button>
+        <div className="">
+          <Button
+            color="primary"
+            onPress={onOpen}
+            onClick={() => {
+              setActiveTopic(null);
+            }}
+          >
+            <IoMdAdd />
+            Add Topic
+          </Button>
+        </div>
       </div>
-      <CourseStageSelector
-        value={stageId}
-        onChange={({ stageId }) => {
-          setSelectedStage(stageId ?? undefined);
-        }}
-      />
-      <CourseSubjectSelector
-        stageId={stageId}
-        value={subjectId}
-        onChange={({ subjectId }) => {
-          setSelectedSubject(subjectId ?? undefined);
-        }}
-      />
+      <div className="flex items-center gap-3 m-8 ">
+        <CourseStageSelector
+          value={stageId}
+          onChange={({ stageId }) => {
+            setSelectedStage(stageId ?? undefined);
+          }}
+        />
+
+        <CourseSubjectSelector
+          stageId={stageId}
+          value={subjectId}
+          onChange={({ subjectId }) => {
+            setSelectedSubject(subjectId ?? undefined);
+          }}
+        />
+      </div>
       <Table aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
           {(column) => (

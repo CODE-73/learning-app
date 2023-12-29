@@ -90,7 +90,7 @@ const SubjectListView: FC = () => {
     [onOpen, openDeleteDialog]
   );
   return (
-    <div>
+    <div className="flex-grow">
       <SubjectFormDialog
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -131,16 +131,16 @@ const SubjectListView: FC = () => {
           </Button>
         </div>
       </div>
-
-      <CourseStageSelector
-        value={stageId}
-        onChange={({ stageId, courseId }) => {
-          setSelectedStage(stageId ?? undefined);
-          setSelectedCourse(courseId ?? undefined);
-        }}
-      />
-
-      <Table aria-label="Example table with custom cells">
+      <div className="m-8">
+        <CourseStageSelector
+          value={stageId}
+          onChange={({ stageId, courseId }) => {
+            setSelectedStage(stageId ?? undefined);
+            setSelectedCourse(courseId ?? undefined);
+          }}
+        />
+      </div>
+      <Table className="w-full" aria-label="Example table with custom cells">
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn

@@ -82,7 +82,6 @@ const SubjectForm: FC<SubjectFormProps> = ({
       onSubmit={form.handleSubmit(upsertSubject)}
     >
       <h1 className="font-bold text-xl">Subject</h1>
-
       <InputElement
         name="title"
         label="Title"
@@ -93,9 +92,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
         label="Description"
         placeholder="Enter Subject description"
       />
-
       <CourseStageSelector.Field name="stageId" control={form.control} />
-
       <div className="flex flex-row gap-1">
         <div className="grow"></div>
         <Button

@@ -15,7 +15,7 @@ const AuthorizedLayout: FC<AuthorizedLayoutProps> = ({ children }) => {
     <div className="h-screen w-screen bg-background flex flex-col">
       <UserProvider onUnauthorized={() => router.replace('/login')}>
         <Navbar />
-        <div className="flex">
+        <div className="flex justify-stretch">
           <Sidebar />
           {children}
         </div>
