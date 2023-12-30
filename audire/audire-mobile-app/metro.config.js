@@ -19,7 +19,10 @@ const customConfig = {
   resolver: {
     extraNodeModules: {
       ...(extraNodeModules ?? {}),
-      '../Utilities/Platform': 'react-native-web/dist/exports/Platform',
+      '../Utilities/Platform':
+        require.resolve('react-native-web').split('/').slice(0, -3).join('/') +
+        '/dist/exports/Platform/index.js',
+      // '../Utilities/Platform': 'react-native-web/dist/exports/Platform',
     },
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
     sourceExts: [...sourceExts, 'svg', 'mjs'],
