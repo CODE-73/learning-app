@@ -21,8 +21,8 @@ type McqExamPageProps = ComponentProps<typeof Box> & {
 
 const IconStyles = StyleSheet.create({
   ListIcon: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
   },
   quiteIcon: {
     width: 14,

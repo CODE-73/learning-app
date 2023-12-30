@@ -10,9 +10,9 @@ import {
   CheckCircleIcon,
   SettingsIcon,
   CircleIcon,
+  Button,
 } from '@gluestack-ui/themed';
-
-import { useActiveUser } from '@learning-app/auth';
+import { useActiveUser, useLogout } from '@learning-app/auth';
 
 type Option = {
   name: string;
@@ -35,12 +35,22 @@ const options: Option[] = [
   { name: 'Notifications', link: '#', icon: BellIcon },
   { name: 'Payments', link: '#', icon: CheckCircleIcon },
   { name: 'Settings', link: '#', icon: SettingsIcon },
-  { name: 'Logout', link: '#', icon: CircleIcon },
 ];
 const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   const {
     user: { firstName },
   } = useActiveUser();
+
+  const { trigger } = useLogout();
+
+  const onLogout = async () => {
+    try {
+      await trigger();
+      console.error('Logged out');
+    } catch (e) {
+      console.error('Error triggering on log in:', e);
+    }
+  };
 
   return isShown ? (
     //transperent box
@@ -113,6 +123,22 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
                 </TouchableOpacity>
               </Link>
             ))}
+            <Box h={0.3} backgroundColor="black" m={17}></Box>
+            <TouchableOpacity onPress={() => onLogout()}>
+              <Box display="flex" flexDirection="row">
+                <Icon
+                  as={CircleIcon}
+                  w="$5"
+                  h="$6"
+                  mx="$5"
+                  fontWeight="$bold"
+                  color="#B91C1C"
+                ></Icon>
+                <Text fontWeight="bold" color="#B91C1C">
+                  Logout
+                </Text>
+              </Box>
+            </TouchableOpacity>
           </Box>
         </Box>
         <Box
