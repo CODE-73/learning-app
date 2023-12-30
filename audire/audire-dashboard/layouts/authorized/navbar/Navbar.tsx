@@ -3,16 +3,24 @@ import { Avatar, Card, Button } from '@nextui-org/react';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Image from 'next/image';
+import { useLogout } from '@learning-app/auth';
 
 const Navbar = () => {
   const [isCardOpen, setIsCardOpen] = useState(false);
+
+  const { trigger } = useLogout();
 
   const handleAvatarClick = () => {
     setIsCardOpen(!isCardOpen);
   };
 
-  const handleLogout = () => {
-    console.log('Logging out...');
+  const onLogout = async () => {
+    try {
+      await trigger();
+      console.error('Logged out');
+    } catch (e) {
+      console.error('Error triggering on log in:', e);
+    }
   };
 
   return (
@@ -46,7 +54,7 @@ const Navbar = () => {
 
         {isCardOpen && (
           <Card>
-            <Button onClick={handleLogout}>Log Out</Button>
+            <Button onClick={() => onLogout()}>Log Out</Button>
           </Card>
         )}
       </div>
