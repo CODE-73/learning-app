@@ -1,3 +1,4 @@
+import { ScrollView } from 'react-native';
 import { Box, Text } from '@gluestack-ui/themed';
 import VideoComponent from './VideoComponent';
 import StudyMeterial from './StudyMeterial';
@@ -14,35 +15,36 @@ type CourseTopicViewProps = {
 
 const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
   const { data: topic } = useTopic({ topicId });
-  console.log(topic, 'ddddddddddd');
 
   return (
-    <Box flexDirection="column" flex={1} bgColor="white" w="$full">
-      <Box ml="$5" pt="$5" pb="$1">
-        <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
-          {topic?.title}
-        </Text>
-        <Text fontSize="$md" color="black" fontWeight="$normal">
-          {topic?.description}
-        </Text>
+    <ScrollView>
+      <Box flexDirection="column" flex={1} bgColor="white" w="$full">
+        <Box ml="$5" pt="$5" pb="$1">
+          <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
+            {topic?.title}
+          </Text>
+          <Text fontSize="$md" color="black" fontWeight="$normal">
+            {topic?.description}
+          </Text>
+        </Box>
+
+        <Box h={0.3} backgroundColor="black" mx={17}></Box>
+
+        <Box ml="$5" pt="$3">
+          <Text fontSize="$lg" color="black" fontWeight="bold" my="$2">
+            Video Class Name
+          </Text>
+          <Text fontSize="$md" color="black" fontWeight="$normal" pb="$1">
+            Presenter Name
+          </Text>
+        </Box>
+
+        <VideoComponent />
+        <StudyMeterial />
+        <SampleQuestions />
+        <McqTestCard topicId={topic?.id} />
       </Box>
-
-      <Box h={0.3} backgroundColor="black" mx={17}></Box>
-
-      <Box ml="$5" pt="$3">
-        <Text fontSize="$lg" color="black" fontWeight="bold" my="$2">
-          Video Class Name
-        </Text>
-        <Text fontSize="$md" color="black" fontWeight="$normal" pb="$1">
-          Presenter Name
-        </Text>
-      </Box>
-
-      <VideoComponent />
-      <StudyMeterial />
-      <SampleQuestions />
-      <McqTestCard topicId={topic?.id} />
-    </Box>
+    </ScrollView>
   );
 };
 
