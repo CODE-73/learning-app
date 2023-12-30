@@ -17,7 +17,7 @@ const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
   const { data: topic } = useTopic({ topicId });
 
   return (
-    <ScrollView>
+    <ScrollView style={{ width: '100%' }}>
       <Box flexDirection="column" flex={1} bgColor="white" w="$full">
         <Box ml="$5" pt="$5" pb="$1">
           <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
