@@ -28,7 +28,7 @@ const LoginForm = () => {
         setIsNewUser(r.isNewUser);
         setMobileNumber(r.mobile);
         if (!r.isNewUser) {
-          router.push({
+          router.replace({
             pathname: 'verification',
             params: {
               mobile: r.mobile,

@@ -36,7 +36,7 @@ const LoginView: FC = () => {
         password: data.password,
       });
       // Success
-      router.push('/');
+      router.replace('/');
       console.log(r);
     } catch (e) {
       alert('Invalid email or password');
