@@ -1,7 +1,7 @@
-import { Topic } from '../../../types';
+import { TopicWithNumQuestions } from '../../../types';
 import { SortParam } from '../../types';
 
-type TopicListSortParams = SortParam<Topic>;
+type TopicListSortParams = SortParam<TopicWithNumQuestions>;
 
 export type TopicListRequest = {
   subjectId: string;
@@ -17,6 +17,6 @@ export type TopicListFilterParams = {
 };
 
 export type TopicListResponse = {
-  data: Topic[];
+  data: TopicWithNumQuestions[];
   count: number;
 };

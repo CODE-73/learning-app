@@ -17,7 +17,7 @@ export async function getTopics(
 
   let query = supabaseCilent
     .from('Topic')
-    .select('*', {
+    .select('*, numQuestion:McqQuestion(count)', {
       count: 'exact',
     })
     .match({ subjectId });
@@ -44,5 +44,9 @@ export async function getTopics(
     throw error;
   }
 
-  return { data, count: count ?? 0 };
+  return { data: data.map(x => ({
+    ...x,
+    // @ts-expect-error TODO: Supabase postgresql error
+    numQuestion: x.numQuestion?.[0]?.count ?? 0,
+  })), count: count ?? 0 };
 }

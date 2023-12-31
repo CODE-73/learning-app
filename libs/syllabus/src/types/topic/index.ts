@@ -6,3 +6,5 @@ export type TopicUpdate = Database['public']['Tables']['Topic']['Update'];
 export type TopicInsert = Database['public']['Tables']['Topic']['Insert'];
 
 export type TopicUpsert = TopicUpdate | TopicInsert;
+
+export type TopicWithNumQuestions = Topic & { numQuestion: number };

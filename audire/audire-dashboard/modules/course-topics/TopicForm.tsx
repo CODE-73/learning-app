@@ -76,8 +76,8 @@ const TopicForm: FC<TopicFormProps> = ({
           enabled: data.enabled,
           description: data.description,
           subjectId: data.subjectId,
-          videoLink: 'video-link',
-          studyMaterial: 'study-material',
+          videoLink: null,
+          studyMaterial: null,
         },
       });
 

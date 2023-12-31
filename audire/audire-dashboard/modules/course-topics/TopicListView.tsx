@@ -1,41 +1,39 @@
-import React, { useState } from 'react';
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
+  Button,
   // User as Topic,
   Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   Tooltip,
-  ChipProps,
-  Button,
+  useDisclosure
 } from '@nextui-org/react';
+import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
-import { MdDelete } from 'react-icons/md';
 import { IoMdAdd } from 'react-icons/io';
+import { MdDelete } from 'react-icons/md';
 import { columns } from './data';
-import { useDisclosure } from '@nextui-org/react';
 // import TopicForm from './TopicForm';
-import { FC } from 'react';
+import {
+  TopicWithNumQuestions,
+  useTopicDelete,
+  useTopics,
+} from '@learning-app/syllabus';
+import ConfirmDeleteDialog from 'components/ConfirmDeleteDialog';
 import CourseStageSelector from 'components/CourseStageSelector';
 import CourseSubjectSelector from 'components/CourseSubjectSelector';
-import { Topic, useTopicDelete, useTopics } from '@learning-app/syllabus';
+import { FC } from 'react';
 import TopicFormDialog from './TopicFormDialog';
-import ConfirmDeleteDialog from 'components/ConfirmDeleteDialog';
-
-const statusColorMap: Record<string, ChipProps['color']> = {
-  upload: 'success',
-  non: 'danger',
-};
 
 const TopicListView: FC = () => {
   const [subjectId, setSelectedSubject] = useState<string | undefined>(
     undefined
   );
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
-  const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
+  const [activeTopic, setActiveTopic] = useState<TopicWithNumQuestions | null>(null);
 
   const {
     data: { data: topics } = {
@@ -53,8 +51,8 @@ const TopicListView: FC = () => {
   } = useDisclosure();
 
   const renderCell = React.useCallback(
-    (topic: Topic, columnKey: React.Key) => {
-      const cellValue = topic[columnKey as keyof Topic];
+    (topic: TopicWithNumQuestions, columnKey: React.Key) => {
+      const cellValue = topic[columnKey as keyof TopicWithNumQuestions];
 
       switch (columnKey) {
         case 'topic':
@@ -72,37 +70,24 @@ const TopicListView: FC = () => {
 
         case 'video':
           return (
-            <Chip
-              className="capitalize"
-              color={statusColorMap[topic.videoLink]}
-              size="sm"
-              variant="flat"
-            >
-              {topic.videoLink ? 'Upload' : 'Non'}
+            <Chip className="capitalize" size="sm" variant="flat">
+              {topic.videoLink ? '✅' : '❌'}
             </Chip>
           );
 
         case 'studyMaterial':
           return (
-            <Chip
-              className="capitalize"
-              color={statusColorMap[topic.studyMaterial]}
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
+            <Chip className="capitalize" size="sm" variant="flat">
+              {topic.studyMaterial ? '✅' : '❌'}
             </Chip>
           );
 
         case 'mcqQuestion':
           return (
-            <Chip
-              className="capitalize"
-              color={statusColorMap[topic.id]}
-              size="sm"
-              variant="flat"
-            >
-              {cellValue}
+            <Chip className="capitalize" size="sm" variant="flat">
+              {topic.numQuestion > 0
+                ? `✅ ${topic.numQuestion} MCQs`
+                : '❌'}
             </Chip>
           );
 

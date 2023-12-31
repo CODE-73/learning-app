@@ -1,6 +1,6 @@
 import { useSubjects } from '@learning-app/syllabus';
 import { Select, SelectItem } from '@nextui-org/react';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Control, FieldValues, FieldPath } from 'react-hook-form';
 import Form from './form/Form';
 
@@ -16,6 +16,13 @@ const CourseSubjectSelector: React.FC<CourseSubjectSelectorProps> & {
   ) => ReactElement;
 } = ({ value, onChange, stageId }) => {
   const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
+
+  useEffect(() => {
+    onChange({ subjectId: null });
+  // Only run this effect when stageId changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stageId]);
+
   return (
     <Select
       label="Subject"
