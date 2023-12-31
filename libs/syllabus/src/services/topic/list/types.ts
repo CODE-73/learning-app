@@ -13,6 +13,7 @@ export type TopicListRequest = {
 
 export type TopicListFilterParams = {
   q?: string;
+  enabled?: boolean;
 };
 
 export type TopicListResponse = {

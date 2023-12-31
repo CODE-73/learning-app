@@ -9,7 +9,10 @@ type CourseStageViewProps = {
 };
 
 const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
-  const { data: { data: subjects } = { data: [] } } = useSubjects({ stageId });
+  const { data: { data: subjects } = { data: [] } } = useSubjects({
+    stageId,
+    filters: { enabled: true },
+  });
 
   return (
     <Box display="flex" bgColor="$white" w="$full" flex={1}>

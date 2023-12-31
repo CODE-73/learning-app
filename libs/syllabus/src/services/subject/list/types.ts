@@ -13,6 +13,7 @@ export type SubjectListRequest = {
 
 export type SubjectListFilterParams = {
   q?: string;
+  enabled?: boolean;
 };
 
 export type SubjectListResponse = {

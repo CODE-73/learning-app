@@ -28,6 +28,10 @@ export async function getTopics(
     );
   }
 
+  if (filters?.enabled !== undefined) {
+    query = query.eq('enabled', filters.enabled);
+  }
+
   if (sort) {
     query = query.order(sort.field, { ascending: sort.ascending });
   } else {

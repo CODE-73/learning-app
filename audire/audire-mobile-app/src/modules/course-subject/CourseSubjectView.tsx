@@ -9,7 +9,12 @@ type CourseSubjectViewProps = {
 };
 
 const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
-  const { data: { data: topics } = { data: [] } } = useTopics({ subjectId });
+  const { data: { data: topics } = { data: [] } } = useTopics({
+    subjectId,
+    filters: {
+      enabled: true,
+    },
+  });
 
   return (
     <Box flex={1} bgColor="$white" w="$full">
