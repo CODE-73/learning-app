@@ -66,6 +66,7 @@ const VideoComponent: FC<VideoComponentProps> = (props) => {
           volume={1}
           resizeMode={ResizeMode.CONTAIN}
           onFullscreenUpdate={onFullscreenUpdate}
+          onPlaybackStatusUpdate={(status) => {}}
           source={{
             uri: url,
             // uri: 'http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8',

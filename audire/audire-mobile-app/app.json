@@ -22,7 +22,11 @@
       "bundleIdentifier": "com.audirelearning.app"
     },
     "android": {
-      "package": "com.audirelearning.app"
+      "package": "com.audirelearning.app",
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -39,7 +43,8 @@
           ]
         }
       ],
-      "expo-router"
+      "expo-router",
+      "expo-av"
     ],
     "extra": {
       "router": {

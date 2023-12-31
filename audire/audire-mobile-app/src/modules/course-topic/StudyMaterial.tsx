@@ -44,6 +44,7 @@ const StudyMeterial: FC<StudyMeterialProps> = (props) => {
               ellipsizeMode="tail"
             >
               Study Material
+              {isMutating && ' (Loading...)'}
             </Text>
           </Box>
           <Box pr="$4">

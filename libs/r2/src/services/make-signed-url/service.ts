@@ -31,7 +31,8 @@ export async function makeSignedURL(
 function getBucketManagerURL() {
   return (
     process.env['NEXT_PUBLIC_BUCKET_MANAGER_URL'] ??
-    process.env['EXPO_PUBLIC_BUCKET_MANAGER_URL'] ??
+    // @ts-expect-error inlining as per expo docs
+    process.env.EXPO_PUBLIC_BUCKET_MANAGER_URL ??
     ''
   );
 }
