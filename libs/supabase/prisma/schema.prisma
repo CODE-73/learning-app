@@ -28,7 +28,7 @@ model Profile {
 
     // Student Specific Fields
     optedCourseId String? @db.Uuid
-    optedCourse Course? @relation("CourseStudents", fields: [optedCourseId], references: [id], onDelete: Restrict)
+    optedCourse   Course? @relation("CourseStudents", fields: [optedCourseId], references: [id], onDelete: Restrict)
 
     createdCourses Course[] @relation("CourseCreatedBy")
     updatedCourses Course[] @relation("CourseUpdatedBy")
@@ -44,10 +44,11 @@ model Profile {
 }
 
 model Course {
-    id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    title       String    @unique
-    stages      Stage[]
-    students    Profile[] @relation("CourseStudents")
+    id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    enabled  Boolean   @default(true)
+    title    String    @unique
+    stages   Stage[]
+    students Profile[] @relation("CourseStudents")
 
     createdBy   Profile?  @relation("CourseCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
     createdById String?   @db.Uuid
@@ -59,6 +60,7 @@ model Course {
 
 model Stage {
     id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    enabled     Boolean   @default(true)
     title       String
     course      Course    @relation(fields: [courseId], references: [id])
     courseId    String    @db.Uuid
@@ -73,6 +75,7 @@ model Stage {
 
 model Subject {
     id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    enabled     Boolean   @default(true)
     title       String
     description String
     stage       Stage     @relation(fields: [stageId], references: [id])
@@ -88,6 +91,7 @@ model Subject {
 
 model Topic {
     id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    enabled       Boolean       @default(true)
     title         String
     description   String
     subject       Subject       @relation(fields: [subjectId], references: [id])

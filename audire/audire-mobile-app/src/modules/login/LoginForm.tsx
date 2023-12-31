@@ -1,4 +1,3 @@
-import { TextareaInput } from '@gluestack-ui/config/build/theme';
 import {
   Box,
   Button,
@@ -12,7 +11,7 @@ import {
 import { useSendMobileOTP } from '@learning-app/auth';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { TextInput, ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 const LoginForm = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -70,7 +69,7 @@ const LoginForm = () => {
         </Text>
       </Box>
 
-      <Box alignItems="center" bgColor="#FFFFFF">
+      <Box alignItems="center" bg="$white" py="$5">
         <FormControl mb="$1" w="$full">
           <Input
             variant="outline"
@@ -126,7 +125,6 @@ const LoginForm = () => {
             bg="#B051AE"
             onPress={() => {
               handleTrigger();
-              console.log('Button pressed!');
             }}
           >
             {isTriggeringMobileOTP ? (

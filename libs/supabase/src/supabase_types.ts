@@ -1,4 +1,3 @@
-
 export type Json =
   | string
   | number
@@ -47,6 +46,7 @@ export interface Database {
         Row: {
           createdAt: string
           createdById: string | null
+          enabled: boolean
           id: string
           title: string
           updatedAt: string | null
@@ -55,6 +55,7 @@ export interface Database {
         Insert: {
           createdAt?: string
           createdById?: string | null
+          enabled?: boolean
           id?: string
           title: string
           updatedAt?: string | null
@@ -63,6 +64,7 @@ export interface Database {
         Update: {
           createdAt?: string
           createdById?: string | null
+          enabled?: boolean
           id?: string
           title?: string
           updatedAt?: string | null
@@ -169,6 +171,7 @@ export interface Database {
           courseId: string
           createdAt: string
           createdById: string | null
+          enabled: boolean
           id: string
           title: string
           updatedAt: string | null
@@ -178,6 +181,7 @@ export interface Database {
           courseId: string
           createdAt?: string
           createdById?: string | null
+          enabled?: boolean
           id?: string
           title: string
           updatedAt?: string | null
@@ -187,6 +191,7 @@ export interface Database {
           courseId?: string
           createdAt?: string
           createdById?: string | null
+          enabled?: boolean
           id?: string
           title?: string
           updatedAt?: string | null
@@ -221,6 +226,7 @@ export interface Database {
           createdAt: string
           createdById: string | null
           description: string
+          enabled: boolean
           id: string
           stageId: string
           title: string
@@ -231,6 +237,7 @@ export interface Database {
           createdAt?: string
           createdById?: string | null
           description: string
+          enabled?: boolean
           id?: string
           stageId: string
           title: string
@@ -241,6 +248,7 @@ export interface Database {
           createdAt?: string
           createdById?: string | null
           description?: string
+          enabled?: boolean
           id?: string
           stageId?: string
           title?: string
@@ -276,6 +284,7 @@ export interface Database {
           createdAt: string
           createdById: string | null
           description: string
+          enabled: boolean
           id: string
           studyMaterial: string | null
           subjectId: string
@@ -288,6 +297,7 @@ export interface Database {
           createdAt?: string
           createdById?: string | null
           description: string
+          enabled?: boolean
           id?: string
           studyMaterial?: string | null
           subjectId: string
@@ -300,6 +310,7 @@ export interface Database {
           createdAt?: string
           createdById?: string | null
           description?: string
+          enabled?: boolean
           id?: string
           studyMaterial?: string | null
           subjectId?: string

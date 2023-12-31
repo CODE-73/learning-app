@@ -1,8 +1,8 @@
 import { Box, Text } from '@gluestack-ui/themed';
 import React, { ComponentProps, FC } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { router } from 'expo-router';
+import { Platform, TouchableOpacity } from 'react-native';
 import DownloadPDFIcon from '/assets/downloadPdf.svg';
+import { openURL } from 'expo-linking';
 
 type StudyMeterialProps = ComponentProps<typeof Box>;
 
@@ -11,12 +11,11 @@ const StudyMeterial: FC<StudyMeterialProps> = (props) => {
     'https://pub-3fe5f60b517c4b64841ac747be486004.r2.dev/Study Meterials/thereactnativebook-sample.pdf'; // Replace with your PDF URL
 
   const handlePdfOpen = () => {
-    router.push({
-      pathname: '/common/pdf-viewer',
-      params: {
-        url: pdfUri,
-      },
-    });
+    if (Platform.OS === 'web') {
+      window.open(pdfUri, '_blank');
+    } else {
+      openURL(pdfUri);
+    }
   };
 
   return (

@@ -46,9 +46,8 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   const onLogout = async () => {
     try {
       await trigger();
-      console.error('Logged out');
     } catch (e) {
-      console.error('Error triggering on log in:', e);
+      console.error('Error triggering logout in:', e);
     }
   };
 

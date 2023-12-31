@@ -89,7 +89,7 @@ const VerificationView: FC<VerificationFormProps> = ({
   };
 
   return (
-    <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
+    <Box display="flex" flex={1} justifyContent="center" w="$full">
       <Box display="flex" mb="$6">
         <Text fontSize="$2xl" fontWeight="bold" color="black" pl="$6">
           Verify
@@ -104,7 +104,7 @@ const VerificationView: FC<VerificationFormProps> = ({
           </Text>
         </Box>
       </Box>
-      <Box alignItems="center" display="flex">
+      <Box alignItems="center" display="flex" bg="$white" py="$5" w="$full">
         <Box flexDirection="row" mb="$8">
           {renderOtpInputBoxes()}
         </Box>

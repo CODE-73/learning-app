@@ -12,7 +12,6 @@ type StageCardProps = {
 };
 
 const StageCard: FC<StageCardProps> = ({ stage, href }) => {
-  console.info('StageCard', { stage });
   return (
     <Box width={120} height={120} alignItems="center">
       <Link href={href} asChild>

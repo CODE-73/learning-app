@@ -7,7 +7,6 @@ import { UserProvider } from '@learning-app/auth';
 
 const MainLayout = () => {
   const [sidebarShown, setSidebarShown] = useState(false);
-  console.log(sidebarShown);
   return (
     <UserProvider onUnauthorized={() => router.replace('/login')}>
       <Box
