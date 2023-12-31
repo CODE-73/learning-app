@@ -2,6 +2,15 @@ import { makeSignedURL } from '../make-signed-url';
 import { UploadFileRequest, FileUploadEvent } from './types';
 import { EventIterator } from 'event-iterator';
 
+/*
+ * Please make sure to set CORS Policy well.
+ * - Allowed Origins
+ * - Allowed Methods
+ * - Allowed Headers
+ * 
+ * !! Missing any of these will cause CORS error.
+ */
+
 export async function uploadFile({
   key,
   isBigFile,

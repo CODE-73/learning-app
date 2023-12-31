@@ -24,6 +24,7 @@ export async function makeSignedURL(
     throw new Error('Failed fetching signed URL');
   }
 
+  console.info('Made Signed URL', args.requestType, args.key, data.signedURL);
   return data.signedURL;
 }
 

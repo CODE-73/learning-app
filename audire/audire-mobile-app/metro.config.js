@@ -4,7 +4,7 @@ const { mergeConfig } = require('metro-config');
 const exclusionList = require('metro-config/src/defaults/exclusionList');
 
 const defaultConfig = getDefaultConfig(__dirname);
-const { assetExts, sourceExts, extraNodeModules } = defaultConfig.resolver;
+const { assetExts, sourceExts } = defaultConfig.resolver;
 
 /**
  * Metro configuration
@@ -17,13 +17,6 @@ const customConfig = {
     babelTransformerPath: require.resolve('react-native-svg-transformer'),
   },
   resolver: {
-    extraNodeModules: {
-      ...(extraNodeModules ?? {}),
-      '../Utilities/Platform':
-        require.resolve('react-native-web').split('/').slice(0, -3).join('/') +
-        '/dist/exports/Platform/index.js',
-      // '../Utilities/Platform': 'react-native-web/dist/exports/Platform',
-    },
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
     sourceExts: [...sourceExts, 'svg', 'mjs'],
     blockList: exclusionList([/^(?!.*node_modules).*\/dist\/.*/]),
@@ -32,7 +25,6 @@ const customConfig = {
   },
 };
 
-console.info('metro.config.js', customConfig);
 module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
   // Change this to true to see debugging info.
   // Useful if you have issues resolving modules

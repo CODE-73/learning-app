@@ -8,7 +8,7 @@ import { RequestSchema } from './zod';
 import { CORSHeaders } from './cors';
 // import { type ExecutionContext } from '@cloudflare/workers-types';
 
-const BUCKET = 'audire';
+const BUCKET = 'audire-bucket';
 
 export default {
   async fetch(

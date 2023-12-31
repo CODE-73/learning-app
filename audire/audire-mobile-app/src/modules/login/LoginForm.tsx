@@ -55,21 +55,20 @@ const LoginForm = () => {
   };
 
   return (
-    <Box display="flex" flex={1} justifyContent="center" w="$full" px="$4">
-      <Box mb="$9">
-        <Text fontSize="$xl" color="black" fontWeight="bold">
-          Welcome to
-        </Text>
-
-        <Text fontSize="$2xl" fontWeight="bold" color="#8D0C8A">
-          Audire
-          <Text fontSize="$2xl" fontWeight="bold" color="black">
-            !
+    <Box display="flex" flex={1} justifyContent="center" w="$full">
+      <Box alignItems="center" bg="$white" py="$5" px="$5" w="$full">
+        <Box mb="$9" alignSelf='flex-start'>
+          <Text fontSize="$xl" color="black" fontWeight="bold">
+            Welcome to
           </Text>
-        </Text>
-      </Box>
 
-      <Box alignItems="center" bg="$white" py="$5">
+          <Text fontSize="$2xl" fontWeight="bold" color="#8D0C8A">
+            Audire
+            <Text fontSize="$2xl" fontWeight="bold" color="black">
+              !
+            </Text>
+          </Text>
+        </Box>
         <FormControl mb="$1" w="$full">
           <Input
             variant="outline"

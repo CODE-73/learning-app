@@ -1,4 +1,4 @@
-package com.audire.app;
+package com.audirelearning.app;
 
 import android.app.Application;
 import android.content.res.Configuration;

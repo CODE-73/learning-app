@@ -1,8 +1,8 @@
 import { ScrollView } from 'react-native';
 import { Box, Text } from '@gluestack-ui/themed';
 import VideoComponent from './VideoComponent';
-import StudyMeterial from './StudyMeterial';
-import SampleQuestions from './SampleQuestions';
+import StudyMaterial from './StudyMaterial';
+// import SampleQuestions from './SampleQuestions';
 import McqTestCard from './McqTestCard';
 import React, { FC } from 'react';
 import { useTopic } from '@learning-app/syllabus';
@@ -30,19 +30,12 @@ const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
 
         <Box h={0.3} backgroundColor="black" mx={17}></Box>
 
-        <Box ml="$5" pt="$3">
-          <Text fontSize="$lg" color="black" fontWeight="bold" my="$2">
-            Video Class Name
-          </Text>
-          <Text fontSize="$md" color="black" fontWeight="$normal" pb="$1">
-            Presenter Name
-          </Text>
-        </Box>
-
-        <VideoComponent />
-        <StudyMeterial />
-        <SampleQuestions />
-        <McqTestCard topicId={topic?.id} />
+        {topic?.videoLink && <VideoComponent r2Key={topic.videoLink} />}
+        {topic?.studyMaterial && <StudyMaterial r2Key={topic.studyMaterial} />}
+        {/* <SampleQuestions /> */}
+        {(topic?.mcqQuestions?.length ?? 0) > 0 && (
+          <McqTestCard topicId={topic?.id} />
+        )}
       </Box>
     </ScrollView>
   );

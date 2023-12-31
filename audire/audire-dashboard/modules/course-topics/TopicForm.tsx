@@ -1,17 +1,15 @@
-import React from 'react';
-import { FC, useEffect } from 'react';
-import { Accordion, AccordionItem, Button } from '@nextui-org/react';
-import { Topic, useTopic, useTopicUpsert } from '@learning-app/syllabus';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { Topic, useMCQQuestionUpsert, useTopic, useTopicUpsert } from '@learning-app/syllabus';
+import { Accordion, AccordionItem, Button } from '@nextui-org/react';
+import CourseSubjectSelector from 'components/CourseSubjectSelector';
+import { FileUploadElement } from 'components/FileUpload';
+import CheckboxElement from 'components/form/CheckboxElement';
 import Form from 'components/form/Form';
 import InputElement from 'components/form/InputElement';
-import CourseSubjectSelector from 'components/CourseSubjectSelector';
+import { FC, useEffect } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
 import MCQForm from './MCQForm';
-import { type TopicForm, TopicFormSchema } from './zod';
-import { useMCQQuestionUpsert } from '@learning-app/syllabus';
-import FileUpload from 'components/FileUpload';
-import CheckboxElement from 'components/form/CheckboxElement';
+import { TopicFormSchema, type TopicForm } from './zod';
 
 interface TopicFormProps {
   isNew?: boolean;
@@ -57,6 +55,8 @@ const TopicForm: FC<TopicFormProps> = ({
       enabled: topic.enabled,
       description: topic.description,
       subjectId: topic.subjectId,
+      studyMaterial: topic.studyMaterial,
+      videoLink: topic.videoLink,
       mcqQuestions: topic.mcqQuestions.map((x) => ({
         ...x,
         options: x.options ?? ['', '', '', ''],
@@ -76,8 +76,8 @@ const TopicForm: FC<TopicFormProps> = ({
           enabled: data.enabled,
           description: data.description,
           subjectId: data.subjectId,
-          videoLink: null,
-          studyMaterial: null,
+          videoLink: data.videoLink,
+          studyMaterial: data.studyMaterial,
         },
       });
 
@@ -97,7 +97,11 @@ const TopicForm: FC<TopicFormProps> = ({
   };
 
   return (
-    <Form formContext={form} onSubmit={form.handleSubmit(upsertTopic)} className='flex flex-col gap-2'>
+    <Form
+      formContext={form}
+      onSubmit={form.handleSubmit(upsertTopic)}
+      className="flex flex-col gap-2"
+    >
       <h1 className="font-bold text-xl">Topic</h1>
       <CheckboxElement name="enabled" label="Enabled" />
       <InputElement
@@ -113,12 +117,14 @@ const TopicForm: FC<TopicFormProps> = ({
 
       {!isNew && topic && (
         <>
-          <FileUpload
+          <FileUploadElement
             label="Upload Video"
-            isBigFile={true}
+            isBigFile={false}
             keyPrefix={`videos/`}
+            name='videoLink'
           />
-          <FileUpload
+          <FileUploadElement
+            name="studyMaterial"
             label="Upload Study Material"
             isBigFile={false}
             keyPrefix={`study-materials/`}

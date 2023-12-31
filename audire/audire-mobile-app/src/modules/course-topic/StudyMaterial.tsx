@@ -2,25 +2,32 @@ import { Box, Text } from '@gluestack-ui/themed';
 import React, { ComponentProps, FC } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 import DownloadPDFIcon from '/assets/downloadPdf.svg';
-import { openURL } from 'expo-linking';
+import * as WebBrowser from 'expo-web-browser';
+import { useR2Download } from '@learning-app/r2';
 
-type StudyMeterialProps = ComponentProps<typeof Box>;
+type StudyMeterialProps = ComponentProps<typeof Box> & {
+  r2Key: string;
+};
 
 const StudyMeterial: FC<StudyMeterialProps> = (props) => {
-  const pdfUri =
-    'https://pub-3fe5f60b517c4b64841ac747be486004.r2.dev/Study Meterials/thereactnativebook-sample.pdf'; // Replace with your PDF URL
+  const { r2Key } = props;
+  const { trigger: getURL, isMutating } = useR2Download();
 
-  const handlePdfOpen = () => {
+  const handlePdfOpen = async () => {
+    const { url } = await getURL({
+      key: r2Key,
+    });
+
     if (Platform.OS === 'web') {
-      window.open(pdfUri, '_blank');
+      window.open(url, '_blank');
     } else {
-      openURL(pdfUri);
+      WebBrowser.openBrowserAsync(url);
     }
   };
 
   return (
     <Box mx={17} borderRadius="$sm" my="$1" backgroundColor="#e5e5e5" py="$6">
-      <TouchableOpacity onPress={handlePdfOpen}>
+      <TouchableOpacity onPress={handlePdfOpen} disabled={isMutating}>
         <Box
           display="flex"
           flexDirection="row"

@@ -10,11 +10,7 @@ export async function downloadFile({
     expiresIn: 3600,
   });
 
-  const r = await fetch(url);
-
-  if (!r.ok) {
-    throw new Error('Failed file download');
+  return {
+    url
   }
-
-  return await r.blob();
 }

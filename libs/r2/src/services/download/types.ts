@@ -2,4 +2,6 @@ export type DownloadFileRequest = {
   key: string;
 };
 
-export type DownloadFileResponse = Blob;
+export type DownloadFileResponse = {
+  url: string;
+};
