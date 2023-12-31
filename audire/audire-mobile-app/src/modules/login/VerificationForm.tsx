@@ -1,5 +1,5 @@
 import React, { FC, RefObject, useRef, useState } from 'react';
-import { TextInput, ActivityIndicator } from 'react-native';
+import { TextInput, ActivityIndicator, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { router } from 'expo-router';
 import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
@@ -110,10 +110,12 @@ const VerificationView: FC<VerificationFormProps> = ({
         </Box>
 
         <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Box mr="$8">
-            <Text fontSize="$sm" color="black" fontWeight="bold">
-              Resend OTP
-            </Text>
+          <Box mr="$8" >
+            <Pressable onPress={() => null} disabled>
+              <Text fontSize="$sm" color="$backgroundDark500" fontWeight="bold">
+                Resend OTP
+              </Text>
+            </Pressable>
           </Box>
           <Box ml="$8">
             <Link href="/login" asChild>

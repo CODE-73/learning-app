@@ -7,6 +7,7 @@ import Form from 'components/form/Form';
 import { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import CheckboxElement from 'components/form/CheckboxElement';
 
 interface SubjectFormProps {
   isNew?: boolean;
@@ -17,6 +18,7 @@ interface SubjectFormProps {
 }
 
 const SubjectFormSchema = z.object({
+  enabled: z.boolean().default(true),
   title: z.string(),
   description: z.string(),
   stageId: z.string().min(1),
@@ -49,6 +51,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
 
     // Load the form with the values of useSubject
     form.reset({
+      enabled: subject.enabled,
       title: subject.title,
       description: subject.description,
       stageId: subject.stageId,
@@ -64,6 +67,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
       const subject = await trigger({
         input: {
           id: isNew ? undefined : subjectId,
+          enabled: data.enabled,
           title: data.title,
           description: data.description,
           stageId: data.stageId,
@@ -82,6 +86,7 @@ const SubjectForm: FC<SubjectFormProps> = ({
       onSubmit={form.handleSubmit(upsertSubject)}
     >
       <h1 className="font-bold text-xl">Subject</h1>
+      <CheckboxElement name='enabled' label='Enabled' />
       <InputElement
         name="title"
         label="Title"

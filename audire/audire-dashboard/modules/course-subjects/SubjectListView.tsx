@@ -1,33 +1,19 @@
-import React, { useState } from 'react';
 import { Subject } from '@learning-app/syllabus';
-import { FC } from 'react';
-import SubjectFormDialog from './SubjectFormDialogue';
 import ConfirmDeleteDialog from 'components/ConfirmDeleteDialog';
+import React, { FC, useState } from 'react';
+import SubjectFormDialog from './SubjectFormDialogue';
 
-import { useDisclosure } from '@nextui-org/react';
-import { Button } from '@nextui-org/react';
-import { IoMdAdd } from 'react-icons/io';
+import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, useDisclosure } from '@nextui-org/react';
 import { CiEdit } from 'react-icons/ci';
+import { IoMdAdd } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Tooltip,
-} from '@nextui-org/react';
 
+import { useSubjectDelete, useSubjects } from '@learning-app/syllabus';
 import CourseStageSelector from 'components/CourseStageSelector';
 import { columns } from './data';
-import { useSubjects } from '@learning-app/syllabus';
-import { useSubjectDelete } from '@learning-app/syllabus';
-import { useActiveUser } from '@learning-app/auth';
 
 const SubjectListView: FC = () => {
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
-  const [courseId, setSelectedCourse] = useState<string | undefined>(undefined);
   const [activeSubject, setactiveSubject] = useState<Subject | null>(null);
 
   const { data: { data: subjects } = { data: [] } } = useSubjects({
@@ -40,8 +26,7 @@ const SubjectListView: FC = () => {
     onOpen: openDeleteDialog,
     onOpenChange: toggleDeleteDialog,
   } = useDisclosure();
-  const { user } = useActiveUser();
-  console.log(user);
+
   const renderCell = React.useCallback(
     (subject: Subject, columnKey: React.Key) => {
       switch (columnKey) {
@@ -136,7 +121,6 @@ const SubjectListView: FC = () => {
           value={stageId}
           onChange={({ stageId, courseId }) => {
             setSelectedStage(stageId ?? undefined);
-            setSelectedCourse(courseId ?? undefined);
           }}
         />
       </div>

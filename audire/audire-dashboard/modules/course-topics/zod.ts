@@ -10,6 +10,7 @@ const MCQQuestionSchema = z.object({
 
 export const TopicFormSchema = z.object({
   title: z.string(),
+  enabled: z.boolean().default(true),
   description: z.string(),
   subjectId: z.string().min(1),
   mcqQuestions: z.array(MCQQuestionSchema),

@@ -11,6 +11,7 @@ import MCQForm from './MCQForm';
 import { type TopicForm, TopicFormSchema } from './zod';
 import { useMCQQuestionUpsert } from '@learning-app/syllabus';
 import FileUpload from 'components/FileUpload';
+import CheckboxElement from 'components/form/CheckboxElement';
 
 interface TopicFormProps {
   isNew?: boolean;
@@ -53,6 +54,7 @@ const TopicForm: FC<TopicFormProps> = ({
     // Load the form with the values of useTopic
     form.reset({
       title: topic.title,
+      enabled: topic.enabled,
       description: topic.description,
       subjectId: topic.subjectId,
       mcqQuestions: topic.mcqQuestions.map((x) => ({
@@ -63,7 +65,6 @@ const TopicForm: FC<TopicFormProps> = ({
   }, [form, isNew, subjectId, topic]);
 
   const upsertTopic = async (data: TopicForm) => {
-    console.info('upsertTopic', data);
     if (!data.title || !data.description) {
       return;
     }
@@ -72,6 +73,7 @@ const TopicForm: FC<TopicFormProps> = ({
         input: {
           id: isNew ? undefined : topicId,
           title: data.title,
+          enabled: data.enabled,
           description: data.description,
           subjectId: data.subjectId,
           videoLink: 'video-link',
@@ -95,8 +97,9 @@ const TopicForm: FC<TopicFormProps> = ({
   };
 
   return (
-    <Form formContext={form} onSubmit={form.handleSubmit(upsertTopic)}>
+    <Form formContext={form} onSubmit={form.handleSubmit(upsertTopic)} className='flex flex-col gap-2'>
       <h1 className="font-bold text-xl">Topic</h1>
+      <CheckboxElement name="enabled" label="Enabled" />
       <InputElement
         name="title"
         label="Title"
