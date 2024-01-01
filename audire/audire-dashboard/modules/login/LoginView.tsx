@@ -90,6 +90,7 @@ const LoginView: FC = () => {
           <input
             className="mt-2 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-lg text-black shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+            type="password"
           />
         </InputElement>
 
