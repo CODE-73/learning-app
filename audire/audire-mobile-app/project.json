@@ -37,6 +37,11 @@
         "platform": "android",
         "local": true,
         "profile": "preview"
+      },
+      "configurations": {
+        "production": {
+          "profile": "production"
+        }
       }
     },
     "build-web": {
