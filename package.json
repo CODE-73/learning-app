@@ -106,6 +106,7 @@
     "metro-react-native-babel-transformer": "0.76.8",
     "metro-resolver": "0.76.8",
     "nx": "17.1.2",
+    "nx-ignore": "17.2.2",
     "postcss": "^8.4.31",
     "prettier": "^2.6.2",
     "prisma": "^5.6.0",
