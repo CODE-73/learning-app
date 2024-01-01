@@ -1,6 +1,6 @@
 import { CORSHeaders } from '../_shared/cors.ts';
 import { sendOTP } from '../_shared/fast2sms.ts';
-import { generateOTP } from '../_shared/otp.ts';
+import { TEST_MOBILE, generateOTP } from '../_shared/otp.ts';
 import { createSupabaseAdminClient } from '../_shared/supabase.ts';
 import { checkUserExists } from '../_shared/user.ts';
 
@@ -32,12 +32,14 @@ Deno.serve(async (req) => {
   const userExists = await checkUserExists(supabaseAdmin, mobile);
   const otp = generateOTP(mobile);
 
-  const r = await sendOTP(mobile, otp);
-  if (!r) {
-    return new Response(JSON.stringify({ error: 'Failed to send OTP' }), {
-      headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
-      status: 500,
-    });
+  if (mobile !== TEST_MOBILE) {
+    const r = await sendOTP(mobile, otp);
+    if (!r) {
+      return new Response(JSON.stringify({ error: 'Failed to send OTP' }), {
+        headers: { ...CORSHeaders, 'Content-Type': 'application/json' },
+        status: 500,
+      });
+    }
   }
 
   return new Response(

@@ -19,10 +19,12 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "buildNumber": "1",
       "bundleIdentifier": "com.audirelearning.app"
     },
     "android": {
       "package": "com.audirelearning.app",
+      "versionCode": 2,
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE"
