@@ -4,7 +4,7 @@ function privacyPolicy() {
 <div>
 <div className="bg-fuchsia-200  text-center p-5 ">
         <Image src="/images/audire.png" alt="Company Logo" width={150} height={40} />
-        {/* Add any additional content or styling for your top bar */}
+       
       </div>
 
 <h1>Privacy Policy</h1>
