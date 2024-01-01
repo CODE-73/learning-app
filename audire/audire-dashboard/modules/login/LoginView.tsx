@@ -69,30 +69,14 @@ const LoginView: FC = () => {
           name="email"
           placeholder="Email"
           required
-        >
-          <span className="block text-lg font-medium text-slate-700">
-            Email
-          </span>
-          <input
-            className="mt-2 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-lg text-black shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-          />
-        </InputElement>
+        />
 
         <InputElement
           className="block mt-6"
           name="password"
           placeholder="Enter your password"
-        >
-          <span className="block text-lg font-medium text-slate-700">
-            Password
-          </span>
-          <input
-            className="mt-2 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-lg text-black shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-            type="password"
-          />
-        </InputElement>
+          type='password'
+        />
 
         <Button
           type="submit"
