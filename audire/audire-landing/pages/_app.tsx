@@ -6,7 +6,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to audire-Learning!</title>
+        <title>Welcome to Audire Learning!</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />

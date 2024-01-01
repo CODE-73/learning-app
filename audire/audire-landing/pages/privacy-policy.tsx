@@ -1,10 +1,12 @@
-
+import Image from 'next/image';
 function privacyPolicy() {
     return (
 <div>
-<div style={{ backgroundColor: '#f0f0f0', padding: '10px', textAlign: 'center' }}>
-                <img src="/images/audire.png" alt="Company Logo" style={{ maxWidth: '150px' }} />
-            </div>
+<div className="bg-fuchsia-200  text-center p-5 ">
+        <Image src="/images/audire.png" alt="Company Logo" width={150} height={40} />
+        {/* Add any additional content or styling for your top bar */}
+      </div>
+
 <h1>Privacy Policy</h1>
 <p>Last updated: January 01, 2024</p>
 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
