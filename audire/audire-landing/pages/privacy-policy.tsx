@@ -2,17 +2,21 @@ import Image from 'next/image';
 function privacyPolicy() {
     return (
 <div>
-<div className="bg-fuchsia-200  text-center p-5 ">
-        <Image src="/images/audire.png" alt="Company Logo" width={150} height={40} />
-       
-      </div>
+<div className="flex flex-row items-center bg-fuchsia-200  shadow-xl ">
+    <div className='pl-10'>
+  <Image src="/images/audire.png" alt="Company Logo" width={150} height={40} />
+  </div>
+  <h1 className="mt-2 sans-serif"><strong>Privacy Policy</strong></h1>
 
-<h1>Privacy Policy</h1>
+</div>
+<div className='p-20'>
+
+<h1> <strong>Privacy Policy</strong> </h1>
 <p>Last updated: January 01, 2024</p>
 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
 <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
 <h2>Interpretation and Definitions</h2>
-<h3>Interpretation</h3>
+<h3><strong>Interpretation </strong> </h3>
 <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
 <h3>Definitions</h3>
 <p>For the purposes of this Privacy Policy:</p>
@@ -162,7 +166,7 @@ function privacyPolicy() {
 <p>By mail: Audire Learning, Near Sagar Auditorium</p>
 </li>
 </ul>
-
+</div>
 
 </div>
         );

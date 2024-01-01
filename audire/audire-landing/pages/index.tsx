@@ -12,13 +12,13 @@ function Index() {
           objectFit="cover"
         />
         <div className="absolute inset-0 bg-white opacity-60"></div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center  ">
+        <div className="absolute inset-0 flex flex-col items-center justify-center ">
           <Image
             src="/images/audire.png"
             alt="Logo"
             width={350}
             height={350}
-            className="mb-4  "
+            className="mb-4 "
           />
         </div>
       </div>
