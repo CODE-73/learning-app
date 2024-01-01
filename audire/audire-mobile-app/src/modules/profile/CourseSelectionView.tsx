@@ -77,7 +77,7 @@ const CourseSelectionView = () => {
                   p="$7"
                 >
                   <Box pl="$4" mt="$2">
-                    <Text fontSize="$2xl" fontWeight="bold" color="black">
+                    <Text fontSize="$xl" fontWeight="$extrabold" color="black">
                       {course.title}
                     </Text>
                   </Box>

@@ -62,7 +62,7 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
             <Text fontSize="$lg" fontWeight="$bold" py="$4">
               The score you obtained is{' '}
             </Text>
-            <Text fontWeight="$extraBlack" fontSize="$3xl">
+            <Text fontWeight="$extrabold"fontSize="$xl">
               10/15
             </Text>
           </Box>

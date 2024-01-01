@@ -112,11 +112,15 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           <TouchableOpacity
             key={option.id}
             onPress={() => handleOptionClick(option.id)}
+            
           >
             <Box
               display="flex"
               flexDirection="row"
               borderRadius="$sm"
+              overflow='hidden'
+              
+             
               backgroundColor={
                 selectedOption === option.id ? '#94B6BB' : '#e5e5e5'
               }
@@ -132,14 +136,15 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                 alignItems="center"
                 borderRadius="$lg"
               >
-                <Text color="black" fontWeight="$bold">
+                <Text color="black" fontWeight="$bold"  >
                   {option.id}
                 </Text>
               </Box>
-
-              <Text fontWeight="$bold" pl="$10">
+<Box flexShrink={1}>
+              <Text fontWeight="$bold" pl="$10" numberOfLines={2} isTruncated>
                 {option.label}
               </Text>
+              </Box>
             </Box>
           </TouchableOpacity>
         ))}
