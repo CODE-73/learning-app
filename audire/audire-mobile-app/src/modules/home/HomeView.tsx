@@ -4,7 +4,7 @@ import HomePageBanner from 'assets/homepageBanner.jpg';
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Dimensions } from 'react-native';
-import HomeFooterView from '../footer/HomeFooterView';
+import FooterView from '../common/FooterView';
 import StageCard from './stage-card/StageCard';
 
 const CARD_COLORS = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
@@ -69,7 +69,7 @@ const HomeView = () => {
           </View>
         ))}
       </Box>
-      <HomeFooterView />
+      <FooterView />
     </Box>
   );
 };

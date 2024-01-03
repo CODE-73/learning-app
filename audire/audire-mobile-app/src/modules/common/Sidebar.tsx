@@ -26,10 +26,10 @@ type SidebarProps = {
 };
 
 const options: Option[] = [
-  { name: 'Exams', link: '/', icon: ClockIcon },
+  { name: 'Exams', link: '/exams', icon: ClockIcon },
   {
     name: 'Home',
-    link: '#',
+    link: '/',
     icon: GripVerticalIcon,
   },
   { name: 'Notifications', link: '#', icon: BellIcon },
