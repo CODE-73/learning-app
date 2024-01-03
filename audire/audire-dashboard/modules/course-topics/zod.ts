@@ -8,7 +8,7 @@ const MCQQuestionSchema = z.object({
   explanation: z.string().default(''),
 });
 
-const FileUploadKey = z.string().optional().transform((val) => {
+const FileUploadKey = z.string().transform((val) => {
   if (typeof val === 'string' && val.length > 0) {
     return val;
   }
@@ -21,8 +21,8 @@ export const TopicFormSchema = z.object({
   description: z.string(),
   subjectId: z.string().min(1),
   mcqQuestions: z.array(MCQQuestionSchema),
-  studyMaterial: FileUploadKey,
-  videoLink: FileUploadKey,
+  studyMaterial: FileUploadKey.nullable().default(null),
+  videoLink: FileUploadKey.nullable().default(null),
 });
 
 export type TopicForm = z.infer<typeof TopicFormSchema>;

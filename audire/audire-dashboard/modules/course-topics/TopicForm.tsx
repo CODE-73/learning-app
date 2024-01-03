@@ -95,7 +95,12 @@ const TopicForm: FC<TopicFormProps> = ({
       console.error(e);
     }
   };
-
+  
+  console.info('Form', {
+    isValid: form.formState.isValid,
+    errors: form.formState.errors
+  })
+  
   return (
     <Form
       formContext={form}
@@ -180,6 +185,7 @@ const TopicForm: FC<TopicFormProps> = ({
           type="submit"
           color="secondary"
           disabled={isMutating || MCQuestionIsMutating}
+    
         >
           Save
         </Button>
