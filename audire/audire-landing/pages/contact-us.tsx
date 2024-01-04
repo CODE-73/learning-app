@@ -19,16 +19,19 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     console.log(formData);
-  
   };
 
   return (
     <div>
       <div className="bg-fuchsia-200 text-center p-5">
-        <Image src="/images/audire.png" alt="Company Logo" width={150} height={40} />
-        
+        <Image
+          src="/images/audire.png"
+          alt="Company Logo"
+          width={150}
+          height={40}
+        />
       </div>
 
       <div className="mx-auto max-w-md p-6 bg-white border rounded-md mt-5">
@@ -77,7 +80,10 @@ function ContactUs() {
             />
           </label>
 
-          <button type="submit" className="w-full bg-fuchsia-500 text-white p-2 rounded-md">
+          <button
+            type="submit"
+            className="w-full bg-fuchsia-500 text-white p-2 rounded-md"
+          >
             Submit
           </button>
         </form>

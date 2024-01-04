@@ -10,8 +10,10 @@ import {
   ButtonText,
   AvatarFallbackText,
 } from '@gluestack-ui/themed';
+
 import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
 import FooterView from '../common/FooterView';
+import { Icon, TrashIcon } from '@gluestack-ui/themed';
 
 const ProfileView = () => {
   const {
@@ -45,10 +47,14 @@ const ProfileView = () => {
 
         <Center>
           <Text fontWeight="bold" color="black" fontSize="$2xl">
-            {firstName} {lastName}
+            {firstName}
+          </Text>
+          <Text fontWeight="bold" color="black" fontSize="$2xl">
+            {lastName}
           </Text>
         </Center>
       </Center>
+
       <Center display="flex" flexDirection="row" gap="$3">
         <Text>First Name:</Text>
         <Input
@@ -94,6 +100,31 @@ const ProfileView = () => {
         </Input>
       </Center>
 
+      <Center display="flex" flexDirection="row" gap="$12">
+        <Text> Email:</Text>
+        <Input
+          variant="outline"
+          size="sm"
+          isDisabled={false}
+          isInvalid={false}
+          isReadOnly={false}
+        >
+          <InputField />
+        </Input>
+      </Center>
+      <Center display="flex" flexDirection="row" gap="$16">
+        <Text> City:</Text>
+        <Input
+          variant="outline"
+          size="sm"
+          isDisabled={false}
+          isInvalid={false}
+          isReadOnly={false}
+        >
+          <InputField />
+        </Input>
+      </Center>
+
       <Button
         m="$10"
         size="md"
@@ -106,7 +137,18 @@ const ProfileView = () => {
       >
         <ButtonText> save </ButtonText>
       </Button>
-
+      <Center flex={1}>
+        <Button
+          size="xs"
+          variant="outline"
+          action="negative"
+          isDisabled={false}
+          isFocusVisible={false}
+        >
+          <ButtonText> Delete Account</ButtonText>
+          <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
+        </Button>
+      </Center>
       <FooterView />
     </Box>
   );

@@ -10,7 +10,6 @@ import {
   CheckCircleIcon,
   SettingsIcon,
   CircleIcon,
- 
 } from '@gluestack-ui/themed';
 import { useActiveUser, useLogout } from '@learning-app/auth';
 
@@ -38,7 +37,7 @@ const options: Option[] = [
 ];
 const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   const {
-    user: { firstName },
+    user: { firstName, lastName },
   } = useActiveUser();
 
   const { trigger } = useLogout();
@@ -85,11 +84,11 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
             </Avatar>
 
             <Box pl="$3">
-              <Text fontSize="$sm" color="black" fontWeight="bold">
+              <Text fontSize="$sm" color="black" fontWeight="$light">
                 Hello,
               </Text>
-              <Text fontWeight="bold" color="black" fontSize="$2xl">
-                {firstName}!
+              <Text fontWeight="bold" color="black" fontSize="$2xl" py="$2">
+                {firstName} !
               </Text>
             </Box>
           </Box>
@@ -123,10 +122,12 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
               </Link>
             ))}
             <Box h={0.3} backgroundColor="black" m={17}></Box>
-            <TouchableOpacity onPress={() => {
-              onLogout();
-              console.log('Logging Out!!!')
-              }}>
+            <TouchableOpacity
+              onPress={() => {
+                onLogout();
+                console.log('Logging Out!!!');
+              }}
+            >
               <Box display="flex" flexDirection="row">
                 <Icon
                   as={CircleIcon}

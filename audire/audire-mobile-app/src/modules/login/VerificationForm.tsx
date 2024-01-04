@@ -110,8 +110,8 @@ const VerificationView: FC<VerificationFormProps> = ({
         </Box>
 
         <Box display="flex" flexDirection="row" justifyContent="space-between">
-          <Box mr="$8" >
-            <Pressable onPress={() => null} disabled>
+          <Box mr="$8">
+            <Pressable onPress={() => null}>
               <Text fontSize="$sm" color="$backgroundDark500" fontWeight="bold">
                 Resend OTP
               </Text>
