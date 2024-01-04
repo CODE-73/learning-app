@@ -16,7 +16,7 @@ const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
 
   return (
     <Box display="flex" bgColor="$white" w="$full" flex={1}>
-      <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" py="$8">
+      <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$8">
         Select a Subject to start with.
       </Text>
       <Box px="$4">

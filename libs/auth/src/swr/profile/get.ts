@@ -11,10 +11,12 @@ import {
 
 export function useProfile(params: ProfileGetRequest) {
   const supabase = useSupabaseClient();
-  const key = params.id
-    ? [AuthSWRKeys.PROFILE, AuthSWRKeys.GET, params.id]
-    : null;
+  const key = params.id ? getUseProfileKey(params.id) : null;
   return useSWR<ProfileGetResponse, PostgrestError, string[] | null>(key, () =>
     getProfile(supabase, params)
   );
+}
+
+export function getUseProfileKey(profileId: string) {
+  return [AuthSWRKeys.PROFILE, AuthSWRKeys.GET, profileId];
 }
