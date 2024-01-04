@@ -15,7 +15,7 @@ const NotificationView = () => {
         alignItems: 'center',
       }}
     >
-      <Text fontSize="$xs">Notification!</Text>
+      <Text fontSize="$xs">No Notification!</Text>
     </View>
   );
 
@@ -28,7 +28,7 @@ const NotificationView = () => {
         alignItems: 'center',
       }}
     >
-      <Text fontSize="$xs">Notification!</Text>
+      <Text fontSize="$xs">No Notification!</Text>
     </View>
   );
 
