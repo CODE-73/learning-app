@@ -1,4 +1,4 @@
-import { McqQuestionInsert } from '../../../types';
+import { McqQuestion, McqQuestionInsert } from '../../../types';
 import { McqQuestionUpsertRequest, McqQuestionUpsertResponse } from './types';
 import { LearningAppSupabase } from '@learning-app/supabase';
 
@@ -29,14 +29,24 @@ export async function upsertMcqQuestion(
     }
   }
 
-  const { data, error } = await supabase
-    .from('McqQuestion')
-    .upsert(newMcqQuestion as McqQuestionInsert[])
-    .select('*');
+  const mcqsToUpdate = newMcqQuestion.filter((x) => !!x.id);
+  const mcqsToInsert = newMcqQuestion.filter((x) => !x.id);
 
-  if (error) {
-    throw error;
+  const _data: McqQuestion[] = [];
+  for (const questions of [mcqsToInsert, mcqsToUpdate]) {
+    if (questions.length > 0) {
+      continue;
+    }
+    const { data, error } = await supabase
+      .from('McqQuestion')
+      .upsert(questions as McqQuestionInsert[])
+      .select('*');
+
+    if (error) {
+      throw error;
+    }
+    _data.concat(data);
   }
 
-  return data;
+  return _data;
 }
