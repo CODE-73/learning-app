@@ -16,7 +16,7 @@ const FooterView = () => {
       link: '/',
       icon: GripVerticalIcon,
     },
-    { name: 'Settings', link: '#', icon: SettingsIcon },
+    { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
   ];
   return (
     <Box

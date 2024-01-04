@@ -51,7 +51,7 @@ const ExamView = () => {
     History: ExamHistory,
   });
 
-  const renderTabBar = (props: ComponentProps<TabBar>) => (
+  const renderTabBar = (props: ComponentProps<typeof TabBar>) => (
     <TabBar
       {...props}
       indicatorStyle={{ backgroundColor: '#8D0C8A' }}

@@ -34,7 +34,7 @@ const options: Option[] = [
   },
   { name: 'Notifications', link: '#', icon: BellIcon },
   { name: 'Payments', link: '#', icon: CheckCircleIcon },
-  { name: 'Settings', link: '#', icon: SettingsIcon },
+  { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
 ];
 const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
   const {
