@@ -1,5 +1,5 @@
 import { Box, Text, Avatar, AvatarFallbackText } from '@gluestack-ui/themed';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import {
@@ -11,7 +11,8 @@ import {
   SettingsIcon,
   CircleIcon,
 } from '@gluestack-ui/themed';
-import { useActiveUser, useLogout } from '@learning-app/auth';
+import { useActiveUser } from '@learning-app/auth';
+import ConformLogoutDialogue from './ConformLogoutDialogue';
 
 type Option = {
   name: string;
@@ -40,15 +41,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
     user: { firstName, lastName },
   } = useActiveUser();
 
-  const { trigger } = useLogout();
-
-  const onLogout = async () => {
-    try {
-      await trigger();
-    } catch (e) {
-      console.error('Error triggering logout in:', e);
-    }
-  };
+  const [showModal, setShowModal] = useState(false);
 
   return isShown ? (
     //transperent box
@@ -124,8 +117,7 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
             <Box h={0.3} backgroundColor="black" m={17}></Box>
             <TouchableOpacity
               onPress={() => {
-                onLogout();
-                console.log('Logging Out!!!');
+                setShowModal(true);
               }}
             >
               <Box display="flex" flexDirection="row">
@@ -142,6 +134,12 @@ const Sidebar: FC<SidebarProps> = ({ isShown, onToggleSidebar }) => {
                 </Text>
               </Box>
             </TouchableOpacity>
+            {showModal && (
+              <ConformLogoutDialogue
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+              />
+            )}
           </Box>
         </Box>
         <Box

@@ -49,22 +49,20 @@ function Index() {
         </div>
         <div className="flex items-center justify-center ">
           <div className="p-3">
-          <Image
-            src="/images/google-play.png"
-            alt="Google Play"
-            width={90}
-            height={90}
-            
-          />
+            <Image
+              src="/images/google-play.png"
+              alt="Google Play"
+              width={90}
+              height={90}
+            />
           </div>
           <div className="p-3">
-          <Image
-            src="/images/app-store.png"
-            alt="App Store"
-            width={90}
-            height={90}
-            
-          />
+            <Image
+              src="/images/app-store.png"
+              alt="App Store"
+              width={90}
+              height={90}
+            />
           </div>
         </div>
       </main>
