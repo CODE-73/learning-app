@@ -1,9 +1,10 @@
-import React, { FC, RefObject, useRef, useState } from 'react';
+import React, { FC, RefObject, useRef, useState, useEffect } from 'react';
 import { TextInput, ActivityIndicator, Pressable } from 'react-native';
 import { Link } from 'expo-router';
 import { router } from 'expo-router';
 import { Box, Text, Button, ButtonText } from '@gluestack-ui/themed';
 import { useVerifyMobileOTP } from '@learning-app/auth';
+import { useSendMobileOTP } from '@learning-app/auth';
 
 type VerificationFormProps = {
   mobile: string;
@@ -25,6 +26,28 @@ const VerificationView: FC<VerificationFormProps> = ({
 
   const { trigger, isMutating: isLoadingVerifyMobileOTP } =
     useVerifyMobileOTP();
+  const { trigger: triggerOTP, isMutating: isTriggeringMobileOTP } =
+    useSendMobileOTP();
+
+  const [resendCountdown, setResendCountdown] = useState(60);
+
+  const [isResendActive, setIsResendActive] = useState(false);
+
+  useEffect(() => {
+    let countdownTimer: NodeJS.Timeout;
+
+    if (resendCountdown > 0) {
+      countdownTimer = setInterval(() => {
+        setResendCountdown((prev) => {
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      setIsResendActive(true);
+    }
+
+    return () => clearInterval(countdownTimer);
+  }, [resendCountdown]);
 
   const handleTrigger = async () => {
     try {
@@ -64,6 +87,12 @@ const VerificationView: FC<VerificationFormProps> = ({
     });
   };
 
+  const handleResendOTP = () => {
+    triggerOTP({ mobile });
+    setResendCountdown(60);
+    setIsResendActive(false);
+  };
+
   const renderOtpInputBoxes = () => {
     return otpValues.map((value, index) => (
       <TextInput
@@ -88,6 +117,7 @@ const VerificationView: FC<VerificationFormProps> = ({
     ));
   };
 
+  console.info('Render End');
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full">
       <Box display="flex" mb="$6">
@@ -111,9 +141,15 @@ const VerificationView: FC<VerificationFormProps> = ({
 
         <Box display="flex" flexDirection="row" justifyContent="space-between">
           <Box mr="$8">
-            <Pressable onPress={() => null}>
-              <Text fontSize="$sm" color="$backgroundDark500" fontWeight="bold">
-                Resend OTP
+            <Pressable onPress={isResendActive ? handleResendOTP : () => null}>
+              <Text
+                fontSize="$sm"
+                color={isResendActive ? '$black' : '$gray500'}
+                fontWeight="bold"
+              >
+                {isResendActive
+                  ? 'Resend OTP'
+                  : `Resend in ${resendCountdown}s`}
               </Text>
             </Pressable>
           </Box>
