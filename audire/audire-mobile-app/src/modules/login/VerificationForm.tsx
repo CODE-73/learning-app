@@ -26,8 +26,7 @@ const VerificationView: FC<VerificationFormProps> = ({
 
   const { trigger, isMutating: isLoadingVerifyMobileOTP } =
     useVerifyMobileOTP();
-  const { trigger: triggerOTP, isMutating: isTriggeringMobileOTP } =
-    useSendMobileOTP();
+  const { trigger: triggerOTP } = useSendMobileOTP();
 
   const [resendCountdown, setResendCountdown] = useState(60);
 
