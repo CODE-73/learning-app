@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Image from 'next/image';
 
 function ContactUs() {
@@ -9,7 +9,9 @@ function ContactUs() {
     message: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -17,7 +19,7 @@ function ContactUs() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log(formData);
@@ -36,14 +38,14 @@ function ContactUs() {
 
       <div className="mx-auto max-w-md p-6 bg-white border rounded-md mt-5">
         <h2 className="text-2xl text-center mb-4">Contact Us</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit}>
           <label className="block mb-2">
             Name:
             <input
               type="text"
               name="name"
               value={formData.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange}
               className="w-full border p-2"
             />
           </label>
