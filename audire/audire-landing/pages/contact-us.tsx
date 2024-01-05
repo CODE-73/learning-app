@@ -26,9 +26,16 @@ function ContactUs() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(formData);
+    const isFormValid = Object.values(formData).every(
+      (value) => value.trim() !== ''
+    );
 
-    setFormSubmitted(true);
+    if (isFormValid) {
+      console.log(formData);
+      setFormSubmitted(true);
+    } else {
+      alert('Please fill in all fields before submitting.');
+    }
   };
 
   return (

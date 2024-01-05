@@ -14,6 +14,8 @@ import {
 import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
 import FooterView from '../common/FooterView';
 import { Icon, TrashIcon } from '@gluestack-ui/themed';
+import { TouchableOpacity } from 'react-native';
+import ConfirmDeleteAccountDialog from './ConfirmDeleteAccountDialog';
 
 const ProfileView = () => {
   const {
@@ -23,6 +25,7 @@ const ProfileView = () => {
   const { trigger, isMutating } = useUpdateProfile();
   const [newFirstName, setNewFirstName] = useState(firstName || '');
   const [newLastName, setNewLastName] = useState(lastName || '');
+  const [showModal, setShowModal] = useState(false);
   const handleSaveClick = () => {
     trigger({
       profileId,
@@ -44,7 +47,28 @@ const ProfileView = () => {
             {firstName}
           </AvatarFallbackText>
         </Avatar>
+        <Center>
+          <Button
+            onPress={() => {
+              setShowModal(true);
+            }}
+            size="xs"
+            variant="outline"
+            action="negative"
+            isDisabled={false}
+            isFocusVisible={false}
+          >
+            <ButtonText> Delete Account</ButtonText>
+            <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
+          </Button>
 
+          {showModal && (
+            <ConfirmDeleteAccountDialog
+              isOpen={showModal}
+              onClose={() => setShowModal(false)}
+            />
+          )}
+        </Center>
         <Center>
           <Text fontWeight="bold" color="black" fontSize="$2xl">
             {firstName}
@@ -124,21 +148,26 @@ const ProfileView = () => {
           <InputField />
         </Input>
       </Center>
-
-      <Button
-        m="$10"
-        size="md"
-        variant="solid"
-        action="primary"
-        bg="#8D0C8A"
-        isDisabled={isMutating}
-        isFocusVisible={false}
-        onPress={handleSaveClick}
-      >
-        <ButtonText> save </ButtonText>
-      </Button>
-      <Center flex={1}>
+      <TouchableOpacity>
         <Button
+          m="$10"
+          size="md"
+          variant="solid"
+          action="primary"
+          bg="#8D0C8A"
+          isDisabled={isMutating}
+          isFocusVisible={false}
+          onPress={handleSaveClick}
+        >
+          <ButtonText> save </ButtonText>
+        </Button>
+      </TouchableOpacity>
+
+      <Center>
+        <Button
+          onPress={() => {
+            setShowModal(true);
+          }}
           size="xs"
           variant="outline"
           action="negative"
@@ -148,7 +177,15 @@ const ProfileView = () => {
           <ButtonText> Delete Account</ButtonText>
           <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
         </Button>
+
+        {showModal && (
+          <ConfirmDeleteAccountDialog
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+          />
+        )}
       </Center>
+
       <FooterView />
     </Box>
   );
