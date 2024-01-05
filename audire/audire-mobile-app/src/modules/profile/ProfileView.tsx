@@ -47,28 +47,7 @@ const ProfileView = () => {
             {firstName}
           </AvatarFallbackText>
         </Avatar>
-        <Center>
-          <Button
-            onPress={() => {
-              setShowModal(true);
-            }}
-            size="xs"
-            variant="outline"
-            action="negative"
-            isDisabled={false}
-            isFocusVisible={false}
-          >
-            <ButtonText> Delete Account</ButtonText>
-            <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
-          </Button>
 
-          {showModal && (
-            <ConfirmDeleteAccountDialog
-              isOpen={showModal}
-              onClose={() => setShowModal(false)}
-            />
-          )}
-        </Center>
         <Center>
           <Text fontWeight="bold" color="black" fontSize="$2xl">
             {firstName}
@@ -163,6 +142,28 @@ const ProfileView = () => {
         </Button>
       </TouchableOpacity>
 
+      <Center>
+        <Button
+          onPress={() => {
+            setShowModal(true);
+          }}
+          size="xs"
+          variant="outline"
+          action="negative"
+          isDisabled={false}
+          isFocusVisible={false}
+        >
+          <ButtonText> Delete Account</ButtonText>
+          <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
+        </Button>
+
+        {showModal && (
+          <ConfirmDeleteAccountDialog
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </Center>
       <Center>
         <Button
           onPress={() => {
