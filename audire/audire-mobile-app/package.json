@@ -49,11 +49,8 @@
     "event-iterator": "*",
     "@aws-sdk/client-s3": "*",
     "@aws-sdk/s3-request-presigner": "*",
-<<<<<<< Updated upstream
-=======
     "xstate": "*",
     "@xstate/react": "*",
->>>>>>> Stashed changes
     "react-native-tab-view": "*"
   },
   "scripts": {
