@@ -1,4 +1,11 @@
-import { Box } from '@gluestack-ui/themed';
+import {
+  Box,
+  Toast,
+  ToastDescription,
+  ToastTitle,
+  VStack,
+  useToast,
+} from '@gluestack-ui/themed';
 import { useR2Download } from '@learning-app/r2';
 import {
   ResizeMode,
@@ -18,12 +25,32 @@ const VideoComponent: FC<VideoComponentProps> = (props) => {
   const videoRef = useRef<Video>(null);
   const [url, setUrl] = useState<string | null>(null);
   const { trigger: getURL } = useR2Download();
+  const toast = useToast();
 
   useEffect(() => {
     getURL({
       key: props.r2Key,
-    }).then(({ url }) => setUrl(url));
-  }, [getURL, props.r2Key]);
+    })
+      .then(({ url }) => setUrl(url))
+      .catch((error) => {
+        toast.show({
+          placement: 'bottom',
+          render: ({ id }) => {
+            const toastId = 'toast-' + id;
+            return (
+              <Toast nativeID={toastId} action="error" variant="accent">
+                <VStack space="xs">
+                  <ToastTitle>Error While Loading</ToastTitle>
+                  <ToastDescription>
+                    Something unexpected happened while loading the video.
+                  </ToastDescription>
+                </VStack>
+              </Toast>
+            );
+          },
+        });
+      });
+  }, [toast, getURL, props.r2Key]);
 
   const onFullscreenUpdate = async ({
     fullscreenUpdate,
