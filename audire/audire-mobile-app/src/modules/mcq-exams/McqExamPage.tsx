@@ -205,6 +205,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                 type: 'PREV_QUESTION',
               })
             }
+            disabled={!state.can({ type: 'PREV_QUESTION' })}
           >
             <Box
               bg="#e5e5e5"
@@ -226,9 +227,10 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                 type: 'NEXT_QUESTION',
               })
             }
+            disabled={!state.can({ type: 'NEXT_QUESTION' })}
           >
             <Box
-              bg="#e5e5e5"
+              bg={state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '$black'}
               display="flex"
               flexDirection="row"
               alignItems="center"

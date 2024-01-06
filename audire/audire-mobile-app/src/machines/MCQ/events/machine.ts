@@ -17,12 +17,10 @@ export type MarkAnswerEvent = {
 
 export type PrevQuestionEvent = {
   type: 'PREV_QUESTION';
-  
 };
 
 export type NextQuestionEvent = {
   type: 'NEXT_QUESTION';
-  
 };
 
 export type MarkToRevisitEvent = {
