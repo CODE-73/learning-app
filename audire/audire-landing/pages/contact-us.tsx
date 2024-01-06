@@ -3,8 +3,6 @@ import Image from 'next/image';
 
 function ContactUs() {
   const [formData, setFormData] = useState({
-    GeneralEnquiry: '',
-    AccountDeletionRequest: '',
     name: '',
     email: '',
     number: '',
@@ -12,6 +10,7 @@ function ContactUs() {
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -26,15 +25,15 @@ function ContactUs() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isFormValid = Object.values(formData).every(
+    const isValid = Object.values(formData).every(
       (value) => value.trim() !== ''
     );
 
-    if (isFormValid) {
+    setIsFormValid(isValid);
+
+    if (isValid) {
       console.log(formData);
       setFormSubmitted(true);
-    } else {
-      alert('Please fill in all fields before submitting.');
     }
   };
 
@@ -57,24 +56,26 @@ function ContactUs() {
           </p>
         ) : (
           <form onSubmit={handleSubmit}>
-            <label className="block mb-2">
-              General Enquiry:
-              <input
-                name="GeneralEnquiry"
-                value={formData.GeneralEnquiry}
-                onChange={handleChange}
-                className="w-full border p-2"
-              />
-            </label>
-            <label className="block mb-2">
-              Account Deletion Request:
-              <input
-                name="AccountDeletionRequest"
-                value={formData.AccountDeletionRequest}
-                onChange={handleChange}
-                className="w-full border p-2"
-              />
-            </label>
+            {!isFormValid && (
+              <div className="titlewint text-red-500 mb-4">
+                Please fill in all fields before submitting
+              </div>
+            )}
+
+            <div className="">
+              <label htmlFor=" Type" className="titlewint px-2">
+                Type:
+              </label>
+              <select name="cars" id="cars" className="titlewint">
+                <option value="GeneralEnquiry">General Enquiry</option>
+                <option value="AccountDeletionRequest">
+                  Account Deletion Request
+                </option>
+              </select>
+              <br />
+              <br />
+            </div>
+
             <label className="block mb-2">
               Name:
               <input

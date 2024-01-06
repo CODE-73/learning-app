@@ -75,6 +75,7 @@ const ExamView = () => {
         Exams
       </Text>
       <TabView
+        // https://reactnavigation.org/docs/tab-view
         renderTabBar={renderTabBar}
         navigationState={{ index, routes }}
         renderScene={renderScene}

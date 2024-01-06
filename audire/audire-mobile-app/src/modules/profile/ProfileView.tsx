@@ -57,75 +57,81 @@ const ProfileView = () => {
           </Text>
         </Center>
       </Center>
+      <Center display="flex" flexDirection="column" gap="$3">
+        <Box display="flex" flexDirection="row" gap="$3">
+          <Text>First Name:</Text>
+          <Input
+            w={200}
+            variant="outline"
+            size="sm"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+          >
+            <InputField
+              placeholder={formattedFirstName}
+              value={newFirstName}
+              onChangeText={(text) => setNewFirstName(text)}
+            />
+          </Input>
+        </Box>
+        <Box display="flex" flexDirection="row" gap="$3">
+          <Text> Last Name:</Text>
+          <Input
+            w={200}
+            variant="outline"
+            size="sm"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+          >
+            <InputField
+              value={newLastName}
+              onChangeText={(text) => setNewLastName(text)}
+              placeholder={formattedLastName}
+            />
+          </Input>
+        </Box>
+        <Box display="flex" flexDirection="row" gap="$9">
+          <Text> Mobile:</Text>
+          <Input
+            w={200}
+            variant="outline"
+            size="sm"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={true}
+          >
+            <InputField placeholder={formattedmobile} />
+          </Input>
+        </Box>
 
-      <Center display="flex" flexDirection="row" gap="$3">
-        <Text>First Name:</Text>
-        <Input
-          variant="outline"
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-        >
-          <InputField
-            placeholder={formattedFirstName}
-            value={newFirstName}
-            onChangeText={(text) => setNewFirstName(text)}
-          />
-        </Input>
-      </Center>
-      <Center display="flex" flexDirection="row" gap="$3">
-        <Text> Last Name:</Text>
-        <Input
-          variant="outline"
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-        >
-          <InputField
-            value={newLastName}
-            onChangeText={(text) => setNewLastName(text)}
-            placeholder={formattedLastName}
-          />
-        </Input>
-      </Center>
-      <Center display="flex" flexDirection="row" gap="$9">
-        <Text> Mobile:</Text>
-        <Input
-          variant="outline"
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={true}
-        >
-          <InputField placeholder={formattedmobile} />
-        </Input>
-      </Center>
-
-      <Center display="flex" flexDirection="row" gap="$12">
-        <Text> Email:</Text>
-        <Input
-          variant="outline"
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-        >
-          <InputField />
-        </Input>
-      </Center>
-      <Center display="flex" flexDirection="row" gap="$16">
-        <Text> City:</Text>
-        <Input
-          variant="outline"
-          size="sm"
-          isDisabled={false}
-          isInvalid={false}
-          isReadOnly={false}
-        >
-          <InputField />
-        </Input>
+        <Box display="flex" flexDirection="row" gap="$12">
+          <Text> Email:</Text>
+          <Input
+            w={200}
+            variant="outline"
+            size="sm"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+          >
+            <InputField />
+          </Input>
+        </Box>
+        <Box display="flex" flexDirection="row" gap="$16">
+          <Text> City:</Text>
+          <Input
+            w={200}
+            variant="outline"
+            size="sm"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+          >
+            <InputField />
+          </Input>
+        </Box>
       </Center>
       <TouchableOpacity>
         <Button
@@ -142,28 +148,6 @@ const ProfileView = () => {
         </Button>
       </TouchableOpacity>
 
-      <Center>
-        <Button
-          onPress={() => {
-            setShowModal(true);
-          }}
-          size="xs"
-          variant="outline"
-          action="negative"
-          isDisabled={false}
-          isFocusVisible={false}
-        >
-          <ButtonText> Delete Account</ButtonText>
-          <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
-        </Button>
-
-        {showModal && (
-          <ConfirmDeleteAccountDialog
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-          />
-        )}
-      </Center>
       <Center>
         <Button
           onPress={() => {
