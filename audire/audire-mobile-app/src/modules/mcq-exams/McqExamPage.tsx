@@ -7,13 +7,24 @@ import {
   Text,
 } from '@gluestack-ui/themed';
 import { type McqQuestion } from '@learning-app/syllabus';
-import React, { ComponentProps, FC, useState } from 'react';
+import React, { ComponentProps, FC, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import McqQuestionListIcon from '/assets/mcqQuestionListIcon.svg';
 import QuiteIcon from '/assets/quiteIcon.svg';
 import AllQuestions from './AllQuestions';
 import Congratulations from './Congratulations';
 import SubmitDialog from './SubmitDialog';
+import { useMachine, useSelector } from '@xstate/react';
+import { MCQMachine } from 'src/machines/MCQ/machine';
+// import {
+//   setMarkAnswer,
+//   setCurrentQuestion,
+//   setMarkToRevisit,
+//   setNextQuestion,
+//   setPrevQuestion,
+//   setStartExam,
+//   setSubmitExam,
+// } from 'src/machines/MCQ/actions';
 
 type McqExamPageProps = ComponentProps<typeof Box> & {
   questions: McqQuestion[];
@@ -33,19 +44,47 @@ const IconStyles = StyleSheet.create({
 const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
   const [showModal, setShowModal] = useState(false);
   const [showSubimtModal, setShowSubimtModal] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  // const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [state, send, actorRef] = useMachine(MCQMachine);
 
-  const options = [
-    { id: 'A', label: questions[0]?.options?.[0] },
-    { id: 'B', label: questions[0]?.options?.[1] },
-    { id: 'C', label: questions[0]?.options?.[2] },
-    { id: 'D', label: questions[0]?.options?.[3] },
-  ];
+  const currentQuestionIdx = useSelector(actorRef, (state) =>
+    state.context?.currentQuestionIdx >= 0
+      ? state.context?.currentQuestionIdx
+      : -1
+  );
+  const currentQuestion = useSelector(actorRef, (state) =>
+    state.context?.currentQuestionIdx >= 0
+      ? (state.context.questions ?? [])[state.context.currentQuestionIdx]
+      : null
+  );
 
-  const handleOptionClick = (optionId: string) => {
-    setSelectedOption(optionId);
-  };
+  const markAnswer = useSelector(
+    actorRef,
+    (state) => state.context?.markAnswer ?? {}
+  );
+
+  useEffect(
+    () =>
+      send({
+        type: 'START_EXAM',
+        questions,
+      }),
+    [send, questions]
+  );
+
+  const options = useMemo(
+    () =>
+      (currentQuestion?.options ?? []).map((op, idx) => ({
+        id: idx,
+        option: op,
+      })),
+    [currentQuestion]
+  );
+
+  // const handleOptionClick = (optionId: string) => {
+  //   setSelectedOption(optionId);
+  // };
 
   return (
     <Box w="$full">
@@ -101,9 +140,10 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           >
             <Box pb="$16">
               <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
-                Question 1/15
+                Question {(state.context?.currentQuestionIdx ?? 0) + 1}/
+                {questions.length}
               </Text>
-              <Text fontWeight="$bold">{questions[0]?.question}</Text>
+              <Text fontWeight="$bold">{currentQuestion?.question}</Text>
             </Box>
           </Box>
         </Box>
@@ -111,18 +151,22 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
         {options.map((option) => (
           <TouchableOpacity
             key={option.id}
-            onPress={() => handleOptionClick(option.id)}
-            
+            onPress={() =>
+              send({
+                type: 'MARK_ANSWER',
+                selectedOption: option.id,
+              })
+            } //MarkAnswer
           >
             <Box
               display="flex"
               flexDirection="row"
               borderRadius="$sm"
-              overflow='hidden'
-              
-             
+              overflow="hidden"
               backgroundColor={
-                selectedOption === option.id ? '#94B6BB' : '#e5e5e5'
+                markAnswer[currentQuestionIdx] === option.id
+                  ? '#94B6BB'
+                  : '#e5e5e5'
               }
               mx={17}
               p="$2"
@@ -136,14 +180,14 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                 alignItems="center"
                 borderRadius="$lg"
               >
-                <Text color="black" fontWeight="$bold"  >
+                <Text color="black" fontWeight="$bold">
                   {option.id}
                 </Text>
               </Box>
-<Box flexShrink={1}>
-              <Text fontWeight="$bold" pl="$10" numberOfLines={2} isTruncated>
-                {option.label}
-              </Text>
+              <Box flexShrink={1}>
+                <Text fontWeight="$bold" pl="$10" numberOfLines={2} isTruncated>
+                  {option.option}
+                </Text>
               </Box>
             </Box>
           </TouchableOpacity>
@@ -155,7 +199,13 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           justifyContent="space-around"
           pt="$16"
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              send({
+                type: 'PREV_QUESTION',
+              })
+            }
+          >
             <Box
               bg="#e5e5e5"
               display="flex"
@@ -170,7 +220,13 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               <Text color="black">Previous</Text>
             </Box>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              send({
+                type: 'NEXT_QUESTION',
+              })
+            }
+          >
             <Box
               bg="#e5e5e5"
               display="flex"
@@ -187,14 +243,15 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           </TouchableOpacity>
         </Box>
       </Box>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          send({
+            type: 'SUBMIT_EXAM',
+          })
+        }
+      >
         <Box m="$6">
-          <Button
-            variant="solid"
-            mt="$1"
-            bg="#8D0C8A"
-            onPress={() => setShowSubimtModal(true)}
-          >
+          <Button variant="solid" mt="$1" bg="#8D0C8A">
             <ButtonText fontSize="$md" fontWeight="bold">
               Submit
             </ButtonText>
