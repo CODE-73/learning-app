@@ -63,7 +63,7 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
         )}
       </Box>
 
-      <TouchableOpacity onPress={() => router.push('/profile/notification')}>
+      <TouchableOpacity onPress={() => router.push('/profile/notifications')}>
         <NotificationIcon />
       </TouchableOpacity>
     </Box>

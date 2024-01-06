@@ -144,7 +144,7 @@ const ProfileView = () => {
           isFocusVisible={false}
           onPress={handleSaveClick}
         >
-          <ButtonText> save </ButtonText>
+          <ButtonText>Update Profile</ButtonText>
         </Button>
       </TouchableOpacity>
 
@@ -159,7 +159,7 @@ const ProfileView = () => {
           isDisabled={false}
           isFocusVisible={false}
         >
-          <ButtonText> Delete Account</ButtonText>
+          <ButtonText>Delete Account</ButtonText>
           <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
         </Button>
 
