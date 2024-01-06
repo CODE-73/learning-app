@@ -15,9 +15,13 @@ const HomeView = () => {
   } = useActiveUser();
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
     if (!optedCourse) {
-      router.replace('/profile/course');
+      timeout = setTimeout(() => {
+        router.replace('/profile/course');
+      }, 3000);
     }
+    return () => clearTimeout(timeout);
   }, [optedCourse]);
 
   if (!optedCourse) {
