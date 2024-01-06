@@ -51,7 +51,8 @@
     "@aws-sdk/s3-request-presigner": "*",
     "xstate": "*",
     "@xstate/react": "*",
-    "react-native-tab-view": "*"
+    "react-native-tab-view": "*",
+    "@react-navigation/drawer": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . audire/audire-mobile-app && cp package-lock.json audire/audire-mobile-app",
