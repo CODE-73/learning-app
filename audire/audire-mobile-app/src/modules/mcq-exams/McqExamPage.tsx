@@ -5,6 +5,8 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   Text,
+  HStack,
+  Switch,
 } from '@gluestack-ui/themed';
 import { type McqQuestion } from '@learning-app/syllabus';
 import React, { ComponentProps, FC, useEffect, useMemo, useState } from 'react';
@@ -147,6 +149,23 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             </Box>
           </Box>
         </Box>
+        <Box py="$5" px="$5">
+          <HStack space="md">
+            <Switch
+              sx={{
+                _light: {
+                  props: {
+                    trackColor: {
+                      false: '$backgroundDark700',
+                      true: '#8D0C8A',
+                    },
+                  },
+                },
+              }}
+            />
+            <Text size="sm">Mark to Revisit</Text>
+          </HStack>
+        </Box>
 
         {options.map((option) => (
           <TouchableOpacity
@@ -208,7 +227,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             disabled={!state.can({ type: 'PREV_QUESTION' })}
           >
             <Box
-              bg="#e5e5e5"
+              bg={state.can({ type: 'PREV_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
               display="flex"
               flexDirection="row"
               alignItems="center"
@@ -230,7 +249,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             disabled={!state.can({ type: 'NEXT_QUESTION' })}
           >
             <Box
-              bg={state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '$black'}
+              bg={state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
               display="flex"
               flexDirection="row"
               alignItems="center"
