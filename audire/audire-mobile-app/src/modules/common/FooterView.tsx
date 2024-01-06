@@ -6,18 +6,46 @@ import {
   GripVerticalIcon,
   SettingsIcon,
 } from '@gluestack-ui/themed';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Keyboard } from 'react-native';
+import { useState, useEffect } from 'react';
+
+type Option = {
+  name: string;
+  link: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icon?: any;
+};
+
+const footer = [
+  { name: 'Exams', link: '/exams', icon: ClockIcon },
+  {
+    name: 'Home',
+    link: '/',
+    icon: GripVerticalIcon,
+  },
+  { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
+] as Option[];
 
 const FooterView = () => {
-  const footer = [
-    { name: 'Exams', link: '/exams', icon: ClockIcon },
-    {
-      name: 'Home',
-      link: '/',
-      icon: GripVerticalIcon,
-    },
-    { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
-  ];
+  const [keyboardShown, setKeyboardShown] = useState(false);
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardShown(true);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardShown(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
+  if (keyboardShown) {
+    return null;
+  }
+
   return (
     <Box
       borderRadius="$2xl"
