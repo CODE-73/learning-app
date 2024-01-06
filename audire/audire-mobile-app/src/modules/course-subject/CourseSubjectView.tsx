@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTopics } from '@learning-app/syllabus';
 import TopicCard from './topic-card/TopicCard';
-import { Box, Text } from '@gluestack-ui/themed';
+import { Box, Text, ScrollView } from '@gluestack-ui/themed';
 import CommonGirl from '/assets/commonGirl.svg';
 
 type CourseSubjectViewProps = {
@@ -21,7 +21,7 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
       <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" py="$8">
         Select a topic to learn today.
       </Text>
-      <Box px="$4">
+      <ScrollView px="$4">
         {topics.map((topic) => (
           <TopicCard
             key={topic.id}
@@ -30,7 +30,7 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
             description={topic.description}
           />
         ))}
-      </Box>
+      </ScrollView>
       <Box
         display="flex"
         flexDirection="column"

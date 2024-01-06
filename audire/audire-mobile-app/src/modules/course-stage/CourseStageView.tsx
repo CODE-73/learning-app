@@ -1,4 +1,4 @@
-import { Box, Text } from '@gluestack-ui/themed';
+import { Box, Text, ScrollView } from '@gluestack-ui/themed';
 import React, { FC } from 'react';
 import SubjectCard from './subject-card/SubjectCard';
 import { useSubjects } from '@learning-app/syllabus';
@@ -19,7 +19,7 @@ const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
       <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$8">
         Select a Subject to start with.
       </Text>
-      <Box px="$4">
+      <ScrollView px="$4">
         {subjects.map((subject) => (
           <SubjectCard
             key={subject.id}
@@ -28,7 +28,7 @@ const CourseStageView: FC<CourseStageViewProps> = ({ stageId }) => {
             description={subject.description}
           />
         ))}
-      </Box>
+      </ScrollView>
       <Box
         display="flex"
         flexDirection="column"

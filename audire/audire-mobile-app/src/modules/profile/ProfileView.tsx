@@ -9,6 +9,7 @@ import {
   Button,
   ButtonText,
   AvatarFallbackText,
+  ScrollView,
 } from '@gluestack-ui/themed';
 
 import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
@@ -57,96 +58,98 @@ const ProfileView = () => {
           </Text>
         </Center>
       </Center>
-      <Center display="flex" flexDirection="column" gap="$3">
-        <Box display="flex" flexDirection="row" gap="$3">
-          <Text>First Name:</Text>
-          <Input
-            w={200}
-            variant="outline"
-            size="sm"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={false}
-          >
-            <InputField
-              placeholder={formattedFirstName}
-              value={newFirstName}
-              onChangeText={(text) => setNewFirstName(text)}
-            />
-          </Input>
-        </Box>
-        <Box display="flex" flexDirection="row" gap="$3">
-          <Text> Last Name:</Text>
-          <Input
-            w={200}
-            variant="outline"
-            size="sm"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={false}
-          >
-            <InputField
-              value={newLastName}
-              onChangeText={(text) => setNewLastName(text)}
-              placeholder={formattedLastName}
-            />
-          </Input>
-        </Box>
-        <Box display="flex" flexDirection="row" gap="$9">
-          <Text> Mobile:</Text>
-          <Input
-            w={200}
-            variant="outline"
-            size="sm"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={true}
-          >
-            <InputField placeholder={formattedmobile} />
-          </Input>
-        </Box>
+      <ScrollView>
+        <Center display="flex" flexDirection="column" gap="$3">
+          <Box display="flex" flexDirection="row" gap="$3">
+            <Text>First Name:</Text>
+            <Input
+              w={200}
+              variant="outline"
+              size="sm"
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}
+            >
+              <InputField
+                placeholder={formattedFirstName}
+                value={newFirstName}
+                onChangeText={(text) => setNewFirstName(text)}
+              />
+            </Input>
+          </Box>
+          <Box display="flex" flexDirection="row" gap="$3">
+            <Text> Last Name:</Text>
+            <Input
+              w={200}
+              variant="outline"
+              size="sm"
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}
+            >
+              <InputField
+                value={newLastName}
+                onChangeText={(text) => setNewLastName(text)}
+                placeholder={formattedLastName}
+              />
+            </Input>
+          </Box>
+          <Box display="flex" flexDirection="row" gap="$9">
+            <Text> Mobile:</Text>
+            <Input
+              w={200}
+              variant="outline"
+              size="sm"
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={true}
+            >
+              <InputField placeholder={formattedmobile} />
+            </Input>
+          </Box>
 
-        <Box display="flex" flexDirection="row" gap="$12">
-          <Text> Email:</Text>
-          <Input
-            w={200}
-            variant="outline"
-            size="sm"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={false}
+          <Box display="flex" flexDirection="row" gap="$12">
+            <Text> Email:</Text>
+            <Input
+              w={200}
+              variant="outline"
+              size="sm"
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}
+            >
+              <InputField />
+            </Input>
+          </Box>
+          <Box display="flex" flexDirection="row" gap="$16">
+            <Text> City:</Text>
+            <Input
+              w={200}
+              variant="outline"
+              size="sm"
+              isDisabled={false}
+              isInvalid={false}
+              isReadOnly={false}
+            >
+              <InputField />
+            </Input>
+          </Box>
+        </Center>
+        <TouchableOpacity>
+          <Button
+            m="$10"
+            size="md"
+            variant="solid"
+            action="primary"
+            bg="#8D0C8A"
+            isDisabled={isMutating}
+            isFocusVisible={false}
+            onPress={handleSaveClick}
           >
-            <InputField />
-          </Input>
-        </Box>
-        <Box display="flex" flexDirection="row" gap="$16">
-          <Text> City:</Text>
-          <Input
-            w={200}
-            variant="outline"
-            size="sm"
-            isDisabled={false}
-            isInvalid={false}
-            isReadOnly={false}
-          >
-            <InputField />
-          </Input>
-        </Box>
-      </Center>
-      <TouchableOpacity>
-        <Button
-          m="$10"
-          size="md"
-          variant="solid"
-          action="primary"
-          bg="#8D0C8A"
-          isDisabled={isMutating}
-          isFocusVisible={false}
-          onPress={handleSaveClick}
-        >
-          <ButtonText>Update Profile</ButtonText>
-        </Button>
-      </TouchableOpacity>
+            <ButtonText>Update Profile</ButtonText>
+          </Button>
+        </TouchableOpacity>
+      </ScrollView>
 
       <Center>
         <Button
