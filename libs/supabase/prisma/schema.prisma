@@ -116,3 +116,12 @@ model McqQuestion {
     topic         Topic    @relation(fields: [topicId], references: [id])
     topicId       String   @db.Uuid
 }
+
+model ContactUs {
+    id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    type      String?
+    name      String?
+    email     String?
+    mobile    String?
+    message   String?
+}

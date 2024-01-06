@@ -1,19 +1,22 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Image from 'next/image';
+import { useContactUsCreate } from '@learning-app/auth';
 
 function ContactUs() {
+  const { trigger } = useContactUsCreate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     number: '',
     message: '',
+    type: 'GeneralEnquiry',
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
 
   const handleChange = (
-    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -33,6 +36,13 @@ function ContactUs() {
 
     if (isValid) {
       console.log(formData);
+      trigger({
+        email: formData.email,
+        message: formData.message,
+        mobile: formData.number,
+        name: formData.name,
+        type: formData.type,
+      });
       setFormSubmitted(true);
     }
   };
@@ -66,7 +76,12 @@ function ContactUs() {
               <label htmlFor=" Type" className="titlewint px-2">
                 Type:
               </label>
-              <select name="cars" id="cars" className="titlewint">
+              <select
+                name="type"
+                className="titlewint"
+                onChange={handleChange}
+                value={formData.type}
+              >
                 <option value="GeneralEnquiry">General Enquiry</option>
                 <option value="AccountDeletionRequest">
                   Account Deletion Request

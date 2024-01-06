@@ -42,6 +42,33 @@ export interface Database {
         }
         Relationships: []
       }
+      ContactUs: {
+        Row: {
+          email: string | null
+          id: string
+          message: string | null
+          mobile: string | null
+          name: string | null
+          type: string | null
+        }
+        Insert: {
+          email?: string | null
+          id?: string
+          message?: string | null
+          mobile?: string | null
+          name?: string | null
+          type?: string | null
+        }
+        Update: {
+          email?: string | null
+          id?: string
+          message?: string | null
+          mobile?: string | null
+          name?: string | null
+          type?: string | null
+        }
+        Relationships: []
+      }
       Course: {
         Row: {
           createdAt: string
@@ -352,6 +379,18 @@ export interface Database {
         Args: {
           mobile: string
         }
+        Returns: boolean
+      }
+      get_user_role: {
+        Args: Record<PropertyKey, never>
+        Returns: Database["public"]["Enums"]["Role"]
+      }
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      is_faculty: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
     }
