@@ -1,6 +1,5 @@
 module.exports = function (api) {
   api.cache(true);
-  console.info('\n\n\tBABBEL CONFIG\n\n');
   return {
     presets: ['babel-preset-expo'],
     // react-native-reanimated/plugin has to be listed last

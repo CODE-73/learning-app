@@ -1,18 +1,19 @@
 import { Box, Text } from '@gluestack-ui/themed';
 import React, { useEffect, useRef } from 'react';
 import { TouchableOpacity, ActivityIndicator } from 'react-native';
-import { router } from 'expo-router';
 import { useActiveUser, useUpdateProfile } from '@learning-app/auth';
 import { useCourses } from '@learning-app/syllabus';
 import { Animated } from 'react-native';
 import CommonGirl from '/assets/commonGirl.svg';
 import CourseSelectionPlayIcon from '/assets/courseSelectionPlayIcon.svg';
+import { useRouter } from 'expo-router';
 
 const CourseSelectionView = () => {
   const {
     data: { data: courses } = { data: [] },
     isLoading: isLoadingCourses,
   } = useCourses();
+  const router = useRouter();
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   const { user } = useActiveUser();
@@ -35,7 +36,9 @@ const CourseSelectionView = () => {
           optedCourseId: courseId,
         },
       });
-      router.replace('/');
+      // Router.replace is failing with DrawerLayout
+      router.push('/');
+      // router.replace('/');
     } catch (e) {
       console.error(e);
     }

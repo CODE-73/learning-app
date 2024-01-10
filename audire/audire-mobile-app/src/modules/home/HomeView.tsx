@@ -1,18 +1,19 @@
 import { Box, Image, Text, View } from '@gluestack-ui/themed';
 import { useActiveUser } from '@learning-app/auth';
 import HomePageBanner from 'assets/homepageBanner.jpg';
-import { router } from 'expo-router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import FooterView from '../common/FooterView';
 import StageCard from './stage-card/StageCard';
+import { useRouter } from 'expo-router';
 
 const CARD_COLORS = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
 
 const HomeView = () => {
   const {
     user: { firstName, optedCourse },
-  } = useActiveUser();
+  } = useActiveUser()
+  const router = useRouter();
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -22,10 +23,10 @@ const HomeView = () => {
       }, 3000);
     }
     return () => clearTimeout(timeout);
-  }, [optedCourse]);
+  }, [optedCourse, router]);
 
   if (!optedCourse) {
-    return null;
+    return <Text>Please wait..</Text>;
   }
 
   // 16:9 Aspect Ratio
