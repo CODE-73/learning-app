@@ -42,23 +42,24 @@ const ProfileView = () => {
   const formattedmobile: string | undefined = mobile ?? undefined;
   return (
     <Box flex={1} width="$full" display="flex" flexDirection="column" gap="$5">
-      <Center display="flex" flexDirection="column" p="$5" gap="$3">
-        <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
-          <AvatarFallbackText fontWeight="bold" color="black">
-            {firstName}
-          </AvatarFallbackText>
-        </Avatar>
-
-        <Center>
-          <Text fontWeight="bold" color="black" fontSize="$2xl">
-            {firstName}
-          </Text>
-          <Text fontWeight="bold" color="black" fontSize="$2xl">
-            {lastName}
-          </Text>
-        </Center>
-      </Center>
       <ScrollView>
+        <Center display="flex" flexDirection="column" p="$5" gap="$3">
+          <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
+            <AvatarFallbackText fontWeight="bold" color="black">
+              {firstName}
+            </AvatarFallbackText>
+          </Avatar>
+
+          <Center>
+            <Text fontWeight="bold" color="black" fontSize="$2xl">
+              {firstName}
+            </Text>
+            <Text fontWeight="bold" color="black" fontSize="$2xl">
+              {lastName}
+            </Text>
+          </Center>
+        </Center>
+
         <Center display="flex" flexDirection="column" gap="$3">
           <Box display="flex" flexDirection="row" gap="$3">
             <Text>First Name:</Text>
@@ -149,30 +150,30 @@ const ProfileView = () => {
             <ButtonText>Update Profile</ButtonText>
           </Button>
         </TouchableOpacity>
+
+        <Center>
+          <Button
+            onPress={() => {
+              setShowModal(true);
+            }}
+            size="xs"
+            variant="outline"
+            action="negative"
+            isDisabled={false}
+            isFocusVisible={false}
+          >
+            <ButtonText>Delete Account</ButtonText>
+            <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
+          </Button>
+
+          {showModal && (
+            <ConfirmDeleteAccountDialog
+              isOpen={showModal}
+              onClose={() => setShowModal(false)}
+            />
+          )}
+        </Center>
       </ScrollView>
-
-      <Center>
-        <Button
-          onPress={() => {
-            setShowModal(true);
-          }}
-          size="xs"
-          variant="outline"
-          action="negative"
-          isDisabled={false}
-          isFocusVisible={false}
-        >
-          <ButtonText>Delete Account</ButtonText>
-          <Icon as={TrashIcon} m="$2" w="$4" h="$4" color="$red" />
-        </Button>
-
-        {showModal && (
-          <ConfirmDeleteAccountDialog
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-          />
-        )}
-      </Center>
 
       <FooterView />
     </Box>
