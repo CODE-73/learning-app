@@ -1,14 +1,12 @@
 import {
   JumpToQuestionEvent,
-  NextQuestionEvent,
-  PrevQuestionEvent,
   MarkAnswerEvent,
   MarkToRevisitEvent,
+  NextQuestionEvent,
+  PrevQuestionEvent,
   StartExamEvent,
-  SubmitExamEvent,
 } from '../events/machine';
-import { MCQMachineContext } from '../types/context';
-import { MarkAnswer, MarkToRevisit } from '../types/context';
+import { MCQMachineContext, MarkAnswer } from '../types/context';
 
 export function setCurrentQuestion(
   context: MCQMachineContext,
@@ -59,15 +57,19 @@ export function setMarkToRevisit(
   context: MCQMachineContext,
   event: MarkToRevisitEvent
 ): MCQMachineContext {
-  const updatedMarkToRevisit: MarkToRevisit = {
-    ...context.markToRevisit,
-    [event.questionIdx]: event.markedForRevisit,
-  };
+  const markToRevisit = context.markToRevisit ?? {};
+  markToRevisit[context.currentQuestionIdx] = event.markToRevisit;
+
+  const numMarkedToRevisit = Object.entries(markToRevisit).filter(
+    (k) => k[1] === true
+  ).length;
 
   return {
     ...context,
-    currentQuestionIdx: event.questionIdx,
-    markToRevisit: updatedMarkToRevisit,
+    markToRevisit: {
+      ...markToRevisit,
+    },
+    noOfQuestionToRevisit: numMarkedToRevisit,
   };
 }
 
@@ -78,15 +80,42 @@ export function setStartExam(
   return {
     ...context,
     currentQuestionIdx: 0,
+    markAnswer: {},
+    markToRevisit: {},
     questions: event.questions,
+    markObtained: 0,
+    maxMark: 0,
+    numCorrectAnswers: 0,
+    numUnattended: 0,
+    numWrongAnswers: 0,
   };
 }
 
-export function setSubmitExam(
-  context: MCQMachineContext,
-  event: SubmitExamEvent
-): MCQMachineContext {
+export function calculateMarks(context: MCQMachineContext): MCQMachineContext {
+  let numCorrect = 0,
+    numWrong = 0,
+    numUnattended = 0;
+  const score = context.questions.reduce((mark, question, idx) => {
+    if (context.markAnswer[idx] !== undefined) {
+      if (context.markAnswer[idx] === question.correctOption) {
+        mark += 4;
+        numCorrect += 1;
+      } else {
+        mark -= 1;
+        numWrong += 1;
+      }
+    } else {
+      numUnattended += 1;
+    }
+    return mark;
+  }, 0);
+
   return {
     ...context,
+    markObtained: score,
+    maxMark: context.questions.length * 4,
+    numCorrectAnswers: numCorrect,
+    numWrongAnswers: numWrong,
+    numUnattended: numUnattended,
   };
 }

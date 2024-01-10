@@ -18,7 +18,6 @@ export async function upsertMcqQuestion(
   const mcqsToDelete = prevMcqQuestion
     ?.filter((mcq) => newMcqQuestion.findIndex((x) => x.id === mcq.id) === -1)
     .map((x) => x.id);
-
   if (mcqsToDelete.length > 0) {
     const { error } = await supabase
       .from('McqQuestion')
@@ -34,7 +33,7 @@ export async function upsertMcqQuestion(
 
   const _data: McqQuestion[] = [];
   for (const questions of [mcqsToInsert, mcqsToUpdate]) {
-    if (questions.length > 0) {
+    if (questions.length < 0) {
       continue;
     }
     const { data, error } = await supabase

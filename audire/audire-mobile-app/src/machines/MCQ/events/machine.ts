@@ -25,12 +25,9 @@ export type NextQuestionEvent = {
 
 export type MarkToRevisitEvent = {
   type: 'MARK_TO_REVISIT';
-  questionIdx: number;
-  markedForRevisit: boolean;
+  markToRevisit: boolean;
 };
 
 export type SubmitExamEvent = {
   type: 'SUBMIT_EXAM';
-  // correctAnswer: string;
-  // selectedOption: string;
 };

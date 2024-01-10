@@ -13,17 +13,21 @@ import {
   ModalFooter,
 } from '@gluestack-ui/themed';
 import { TouchableOpacity } from 'react-native';
+import { McqQuestion } from '@learning-app/syllabus';
 
 type AllQuestionsProps = ComponentProps<typeof Box> & {
   isOpen: boolean;
   onClose: () => void;
+  questions: McqQuestion[];
+  onJumpToQuestion: (questionIdx: number) => void;
 };
 
-const AllQuestions: FC<AllQuestionsProps> = (props) => {
-  const questionBoxs = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30,
-  ];
+const AllQuestions: FC<AllQuestionsProps> = ({
+  isOpen,
+  onClose,
+  questions,
+  onJumpToQuestion,
+}) => {
   const statusData = [
     { color: '#8FC37D', text: 'Answered' },
     { color: '#F07A7A', text: 'Unanswered' },
@@ -37,8 +41,8 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
     <Modal
       size="full"
       p="$5"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       finalFocusRef={ref}
     >
       <ModalBackdrop />
@@ -57,8 +61,14 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
             gap="$1"
             justifyContent="center"
           >
-            {questionBoxs.map((questionBox, index) => (
-              <TouchableOpacity key={index}>
+            {questions.map((question, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  onJumpToQuestion(index);
+                  onClose();
+                }}
+              >
                 <Box
                   bg="$white"
                   alignItems="center"
@@ -69,7 +79,7 @@ const AllQuestions: FC<AllQuestionsProps> = (props) => {
                   height="$12"
                 >
                   <Text color="$black" fontWeight="$bold">
-                    {questionBox}
+                    {index + 1}
                   </Text>
                 </Box>
               </TouchableOpacity>

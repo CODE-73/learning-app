@@ -1,7 +1,5 @@
 import {
   Box,
-  Button,
-  ButtonText,
   ChevronLeftIcon,
   ChevronRightIcon,
   Text,
@@ -15,18 +13,9 @@ import McqQuestionListIcon from '/assets/mcqQuestionListIcon.svg';
 import QuiteIcon from '/assets/quiteIcon.svg';
 import AllQuestions from './AllQuestions';
 import Congratulations from './Congratulations';
-import SubmitDialog from './SubmitDialog';
+import ConfirmSubmitDialog from './ConfirmSubmitDialog';
 import { useMachine, useSelector } from '@xstate/react';
 import { MCQMachine } from 'src/machines/MCQ/machine';
-// import {
-//   setMarkAnswer,
-//   setCurrentQuestion,
-//   setMarkToRevisit,
-//   setNextQuestion,
-//   setPrevQuestion,
-//   setStartExam,
-//   setSubmitExam,
-// } from 'src/machines/MCQ/actions';
 
 type McqExamPageProps = ComponentProps<typeof Box> & {
   questions: McqQuestion[];
@@ -44,10 +33,9 @@ const IconStyles = StyleSheet.create({
 });
 
 const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showSubimtModal, setShowSubimtModal] = useState(false);
-  // const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [showQuestionsDialog, setShowQuestionsDialog] = useState(false);
+  const [showConfirmSubmitDialog, setShowConfirmSubmitDialog] = useState(false);
+  const [showCongratsDialog, setShowCongratsDialog] = useState(false);
   const [state, send, actorRef] = useMachine(MCQMachine);
 
   const currentQuestionIdx = useSelector(actorRef, (state) =>
@@ -59,6 +47,14 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     state.context?.currentQuestionIdx >= 0
       ? (state.context.questions ?? [])[state.context.currentQuestionIdx]
       : null
+  );
+
+  const markedToRevisit = useSelector(actorRef, (state) =>
+    state.context?.currentQuestionIdx >= 0
+      ? (state.context.markToRevisit ?? {})[
+          state.context.currentQuestionIdx
+        ] === true
+      : false
   );
 
   const markAnswer = useSelector(
@@ -84,27 +80,30 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
     [currentQuestion]
   );
 
-  // const handleOptionClick = (optionId: string) => {
-  //   setSelectedOption(optionId);
-  // };
-
   return (
     <Box w="$full">
       <Box display="flex" flexDirection="row" justifyContent="flex-end" pr="$4">
         <Box>
-          <TouchableOpacity onPress={() => setShowModal(true)}>
+          <TouchableOpacity onPress={() => setShowQuestionsDialog(true)}>
             <Box pt="$1.5">
               <McqQuestionListIcon style={IconStyles.ListIcon} />
             </Box>
           </TouchableOpacity>
-          {showModal && (
+          {showQuestionsDialog && (
             <AllQuestions
-              isOpen={showModal}
-              onClose={() => setShowModal(false)}
+              isOpen={showQuestionsDialog}
+              onClose={() => setShowQuestionsDialog(false)}
+              questions={state.context.questions}
+              onJumpToQuestion={(idx) =>
+                send({
+                  type: 'JUMP_TO_QUESTION',
+                  questionIdx: idx,
+                })
+              }
             />
           )}
         </Box>
-        <TouchableOpacity onPress={() => setShowSubmitDialog(true)}>
+        <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
           <Box
             display="flex"
             flexDirection="row"
@@ -124,9 +123,17 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           </Box>
         </TouchableOpacity>
 
-        <SubmitDialog
-          isOpen={showSubmitDialog}
-          onClose={() => setShowSubmitDialog(false)}
+        <ConfirmSubmitDialog
+          isOpen={showConfirmSubmitDialog}
+          onConfirm={() => {
+            send({
+              type: 'SUBMIT_EXAM',
+            });
+            setShowCongratsDialog(true);
+          }}
+          onClose={() => setShowConfirmSubmitDialog(false)}
+          numUnattended={state.context.numUnattended}
+          numToRevisit={state.context.noOfQuestionToRevisit}
         />
       </Box>
       {/* start */}
@@ -152,6 +159,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
         <Box py="$5" px="$5">
           <HStack space="md">
             <Switch
+              value={markedToRevisit}
               sx={{
                 _light: {
                   props: {
@@ -162,6 +170,12 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                   },
                 },
               }}
+              onToggle={(arg) =>
+                send({
+                  type: 'MARK_TO_REVISIT',
+                  markToRevisit: !markedToRevisit,
+                })
+              }
             />
             <Text size="sm">Mark to Revisit</Text>
           </HStack>
@@ -264,24 +278,19 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           </TouchableOpacity>
         </Box>
       </Box>
-      <TouchableOpacity
-        onPress={() =>
-          send({
-            type: 'SUBMIT_EXAM',
-          })
-        }
-      >
-        <Box m="$6">
-          <Button variant="solid" mt="$1" bg="#8D0C8A">
-            <ButtonText fontSize="$md" fontWeight="bold">
-              Submit
-            </ButtonText>
-          </Button>
+      <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
+        <Box m="$6" bg="#8D0C8A" p="$2" alignItems="center">
+          <Text fontSize="$md" fontWeight="bold" color="white">
+            Submit
+          </Text>
         </Box>
       </TouchableOpacity>
       <Congratulations
-        isOpen={showSubimtModal}
-        onClose={() => setShowSubimtModal(false)}
+        isOpen={showCongratsDialog}
+        onClose={() => setShowCongratsDialog(false)}
+        markObtained={state.context.markObtained}
+        maxMark={state.context.maxMark}
+        numQuestions={state.context.questions?.length}
       />
     </Box>
   );

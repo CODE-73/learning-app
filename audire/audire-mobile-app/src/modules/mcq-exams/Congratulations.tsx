@@ -17,6 +17,10 @@ import Congratulations from '/assets/Congratulations.svg';
 type AllQuestionsProps = ComponentProps<typeof Box> & {
   isOpen: boolean;
   onClose: () => void;
+
+  markObtained: number;
+  maxMark: number;
+  numQuestions: number;
 };
 
 const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
@@ -60,10 +64,10 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
             justifyContent="space-around"
           >
             <Text fontSize="$lg" fontWeight="$bold" py="$4">
-              The score you obtained is{' '}
+              The score you obtained is: {props.markObtained}
             </Text>
-            <Text fontWeight="$extrabold"fontSize="$xl">
-              10/15
+            <Text fontWeight="$extrabold" fontSize="$xl">
+              {props.markObtained} / {props.maxMark}
             </Text>
           </Box>
         </ModalBody>

@@ -18,18 +18,21 @@ import { TouchableOpacity } from 'react-native';
 
 type SubmitDialogProps = ComponentProps<typeof Box> & {
   isOpen: boolean;
+  onConfirm: () => void;
   onClose: () => void;
+  numUnattended: number;
+  numToRevisit: number;
 };
 
-const SubmitDialog: FC<SubmitDialogProps> = (props) => {
+const ConfirmSubmitDialog: FC<SubmitDialogProps> = (props) => {
   const ref = React.useRef(null);
   const handleClose = () => {
     props.onClose();
   };
   const handleYesClick = () => {
+    props.onConfirm();
     handleClose();
   };
-
   return (
     <Modal
       size="full"
@@ -46,8 +49,9 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
         <ModalBody>
           <Box>
             <Text color="black">
-              You have 10 unattended questions and 3 questions you had to
-              revisit.
+              You have {props.numUnattended} unattended questions and{' '}
+              {props.numToRevisit}
+              questions you had to revisit.
             </Text>
             <Text color="black" pt="$4">
               Are you sure you want to submit the test ?
@@ -82,4 +86,4 @@ const SubmitDialog: FC<SubmitDialogProps> = (props) => {
     </Modal>
   );
 };
-export default SubmitDialog;
+export default ConfirmSubmitDialog;

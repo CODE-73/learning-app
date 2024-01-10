@@ -7,7 +7,7 @@ import {
   setMarkAnswer,
   setMarkToRevisit,
   setStartExam,
-  setSubmitExam,
+  calculateMarks,
 } from './actions';
 import { MCQMachineEvents } from './events';
 import { hasNextQuestion, hasPrevQuestion } from './guards';
@@ -23,8 +23,12 @@ export const MCQMachine = createMachine(
     context: {} as MCQMachineContext,
     states: {
       'attending-question': {
+        entry: ['calculateMarks'],
         on: {
-          SUBMIT_EXAM: 'done',
+          SUBMIT_EXAM: {
+            actions: ['calculateMarks'],
+            target: 'done',
+          },
           MARK_ANSWER: 'marking-answer',
           NEXT_QUESTION: {
             target: 'loading-next-question',
@@ -112,9 +116,8 @@ export const MCQMachine = createMachine(
         assertEvent(event, 'START_EXAM');
         return setStartExam(context, event);
       }),
-      setSubmitExam: assign(({ context, event }) => {
-        assertEvent(event, 'SUBMIT_EXAM');
-        return setSubmitExam(context, event);
+      calculateMarks: assign(({ context }) => {
+        return calculateMarks(context);
       }),
     },
     guards: {
