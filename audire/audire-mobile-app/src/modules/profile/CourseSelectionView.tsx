@@ -44,10 +44,10 @@ const CourseSelectionView = () => {
   return (
     <Box flex={1} bgColor="$white" w="$full">
       <Box display="flex">
-        <Text fontSize="$lg" color="black" fontWeight="$$light" ml="$5" pt="$8">
+        <Text fontSize="$lg" color="black" fontWeight="$light" ml="$5" pt="$8">
           Hey {user.firstName}!
         </Text>
-        <Text fontSize="$2xl" color="black" fontWeight="bold" ml="$5" pt="$2">
+        <Text fontSize="$2xl" color="black" fontWeight="$bold" ml="$5" pt="$2">
           Let’s start learning!
         </Text>
       </Box>

@@ -116,7 +116,6 @@ const VerificationView: FC<VerificationFormProps> = ({
     ));
   };
 
-  console.info('Render End');
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full">
       <Box display="flex" mb="$6">
@@ -143,7 +142,7 @@ const VerificationView: FC<VerificationFormProps> = ({
             <Pressable onPress={isResendActive ? handleResendOTP : () => null}>
               <Text
                 fontSize="$sm"
-                color={isResendActive ? '$black' : '$gray500'}
+                color={isResendActive ? '$black' : '$trueGray400'}
                 fontWeight="bold"
               >
                 {isResendActive

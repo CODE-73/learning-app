@@ -8,7 +8,6 @@ const MainLayout = () => {
   return (
     <UserProvider onUnauthorized={() => router.replace('/login')}>
       <Drawer
-        initialRouteName="index"
         backBehavior='history'
         drawerContent={(props) => <Sidebar {...props} />}
         screenOptions={{
