@@ -20,7 +20,9 @@
     "@babel/core": "*",
     "expo-router": "*",
     "react-native-gesture-handler": "*",
+    "react-native-pager-view": "*",
     "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
     "expo-updates": "*",
     "@gluestack-style/react": "*",
     "@gluestack-ui/themed": "*",
@@ -52,6 +54,7 @@
     "xstate": "*",
     "@xstate/react": "*",
     "react-native-tab-view": "*",
+    "react-native-reanimated": "*",
     "@react-navigation/drawer": "*"
   },
   "scripts": {
