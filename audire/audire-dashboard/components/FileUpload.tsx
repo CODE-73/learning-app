@@ -25,7 +25,7 @@ const FileUpload: FC<FileUploadProps> = (props) => {
     [targetKey, file]
   );
 
-  const { data: uploadStatus, error: uploadError } = useR2Upload({
+  const { data: uploadStatus } = useR2Upload({
     key: key && uploadedKeys.includes(key) ? null : key,
     isBigFile,
     fileContents: file,
