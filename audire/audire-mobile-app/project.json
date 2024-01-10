@@ -59,6 +59,10 @@
       "executor": "@nx/expo:build-list",
       "options": {}
     },
+    "eas-build": {
+      "executor": "@nx/expo:build",
+      "options": {}
+    },
     "sync-deps": {
       "executor": "@nx/expo:sync-deps",
       "options": {}
