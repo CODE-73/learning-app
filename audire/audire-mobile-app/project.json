@@ -44,6 +44,19 @@
         }
       }
     },
+    "build-ios-local": {
+      "executor": "@nx/expo:build",
+      "options": {
+        "platform": "ios",
+        "local": true,
+        "profile": "production"
+      },
+      "configurations": {
+        "preview": {
+          "profile": "preview"
+        }
+      }
+    },
     "build-web": {
       "executor": "@nx/expo:export",
       "options": {

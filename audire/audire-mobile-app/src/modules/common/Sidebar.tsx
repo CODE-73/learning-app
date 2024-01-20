@@ -14,6 +14,7 @@ import {
 import { useActiveUser } from '@learning-app/auth';
 import ConformLogoutDialogue from './ConformLogoutDialogue';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Option = {
   name: string;
@@ -43,9 +44,10 @@ const Sidebar: FC<SidebarProps> = (props) => {
   } = useActiveUser();
 
   const [showModal, setShowModal] = useState(false);
+  const { top } = useSafeAreaInsets();
 
   return (
-    <Box display="flex" flexDirection="column" bg="white">
+    <Box display="flex" flexDirection="column" bg="white" style={{ marginTop: top }}>
       <Box overflow="hidden" width="100%">
         <Box display="flex" flexDirection="row" p="$5">
           <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
@@ -75,7 +77,6 @@ const Sidebar: FC<SidebarProps> = (props) => {
                   flexDirection="row"
                   alignItems="center"
                   mb="$10"
-                  
                 >
                   {option.icon && (
                     <Icon
