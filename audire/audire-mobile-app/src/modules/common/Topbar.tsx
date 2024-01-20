@@ -20,8 +20,9 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
   return (
     <Box
       w="$full"
-      p="$6"
+      paddingHorizontal="$5"
       pt={top > 10 ? "$0" : undefined}
+      pb="$3"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"

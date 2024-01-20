@@ -12,8 +12,7 @@ import {
   CircleIcon,
 } from '@gluestack-ui/themed';
 import { useActiveUser } from '@learning-app/auth';
-import ConformLogoutDialogue from './ConformLogoutDialogue';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import ConformLogoutDialogue from './ConfirmLogoutDialog';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Option = {
@@ -24,7 +23,7 @@ type Option = {
   icon: any;
 };
 
-type SidebarProps = DrawerContentComponentProps;
+type SidebarContentProps = {};
 
 const options: Option[] = [
   {
@@ -38,7 +37,7 @@ const options: Option[] = [
   { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
 ];
 
-const Sidebar: FC<SidebarProps> = (props) => {
+const SidebarContent: FC<SidebarContentProps> = (props) => {
   const {
     user: { firstName },
   } = useActiveUser();
@@ -47,7 +46,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
   const { top } = useSafeAreaInsets();
 
   return (
-    <Box display="flex" flexDirection="column" bg="white" style={{ marginTop: top }}>
+    <Box display="flex" flexDirection="column" bg="white" style={{ paddingTop: top, height: '100%' }}>
       <Box overflow="hidden" width="100%">
         <Box display="flex" flexDirection="row" p="$5">
           <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
@@ -139,4 +138,4 @@ const Sidebar: FC<SidebarProps> = (props) => {
   );
 };
 
-export default Sidebar;
+export default SidebarContent;
