@@ -8,9 +8,8 @@ import React, { FC } from 'react';
 import { useTopic } from '@learning-app/syllabus';
 
 type CourseTopicViewProps = {
-  topicId: string;
-  title: string;
-  description: string;
+  topicId: string 
+
 };
 
 const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
