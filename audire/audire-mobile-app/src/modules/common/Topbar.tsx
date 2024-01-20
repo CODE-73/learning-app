@@ -5,6 +5,7 @@ import { Icon, ChevronRightIcon } from '@gluestack-ui/themed';
 import NotificationIcon from '/assets/notificationIcon.svg';
 import { useActiveUser } from '@learning-app/auth';
 import { router } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type TopbarProps = {
   onToggleSidebar: () => void;
@@ -14,15 +15,18 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
   const {
     user: { optedCourse, firstName },
   } = useActiveUser();
+  const { top } = useSafeAreaInsets();
 
   return (
     <Box
       w="$full"
       p="$6"
+      pt={top > 10 ? "$0" : undefined}
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
+      style={{ marginTop: top }}
     >
       <Box display="flex" flexDirection="row" alignItems="center">
         <Pressable onPress={onToggleSidebar}>

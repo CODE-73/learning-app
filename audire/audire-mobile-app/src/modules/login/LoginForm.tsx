@@ -81,6 +81,7 @@ const LoginForm = () => {
               <Text>+91</Text>
             </InputSlot>
             <InputField
+              lineHeight={22}
               type="text"
               placeholder="Mobile Number"
               value={mobileNumber}
@@ -109,6 +110,7 @@ const LoginForm = () => {
             >
               <InputField
                 type="text"
+                lineHeight={22}
                 placeholder="Name"
                 onChangeText={(e) => {
                   setFullName(e);

@@ -72,6 +72,7 @@ const ProfileView = () => {
               isReadOnly={false}
             >
               <InputField
+                lineHeight={22}
                 placeholder={formattedFirstName}
                 value={newFirstName}
                 onChangeText={(text) => setNewFirstName(text)}
@@ -89,6 +90,7 @@ const ProfileView = () => {
               isReadOnly={false}
             >
               <InputField
+                lineHeight={22}
                 value={newLastName}
                 onChangeText={(text) => setNewLastName(text)}
                 placeholder={formattedLastName}
@@ -119,7 +121,7 @@ const ProfileView = () => {
               isInvalid={false}
               isReadOnly={false}
             >
-              <InputField />
+              <InputField lineHeight={22} />
             </Input>
           </Box>
           <Box display="flex" flexDirection="row" gap="$16">
@@ -132,7 +134,7 @@ const ProfileView = () => {
               isInvalid={false}
               isReadOnly={false}
             >
-              <InputField />
+              <InputField lineHeight={22} />
             </Input>
           </Box>
         </Center>
