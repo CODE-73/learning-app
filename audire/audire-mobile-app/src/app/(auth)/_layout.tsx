@@ -1,23 +1,27 @@
 import { UserProvider } from '@learning-app/auth';
 import { router } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
+import { Stack } from 'expo-router/stack';
+import { useState } from 'react';
 import Topbar from '../../modules/common/Topbar';
-import Sidebar from '../../modules/common/Sidebar';
+import Sidebar from '../../modules/common/sidebar/Sidebar';
 
 const MainLayout = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <UserProvider onUnauthorized={() => router.replace('/login')}>
-      <Drawer
-        backBehavior='history'
-        drawerContent={(props) => <Sidebar {...props} />}
+      <Topbar onToggleSidebar={() => setSidebarOpen(prev => !prev)} />
+
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setSidebarOpen} />
+      <Stack
+        initialRouteName='/'
         screenOptions={{
-          header: (props) => (
-            <Topbar onToggleSidebar={() => props.navigation.toggleDrawer()} />
-          ),
+          header: () => null
         }}
-      ></Drawer>
+      />
     </UserProvider>
   );
-};
+
+}
 
 export default MainLayout;

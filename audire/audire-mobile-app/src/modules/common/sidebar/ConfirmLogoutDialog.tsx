@@ -14,12 +14,12 @@ import {
 } from '@gluestack-ui/themed';
 import { useLogout } from '@learning-app/auth';
 
-type ConformLogoutDialogueProps = ComponentProps<typeof Modal> & {
+type ConfirmLogoutDialogProps = ComponentProps<typeof Modal> & {
   isOpen: boolean;
   onClose: () => void;
 };
 
-const ConformLogoutDialogue: FC<ConformLogoutDialogueProps> = (props) => {
+const ConfirmLogoutDialog: FC<ConfirmLogoutDialogProps> = (props) => {
   const { trigger } = useLogout();
   const onLogout = async () => {
     try {
@@ -70,4 +70,4 @@ const ConformLogoutDialogue: FC<ConformLogoutDialogueProps> = (props) => {
   );
 };
 
-export default ConformLogoutDialogue;
+export default ConfirmLogoutDialog;
