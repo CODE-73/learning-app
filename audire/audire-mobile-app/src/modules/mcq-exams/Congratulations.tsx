@@ -11,7 +11,11 @@ import {
   ModalBody,
   ModalFooter,
   Text,
+  Button,
+  ButtonText,
 } from '@gluestack-ui/themed';
+import { TouchableOpacity } from 'react-native';
+import { router } from 'expo-router';
 import Congratulations from '/assets/Congratulations.svg';
 
 type AllQuestionsProps = ComponentProps<typeof Box> & {
@@ -74,6 +78,15 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
         <ModalFooter>
           <Box display="flex" flexDirection="row"></Box>
         </ModalFooter>
+        <TouchableOpacity>
+          <Box>
+            <Button bg="#8D0C8A" onPress={() => router.replace('/')}>
+              <ButtonText fontSize="$md" fontWeight="bold">
+                Home Page
+              </ButtonText>
+            </Button>
+          </Box>
+        </TouchableOpacity>
       </ModalContent>
     </Modal>
   );
