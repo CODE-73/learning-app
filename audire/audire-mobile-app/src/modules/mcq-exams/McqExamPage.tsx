@@ -241,7 +241,11 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             disabled={!state.can({ type: 'PREV_QUESTION' })}
           >
             <Box
-              bg={state.can({ type: 'PREV_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
+              bg={
+                state.can({ type: 'PREV_QUESTION' })
+                  ? '$backgroundDark300'
+                  : '#e5e5e5'
+              }
               display="flex"
               flexDirection="row"
               alignItems="center"
@@ -250,8 +254,18 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               p="$2"
               borderRadius="$lg"
             >
-              <ChevronLeftIcon />
-              <Text color="black">Previous</Text>
+              <ChevronLeftIcon
+                color={
+                  state.can({ type: 'NEXT_QUESTION' }) ? '$white' : '$black'
+                }
+              />
+              <Text
+                color={
+                  state.can({ type: 'NEXT_QUESTION' }) ? '$white' : '$black'
+                }
+              >
+                Previous
+              </Text>
             </Box>
           </TouchableOpacity>
           <TouchableOpacity
@@ -263,7 +277,11 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             disabled={!state.can({ type: 'NEXT_QUESTION' })}
           >
             <Box
-              bg={state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
+              bg={
+                state.can({ type: 'NEXT_QUESTION' })
+                  ? '$backgroundDark200'
+                  : '#e5e5e5'
+              }
               display="flex"
               flexDirection="row"
               alignItems="center"
@@ -272,8 +290,18 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
               p="$2"
               borderRadius="$lg"
             >
-              <Text color="black">Next</Text>
-              <ChevronRightIcon />
+              <Text
+                color={
+                  state.can({ type: 'NEXT_QUESTION' }) ? '$black' : '$white'
+                }
+              >
+                Next
+              </Text>
+              <ChevronRightIcon
+                color={
+                  state.can({ type: 'NEXT_QUESTION' }) ? '$black' : '$white'
+                }
+              />
             </Box>
           </TouchableOpacity>
         </Box>
