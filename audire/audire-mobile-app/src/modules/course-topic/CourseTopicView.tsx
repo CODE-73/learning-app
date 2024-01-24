@@ -8,15 +8,14 @@ import React, { FC } from 'react';
 import { useTopic } from '@learning-app/syllabus';
 
 type CourseTopicViewProps = {
-  topicId: string 
-
+  topicId: string;
 };
 
 const CourseTopicView: FC<CourseTopicViewProps> = ({ topicId }) => {
   const { data: topic } = useTopic({ topicId });
 
   return (
-    <ScrollView style={{ width: '100%' }}>
+    <ScrollView style={{ width: '100%', backgroundColor: 'white' }}>
       <Box flexDirection="column" flex={1} bgColor="white" w="$full">
         <Box ml="$5" pt="$5" pb="$1">
           <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
