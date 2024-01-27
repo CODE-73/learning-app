@@ -74,7 +74,7 @@ const VideoComponent: FC<VideoComponentProps> = (props) => {
 
   return (
     <Box
-      width="$full"
+      mx={17}
       display="flex"
       alignItems="center"
       justifyContent="center"
