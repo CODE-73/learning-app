@@ -25,7 +25,7 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
           {subject?.title}
         </Text>
       </Box>
-      <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" pb="$3">
+      <Text fontSize="$md" color="black" fontWeight="bold" ml="$5" pb="$3">
         Select a topic to learn today.
       </Text>
       <ScrollView px="$4">
