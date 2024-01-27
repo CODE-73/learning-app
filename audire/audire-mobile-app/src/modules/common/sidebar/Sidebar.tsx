@@ -21,7 +21,7 @@ const animConfig = {
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
-  const drawerPosition = useSharedValue(-250); // Assuming drawer width of 250
+  const drawerPosition = useSharedValue(-250); // Assuming drawer width of 250.
 
   const drawerStyle = useAnimatedStyle(() => {
     return {

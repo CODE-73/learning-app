@@ -22,7 +22,6 @@ type Option = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 };
-
 type SidebarContentProps = { onClose: () => void };
 
 const options: Option[] = [
@@ -121,6 +120,7 @@ const SidebarContent: FC<SidebarContentProps> = (props) => {
           <Box h={0.3} backgroundColor="black" m={17}></Box>
           <TouchableOpacity
             onPress={() => {
+              props.onClose();
               setShowModal(true);
             }}
           >
