@@ -3,6 +3,7 @@ import { useTopics } from '@learning-app/syllabus';
 import TopicCard from './topic-card/TopicCard';
 import { Box, Text, ScrollView } from '@gluestack-ui/themed';
 import CommonGirl from '/assets/commonGirl.svg';
+import { useSubject } from '@learning-app/syllabus';
 
 type CourseSubjectViewProps = {
   subjectId: string;
@@ -15,10 +16,16 @@ const CourseSubjectView: FC<CourseSubjectViewProps> = ({ subjectId }) => {
       enabled: true,
     },
   });
+  const { data: subject } = useSubject({ subjectId });
 
   return (
     <Box flex={1} bgColor="$white" w="$full">
-      <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" py="$8">
+      <Box ml="$5" pb="$1">
+        <Text fontSize="$xl" color="black" fontWeight="bold" my="$2">
+          {subject?.title}
+        </Text>
+      </Box>
+      <Text fontSize="$xl" color="black" fontWeight="bold" ml="$5" pb="$3">
         Select a topic to learn today.
       </Text>
       <ScrollView px="$4">
