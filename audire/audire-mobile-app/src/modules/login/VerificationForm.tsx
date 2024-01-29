@@ -86,6 +86,15 @@ const VerificationView: FC<VerificationFormProps> = ({
     });
   };
 
+  const handleBackspace = (index: number) => {
+    const prevRef = inputRefs.current[index - 1];
+    prevRef?.current?.focus?.();
+    setOTPValues((prev) => {
+      prev[index - 1] = '';
+      return [...prev];
+    });
+  };
+
   const handleResendOTP = () => {
     triggerOTP({ mobile });
     setResendCountdown(60);
@@ -112,6 +121,11 @@ const VerificationView: FC<VerificationFormProps> = ({
         keyboardType="numeric"
         onChangeText={(newValue) => handleOtpInputChange(index, newValue)}
         maxLength={1}
+        onKeyPress={({ nativeEvent }) => {
+          if (nativeEvent.key === 'Backspace') {
+            handleBackspace(index);
+          }
+        }}
       />
     ));
   };
@@ -119,9 +133,9 @@ const VerificationView: FC<VerificationFormProps> = ({
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full">
       <Box display="flex" mb="$6">
-        <Text fontSize="$2xl" fontWeight="bold" color="black" pl="$6">
+        <Text fontSize="$xl" fontWeight="bold" color="black" pl="$6">
           Verify
-          <Text color="$fuchsia800" fontWeight="bold" fontSize="$2xl" ml="$1">
+          <Text color="$fuchsia800" fontWeight="bold" fontSize="$xl" ml="$1">
             OTP
           </Text>
         </Text>
