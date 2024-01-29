@@ -11,6 +11,7 @@ import {
   ModalBody,
   ModalFooter,
   Text,
+  Center,
 } from '@gluestack-ui/themed';
 import Congratulations from '/assets/Congratulations.svg';
 
@@ -38,25 +39,16 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
       <ModalContent>
         <ModalHeader>
           <Heading></Heading>
+          <Heading fontSize="$2xl">Congratulations!</Heading>
           <ModalCloseButton>
             <CloseIcon size="sm" />
           </ModalCloseButton>
         </ModalHeader>
-        <ModalBody pt="$7">
-          <Box
-            display="flex"
-            flexDirection="row"
-            flexWrap="wrap"
-            gap="$1"
-            justifyContent="center"
-          >
-            <Heading pb="$7" fontSize="$2xl">
-              Congratulations!
-            </Heading>
-            <Box>
-              <Congratulations />
-            </Box>
-          </Box>
+        <ModalBody>
+          <Center>
+            <Congratulations />
+          </Center>
+
           <Box
             display="flex"
             flexDirection="column"
