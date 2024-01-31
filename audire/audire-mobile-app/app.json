@@ -2,7 +2,7 @@
   "expo": {
     "name": "Audire",
     "slug": "audire-mobile-app",
-    "version": "1.0.0",
+    "version": "1.10.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "com.audire.app",
@@ -19,12 +19,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "1",
+      "buildNumber": "99",
       "bundleIdentifier": "com.audirelearning.app"
     },
     "android": {
       "package": "com.audirelearning.app",
-      "versionCode": 4,
+      "versionCode": 99,
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE"
