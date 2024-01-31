@@ -47,9 +47,9 @@ jobs:
           NEW_VERSION_CODE="${{ github.event.inputs.android_version_code }}"
           sed -i 's/"versionCode": [0-9]*,/"versionCode": '$NEW_VERSION_CODE',/g' audire/audire-mobile-app/app.json
 
-    #   - name: Commit and push
-    #     run: |
-    #       git config --local user.email "action@github.com"
-    #       git config --local user.name "GitHub Action"
-    #       git commit -am "chore: Bump Audire ExpoApp to v${{ github.event.inputs.version }}"
-    #       git push
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "chore: Bump Audire ExpoApp to v${{ github.event.inputs.version }}"
+          git push
