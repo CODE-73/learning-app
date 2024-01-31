@@ -1,6 +1,9 @@
 name: Bump Audire App Version
 run-name: Bump to Version ${{ github.event.inputs.version }}
 
+permissions:
+    contents: write
+
 on:
   workflow_dispatch:
     inputs:
