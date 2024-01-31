@@ -9,11 +9,9 @@ const MainLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const segments = useSegments();
-  console.log('aaaa', segments);
   const hideTopbarSegments = ['(auth)/mcq-exams/[topic]'];
 
   const hideTopbar = hideTopbarSegments.indexOf(segments.join('/')) >= 0;
-  console.log({ segments, hideTopbarSegments, hideTopbar });
 
   return (
     <UserProvider onUnauthorized={() => router.replace('/login')}>

@@ -21,13 +21,12 @@ const Topbar: FC<TopbarProps> = ({ onToggleSidebar }) => {
     <Box
       w="$full"
       paddingHorizontal="$5"
-      pt={top > 10 ? "$0" : undefined}
+      pt={top > 10 ? '$0' : undefined}
       pb="$3"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      style={{ marginTop: top }}
     >
       <Box display="flex" flexDirection="row" alignItems="center">
         <Pressable onPress={onToggleSidebar}>
