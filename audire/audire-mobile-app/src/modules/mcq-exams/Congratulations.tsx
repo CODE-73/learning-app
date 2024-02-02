@@ -1,5 +1,6 @@
 import React, { ComponentProps, FC } from 'react';
 import { CloseIcon } from '@gluestack-ui/themed';
+import { router } from 'expo-router';
 import {
   Heading,
   Box,
@@ -38,9 +39,13 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
       <ModalBackdrop />
       <ModalContent>
         <ModalHeader>
-          <Heading></Heading>
           <Heading fontSize="$2xl">Congratulations!</Heading>
-          <ModalCloseButton>
+          <ModalCloseButton
+            onPress={() => {
+              router.replace('/');
+              props.onClose();
+            }}
+          >
             <CloseIcon size="sm" />
           </ModalCloseButton>
         </ModalHeader>

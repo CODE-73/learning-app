@@ -1,12 +1,17 @@
 import React, { FC, useEffect } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import SidebarContent from './SidebarContent';
 
 type SidebarProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-}
+};
 
 const animConfig = {
   duration: 500,
@@ -16,7 +21,7 @@ const animConfig = {
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
-  const drawerPosition = useSharedValue(-250); // Assuming drawer width of 250
+  const drawerPosition = useSharedValue(-250); // Assuming drawer width of 250.
 
   const drawerStyle = useAnimatedStyle(() => {
     return {
@@ -34,7 +39,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
   useEffect(() => {
     toggleDrawer();
-  }, [isOpen])
+  }, [isOpen]);
 
   const toggleDrawer = () => {
     drawerPosition.value = withTiming(isOpen ? 0 : -250, animConfig);
@@ -43,10 +48,13 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   return (
     <>
       <Animated.View style={[styles.drawer, drawerStyle]}>
-        <SidebarContent />
+        <SidebarContent onClose={() => setIsOpen(false)} />
       </Animated.View>
 
-      <AnimatedPressable style={[styles.overlay, overlayStyle]} onPress={() => setIsOpen(false)} />
+      <AnimatedPressable
+        style={[styles.overlay, overlayStyle]}
+        onPress={() => setIsOpen(false)}
+      />
     </>
   );
 };
