@@ -119,7 +119,7 @@ const LoginForm = () => {
             </Input>
           </FormControl>
         ) : null}
-        <Box mb="$1" w="$full"  opacity={mobileNumber.length === 10 ? 1 : 0.7}>
+        <Box mb="$1" w="$full"  opacity={mobileNumber.length === 10 || mobileNumber.length === 12 && fullName.length >= 1 ? 1 : 0.7  }>
           <Button
             variant="solid"
             mt="$1"
@@ -127,7 +127,7 @@ const LoginForm = () => {
             onPress={() => {
               handleTrigger();
             }}
-            disabled={mobileNumber.length !== 10}
+            disabled={mobileNumber.length !== 10 &&  mobileNumber.length !== 12 && fullName.length >= 1}
           >
             {isTriggeringMobileOTP ? (
               <ActivityIndicator size="small" color="#ffffff" />
