@@ -25,7 +25,7 @@ const LoginForm = () => {
       if (!isNewUser) {
         const r = await trigger({ mobile: `+91${mobileNumber}` });
         setIsNewUser(r.isNewUser);
-        setMobileNumber(r.mobile);
+        setMobileNumber(r.mobile.substring(2));
         if (!r.isNewUser) {
           router.replace({
             pathname: 'verification',
@@ -43,7 +43,7 @@ const LoginForm = () => {
         router.push({
           pathname: 'verification',
           params: {
-            mobile: mobileNumber,
+            mobile: `91${mobileNumber}`,
             fullName: fullName,
             isNewUser: 1,
           },
@@ -54,10 +54,13 @@ const LoginForm = () => {
     }
   };
 
+  const isValid =
+    mobileNumber.length === 10 && (!isNewUser || fullName.length > 0);
+
   return (
     <Box display="flex" flex={1} justifyContent="center" w="$full">
       <Box alignItems="center" bg="$white" py="$5" px="$5" w="$full">
-        <Box mb="$9" alignSelf='flex-start'>
+        <Box mb="$9" alignSelf="flex-start">
           <Text fontSize="$xl" color="black" fontWeight="bold">
             Welcome to
           </Text>
@@ -119,7 +122,7 @@ const LoginForm = () => {
             </Input>
           </FormControl>
         ) : null}
-        <Box mb="$1" w="$full"  opacity={mobileNumber.length === 10 || mobileNumber.length === 12 && fullName.length >= 1 ? 1 : 0.7  }>
+        <Box mb="$1" w="$full" opacity={isValid ? 1 : 0.7}>
           <Button
             variant="solid"
             mt="$1"
@@ -127,7 +130,7 @@ const LoginForm = () => {
             onPress={() => {
               handleTrigger();
             }}
-            disabled={mobileNumber.length !== 10 &&  mobileNumber.length !== 12 && fullName.length >= 1}
+            disabled={!isValid}
           >
             {isTriggeringMobileOTP ? (
               <ActivityIndicator size="small" color="#ffffff" />
