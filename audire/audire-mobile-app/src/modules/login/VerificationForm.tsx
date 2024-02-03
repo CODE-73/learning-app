@@ -117,9 +117,9 @@ const VerificationView: FC<VerificationFormProps> = ({
   };
 
   return (
-    <Box display="flex" flex={1} justifyContent="center" w="$full">
-      <Box display="flex" mb="$6">
-        <Text fontSize="$2xl" fontWeight="bold" color="black" pl="$6">
+    <Box display="flex" flex={1} alignItems="center" justifyContent="center" w="$full">
+      <Box display="flex"  mb="$6">
+        <Text fontSize="$2xl" fontWeight="bold" color="black" >
           Verify
           <Text color="$fuchsia800" fontWeight="bold" fontSize="$2xl" ml="$1">
             OTP

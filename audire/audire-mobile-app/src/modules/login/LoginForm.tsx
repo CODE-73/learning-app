@@ -58,8 +58,14 @@ const LoginForm = () => {
     mobileNumber.length === 10 && (!isNewUser || fullName.length > 0);
 
   return (
-    <Box display="flex" flex={1} justifyContent="center" w="$full">
-      <Box alignItems="center" bg="$white" py="$5" px="$5" w="$full">
+    <Box
+      display="flex"
+      flex={1}
+      justifyContent="center"
+      w="$full"
+      alignItems="center"
+    >
+      <Box bg="$white" py="$5" px="$5" $base-w="$full" $md-w="45%" $xl-w="25%">
         <Box mb="$9" alignSelf="flex-start">
           <Text fontSize="$xl" color="black" fontWeight="bold">
             Welcome to
