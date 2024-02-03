@@ -92,6 +92,7 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
           {showQuestionsDialog && (
             <AllQuestions
               isOpen={showQuestionsDialog}
+              currentQuestionIdx={state.context.currentQuestionIdx}
               onClose={() => setShowQuestionsDialog(false)}
               questions={state.context.questions}
               onJumpToQuestion={(idx) =>
@@ -100,6 +101,9 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
                   questionIdx: idx,
                 })
               }
+              markedToRevisit={state.context.markToRevisit}
+              markAnswer={state.context.markAnswer}
+              visited={state.context.visited}
             />
           )}
         </Box>
@@ -187,7 +191,8 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
             onPress={() =>
               send({
                 type: 'MARK_ANSWER',
-                selectedOption: option.id,
+                selectedOption:
+                  markAnswer[currentQuestionIdx] === option.id ? -1 : option.id,
               })
             } //MarkAnswer
           >

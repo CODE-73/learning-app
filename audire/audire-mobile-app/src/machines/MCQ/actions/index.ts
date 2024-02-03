@@ -88,6 +88,7 @@ export function setStartExam(
     numCorrectAnswers: 0,
     numUnattended: 0,
     numWrongAnswers: 0,
+    visited: {},
   };
 }
 
@@ -96,7 +97,7 @@ export function calculateMarks(context: MCQMachineContext): MCQMachineContext {
     numWrong = 0,
     numUnattended = 0;
   const score = context.questions.reduce((mark, question, idx) => {
-    if (context.markAnswer[idx] !== undefined) {
+    if (context.markAnswer[idx] >= 0) {
       if (context.markAnswer[idx] === question.correctOption) {
         mark += 4;
         numCorrect += 1;
@@ -117,5 +118,18 @@ export function calculateMarks(context: MCQMachineContext): MCQMachineContext {
     numCorrectAnswers: numCorrect,
     numWrongAnswers: numWrong,
     numUnattended: numUnattended,
+  };
+}
+
+export function markQuestionVisited(
+  context: MCQMachineContext
+): MCQMachineContext {
+  return {
+    ...context,
+    visited: {
+      ...context.visited,
+
+      [context.currentQuestionIdx]: true,
+    },
   };
 }

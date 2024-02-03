@@ -14,19 +14,32 @@ import {
 } from '@gluestack-ui/themed';
 import { TouchableOpacity } from 'react-native';
 import { McqQuestion } from '@learning-app/syllabus';
+import {
+  MarkAnswer,
+  MarkToRevisit,
+  VisitedQuestions,
+} from '../../machines/MCQ/types/context';
 
 type AllQuestionsProps = ComponentProps<typeof Box> & {
   isOpen: boolean;
   onClose: () => void;
+  currentQuestionIdx: number;
   questions: McqQuestion[];
   onJumpToQuestion: (questionIdx: number) => void;
+  markedToRevisit: MarkToRevisit;
+  markAnswer: MarkAnswer;
+  visited: VisitedQuestions;
 };
 
 const AllQuestions: FC<AllQuestionsProps> = ({
   isOpen,
   onClose,
+  currentQuestionIdx,
   questions,
   onJumpToQuestion,
+  markedToRevisit,
+  markAnswer,
+  visited,
 }) => {
   const statusData = [
     { color: '#8FC37D', text: 'Answered' },
@@ -36,6 +49,23 @@ const AllQuestions: FC<AllQuestionsProps> = ({
     { color: '#79D3E7', text: 'To Revisit' },
     { color: 'white', text: 'Not visited' },
   ];
+  const getQuestionColor = (index: number) => {
+    if (markedToRevisit[index] === true) {
+      // To Revisit
+      return '#79D3E7';
+    } else if (markAnswer[index] >= 0) {
+      // Answer Marked
+      return '#8FC37D';
+    } else if (visited[index] === true) {
+      // Unanswered
+      return '#F07A7A';
+    } else {
+      return '$white';
+    }
+  };
+
+  console.log('bbbbb', markedToRevisit);
+  console.log('ccc', markAnswer);
   const ref = React.useRef(null);
   return (
     <Modal
@@ -70,10 +100,12 @@ const AllQuestions: FC<AllQuestionsProps> = ({
                 }}
               >
                 <Box
-                  bg="$white"
+                  bg={getQuestionColor(index)}
                   alignItems="center"
                   justifyContent="center"
                   borderRadius="$lg"
+                  borderColor={'$black'}
+                  borderWidth={currentQuestionIdx === index ? '$2' : undefined}
                   mb="$4"
                   width="$12"
                   height="$12"
