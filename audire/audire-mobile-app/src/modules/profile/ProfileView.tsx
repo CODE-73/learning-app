@@ -51,11 +51,14 @@ const ProfileView = () => {
           </Avatar>
 
           <Center>
-            <Text fontWeight="bold" color="black" fontSize="$2xl">
-              {firstName}
-            </Text>
-            <Text fontWeight="bold" color="black" fontSize="$2xl">
-              {lastName}
+            <Text
+              fontWeight="bold"
+              color="black"
+              fontSize="$xl"
+              numberOfLines={2}
+              textAlign="center"
+            >
+              {firstName} {lastName}
             </Text>
           </Center>
         </Center>
