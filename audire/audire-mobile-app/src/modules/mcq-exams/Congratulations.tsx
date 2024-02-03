@@ -39,6 +39,7 @@ const CongratulationsDialog: FC<AllQuestionsProps> = (props) => {
       <ModalBackdrop />
       <ModalContent>
         <ModalHeader>
+          <Heading></Heading>
           <Heading fontSize="$2xl">Congratulations!</Heading>
           <ModalCloseButton
             onPress={() => {
