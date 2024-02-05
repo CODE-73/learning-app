@@ -6,7 +6,11 @@ export type MarkAnswer = {
 };
 
 export type MarkToRevisit = {
-  [questionId: string]: boolean;
+  [questionIdx: string]: boolean;
+};
+
+export type VisitedQuestions = {
+  [questionIdx: number]: boolean;
 };
 
 export type MCQMachineContext = {
@@ -15,6 +19,7 @@ export type MCQMachineContext = {
   currentQuestionIdx: number;
   markAnswer: MarkAnswer;
   markToRevisit: MarkToRevisit;
+  visited: VisitedQuestions;
   noOfQuestionToRevisit: number;
 
   // On Submit the following are filled

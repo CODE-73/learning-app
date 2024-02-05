@@ -8,6 +8,7 @@ import {
   setMarkToRevisit,
   setStartExam,
   calculateMarks,
+  markQuestionVisited,
 } from './actions';
 import { MCQMachineEvents } from './events';
 import { hasNextQuestion, hasPrevQuestion } from './guards';
@@ -23,7 +24,7 @@ export const MCQMachine = createMachine(
     context: {} as MCQMachineContext,
     states: {
       'attending-question': {
-        entry: ['calculateMarks'],
+        entry: ['calculateMarks', 'markQuestionVisited'],
         on: {
           SUBMIT_EXAM: {
             actions: ['calculateMarks'],
@@ -118,6 +119,9 @@ export const MCQMachine = createMachine(
       }),
       calculateMarks: assign(({ context }) => {
         return calculateMarks(context);
+      }),
+      markQuestionVisited: assign(({ context }) => {
+        return markQuestionVisited(context);
       }),
     },
     guards: {
