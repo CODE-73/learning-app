@@ -52,7 +52,7 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "code73in@gmail.com"
+          git config --local user.name "CODE73 Bot"
           git commit -am "chore: Bump Audire ExpoApp to v${{ github.event.inputs.version }}"
           git push
