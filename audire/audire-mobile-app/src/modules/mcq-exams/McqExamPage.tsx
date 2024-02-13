@@ -5,6 +5,7 @@ import {
   Text,
   HStack,
   Switch,
+  ScrollView,
 } from '@gluestack-ui/themed';
 import { type McqQuestion } from '@learning-app/syllabus';
 import React, { ComponentProps, FC, useEffect, useMemo, useState } from 'react';
@@ -82,221 +83,243 @@ const McqExamPage: FC<McqExamPageProps> = ({ questions }) => {
 
   return (
     <Box w="$full">
-      <Box display="flex" flexDirection="row" justifyContent="flex-end" pr="$4">
-        <Box>
-          <TouchableOpacity onPress={() => setShowQuestionsDialog(true)}>
-            <Box pt="$1.5">
-              <McqQuestionListIcon style={IconStyles.ListIcon} />
-            </Box>
-          </TouchableOpacity>
-          {showQuestionsDialog && (
-            <AllQuestions
-              isOpen={showQuestionsDialog}
-              currentQuestionIdx={state.context.currentQuestionIdx}
-              onClose={() => setShowQuestionsDialog(false)}
-              questions={state.context.questions}
-              onJumpToQuestion={(idx) =>
-                send({
-                  type: 'JUMP_TO_QUESTION',
-                  questionIdx: idx,
-                })
-              }
-              markedToRevisit={state.context.markToRevisit}
-              markAnswer={state.context.markAnswer}
-              visited={state.context.visited}
-            />
-          )}
-        </Box>
-        <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
-          <Box
-            display="flex"
-            flexDirection="row"
-            alignContent="center"
-            alignItems="center"
-            justifyContent="space-between"
-            bgColor="#e5e5e5"
-            ml="$4"
-            p="$1"
-            px="$3"
-            borderRadius="$full"
-          >
-            <Text color="#8D0C8A" mr="$2">
-              Quit
-            </Text>
-            <QuiteIcon style={IconStyles.quiteIcon} />
-          </Box>
-        </TouchableOpacity>
-
-        <ConfirmSubmitDialog
-          isOpen={showConfirmSubmitDialog}
-          onConfirm={() => {
-            send({
-              type: 'SUBMIT_EXAM',
-            });
-            setShowCongratsDialog(true);
-          }}
-          onClose={() => setShowConfirmSubmitDialog(false)}
-          numUnattended={state.context.numUnattended}
-          numToRevisit={state.context.noOfQuestionToRevisit}
-        />
-      </Box>
-      {/* start */}
-      <Box>
-        <Box>
-          <Box
-            borderRadius="$sm"
-            mt="$16"
-            mb="$2"
-            backgroundColor="#e5e5e5"
-            mx={17}
-            pl="$4"
-          >
-            <Box pb="$16">
-              <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
-                Question {(state.context?.currentQuestionIdx ?? 0) + 1}/
-                {questions.length}
-              </Text>
-              <Text fontWeight="$bold">{currentQuestion?.question}</Text>
-            </Box>
-          </Box>
-        </Box>
-        <Box py="$5" px="$5">
-          <HStack space="md">
-            <Switch
-              value={markedToRevisit}
-              sx={{
-                _light: {
-                  props: {
-                    trackColor: {
-                      false: '$backgroundDark700',
-                      true: '#8D0C8A',
-                    },
-                  },
-                },
-              }}
-              onToggle={(arg) =>
-                send({
-                  type: 'MARK_TO_REVISIT',
-                  markToRevisit: !markedToRevisit,
-                })
-              }
-            />
-            <Text size="sm">Mark to Revisit</Text>
-          </HStack>
-        </Box>
-
-        {options.map((option) => (
-          <TouchableOpacity
-            key={option.id}
-            onPress={() =>
-              send({
-                type: 'MARK_ANSWER',
-                selectedOption:
-                  markAnswer[currentQuestionIdx] === option.id ? -1 : option.id,
-              })
-            } //MarkAnswer
-          >
-            <Box
-              display="flex"
-              flexDirection="row"
-              borderRadius="$sm"
-              overflow="hidden"
-              backgroundColor={
-                markAnswer[currentQuestionIdx] === option.id
-                  ? '#94B6BB'
-                  : '#e5e5e5'
-              }
-              mx={17}
-              p="$2"
-              mb="$2"
-              alignItems="center"
-            >
-              <Box
-                bg="#F9E2F9"
-                p="$2"
-                width="$10"
-                alignItems="center"
-                borderRadius="$lg"
-              >
-                <Text color="black" fontWeight="$bold">
-                  {option.id}
-                </Text>
-              </Box>
-              <Box flexShrink={1}>
-                <Text fontWeight="$bold" pl="$10" numberOfLines={2} isTruncated>
-                  {option.option}
-                </Text>
-              </Box>
-            </Box>
-          </TouchableOpacity>
-        ))}
-
+      <ScrollView>
         <Box
           display="flex"
           flexDirection="row"
-          justifyContent="space-around"
-          pt="$16"
+          justifyContent="flex-end"
+          pr="$4"
+          pt="$5"
         >
-          <TouchableOpacity
-            onPress={() =>
-              send({
-                type: 'PREV_QUESTION',
-              })
-            }
-            disabled={!state.can({ type: 'PREV_QUESTION' })}
-          >
+          <Box mt="$3">
+            <TouchableOpacity onPress={() => setShowQuestionsDialog(true)}>
+              <Box pt="$1.5">
+                <McqQuestionListIcon style={IconStyles.ListIcon} />
+              </Box>
+            </TouchableOpacity>
+            {showQuestionsDialog && (
+              <AllQuestions
+                isOpen={showQuestionsDialog}
+                currentQuestionIdx={state.context.currentQuestionIdx}
+                onClose={() => setShowQuestionsDialog(false)}
+                questions={state.context.questions}
+                onJumpToQuestion={(idx) =>
+                  send({
+                    type: 'JUMP_TO_QUESTION',
+                    questionIdx: idx,
+                  })
+                }
+                markedToRevisit={state.context.markToRevisit}
+                markAnswer={state.context.markAnswer}
+                visited={state.context.visited}
+              />
+            )}
+          </Box>
+          <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
             <Box
-              bg={state.can({ type: 'PREV_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
               display="flex"
               flexDirection="row"
+              alignContent="center"
               alignItems="center"
-              justifyContent="center"
-              width={150}
-              p="$2"
-              borderRadius="$lg"
+              justifyContent="space-between"
+              bgColor="#e5e5e5"
+              mt="$4"
+              ml="$4"
+              p="$1"
+              px="$3"
+              borderRadius="$full"
             >
-              <ChevronLeftIcon />
-              <Text color="black">Previous</Text>
+              <Text color="#8D0C8A" mr="$2">
+                Quit
+              </Text>
+              <QuiteIcon style={IconStyles.quiteIcon} />
             </Box>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
+
+          <ConfirmSubmitDialog
+            isOpen={showConfirmSubmitDialog}
+            onConfirm={() => {
               send({
-                type: 'NEXT_QUESTION',
-              })
-            }
-            disabled={!state.can({ type: 'NEXT_QUESTION' })}
-          >
+                type: 'SUBMIT_EXAM',
+              });
+              setShowCongratsDialog(true);
+            }}
+            onClose={() => setShowConfirmSubmitDialog(false)}
+            numUnattended={state.context.numUnattended}
+            numToRevisit={state.context.noOfQuestionToRevisit}
+          />
+        </Box>
+        {/* start */}
+
+        <Box>
+          <Box>
             <Box
-              bg={state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'}
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              justifyContent="center"
-              width={150}
-              p="$2"
-              borderRadius="$lg"
+              borderRadius="$sm"
+              mt="$16"
+              mb="$2"
+              backgroundColor="#e5e5e5"
+              mx={17}
+              pl="$4"
             >
-              <Text color="black">Next</Text>
-              <ChevronRightIcon />
+              <Box pb="$16">
+                <Text fontWeight="$semibold" fontSize={10} pt="$1.5">
+                  Question {(state.context?.currentQuestionIdx ?? 0) + 1}/
+                  {questions.length}
+                </Text>
+                <Text fontWeight="$bold">{currentQuestion?.question}</Text>
+              </Box>
+            </Box>
+          </Box>
+          <Box py="$5" px="$5">
+            <HStack space="md">
+              <Switch
+                value={markedToRevisit}
+                sx={{
+                  _light: {
+                    props: {
+                      trackColor: {
+                        false: '$backgroundDark700',
+                        true: '#8D0C8A',
+                      },
+                    },
+                  },
+                }}
+                onToggle={(arg) =>
+                  send({
+                    type: 'MARK_TO_REVISIT',
+                    markToRevisit: !markedToRevisit,
+                  })
+                }
+              />
+              <Text size="sm">Mark to Revisit</Text>
+            </HStack>
+          </Box>
+
+          {options.map((option) => (
+            <TouchableOpacity
+              key={option.id}
+              onPress={() =>
+                send({
+                  type: 'MARK_ANSWER',
+                  selectedOption:
+                    markAnswer[currentQuestionIdx] === option.id
+                      ? -1
+                      : option.id,
+                })
+              } //MarkAnswer
+            >
+              <Box
+                display="flex"
+                flexDirection="row"
+                borderRadius="$sm"
+                overflow="hidden"
+                backgroundColor={
+                  markAnswer[currentQuestionIdx] === option.id
+                    ? '#94B6BB'
+                    : '#e5e5e5'
+                }
+                mx={17}
+                p="$2"
+                mb="$2"
+                alignItems="center"
+              >
+                <Box
+                  bg="#F9E2F9"
+                  p="$2"
+                  width="$10"
+                  alignItems="center"
+                  borderRadius="$lg"
+                >
+                  <Text color="black" fontWeight="$bold">
+                    {option.id}
+                  </Text>
+                </Box>
+                <Box flexShrink={1}>
+                  <Text
+                    fontWeight="$bold"
+                    pl="$10"
+                    numberOfLines={20}
+                    isTruncated
+                  >
+                    {option.option}
+                  </Text>
+                </Box>
+              </Box>
+            </TouchableOpacity>
+          ))}
+
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-around"
+            pt="$16"
+          >
+            <TouchableOpacity
+              onPress={() =>
+                send({
+                  type: 'PREV_QUESTION',
+                })
+              }
+              disabled={!state.can({ type: 'PREV_QUESTION' })}
+            >
+              <Box
+                bg={
+                  state.can({ type: 'PREV_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'
+                }
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+                width={150}
+                p="$2"
+                borderRadius="$lg"
+              >
+                <ChevronLeftIcon />
+                <Text color="black">Previous</Text>
+              </Box>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                send({
+                  type: 'NEXT_QUESTION',
+                })
+              }
+              disabled={!state.can({ type: 'NEXT_QUESTION' })}
+            >
+              <Box
+                bg={
+                  state.can({ type: 'NEXT_QUESTION' }) ? '#e5e5e5' : '#F6F6F6'
+                }
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+                width={150}
+                p="$2"
+                borderRadius="$lg"
+              >
+                <Text color="black">Next</Text>
+                <ChevronRightIcon />
+              </Box>
+            </TouchableOpacity>
+          </Box>
+          <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
+            <Box m="$6" bg="#8D0C8A" p="$2" alignItems="center">
+              <Text fontSize="$md" fontWeight="bold" color="white">
+                Submit
+              </Text>
             </Box>
           </TouchableOpacity>
         </Box>
-      </Box>
-      <TouchableOpacity onPress={() => setShowConfirmSubmitDialog(true)}>
-        <Box m="$6" bg="#8D0C8A" p="$2" alignItems="center">
-          <Text fontSize="$md" fontWeight="bold" color="white">
-            Submit
-          </Text>
-        </Box>
-      </TouchableOpacity>
-      <Congratulations
-        isOpen={showCongratsDialog}
-        onClose={() => setShowCongratsDialog(false)}
-        markObtained={state.context.markObtained}
-        maxMark={state.context.maxMark}
-        numQuestions={state.context.questions?.length}
-      />
+
+        <Congratulations
+          isOpen={showCongratsDialog}
+          onClose={() => setShowCongratsDialog(false)}
+          markObtained={state.context.markObtained}
+          maxMark={state.context.maxMark}
+          numQuestions={state.context.questions?.length}
+        />
+      </ScrollView>
     </Box>
   );
 };
