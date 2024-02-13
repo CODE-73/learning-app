@@ -12,7 +12,7 @@ const CARD_COLORS = ['#D6A8D4', '#94B6BB', '#FBB6B1', '#FF33D1', '#33D1FF'];
 const HomeView = () => {
   const {
     user: { firstName, optedCourse },
-  } = useActiveUser()
+  } = useActiveUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -36,43 +36,55 @@ const HomeView = () => {
 
   return (
     <Box flex={1} width="$full">
-      <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$5">
-        Hello {firstName}!
-      </Text>
-      <Box bg="white" p="$1.5">
-        <Image
-          borderRadius={10}
-          style={{
-            resizeMode: 'contain',
-            width: imageWidth,
-            height: imageHeight,
-          }}
-          alt="homepageBanner"
-          source={HomePageBanner}
-        />
-      </Box>
-      <Text fontSize="$xl" color="black" fontWeight="$medium" ml="$5" py="$5">
-        Choose your stage
-      </Text>
-      <Box
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-        borderRadius="$2xl"
-      >
-        {optedCourse.stages.map((stage, index) => (
-          <View
-            borderRadius="$lg"
-            key={stage.id}
-            style={{ backgroundColor: CARD_COLORS[index % CARD_COLORS.length] }}
-          >
-            <StageCard
-              stage={stage.title}
-              href={`/course-stages/${stage.id}`}
-            />
-          </View>
-        ))}
+      <Box $lg-pb="$96">
+        <Text fontSize="$xl" color="black" fontWeight="$bold" ml="$5" py="$5">
+          Hello {firstName}!
+        </Text>
+        <Box bg="white" p="$1.5" maxHeight={dimensions.height / 1.5}>
+          <Image
+            borderRadius={10}
+            maxHeight="$full"
+            resizeMode="cover"
+            $md-resizeMode="cover"
+            style={{
+              width: imageWidth,
+              height: imageHeight,
+            }}
+            alt="homepageBanner"
+            source={HomePageBanner}
+          />
+        </Box>
+        <Text fontSize="$xl" color="black" fontWeight="$medium" ml="$5" py="$5">
+          Choose your stage
+        </Text>
+        <Box
+          display="flex"
+          gap="$2"
+          flexDirection="row"
+          justifyContent="space-evenly"
+          alignItems="center"
+          borderRadius="$2xl"
+        >
+          {optedCourse.stages.map((stage, index) => (
+            <View
+              borderRadius="$lg"
+              minHeight={dimensions.height - dimensions.height * 0.85}
+              width="$1/3"
+              key={stage.id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              style={{
+                backgroundColor: CARD_COLORS[index % CARD_COLORS.length],
+              }}
+            >
+              <StageCard
+                stage={stage.title}
+                href={`/course-stages/${stage.id}`}
+              />
+            </View>
+          ))}
+        </Box>
       </Box>
       <FooterView />
     </Box>
