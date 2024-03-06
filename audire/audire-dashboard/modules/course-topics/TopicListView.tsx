@@ -9,14 +9,14 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
-  useDisclosure
+  useDisclosure,
 } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { CiEdit } from 'react-icons/ci';
 import { IoMdAdd } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { columns } from './data';
-// import TopicForm from './TopicForm';
+import { Zoom, toast } from 'react-toastify';
 import {
   TopicWithNumQuestions,
   useTopicDelete,
@@ -33,7 +33,9 @@ const TopicListView: FC = () => {
     undefined
   );
   const [stageId, setSelectedStage] = useState<string | undefined>(undefined);
-  const [activeTopic, setActiveTopic] = useState<TopicWithNumQuestions | null>(null);
+  const [activeTopic, setActiveTopic] = useState<TopicWithNumQuestions | null>(
+    null
+  );
 
   const {
     data: { data: topics } = {
@@ -85,9 +87,7 @@ const TopicListView: FC = () => {
         case 'mcqQuestion':
           return (
             <Chip className="capitalize" size="sm" variant="flat">
-              {topic.numQuestion > 0
-                ? `✅ ${topic.numQuestion} MCQs`
-                : '❌'}
+              {topic.numQuestion > 0 ? `✅ ${topic.numQuestion} MCQs` : '❌'}
             </Chip>
           );
 
@@ -149,11 +149,23 @@ const TopicListView: FC = () => {
               })
               .catch((error) => {
                 console.error('Delete error:', error);
+                if (error.code === '23503') {
+                  toast.error('Please delete the contents in this topic', {
+                    position: 'bottom-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                    transition: Zoom,
+                  });
+                }
               });
           }
         }}
       />
-      {/* <TopicForm isOpen={isOpen} onOpenChange={onOpenChange} /> */}
       <div className="flex items-center justify-between ">
         <h1 className=" text-2xl font-bold">Topics</h1>
 
