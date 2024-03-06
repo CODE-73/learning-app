@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 const LoginFormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8, 'Password must be at least 8 characters long'),
+  password: z.string(),
 });
 
 type LoginForm = z.infer<typeof LoginFormSchema>;
@@ -75,7 +75,7 @@ const LoginView: FC = () => {
           className="block mt-6"
           name="password"
           placeholder="Enter your password"
-          type='password'
+          type="password"
         />
 
         <Button
