@@ -38,7 +38,7 @@ const options: Option[] = [
     icon: BellIcon,
     disabled: false,
   },
-  { name: 'Payments', link: '', icon: CheckCircleIcon, disabled: true },
+
   {
     name: 'Settings',
     link: '/profile/profile',

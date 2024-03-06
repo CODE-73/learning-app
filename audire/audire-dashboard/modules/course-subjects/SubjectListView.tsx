@@ -3,10 +3,21 @@ import ConfirmDeleteDialog from 'components/ConfirmDeleteDialog';
 import React, { FC, useState } from 'react';
 import SubjectFormDialog from './SubjectFormDialogue';
 
-import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, useDisclosure } from '@nextui-org/react';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  Tooltip,
+  useDisclosure,
+} from '@nextui-org/react';
 import { CiEdit } from 'react-icons/ci';
 import { IoMdAdd } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
+import { Zoom, toast } from 'react-toastify';
 
 import { useSubjectDelete, useSubjects } from '@learning-app/syllabus';
 import CourseStageSelector from 'components/CourseStageSelector';
@@ -97,6 +108,19 @@ const SubjectListView: FC = () => {
               })
               .catch((error) => {
                 console.error('Delete error:', error);
+                if (error.code === '23503') {
+                  toast.error('Please delete the topics under this subject ', {
+                    position: 'bottom-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored',
+                    transition: Zoom,
+                  });
+                }
               });
           }
         }}
