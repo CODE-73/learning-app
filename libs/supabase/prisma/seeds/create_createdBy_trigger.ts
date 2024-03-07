@@ -24,7 +24,7 @@ async function makeTrigger(prisma: PrismaClient, tableName: string) {
                 `;
 }
 
-export async function update_createdBy(prisma: PrismaClient) {
+export async function create_createdBy(prisma: PrismaClient) {
   await makeFunction(prisma);
   await makeCreatedByTriggers(prisma)
 }
