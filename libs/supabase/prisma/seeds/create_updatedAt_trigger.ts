@@ -8,12 +8,12 @@ async function makeFunction(prisma) {
 }
 
 async function makeTrigger(prisma: PrismaClient, tableName: string) {
-  await prisma.$executeRaw`
+  await prisma.$executeRawUnsafe(`
                     CREATE OR REPLACE TRIGGER update_updatedAt_trigger
                     BEFORE UPDATE OR INSERT ON public."${tableName}"
                     FOR EACH ROW
                     EXECUTE PROCEDURE moddatetime("updatedAt");
-                `;
+                `);
 }
 
 export async function create_updatedAt(prisma: PrismaClient) {

@@ -16,12 +16,12 @@ async function makeFunction(prisma) {
 }
 
 async function makeTrigger(prisma: PrismaClient, tableName: string) {
-  await prisma.$executeRaw`
+  await prisma.$executeRawUnsafe(`
                     CREATE OR REPLACE TRIGGER update_updatedBy_trigger
                     BEFORE UPDATE OR INSERT ON public."${tableName}"
                     FOR EACH ROW
                     EXECUTE PROCEDURE public.update_updated_by();
-                `;
+                `);
 }
 
 export async function create_updatedBy(prisma: PrismaClient) {

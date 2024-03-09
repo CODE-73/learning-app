@@ -16,12 +16,12 @@ async function makeFunction(prisma) {
 }
 
 async function makeTrigger(prisma: PrismaClient, tableName: string) {
-  await prisma.$executeRaw`
+  await prisma.$executeRawUnsafe(`
                     CREATE OR REPLACE TRIGGER update_createdBy_trigger
                     BEFORE INSERT ON public."${tableName}"
                     FOR EACH ROW
                     EXECUTE PROCEDURE public.update_createdBy();
-                `;
+                `);
 }
 
 export async function create_createdBy(prisma: PrismaClient) {
@@ -31,7 +31,7 @@ export async function create_createdBy(prisma: PrismaClient) {
 
 
 async function makeCreatedByTriggers(prisma: PrismaClient) {
-  for (const entity of allModels) {
+  for (const entity of allModels) {    
     await makeTrigger(prisma, entity);
   }
 }
