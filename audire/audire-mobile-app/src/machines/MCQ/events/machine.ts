@@ -1,4 +1,4 @@
-import { McqQuestion } from '../../../../../../libs/syllabus/src/types';
+import { McqQuestion } from '@learning-app/syllabus';
 
 export type StartExamEvent = {
   type: 'START_EXAM';

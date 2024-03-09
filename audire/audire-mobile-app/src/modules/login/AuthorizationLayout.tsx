@@ -28,10 +28,10 @@ const AuthorizationLayout: FC<AuthorizationLayoutProps> = ({ children }) => {
       h="$full"
     >
       {children}
-      <Box position="absolute" zIndex={-1}>
-        <Animated.View style={{ opacity: fadeAnim }}>
-          <LoginBackgroundImage />
-        </Animated.View>
+      <Box position="absolute" zIndex={-1} $xl-maxWidth="$1/4">
+        <Animated.View style={{ opacity: fadeAnim}}>
+        <LoginBackgroundImage />
+                 </Animated.View>
       </Box>
     </Box>
   );

@@ -22,21 +22,30 @@ type Option = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any;
 };
-
-type SidebarContentProps = {};
+type SidebarContentProps = { onClose: () => void };
 
 const options: Option[] = [
   {
     name: 'Home',
     link: '/',
     icon: GripVerticalIcon,
+    disabled: false,
   },
-  { name: 'Exams', link: '/exams', icon: ClockIcon },
-  { name: 'Notifications', link: '/profile/notifications', icon: BellIcon },
-  { name: 'Payments', link: '', icon: CheckCircleIcon, disabled: true },
-  { name: 'Settings', link: '/profile/profile', icon: SettingsIcon },
-];
+  { name: 'Exams', link: '/exams', icon: ClockIcon, disabled: false },
+  {
+    name: 'Notifications',
+    link: '/profile/notifications',
+    icon: BellIcon,
+    disabled: false,
+  },
 
+  {
+    name: 'Settings',
+    link: '/profile/profile',
+    icon: SettingsIcon,
+    disabled: false,
+  },
+];
 const SidebarContent: FC<SidebarContentProps> = (props) => {
   const {
     user: { firstName },
@@ -46,7 +55,12 @@ const SidebarContent: FC<SidebarContentProps> = (props) => {
   const { top } = useSafeAreaInsets();
 
   return (
-    <Box display="flex" flexDirection="column" bg="white" style={{ paddingTop: top, height: '100%' }}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      bg="white"
+      style={{ paddingTop: top, height: '100%' }}
+    >
       <Box overflow="hidden" width="100%">
         <Box display="flex" flexDirection="row" p="$5">
           <Avatar bgColor="#D6A8D4" size="lg" borderRadius="$full">
@@ -69,8 +83,13 @@ const SidebarContent: FC<SidebarContentProps> = (props) => {
         </Box>
         <Box mt="$10" pl="$5">
           {options.map((option) => (
-            <Link key={option.name} href={option.link} disabled={options.disabled} asChild>
-              <TouchableOpacity>
+            <Link
+              key={option.name}
+              href={option.link}
+              disabled={options.disabled}
+              asChild
+            >
+              <TouchableOpacity onPress={props.onClose}>
                 <Box
                   display="flex"
                   flexDirection="row"
@@ -87,7 +106,11 @@ const SidebarContent: FC<SidebarContentProps> = (props) => {
                       color={option.disabled ? 'gray' : 'black'}
                     />
                   )}
-                  <Text fontSize="$lg" color={option.disabled ? 'gray' : 'black'} fontWeight="$bold">
+                  <Text
+                    fontSize="$lg"
+                    color={option.disabled ? 'gray' : 'black'}
+                    fontWeight="$bold"
+                  >
                     {option.name}
                   </Text>
                 </Box>
@@ -97,6 +120,7 @@ const SidebarContent: FC<SidebarContentProps> = (props) => {
           <Box h={0.3} backgroundColor="black" m={17}></Box>
           <TouchableOpacity
             onPress={() => {
+              props.onClose();
               setShowModal(true);
             }}
           >

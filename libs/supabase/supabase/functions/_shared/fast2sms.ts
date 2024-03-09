@@ -7,6 +7,9 @@ export async function sendOTP(mobile: string, otp: string): Promise<boolean> {
     return false;
   }
 
+  console.info('Sending OTP', mobile, otp);
+  return true;
+
   const apiKey = Deno.env.get('FAST2SMS_API_KEY');
 
   const res = await fetch('https://www.fast2sms.com/dev/bulkV2', {

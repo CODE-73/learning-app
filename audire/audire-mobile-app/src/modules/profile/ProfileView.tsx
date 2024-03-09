@@ -51,20 +51,25 @@ const ProfileView = () => {
           </Avatar>
 
           <Center>
-            <Text fontWeight="bold" color="black" fontSize="$2xl">
-              {firstName}
-            </Text>
-            <Text fontWeight="bold" color="black" fontSize="$2xl">
-              {lastName}
+            <Text
+              fontWeight="bold"
+              color="black"
+              fontSize="$xl"
+              numberOfLines={2}
+              textAlign="center"
+            >
+              {firstName} {lastName}
             </Text>
           </Center>
         </Center>
 
-        <Center display="flex" flexDirection="column" gap="$3">
-          <Box display="flex" flexDirection="row" gap="$3">
-            <Text>First Name:</Text>
+        <Center display="flex" flexDirection="column" gap="$4" px="$12">
+          <Center display="flex" flexDirection="column" alignItems="flex-start">
+            <Text fontWeight="bold" fontSize="$xs">
+              First Name
+            </Text>
             <Input
-              w={200}
+              w="$full"
               variant="outline"
               size="sm"
               isDisabled={false}
@@ -78,11 +83,13 @@ const ProfileView = () => {
                 onChangeText={(text) => setNewFirstName(text)}
               />
             </Input>
-          </Box>
-          <Box display="flex" flexDirection="row" gap="$3">
-            <Text> Last Name:</Text>
+          </Center>
+          <Center display="flex" flexDirection="column" alignItems="flex-start">
+            <Text fontWeight="bold" fontSize="$xs">
+              Last Name
+            </Text>
             <Input
-              w={200}
+              w="$full"
               variant="outline"
               size="sm"
               isDisabled={false}
@@ -96,11 +103,14 @@ const ProfileView = () => {
                 placeholder={formattedLastName}
               />
             </Input>
-          </Box>
-          <Box display="flex" flexDirection="row" gap="$9">
-            <Text> Mobile:</Text>
+          </Center>
+          <Center display="flex" flexDirection="column" alignItems="flex-start">
+            <Text fontWeight="bold" fontSize="$xs">
+              {' '}
+              Mobile
+            </Text>
             <Input
-              w={200}
+              w="$full"
               variant="outline"
               size="sm"
               isDisabled={false}
@@ -109,12 +119,15 @@ const ProfileView = () => {
             >
               <InputField placeholder={formattedmobile} />
             </Input>
-          </Box>
+          </Center>
 
-          <Box display="flex" flexDirection="row" gap="$12">
-            <Text> Email:</Text>
+          <Center display="flex" flexDirection="column" alignItems="flex-start">
+            <Text fontWeight="bold" fontSize="$xs">
+              {' '}
+              Email
+            </Text>
             <Input
-              w={200}
+              w="$full"
               variant="outline"
               size="sm"
               isDisabled={false}
@@ -123,11 +136,14 @@ const ProfileView = () => {
             >
               <InputField lineHeight={22} />
             </Input>
-          </Box>
-          <Box display="flex" flexDirection="row" gap="$16">
-            <Text> City:</Text>
+          </Center>
+          <Center display="flex" flexDirection="column" alignItems="flex-start">
+            <Text fontWeight="bold" fontSize="$xs">
+              {' '}
+              City
+            </Text>
             <Input
-              w={200}
+              w="$full"
               variant="outline"
               size="sm"
               isDisabled={false}
@@ -136,7 +152,7 @@ const ProfileView = () => {
             >
               <InputField lineHeight={22} />
             </Input>
-          </Box>
+          </Center>
         </Center>
         <TouchableOpacity>
           <Button

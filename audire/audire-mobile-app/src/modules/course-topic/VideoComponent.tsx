@@ -16,12 +16,15 @@ import {
 import * as ScreenOrientation from 'expo-screen-orientation';
 import React, { ComponentProps, FC, useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
+import { usePreventScreenCapture } from 'expo-screen-capture';
 
 type VideoComponentProps = ComponentProps<typeof Box> & {
   r2Key: string;
 };
 
 const VideoComponent: FC<VideoComponentProps> = (props) => {
+  usePreventScreenCapture();
+
   const videoRef = useRef<Video>(null);
   const [url, setUrl] = useState<string | null>(null);
   const { trigger: getURL } = useR2Download();

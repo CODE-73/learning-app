@@ -2,6 +2,7 @@ import { Slot } from 'expo-router';
 import { GluestackUIProvider, Box } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 import { ExpoSupabaseProvider } from '@learning-app/supabase-expo';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const audireConfig = {
   ...config,
@@ -37,19 +38,24 @@ const audireConfig = {
   },
 } as const;
 
-const RootLayout = () => (
-  <ExpoSupabaseProvider>
-    <GluestackUIProvider config={audireConfig}>
-      <Box
-        width="100%"
-        flex={1}
-        flexDirection="column"
-        justifyContent="flex-start"
-        alignItems="stretch"
-      >
-        <Slot />
-      </Box>
-    </GluestackUIProvider>
-  </ExpoSupabaseProvider>
-);
+const RootLayout = () => {
+  const { top } = useSafeAreaInsets();
+
+  return (
+    <ExpoSupabaseProvider>
+      <GluestackUIProvider config={audireConfig}>
+        <Box
+          width="100%"
+          flex={1}
+          flexDirection="column"
+          justifyContent="flex-start"
+          alignItems="stretch"
+          style={{ marginTop: top }}
+        >
+          <Slot />
+        </Box>
+      </GluestackUIProvider>
+    </ExpoSupabaseProvider>
+  );
+};
 export default RootLayout;
