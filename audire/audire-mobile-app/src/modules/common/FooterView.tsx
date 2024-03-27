@@ -49,12 +49,14 @@ const FooterView = () => {
   return (
     <Box
       borderRadius="$2xl"
-      position="absolute"
+      position="$fixed"
       w="$full"
+      $lg-maxWidth="$1/3"
       bottom="$0"
       display="flex"
       flexDirection="row"
       justifyContent="space-between"
+      alignSelf="center"
       bg="#D6A8D4"
       px="$10"
       py="$5"

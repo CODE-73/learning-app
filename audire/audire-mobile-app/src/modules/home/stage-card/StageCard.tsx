@@ -13,21 +13,34 @@ type StageCardProps = {
 
 const StageCard: FC<StageCardProps> = ({ stage, href }) => {
   return (
-    <Box width={120} height={120} alignItems="center">
+    <Box>
       <Link href={href} asChild>
         <TouchableOpacity>
-          <Box alignItems="center" pt="$3">
+          <Box
+            $md-display="flex"
+            $md-flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+          >
             <Text
               color="black"
-              fontSize="$lg"
+              sx={{
+                '@base': {
+                  size: 'xl',
+                },
+                '@md': {
+                  size: '2xl',
+                },
+                '@xl': {
+                  size: '6xl',
+                },
+              }}
               fontWeight="$medium"
-              justifyContent="center"
-              alignItems="center"
             >
               {stage}
             </Text>
 
-            <Box pt="$10" ml="$10">
+            <Box>
               <Icon as={ArrowRightIcon} color="#B051AE" m="$2" w="$6" h="$6" />
             </Box>
           </Box>
