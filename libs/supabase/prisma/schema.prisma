@@ -41,6 +41,9 @@ model Profile {
 
     createdTopics Topic[] @relation("TopicCreatedBy")
     updatedTopics Topic[] @relation("TopicUpdatedBy")
+
+    createdMcqs McqQuestion[] @relation("McqCreatedBy")
+    updatedMcqs McqQuestion[] @relation("McqUpdatedBy")
 }
 
 model Course {
@@ -115,13 +118,17 @@ model McqQuestion {
     explanation   String
     topic         Topic    @relation(fields: [topicId], references: [id])
     topicId       String   @db.Uuid
+    createdBy     Profile? @relation("McqCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+    createdById   String?  @db.Uuid
+    updatedBy     Profile? @relation("McqUpdatedBy", fields: [updatedById], references: [id], onDelete: Restrict)
+    updatedById   String?  @db.Uuid
 }
 
 model ContactUs {
-    id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-    type      String?
-    name      String?
-    email     String?
-    mobile    String?
-    message   String?
+    id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    type    String?
+    name    String?
+    email   String?
+    mobile  String?
+    message String?
 }

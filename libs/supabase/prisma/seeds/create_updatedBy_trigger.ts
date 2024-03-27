@@ -6,7 +6,7 @@ async function makeFunction(prisma) {
                 CREATE OR REPLACE FUNCTION public.update_updated_by()
                 RETURNS trigger AS $$
                   BEGIN
-                    NEW."updatedBy" := auth.uid();
+                    NEW."updatedById" := auth.uid();
                   RETURN NEW;
                   END;
                 $$
