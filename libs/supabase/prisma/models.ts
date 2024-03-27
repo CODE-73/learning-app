@@ -1,0 +1,1 @@
+export const allModels = ['Subject', 'Topic', 'McqQuestion']
