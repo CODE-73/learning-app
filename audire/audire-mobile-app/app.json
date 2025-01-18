@@ -24,7 +24,7 @@
     },
     "android": {
       "package": "com.audirelearning.app",
-      "versionCode": 6,
+      "versionCode": 8,
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE"
